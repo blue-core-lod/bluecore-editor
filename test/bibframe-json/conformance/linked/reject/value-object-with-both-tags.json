@@ -1,0 +1,27 @@
+{
+  "description": "a value object carries at most one of @type or @language",
+  "document": {
+    "@context": "https://bibframe-json.org/v0.1/context/bibframe.jsonld",
+    "@id": "https://x/1",
+    "@type": [
+      "Work"
+    ],
+    "title": [
+      {
+        "@type": [
+          "Title"
+        ],
+        "mainTitle": [
+          {
+            "@value": "x",
+            "@type": "xsd:string",
+            "@language": "en"
+          }
+        ]
+      }
+    ]
+  },
+  "errors": [
+    "/title/0/mainTitle/0"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/blue-core-lod/bibframe-json",
+  "commit": "31878f3f99f369748a16923e8be0a9ec02e6e983",
+  "files": {
+    "linked.json": {
+      "path": "bibframe_json/v0.1/schema/linked.json",
+      "sha256": "b9f89dbcc773125e06665585611e6d021540cd929ba3a183562ee149cfceaa71"
+    },
+    "bounded.json": {
+      "path": "bibframe_json/v0.1/schema/bounded.json",
+      "sha256": "19de0eb1e82afd84b0f8ed4d71f545565e8ce12fafaf9797c7091f06d3bdb9c3"
+    },
+    "ontology.json": {
+      "path": "bibframe_json/v0.1/schema/ontology.json",
+      "sha256": "dc0b88adf7aa9dcb00d3948d6db473ad71662d924a00f904e5c7269accd74415"
+    },
+    "bibframe.jsonld": {
+      "path": "bibframe_json/v0.1/context/bibframe.jsonld",
+      "sha256": "92ba252e615076fd02378c64ca0a318e0f0a9a5935517aca0e8fcda05a4bab79"
+    },
+    "vocabulary.json": {
+      "path": "bibframe_json/vocabulary.json",
+      "sha256": "7c60d8e218b30ea221be3944a27db93db8d7c04aca38c86b27de4a47d050ba60"
+    }
+  }
+}

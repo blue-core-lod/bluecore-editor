@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create an authority</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&amp;family=Atkinson+Hyperlegible+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1F4E8C}a:hover{color:#163A69}
+</style>
+</helmet>
+<div style="font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; background: #E4E7E6; color: #17202B; font-size: 16px; line-height: 1.45; padding: 48px 32px 64px">
+<div role="dialog" aria-labelledby="newauth" style="max-width: 720px; margin: 0 auto; border-radius: 10px; border: 1px solid #C9CECD; background: #FFFFFF; box-shadow: 0 12px 32px rgba(23, 32, 43, 0.18)">
+<div style="padding: 24px 28px 12px">
+<h1 id="newauth" style="margin: 0 0 6px; font-size: 24px">New person in Blue Core</h1>
+<p style="margin: 0; color: #4A5560">Filled in from the description you&#39;re working on. Check it against the item.</p>
+</div>
+
+<div style="margin: 8px 28px 0; padding: 12px 14px; border-radius: 8px; background: #F0F2F1; font-size: 14px">
+<div style="font-weight: 600">No match found</div>
+<div style="color: #4A5560">Searched Blue Core, LC, FAST, Wikidata, and Getty ULAN on October 24, 2026. Checked id.loc.gov again just now. This search is saved with the new authority.</div>
+</div>
+
+<div style="padding: 16px 28px 0; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="authname" style="font-weight: 600">Name <span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560; font-weight: 400; margin-left: 6px">100</span></label>
+<input id="authname" type="text" value="Okafor, Dana" style="height: 44px; padding: 0 12px; border-radius: 6px; border: 1px solid #6E7882; font: inherit">
+<div style="font-size: 13px; color: #4A5560">From the statement of responsibility</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 200px">
+<label for="authdates" style="font-weight: 600">Dates <span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560; font-weight: 400; margin-left: 6px">046 / 100 $d</span></label>
+<input id="authdates" type="text" value="" placeholder="Add if the item gives them" style="height: 44px; padding: 0 12px; border-radius: 6px; border: 1px solid #6E7882; font: inherit">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 200px">
+<label for="authrole" style="font-weight: 600">Field of activity <span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560; font-weight: 400; margin-left: 6px">372</span></label>
+<input id="authrole" type="text" value="" placeholder="For example, literary scholar" style="height: 44px; padding: 0 12px; border-radius: 6px; border: 1px solid #6E7882; font: inherit">
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="authsource" style="font-weight: 600">Found in <span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560; font-weight: 400; margin-left: 6px">670</span></label>
+<input id="authsource" type="text" value="Adventures of Huckleberry Finn, 2026: title page (introduction by Dana Okafor)" style="height: 44px; padding: 0 12px; border-radius: 6px; border: 1px solid #6E7882; font: inherit">
+<div style="font-size: 13px; color: #4A5560">From this publication. Add what the item says about the person, such as an author note.</div>
+</div>
+</div>
+
+<div style="margin: 18px 28px 0">
+<div style="font-size: 14px; color: #4A5560; margin-bottom: 8px">Add more details</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Fuller form of name<span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 12px; color: #4A5560">378</span></button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Associated place<span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 12px; color: #4A5560">370</span></button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Affiliation<span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 12px; color: #4A5560">373</span></button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Occupation<span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 12px; color: #4A5560">374</span></button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Language<span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 12px; color: #4A5560">377</span></button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Variant name<span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 12px; color: #4A5560">400</span></button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Related name<span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 12px; color: #4A5560">500</span></button>
+</div>
+</div>
+
+<div style="margin: 20px 28px 0; padding-top: 14px; border-top: 1px solid #D9DDDC">
+<div style="font-size: 14px; color: #4A5560; margin-bottom: 8px">After you create it</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px">
+<li style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border-radius: 15px; background: #17202B; color: #FFFFFF; font-weight: 600">1. Provisional, usable now</li>
+<li style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border-radius: 15px; border: 1px solid #8A949D">2. Reviewed</li>
+<li style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border-radius: 15px; border: 1px solid #8A949D">3. Published to Wikidata</li>
+<li style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border-radius: 15px; border: 1px solid #8A949D">4. Sent to NACO</li>
+</ol>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; padding: 22px 28px 24px">
+<a href="Main.dc.html" style="height: 44px; padding: 0 16px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; text-decoration: none">Keep as unlinked text</a>
+<a href="Main.dc.html" style="height: 44px; padding: 0 18px; border-radius: 6px; border: 1px solid #17202B; background: #17202B; color: #FFFFFF; font: inherit; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; text-decoration: none">Create and link</a>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

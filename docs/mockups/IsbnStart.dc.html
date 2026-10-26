@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Starting from an ISBN</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&amp;family=Atkinson+Hyperlegible+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1F4E8C}a:hover{color:#163A69}
+</style>
+</helmet>
+<div style="font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; background: #FAFBFA; color: #17202B; font-size: 16px; line-height: 1.45">
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 14px 32px; border-bottom: 1px solid #D9DDDC; background: #FFFFFF">
+<div style="font-weight: 700; font-size: 18px">Blue Core</div>
+<div style="font-weight: 600; font-size: 18px; flex: 1 1 auto">New description</div>
+</header>
+<div style="max-width: 920px; box-sizing: border-box; padding: 40px 32px 64px; margin: 0 auto">
+<h1 style="margin: 0 0 8px; font-size: 28px">What are you cataloging?</h1>
+<p style="margin: 0 0 24px; color: #4A5560">Enter an identifier from the item in hand. Existing descriptions are a faster start than a blank one.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 360px">
+<label for="isbn" style="font-weight: 600">ISBN, LCCN, or OCLC number</label>
+<input id="isbn" type="text" value="9780000000002" style="height: 48px; padding: 0 14px; border-radius: 6px; border: 1px solid #6E7882; font: inherit; font-size: 18px; font-family: 'Atkinson Hyperlegible Mono', monospace">
+</div>
+<button type="button" style="height: 48px; padding: 0 20px; border-radius: 6px; border: 1px solid #17202B; background: #17202B; color: #FFFFFF; font: inherit; font-weight: 600">Search</button>
+</div>
+<div style="margin-top: 10px; font-size: 14px; color: #4A5560">Searched Blue Core and id.loc.gov, as ISBN-13 and ISBN-10.</div>
+
+<h2 style="margin: 36px 0 12px; font-size: 20px">This publication</h2>
+<div style="padding: 18px 20px; border-radius: 8px; border: 1px solid #D9DDDC; background: #FFFFFF">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px">
+<div style="flex: 1 1 420px; min-width: 0">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px">
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600">Instance</span>
+<span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">LC</span>
+<span style="font-size: 14px; color: #4A5560">Prepublication (CIP) description</span>
+</div>
+<div style="font-weight: 600; font-size: 18px">Adventures of Huckleberry Finn / Mark Twain ; introduction by Dana Okafor</div>
+<div style="color: #4A5560">Saint Louis : Riverbend Editions, 2026. ISBN 9780000000002 (paperback).</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="Lookup.dc.html" style="height: 44px; padding: 0 16px; border-radius: 6px; border: 1px solid #17202B; background: #17202B; color: #FFFFFF; font: inherit; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; text-decoration: none">Start from this description</a>
+<button type="button" style="height: 40px; padding: 0 16px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Compare with item</button>
+</div>
+</div>
+<div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #D9DDDC; font-size: 14px; color: #4A5560">Starting from it copies the description into Blue Core and records that it came from LC. The CIP data was written before publication, so check the title page and extent.</div>
+</div>
+
+<h2 style="margin: 36px 0 12px; font-size: 20px">The Work it belongs to</h2>
+<div style="padding: 18px 20px; border-radius: 8px; border: 1px solid #D9DDDC; background: #FFFFFF">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px">
+<div style="flex: 1 1 420px; min-width: 0">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px">
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #1F4E8C; color: #FFFFFF; font-size: 13px; font-weight: 600">Work</span>
+<span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">Blue Core</span>
+</div>
+<div style="font-weight: 600; font-size: 18px">Twain, Mark, 1835-1910. Adventures of Huckleberry Finn</div>
+<div style="color: #4A5560">37 Instances in Blue Core. Subjects and genre already described.</div>
+</div>
+<button type="button" style="height: 44px; padding: 0 16px; border-radius: 6px; border: 1px solid #1F4E8C; background: #FFFFFF; color: #1F4E8C; font: inherit; font-weight: 600">Use this Work</button>
+</div>
+</div>
+
+<div style="margin-top: 28px; padding: 12px 16px; border-radius: 8px; background: #F0F2F1; font-size: 14px; color: #4A5560">2 other id.loc.gov results mention this number but don&#39;t carry it as an ISBN, so they aren&#39;t shown. <a href="#hidden">Show them</a></div>
+
+<div style="margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<button type="button" style="height: 44px; padding: 0 16px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit">Start a blank description</button>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

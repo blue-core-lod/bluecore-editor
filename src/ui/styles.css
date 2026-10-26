@@ -1,0 +1,521 @@
+/* The visual language of docs/mockups/screens.md. */
+:root {
+  --ground: #fafbfa;
+  --surface: #ffffff;
+  --text: #17202b;
+  --muted: #4a5560;
+  --rule: #d9dddc;
+  --work: #1f4e8c;
+  --instance: #9a4a06;
+  --linked: #eaf0f8;
+  --note-ground: #fff4dc;
+  --note-text: #5a3b00;
+  --focus: #1f4e8c;
+  --sans: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --mono: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+
+  color-scheme: light;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--ground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+}
+
+a {
+  color: var(--work);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+h1,
+h2 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Buttons: dark filled for the primary action, outlined for secondary. */
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--text);
+  background: var(--text);
+  color: #fff;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+button.secondary {
+  background: var(--surface);
+  color: var(--text);
+}
+button.round {
+  border-radius: 50%;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+}
+button.link {
+  border: none;
+  background: none;
+  color: var(--work);
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* Header: one row on wide screens, controls below the title on narrow ones. */
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.brand {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+.header-main {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  min-width: 0;
+}
+.title-block {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+.title-block h1 {
+  font-size: 1.2rem;
+}
+.title-block p {
+  margin: 0.1rem 0 0;
+  font-size: 0.9rem;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.hints-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.user {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+/* The Hints switch. */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  color: var(--text);
+}
+.switch::before {
+  content: '';
+  width: 2rem;
+  height: 1.1rem;
+  border-radius: 1rem;
+  background: var(--rule) radial-gradient(circle at 0.55rem 50%, #fff 0.4rem, transparent 0.42rem);
+  transition: background-position 0.15s;
+}
+.switch[aria-checked='true']::before {
+  background: var(--work) radial-gradient(circle at 1.45rem 50%, #fff 0.4rem, transparent 0.42rem);
+}
+
+/* Panels that open under the header. */
+.history,
+.explainer {
+  max-width: 34rem;
+  margin: 0.75rem 1.5rem 0 auto;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgb(23 32 43 / 0.08);
+}
+.history h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.history ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.history > ol > li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.history time {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.history .note {
+  flex-basis: 100%;
+}
+.history .started {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+.explainer p {
+  margin-top: 0;
+}
+
+/* Adding values: dashed outlines, as in the mockups. */
+button.add {
+  background: transparent;
+  color: var(--muted);
+  border: 1px dashed var(--muted);
+  padding: 0.15rem 0.7rem;
+  font-size: 0.9rem;
+}
+button.add:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+.adding {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+.adding input {
+  flex: 1 1 12rem;
+}
+.adding select {
+  font: inherit;
+  padding: 0.3rem;
+  max-width: 100%;
+}
+.subfield.empty input {
+  border-style: dashed;
+  background: transparent;
+}
+.missing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+}
+.section h2 + .missing {
+  border-top: none;
+}
+.add-field input {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.add-field h2 {
+  font-size: 1.05rem;
+}
+.matches {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.matches li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.matches .on {
+  display: flex;
+  gap: 0.4rem;
+}
+.matches .badge {
+  border: none;
+  cursor: pointer;
+}
+
+/* What a save did. */
+.saved {
+  background: #e8f3ec;
+  color: #1d4d2c;
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+}
+.save-results {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.save-results .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.4rem 0;
+}
+
+/* Warnings and teaching notes: never blocking. */
+.note {
+  background: var(--note-ground);
+  color: var(--note-text);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+}
+
+.page {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.start {
+  max-width: 44rem;
+}
+.start h1 {
+  margin-bottom: 1rem;
+}
+.find {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+.find input {
+  flex: 1;
+}
+.results {
+  list-style: none;
+  padding: 0;
+}
+.results li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.results .uri {
+  display: block;
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--surface);
+  min-width: 0;
+}
+input[readonly] {
+  background: transparent;
+}
+
+/* The description: sections of rows, each a label, its values and a badge. */
+.section,
+.record {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.section h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+.record summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 14rem) 1fr;
+  gap: 0.5rem 1rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--rule);
+}
+.section h2 + .row {
+  border-top: none;
+}
+.hints .row {
+  grid-template-columns: minmax(8rem, 14rem) 1fr 5.5rem;
+}
+.row-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+}
+.row-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: flex-start;
+  min-width: 0;
+}
+.marc {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.badge {
+  justify-self: end;
+  align-self: start;
+  display: inline-block;
+  padding: 0.05rem 0.5rem;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.badge-work {
+  background: var(--work);
+}
+.badge-instance {
+  background: var(--instance);
+}
+
+.literal {
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.literal input {
+  flex: 1;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0 0.3rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 100%;
+  background: var(--linked);
+  border-radius: 1rem;
+  padding: 0.15rem 0.35rem 0.15rem 0.75rem;
+}
+.chip a {
+  color: var(--text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.chip a:hover {
+  text-decoration: underline;
+}
+.source {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--work);
+  background: var(--surface);
+  border-radius: 3px;
+  padding: 0 0.3rem;
+}
+
+button.remove {
+  border: none;
+  background: none;
+  color: var(--muted);
+  padding: 0 0.3rem;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+button.remove:hover {
+  color: var(--text);
+}
+
+.subnode {
+  flex: 1 1 100%;
+  border-left: 3px solid var(--rule);
+  padding: 0.1rem 0 0.1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.subnode-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 1.2rem;
+}
+.subnode-head .remove {
+  margin-left: auto;
+}
+.caption {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.subfield {
+  display: grid;
+  grid-template-columns: minmax(6rem, 10rem) 1fr;
+  gap: 0.5rem;
+  align-items: start;
+}
+.subfield-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding-top: 0.3rem;
+}
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+@media (max-width: 40rem) {
+  .app-header,
+  .page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .row,
+  .hints .row,
+  .subfield {
+    grid-template-columns: 1fr;
+  }
+  .badge {
+    justify-self: start;
+  }
+}

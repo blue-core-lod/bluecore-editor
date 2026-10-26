@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Description view</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&amp;family=Atkinson+Hyperlegible+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; background: #FAFBFA; color: #17202B; font-size: 16px; line-height: 1.45">
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 10px 24px; border-bottom: 1px solid #D9DDDC; background: #FFFFFF">
+<div style="flex: 0 0 auto; font-weight: 700; font-size: 17px; padding-right: 20px; border-right: 1px solid #D9DDDC">Blue Core</div>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px">
+<h1 style="margin: 0; font-size: 19px; font-weight: 700">Adventures of Huckleberry Finn</h1>
+<span style="font-size: 14px; color: #4A5560">Print monograph from ISBN 9780000000002</span>
+</div>
+<div style="flex: 1 1 640px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px">
+<div style="position: relative; flex: 0 0 auto">
+<button type="button" aria-expanded="{{historyExpanded}}" onClick="{{toggleHistory}}" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 15px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"></path><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"></path></svg>3 unsaved changes</button>
+<sc-if value="{{showHistory}}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="Changes since your last save" style="position: absolute; z-index: 2; top: 50px; left: 0; width: 420px; border-radius: 10px; border: 1px solid #C9CECD; background: #FFFFFF; box-shadow: 0 12px 32px rgba(23, 32, 43, 0.18); font-size: 15px">
+<div style="padding: 14px 16px 8px"><div style="font-weight: 700">Changes since your last save</div><div style="font-size: 14px; color: #4A5560">Kept on this device until you save to Blue Core</div></div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid #D9DDDC">
+<div style="flex: 1 1 auto"><div>Moved Extent to the Instance</div><div style="font-size: 13px; color: #4A5560">2 minutes ago</div></div>
+<button type="button" style="height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Undo</button>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid #D9DDDC">
+<div style="flex: 1 1 auto"><div>Added genre/form Picaresque fiction</div><div style="font-size: 13px; color: #4A5560">6 minutes ago</div></div>
+<button type="button" style="height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Undo</button>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid #D9DDDC">
+<div style="flex: 1 1 auto"><div>Linked author to LC name Twain, Mark, 1835-1910</div><div style="font-size: 13px; color: #4A5560">9 minutes ago</div></div>
+<button type="button" style="height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 14px">Undo</button>
+</div>
+<div style="padding: 10px 16px 12px; border-top: 1px solid #D9DDDC; background: #F0F2F1; border-radius: 0 0 10px 10px; font-size: 14px; color: #4A5560">Started from LC&#39;s CIP description 12 minutes ago</div>
+</div>
+</sc-if>
+</div>
+<div style="position: relative; flex: 0 0 auto">
+<button type="button" style="height: 40px; padding: 0 14px; border-radius: 6px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 15px">Validate</button>
+</div>
+<div style="position: relative; flex: 0 0 auto">
+<button type="button" style="height: 40px; padding: 0 16px; border-radius: 6px; border: 1px solid #17202B; background: #17202B; color: #FFFFFF; font: inherit; font-size: 15px; font-weight: 600">Save to Blue Core</button>
+</div>
+<div style="position: relative; flex: 0 0 auto">
+<div style="display: inline-flex; align-items: center; gap: 2px">
+<button type="button" aria-pressed="{{hintsPressed}}" onClick="{{toggleHints}}" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 10px 0 6px; border-radius: 6px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 15px">
+<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: {{knobSide}}; width: 36px; height: 22px; padding: 0 3px; box-sizing: border-box; border-radius: 11px; background: {{trackColor}}"><span style="width: 16px; height: 16px; border-radius: 8px; background: #FFFFFF"></span></span>Hints</button>
+<button type="button" aria-label="What hints show" aria-expanded="{{infoExpanded}}" onClick="{{toggleInfo}}" style="width: 32px; height: 32px; border-radius: 16px; border: 1px solid #8A949D; background: #FFFFFF; color: #17202B; font: inherit; font-size: 15px; font-weight: 700">?</button>
+</div>
+<sc-if value="{{showInfo}}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="What hints show" style="position: absolute; z-index: 2; top: 50px; right: 0; width: 360px; padding: 16px 18px; border-radius: 10px; border: 1px solid #C9CECD; background: #FFFFFF; box-shadow: 0 12px 32px rgba(23, 32, 43, 0.18); font-size: 15px">
+<div style="font-weight: 700; margin-bottom: 6px">Hints show where each field comes from</div>
+<div style="display: flex; flex-direction: column; gap: 8px; color: #17202B">
+<div>Its MARC tag, such as <span style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 14px">245 $a</span>, linked to the MARC 21 format.</div>
+<div style="display: flex; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #1F4E8C; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Work</span>describes every edition</div>
+<div style="display: flex; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Instance</span>describes this publication</div>
+<div style="color: #4A5560; font-size: 14px">Badges link to the <a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" style="color: #1F4E8C">BIBFRAME Primer</a>.</div>
+</div>
+<button type="button" onClick="{{toggleInfo}}" style="margin-top: 12px; height: 40px; padding: 0 14px; border-radius: 6px; border: 1px solid #17202B; background: #17202B; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600">Got it</button>
+</div>
+</sc-if>
+</div>
+</div>
+</header>
+<div style="display: flex; flex-wrap: wrap; gap: 32px; padding: 8px 24px 48px; max-width: 1440px; box-sizing: border-box">
+<main style="flex: 1 1 640px; min-width: 0">
+<section style="margin-top: 28px">
+<h2 style="margin: 0 0 4px; font-size: 20px">Title and statement of responsibility</h2>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><label for="f-title" style="font-weight: 600">Title</label><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd245.html" style="color: #1F4E8C">245 $a</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><input id="f-title" type="text" value="Adventures of Huckleberry Finn" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is an Instance? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Instance</a></div></sc-if>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><label for="f-sor" style="font-weight: 600">Statement of responsibility</label><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd245.html" style="color: #1F4E8C">245 $c</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><input id="f-sor" type="text" value="Mark Twain ; with an introduction by Dana Okafor" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is an Instance? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Instance</a></div></sc-if>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><label for="f-ptitle" style="font-weight: 600">Preferred title</label><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd240.html" style="color: #1F4E8C">240 $a</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><input id="f-ptitle" type="text" value="Adventures of Huckleberry Finn" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is a Work? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #1F4E8C; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Work</a></div></sc-if>
+</div>
+</section>
+<section style="margin-top: 28px">
+<h2 style="margin: 0 0 4px; font-size: 20px">Creators and contributors</h2>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><div style="font-weight: 600">Author</div><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd100.html" style="color: #1F4E8C">100</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 40px; padding: 2px 2px 2px 12px; border-radius: 6px; background: #EAF0F8; border: 1px solid #B9CBE3; box-sizing: border-box"><span style=" font-weight: 600">Twain, Mark, 1835-1910</span><span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">Blue Core</span><span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">LC</span><span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">Wikidata</span><button type="button" aria-label="Remove Twain, Mark, 1835-1910" style="width: 36px; height: 36px; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 18px">&#215;</button></span></div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is a Work? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #1F4E8C; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Work</a></div></sc-if>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><div style="font-weight: 600">Writer of introduction</div><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd700.html" style="color: #1F4E8C">700</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 6px; border: 1px dashed #6E7882; color: #4A5560; box-sizing: border-box">Okafor, Dana <span style="margin-left: 8px; font-size: 13px">unlinked</span></span><a href="CreateAuthority.dc.html" style="height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #1F4E8C; background: #FFFFFF; color: #1F4E8C; font: inherit; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; text-decoration: none">Find authority</a></div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is an Instance? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Instance</a></div></sc-if>
+</div>
+<div style="padding: 4px 0 0 216px"><button type="button" style="height: 40px; padding: 0 12px; border-radius: 6px; border: 1px dashed #6E7882; background: transparent; color: #17202B; font: inherit; font-size: 14px">Add creator or contributor</button></div>
+</section>
+<section style="margin-top: 28px">
+<h2 style="margin: 0 0 4px; font-size: 20px">Subjects and genre/form</h2>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><div style="font-weight: 600">Subjects</div><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd650.html" style="color: #1F4E8C">650</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 40px; padding: 2px 2px 2px 12px; border-radius: 6px; background: #EAF0F8; border: 1px solid #B9CBE3; box-sizing: border-box"><span style="">Mississippi River--Fiction</span><span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">LC</span><button type="button" aria-label="Remove Mississippi River--Fiction" style="width: 36px; height: 36px; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 18px">&#215;</button></span><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 40px; padding: 2px 2px 2px 12px; border-radius: 6px; background: #EAF0F8; border: 1px solid #B9CBE3; box-sizing: border-box"><span style="">Runaway children--Fiction</span><span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">LC</span><button type="button" aria-label="Remove Runaway children--Fiction" style="width: 36px; height: 36px; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 18px">&#215;</button></span><button type="button" style="height: 40px; padding: 0 12px; border-radius: 6px; border: 1px dashed #6E7882; background: transparent; color: #17202B; font: inherit; font-size: 14px">Add subject</button></div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is a Work? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #1F4E8C; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Work</a></div></sc-if>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><div style="font-weight: 600">Genre/form</div><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd655.html" style="color: #1F4E8C">655</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 40px; padding: 2px 2px 2px 12px; border-radius: 6px; background: #EAF0F8; border: 1px solid #B9CBE3; box-sizing: border-box"><span style="">Picaresque fiction</span><span style="font-size: 12px; padding: 1px 6px; border: 1px solid #8FA7C7; border-radius: 4px; background: #FFFFFF">LC</span><button type="button" aria-label="Remove Picaresque fiction" style="width: 36px; height: 36px; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 18px">&#215;</button></span><a href="ScopePrompt.dc.html" style="height: 40px; padding: 0 12px; border-radius: 6px; border: 1px dashed #6E7882; background: transparent; color: #17202B; font: inherit; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; text-decoration: none">Add genre/form</a></div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is a Work? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #1F4E8C; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Work</a></div></sc-if>
+</div>
+</section>
+<section style="margin-top: 28px">
+<h2 style="margin: 0 0 4px; font-size: 20px">Publication and identifiers</h2>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><div style="font-weight: 600">Publication</div><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd264.html" style="color: #1F4E8C">264 _1</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+<div><label for="f-place" style="display: block; font-size: 13px; color: #4A5560; margin-bottom: 2px">Place</label><input id="f-place" type="text" value="Saint Louis" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div>
+<div><label for="f-pub" style="display: block; font-size: 13px; color: #4A5560; margin-bottom: 2px">Publisher</label><input id="f-pub" type="text" value="Riverbend Editions" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div>
+<div><label for="f-date" style="display: block; font-size: 13px; color: #4A5560; margin-bottom: 2px">Date</label><input id="f-date" type="text" value="2026" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div>
+</div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is an Instance? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Instance</a></div></sc-if>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><label for="f-isbn" style="font-weight: 600">ISBN</label><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd020.html" style="color: #1F4E8C">020 $a</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><div style="display: flex; gap: 12px"><div style="flex: 1 1 auto"><input id="f-isbn" type="text" value="9780000000002" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div><div style="flex: 0 0 160px"><label for="f-qual" style="position: absolute; left: -9999px">ISBN qualifier</label><input id="f-qual" type="text" value="paperback" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit"></div></div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is an Instance? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Instance</a></div></sc-if>
+</div>
+</section>
+<section style="margin-top: 28px">
+<h2 style="margin: 0 0 4px; font-size: 20px">Physical description and carrier</h2>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><div style="font-weight: 600">Content, media, carrier</div><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd336.html" style="color: #1F4E8C">336</a> / <a href="https://www.loc.gov/marc/bibliographic/bd337.html" style="color: #1F4E8C">337</a> / <a href="https://www.loc.gov/marc/bibliographic/bd338.html" style="color: #1F4E8C">338</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 40px; padding: 2px 2px 2px 12px; border-radius: 6px; background: #EAF0F8; border: 1px solid #B9CBE3; box-sizing: border-box"><span style="">text</span><button type="button" aria-label="Remove text" style="width: 36px; height: 36px; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 18px">&#215;</button></span><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 40px; padding: 2px 2px 2px 12px; border-radius: 6px; background: #EAF0F8; border: 1px solid #B9CBE3; box-sizing: border-box"><span style="">unmediated</span><button type="button" aria-label="Remove unmediated" style="width: 36px; height: 36px; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 18px">&#215;</button></span><span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 40px; padding: 2px 2px 2px 12px; border-radius: 6px; background: #EAF0F8; border: 1px solid #B9CBE3; box-sizing: border-box"><span style="">volume</span><button type="button" aria-label="Remove volume" style="width: 36px; height: 36px; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #17202B; font: inherit; font-size: 18px">&#215;</button></span></div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is an Instance? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #9A4A06; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Instance</a></div></sc-if>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start; padding: 10px 0; border-top: 1px solid #D9DDDC">
+<div style="flex: 0 0 200px; padding-top: 8px"><label for="f-extent" style="font-weight: 600">Extent</label><sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 13px; color: #4A5560"><a href="https://www.loc.gov/marc/bibliographic/bd300.html" style="color: #1F4E8C">300 $a</a></div></sc-if></div>
+<div style="flex: 1 1 auto; min-width: 0"><input id="f-extent" type="text" value="xxviii, 366 pages" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 10px; border-radius: 6px; border: 1px solid #A9B1B8; background: #FFFFFF; color: #17202B; font: inherit">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 10px; padding: 10px 12px; border-radius: 6px; background: #FFF4DC; border: 1px solid #E6C98A; color: #5C3B00; font-size: 14px">
+<span style="flex: 1 1 280px">Extent usually describes this publication, not the Work. Every edition has its own page count.</span>
+<button type="button" style="height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid #5C3B00; background: #FFFFFF; color: #5C3B00; font: inherit; font-size: 14px; font-weight: 600">Move to Instance</button>
+<button type="button" style="height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid transparent; background: transparent; color: #5C3B00; font: inherit; font-size: 14px">Keep on Work</button>
+</div></div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><div style="flex: 0 0 84px; padding-top: 8px; text-align: right"><a href="https://bibframe.org/docs/view/documentation-bf-primer/index.md" title="What is a Work? Read the BIBFRAME Primer" style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #1F4E8C; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none">Work</a></div></sc-if>
+</div>
+</section>
+<div style="margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<a href="AddField.dc.html" style="height: 44px; padding: 0 16px; border-radius: 6px; border: 1px solid #17202B; background: #FFFFFF; color: #17202B; font: inherit; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; text-decoration: none">Add field</a>
+<span style="font-size: 14px; color: #4A5560">Search by name or MARC tag, such as 490 or 504</span>
+</div>
+</main>
+<aside style="margin-top: 28px; flex: 1 1 {{asideBasis}}; max-width: {{asideMax}}; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 8px; border: 1px solid #D9DDDC; background: #FFFFFF">
+<div style="flex: 1 1 200px; font-size: 14px"><div style="font-weight: 600">Context</div><div style="color: #4A5560">This Work may already be in Blue Core, with 37 Instances.</div></div>
+<a href="Context.dc.html" style="height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #1F4E8C; background: #FFFFFF; color: #1F4E8C; font: inherit; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; text-decoration: none">Open</a>
+</div>
+<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}">
+<div style="border-radius: 8px; border: 1px solid #D9DDDC; background: #FFFFFF">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid #D9DDDC">
+<div style="font-weight: 600">MARC preview</div>
+<div style="font-size: 13px; color: #4A5560">Read only</div>
+</div>
+<div style="overflow-x: auto">
+<div style="padding: 14px 16px; font-family: 'Atkinson Hyperlegible Mono', monospace; font-size: 14px; line-height: 1.7; color: #17202B">
+<div style="padding-left: 7ch; text-indent: -7ch">100 1_ $a Twain, Mark, $d 1835-1910, $e author.</div>
+<div style="padding-left: 7ch; text-indent: -7ch">240 10 $a Adventures of Huckleberry Finn</div>
+<div style="padding-left: 7ch; text-indent: -7ch">245 10 $a Adventures of Huckleberry Finn / $c Mark Twain ; with an introduction by Dana Okafor.</div>
+<div style="padding-left: 7ch; text-indent: -7ch">264 _1 $a Saint Louis : $b Riverbend Editions, $c 2026.</div>
+<div style="padding-left: 7ch; text-indent: -7ch">300 __ $a xxviii, 366 pages</div>
+<div style="padding-left: 7ch; text-indent: -7ch">336 __ $a text $b txt $2 rdacontent</div>
+<div style="padding-left: 7ch; text-indent: -7ch">337 __ $a unmediated $b n $2 rdamedia</div>
+<div style="padding-left: 7ch; text-indent: -7ch">338 __ $a volume $b nc $2 rdacarrier</div>
+<div style="padding-left: 7ch; text-indent: -7ch">650 _0 $a Mississippi River $v Fiction.</div>
+<div style="padding-left: 7ch; text-indent: -7ch">650 _0 $a Runaway children $v Fiction.</div>
+<div style="padding-left: 7ch; text-indent: -7ch">655 _7 $a Picaresque fiction. $2 lcgft</div>
+<div style="padding-left: 7ch; text-indent: -7ch">700 1_ $a Okafor, Dana, $e writer of introduction.</div>
+</div>
+</div>
+</div>
+</sc-if>
+</aside>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"hints":{"editor":"boolean","default":true},"openPanel":{"editor":"enum","options":["none","hints","history"],"default":"none"},"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+renderVals() {
+const st = this.state || {};
+const hints = st.hints !== undefined ? st.hints : (this.props.hints ?? true);
+const panel = st.panel !== undefined ? st.panel : (this.props.openPanel ?? 'none');
+return {
+hints: hints,
+asideBasis: hints ? '580px' : '340px',
+asideMax: hints ? 'none' : '420px',
+hintsPressed: hints ? 'true' : 'false',
+knobSide: hints ? 'flex-end' : 'flex-start',
+trackColor: hints ? '#1F4E8C' : '#8A949D',
+toggleHints: () => this.setState({ hints: !hints }),
+showInfo: panel === 'hints',
+showHistory: panel === 'history',
+infoExpanded: panel === 'hints' ? 'true' : 'false',
+historyExpanded: panel === 'history' ? 'true' : 'false',
+toggleInfo: () => this.setState({ panel: panel === 'hints' ? 'none' : 'hints' }),
+toggleHistory: () => this.setState({ panel: panel === 'history' ? 'none' : 'history' })
+};
+}
+}
+</script>
+</body>
+</html>

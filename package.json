@@ -1,0 +1,41 @@
+{
+  "name": "bluecore-editor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "A BIBFRAME description editor for Blue Core, running entirely in the browser.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "vendor:bibframe-json": "node scripts/vendor-bibframe-json.mjs"
+  },
+  "dependencies": {
+    "@fontsource/atkinson-hyperlegible-mono": "^5.3.0",
+    "@fontsource/atkinson-hyperlegible-next": "^5.3.0",
+    "ajv": "^8.20.0",
+    "idb": "^8.0.4",
+    "oidc-client-ts": "^3.5.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "eslint": "^10.13.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "fake-indexeddb": "^6.2.6",
+    "globals": "^17.13.0",
+    "jsdom": "^30.1.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}
