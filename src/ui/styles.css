@@ -533,6 +533,11 @@ button.remove:hover {
   font-size: 0.8rem;
   color: var(--muted);
 }
+.empty-note {
+  font-size: 0.8rem;
+  color: var(--note-text);
+  margin-left: 0.6rem;
+}
 .subfield {
   display: grid;
   grid-template-columns: minmax(6rem, 10rem) 1fr;

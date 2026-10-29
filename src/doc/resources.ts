@@ -39,12 +39,13 @@ export function resourceOf(doc: Doc, key: Key): Key {
 /**
  * One resource as the linked description Blue Core stores: everything below
  * it, except that another principal resource is a bare URI rather than
- * embedded, and with the document's @context.
+ * embedded, and with the document's @context. Empty nodes are left out (see
+ * isEmpty).
  */
 export function linkedResource(doc: Doc, key: Key): JsonObject {
   const { work } = principals(doc)
   const context = getNode(doc, doc.root).keywords['@context'] as Json | undefined
-  const json = denormalize(doc, key)
+  const json = withoutEmpty(denormalize(doc, key))
   if (key === doc.root && work) {
     const workId = getNode(doc, work).keywords['@id'] as string
     json.instanceOf = (json.instanceOf as Json[]).map((ref) => (idOf(ref) === workId ? workId : ref))
@@ -58,6 +59,35 @@ export function changedResources(base: Doc, current: Doc): Key[] {
   return resources.filter(
     (key) => !base.nodes[key] || !sameJson(linkedResource(base, key), linkedResource(current, key)),
   )
+}
+
+/**
+ * Whether a node says nothing yet: no URI, no value, and nothing in it but
+ * other empty nodes, as an Identifier is when its type has been chosen and
+ * nothing filled in. A save leaves these out, and the view says so.
+ */
+export function isEmpty(doc: Doc, key: Key): boolean {
+  const node = getNode(doc, key)
+  if (Object.keys(node.keywords).some((name) => name !== '@type')) return false
+  return Object.values(node.props).every((values) => values.every((value) => 'node' in value && isEmpty(doc, value.node)))
+}
+
+/** The same JSON without the nodes isEmpty describes, nor the properties left with no values. */
+function withoutEmpty<T extends Json>(json: T): T {
+  if (Array.isArray(json)) {
+    return json.map(withoutEmpty).filter((value) => !emptyNode(value)) as T
+  }
+  if (json === null || typeof json !== 'object') return json
+  const entries = Object.entries(json).flatMap(([name, value]): [string, Json][] => {
+    if (name.startsWith('@')) return [[name, value]]
+    const kept = withoutEmpty(value)
+    return Array.isArray(kept) && kept.length === 0 ? [] : [[name, kept]]
+  })
+  return Object.fromEntries(entries) as T
+}
+
+function emptyNode(json: Json): boolean {
+  return json !== null && typeof json === 'object' && !Array.isArray(json) && Object.keys(json).every((name) => name === '@type')
 }
 
 function idOf(ref: Json | undefined): string | undefined {

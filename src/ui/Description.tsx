@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from 'react'
 
 import { change, type Change } from '../doc/log'
 import { getNode, isValueObject, type Doc, type Json, type Key, type Literal, type Node, type Value } from '../doc/model'
+import { isEmpty } from '../doc/resources'
 import { definitionOf, modeledProperties } from '../schema/fields'
 import { AddField } from './AddField'
 import { AddValue } from './AddValue'
@@ -263,6 +264,7 @@ function Subnode(props: ValueProps & { child: Node }) {
     <div className="subnode">
       <div className="subnode-head">
         {caption && <span className="caption">{caption}</span>}
+        {isEmpty(doc, child.key) && <span className="empty-note">Empty, so it won&rsquo;t be saved</span>}
         <RemoveButton name={label} onClick={remove} />
       </div>
       {Object.entries(child.props).map(([prop, values]) => (

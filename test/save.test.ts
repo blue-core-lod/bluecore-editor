@@ -2,8 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { afterSave, saveDescription, type SaveState } from '../src/api/save'
 import { change, record } from '../src/doc/log'
-import { getNode, normalize, type Doc } from '../src/doc/model'
-import { principals, snapshot, unsaved } from '../src/doc/resources'
+import { fragment, getNode, normalize, type Doc, type Json } from '../src/doc/model'
+import { isEmpty, principals, snapshot, unsaved } from '../src/doc/resources'
 import { getValidators } from '../src/schema/validate'
 import { example } from './fixtures'
 
@@ -152,5 +152,41 @@ describe('linked descriptions', () => {
     const doc: Doc = normalize(example('bounded'))
     const { linked } = getValidators()
     for (const json of Object.values(snapshot(doc))) expect(linked(json), JSON.stringify(linked.errors)).toBe(true)
+  })
+})
+
+/** Add a value to a property of the Instance, as AddValue does. */
+function addToInstance(state: SaveState, prop: string, json: Json): { state: SaveState; key: string } {
+  const { instance } = principals(state.current)
+  const after = getNode(state.current, instance).props[prop]?.at(-1)?.key ?? null
+  const { value, nodes } = fragment(json, { node: instance, prop })
+  const edit = change(`Added ${prop}`, [{ op: 'insert', node: instance, prop, after, value, nodes }])
+  return { state: { ...state, ...record(state.log, state.current, edit) }, key: 'node' in value ? value.node : '' }
+}
+
+describe('empty nodes', () => {
+  it('leaves out a node with only a type, so there is nothing to save', () => {
+    const { state, key } = addToInstance(opened(), 'identifiedBy', { '@type': ['Lccn'] })
+    expect(isEmpty(state.current, key)).toBe(true)
+    expect(unsaved(state.current, state.saved)).toEqual([])
+  })
+
+  it('leaves out a node holding only empty nodes, and the property if nothing is left', () => {
+    const { state, key } = addToInstance(opened(), 'note', { '@type': ['Note'], 'noteType': [{ '@type': ['Note'] }] })
+    expect(isEmpty(state.current, key)).toBe(true)
+    expect(unsaved(state.current, state.saved)).toEqual([])
+  })
+
+  it('saves the node once it has a value', () => {
+    const { state, key } = addToInstance(opened(), 'identifiedBy', { '@type': ['Lccn'], 'rdf:value': ['2020012345'] })
+    expect(isEmpty(state.current, key)).toBe(false)
+    const [pending] = unsaved(state.current, state.saved)
+    expect(JSON.stringify(pending?.json.identifiedBy)).toContain('2020012345')
+  })
+
+  it('keeps a node that is a link, though it has nothing else', () => {
+    const { state, key } = addToInstance(opened(), 'carrier', { '@id': 'http://id.loc.gov/vocabulary/carriers/nb' })
+    expect(isEmpty(state.current, key)).toBe(false)
+    expect(unsaved(state.current, state.saved)).toHaveLength(1)
   })
 })
