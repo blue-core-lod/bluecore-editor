@@ -271,6 +271,51 @@ button.add:hover {
   cursor: pointer;
 }
 
+/* Looking up a linked value: results as each source answers. */
+.lookup {
+  flex: 1 1 100%;
+}
+.lookup-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.lookup-source.failed {
+  color: var(--note-text);
+}
+.lookup-results {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.lookup-results li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+.lookup-results li + li {
+  border-top: 1px solid var(--rule);
+}
+.lookup-results .source {
+  white-space: nowrap;
+}
+.lookup-results li[aria-selected='true'] {
+  background: var(--linked);
+}
+.lookup .hint {
+  margin: 0.3rem 0 0;
+  font-size: 0.8rem;
+}
+
 /* What a save did. */
 .saved {
   background: #e8f3ec;

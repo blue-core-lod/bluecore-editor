@@ -221,10 +221,10 @@ function Chip(props: ValueProps & { uri: string }) {
   )
 }
 
-/** A node described in place, such as a Title or an Extent: its own small form. */
 /** Subforms that don't offer their empty fields: record-keeping, not cataloging. */
 const noEmptyFields = new Set(['AdminMetadata'])
 
+/** A node described in place, such as a Title or an Extent: its own small form. */
 function Subnode(props: ValueProps & { child: Node }) {
   const { doc } = useDescription()
   const { child, label } = props

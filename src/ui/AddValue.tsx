@@ -2,9 +2,11 @@ import { useState } from 'react'
 
 import { change } from '../doc/log'
 import { fragment, getNode, type Key } from '../doc/model'
+import { sourcesFor } from '../lookup/sources'
 import { useDescription } from './context'
 import { entryFor, fieldKind, newValue } from './form'
 import { termLabel } from './labels'
+import { Lookup } from './Lookup'
 
 /**
  * Adding a value to a property: "Add another" under a field, a field of a
@@ -38,26 +40,22 @@ export function AddValue({
   const { doc, record } = useDescription()
   const [open, setOpen] = useState(startOpen)
   const [text, setText] = useState('')
-  const [uri, setUri] = useState('')
-  const [linkLabel, setLinkLabel] = useState('')
   const entry = entryFor(fieldKind(doc, node, prop))
   const [type, setType] = useState(entry.entry === 'node' ? entry.preferred : '')
 
   const close = () => {
     setText('')
-    setUri('')
-    setLinkLabel('')
     setOpen(startOpen)
     onDone?.()
   }
 
-  const add = () => {
-    const json = newValue(entry, { text, uri, label: linkLabel, type })
+  const add = (link?: { uri: string; label: string }) => {
+    const json = newValue(entry, { text, type, ...link })
     if (json === null) return false
     const values = getNode(doc, node).props[prop] ?? []
     const after = values.at(-1)?.key ?? null
     const { value, nodes } = fragment(json, { node, prop })
-    const what = entry.entry === 'node' ? termLabel(type) : entry.entry === 'link' ? linkLabel || uri : text.trim()
+    const what = entry.entry === 'node' ? termLabel(type) : link ? link.label || link.uri : text.trim()
     record(change(`Added ${changeLabel}: ${what}`, [{ op: 'insert', node, prop, after, value, nodes }]))
     close()
     return true
@@ -93,38 +91,7 @@ export function AddValue({
         </span>
       )
     case 'link':
-      return (
-        <span className="adding link-entry">
-          {/* Lookups come later; for now a link is pasted, from id.loc.gov or elsewhere. */}
-          <input
-            aria-label={`${label} URI`}
-            placeholder="URI, such as https://id.loc.gov/…"
-            value={uri}
-            autoFocus
-            onChange={(event) => setUri(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') add()
-              if (event.key === 'Escape') close()
-            }}
-          />
-          <input
-            aria-label={`${label} label`}
-            placeholder="Label"
-            value={linkLabel}
-            onChange={(event) => setLinkLabel(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') add()
-              if (event.key === 'Escape') close()
-            }}
-          />
-          <button type="button" className="secondary" onClick={() => add()} disabled={!newValue(entry, { uri })}>
-            Add
-          </button>
-          <button type="button" className="link" onClick={close}>
-            Cancel
-          </button>
-        </span>
-      )
+      return <Lookup label={label} sources={sourcesFor(prop)} onPick={(hit) => add(hit)} onCancel={close} />
     case 'node':
       return (
         <span className="adding">
