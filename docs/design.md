@@ -18,6 +18,8 @@ The design makes five bets:
 
 Throughout, the editor follows a few principles: guide without constraining (the full BIBFRAME vocabulary is always one search away), search before creating, suggest rather than fill in, be honest about uncertainty, work fully from the keyboard, and never drop data it doesn't model.
 
+Underneath all of these is a goal: **the editor should not deskill catalogers, but make their work more interesting, fun, and effective.** It leaves the judgment with them and explains the model as they work, rather than reducing cataloging to filling in a form. Where the editor does something on the cataloger's behalf, such as suggesting a value, placing a field on the Work, or following a link to its source, it says so. That transparency is there to look at, not forced on anyone: hints, the history, and the reasons behind a suggestion are a click away, so experienced catalogers aren't buried in explanations they no longer need.
+
 ## Gaps in current editors
 
 Marva and Sinopia are the current BIBFRAME editors. This design targets gaps in both rather than replacing either:
