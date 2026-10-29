@@ -308,6 +308,11 @@ button.add:hover {
 .lookup-results .source {
   white-space: nowrap;
 }
+.lookup-results .code {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
 .lookup-results li[aria-selected='true'] {
   background: var(--linked);
 }

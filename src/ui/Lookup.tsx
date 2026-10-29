@@ -1,7 +1,8 @@
 import { useEffect, useId, useState, type KeyboardEvent } from 'react'
 
 import { searchSource, type Hit } from '../lookup/qa'
-import type { Source } from '../lookup/sources'
+import { isLocal, type Source } from '../lookup/sources'
+import { useDescription } from './context'
 import { isUri } from './labels'
 
 type SourceState = { state: 'loading' } | { state: 'done'; hits: Hit[] } | { state: 'failed' }
@@ -11,7 +12,11 @@ interface Option extends Hit {
   source: string
 }
 
-/** Wait this long after the last keystroke before searching. */
+function hitsOf(result: SourceState | undefined): Hit[] {
+  return result?.state === 'done' ? result.hits : []
+}
+
+/** Wait this long after the last keystroke before searching a remote source. */
 const pause = 300
 
 /**
@@ -23,15 +28,19 @@ const pause = 300
 export function Lookup({
   label,
   sources,
+  already,
   onPick,
   onCancel,
 }: {
   /** What the field is called, such as "Subject". */
   label: string
   sources: Source[]
+  /** URIs the field already links to, not offered again. */
+  already: ReadonlySet<string>
   onPick: (hit: Hit) => void
   onCancel: () => void
 }) {
+  const { hints } = useDescription()
   const listId = useId()
   const [query, setQuery] = useState('')
   const [pastedLabel, setPastedLabel] = useState('')
@@ -41,7 +50,9 @@ export function Lookup({
 
   const text = query.trim()
   const pasted = isUri(text)
-  const searching = !pasted && text.length >= 2
+  // A picklist (only vendored vocabularies) answers at once, and from the first keystroke, or none.
+  const picklist = sources.length > 0 && sources.every(isLocal)
+  const searching = !pasted && (picklist || text.length >= 2)
 
   useEffect(() => {
     if (!searching) return
@@ -58,14 +69,14 @@ export function Lookup({
           },
         )
       }
-    }, pause)
+    }, picklist ? 0 : pause)
     return () => {
       clearTimeout(timer)
       controller.abort()
     }
-  }, [searching, text, sources, attempt])
+  }, [searching, picklist, text, sources, attempt])
 
-  const seen = new Set<string>()
+  const seen = new Set(already)
   const options: Option[] = searching
     ? sources.flatMap((source) => {
         const result = results[source.label]
@@ -104,9 +115,11 @@ export function Lookup({
           aria-activedescendant={current?.id}
           aria-autocomplete="list"
           placeholder={
-            sources.length > 0
-              ? `Find ${label.toLowerCase()} in ${sources.map((source) => source.label).join(' and ')}, or paste a URI`
-              : `Paste the URI of the ${label.toLowerCase()}`
+            picklist
+              ? `Find ${label.toLowerCase()} in ${sources.map((source) => source.label).join(' and ')} by name or MARC code`
+              : sources.length > 0
+                ? `Find ${label.toLowerCase()} in ${sources.map((source) => source.label).join(' and ')}, or paste a URI`
+                : `Paste the URI of the ${label.toLowerCase()}`
           }
           value={query}
           autoFocus
@@ -134,7 +147,7 @@ export function Lookup({
           Cancel
         </button>
       </div>
-      {searching && (
+      {searching && !picklist && (
         <p className="lookup-sources" aria-live="polite">
           {sources.map((source) => {
             const result = results[source.label]
@@ -158,6 +171,13 @@ export function Lookup({
           })}
         </p>
       )}
+      {picklist && text && options.length === 0 && (
+        <p className="muted hint">
+          {/* Matches the field already has were left out, so "nothing" would be wrong. */}
+          Nothing {sources.some((source) => hitsOf(results[source.label]).length > 0) ? 'else ' : ''}in{' '}
+          {sources.map((source) => source.label).join(' or ')} matches
+        </p>
+      )}
       {options.length > 0 && (
         <>
           <ul className="lookup-results" role="listbox" id={listId} aria-label={`${label} results`}>
@@ -171,7 +191,10 @@ export function Lookup({
                 onClick={() => onPick(option)}
                 onMouseEnter={() => setActive(options.indexOf(option))}
               >
-                <span>{option.label}</span>
+                <span>
+                  {option.label}
+                  {hints && option.code && <span className="code"> {option.code}</span>}
+                </span>
                 <span className="source">{option.source}</span>
               </li>
             ))}

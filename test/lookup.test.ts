@@ -1,10 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { config } from '../src/config'
+import { searchVocabulary } from '../src/lookup/local'
 import { searchSource, searchUrl } from '../src/lookup/qa'
-import { sourcesFor } from '../src/lookup/sources'
+import { isLocal, sourcesFor, type QaSource } from '../src/lookup/sources'
 
-const names = { label: 'LC Names', path: 'loc/names' }
+const names: QaSource = { label: 'LC Names', path: 'loc/names' }
 
 function stubFetch(status: number, body: unknown) {
   const fetch = vi.fn(async () => new Response(JSON.stringify(body), { status }))
@@ -51,5 +52,41 @@ describe('lookups', () => {
   it('gives the same empty list for a property with no sources', () => {
     expect(sourcesFor('mainTitle')).toBe(sourcesFor('partName'))
     expect(sourcesFor('subject').map((source) => source.label)).toEqual(['LC Subjects', 'LC Names'])
+  })
+})
+
+describe('vendored vocabularies', () => {
+  const labels = (hits: { label: string }[]) => hits.map((hit) => hit.label)
+
+  it('matches the MARC code first', () => {
+    expect(searchVocabulary('relators', 'aut')[0]).toEqual({
+      uri: 'http://id.loc.gov/vocabulary/relators/aut',
+      label: 'author',
+      code: 'aut',
+    })
+  })
+
+  it('matches the start of a label, unlike QA', () => {
+    expect(labels(searchVocabulary('languages', 'Engl'))[0]).toBe('English')
+  })
+
+  it('matches the start of any word, then anything containing the text', () => {
+    const found = labels(searchVocabulary('languages', 'old'))
+    expect(found).toContain('English, Old (ca. 450-1100)')
+    expect(labels(searchVocabulary('carriers', 'disc'))).toContain('audio disc')
+  })
+
+  it('offers a short list whole before anything is typed, and a long one not at all', () => {
+    expect(searchVocabulary('mediaTypes', '')).toHaveLength(10)
+    expect(searchVocabulary('languages', '')).toEqual([])
+  })
+
+  it('searches the vendored list for a vocabulary source, without a request', async () => {
+    const fetch = stubFetch(200, [])
+    const [role] = sourcesFor('role')
+    if (!role) throw new Error('no source for role')
+    expect(isLocal(role)).toBe(true)
+    expect(labels(await searchSource(role, 'editor'))[0]).toBe('editor')
+    expect(fetch).not.toHaveBeenCalled()
   })
 })

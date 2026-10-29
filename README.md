@@ -51,5 +51,11 @@ URI with `If-Match`, so a save never replaces someone else's newer version
 without asking. `src/api/endpoints.ts` is the one place that maps a resource
 URI to a request URL.
 
+`src/lookup/` finds the entities links point to. Authorities (LC names,
+subjects, genre/form terms) are searched in QA through Sinopia's proxy beside
+Blue Core. The small LC vocabularies (carriers, languages, relators…) are
+vendored into `src/lookup/vocabularies.json` by `npm run
+vendor:lc-vocabularies` and searched locally, as picklists.
+
 `src/ui/` is the description view. `src/ui/presentation.ts` is the presentation
 sidecar: sections, field order and MARC hints, keyed by property name.

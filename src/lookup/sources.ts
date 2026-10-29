@@ -1,33 +1,46 @@
+import type { Vocabulary } from './local'
+
 /**
- * Where to look up a linked value, by the property it's for. These are QA
- * (Questioning Authority) authorities, the lookup service Sinopia uses, so a
- * cataloger finds the same entities in either editor.
- *
- * The LC vocabularies (carriers, languages, relators…) are small enough to be
- * local picklists one day, as the design says; until then they're lookups too.
+ * Where to look up a linked value, by the property it's for. Authorities are
+ * searched in QA (Questioning Authority), the lookup service Sinopia uses, so
+ * a cataloger finds the same entities in either editor. The small LC
+ * vocabularies (carriers, languages, relators…) are vendored picklists.
  */
 
-export interface Source {
+/** An authority searched in QA. */
+export interface QaSource {
   /** What the cataloger sees, such as "LC Names". */
   label: string
   /** The QA search path, after authorities/search/. */
   path: string
 }
 
-const lcNames: Source = { label: 'LC Names', path: 'loc/names' }
-const lcsh: Source = { label: 'LC Subjects', path: 'loc/subjects' }
+/** An LC vocabulary vendored into the editor (see scripts/vendor-lc-vocabularies.mjs). */
+export interface VocabularySource {
+  label: string
+  vocabulary: Vocabulary
+}
+
+export type Source = QaSource | VocabularySource
+
+export function isLocal(source: Source): source is VocabularySource {
+  return 'vocabulary' in source
+}
+
+const lcNames: QaSource = { label: 'LC Names', path: 'loc/names' }
+const lcsh: QaSource = { label: 'LC Subjects', path: 'loc/subjects' }
 
 export const lookups: Record<string, Source[]> = {
   agent: [lcNames],
   subject: [lcsh, lcNames],
   genreForm: [{ label: 'LC Genre/Form', path: 'loc/genreForms' }],
-  carrier: [{ label: 'LC Carrier types', path: 'loc/carriers' }],
-  media: [{ label: 'LC Media types', path: 'loc/mediaTypes' }],
-  content: [{ label: 'LC Content types', path: 'loc/contentTypes' }],
-  language: [{ label: 'LC Languages', path: 'loc/languages' }],
-  role: [{ label: 'LC Relators', path: 'loc/relators' }],
-  place: [{ label: 'MARC Countries', path: 'loc/countries' }],
-  issuance: [{ label: 'LC Issuance', path: 'loc/issuance' }],
+  carrier: [{ label: 'LC Carrier types', vocabulary: 'carriers' }],
+  media: [{ label: 'LC Media types', vocabulary: 'mediaTypes' }],
+  content: [{ label: 'LC Content types', vocabulary: 'contentTypes' }],
+  language: [{ label: 'LC Languages', vocabulary: 'languages' }],
+  role: [{ label: 'LC Relators', vocabulary: 'relators' }],
+  place: [{ label: 'MARC Countries', vocabulary: 'countries' }],
+  issuance: [{ label: 'LC Issuance', vocabulary: 'issuance' }],
 }
 
 const none: Source[] = []

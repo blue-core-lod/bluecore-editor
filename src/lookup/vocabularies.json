@@ -1,0 +1,6116 @@
+{
+ "carriers": [
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/ha",
+   "label": "aperture card",
+   "code": "ha"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/sb",
+   "label": "audio belt",
+   "code": "sb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/sg",
+   "label": "audio cartridge",
+   "code": "sg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/se",
+   "label": "audio cylinder",
+   "code": "se"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/sd",
+   "label": "audio disc",
+   "code": "sd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/sq",
+   "label": "audio roll",
+   "code": "sq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/sw",
+   "label": "audio wire reel",
+   "code": "sw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/ss",
+   "label": "audiocassette",
+   "code": "ss"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/st",
+   "label": "audiotape reel",
+   "code": "st"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/no",
+   "label": "card",
+   "code": "no"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/ck",
+   "label": "computer card",
+   "code": "ck"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/cb",
+   "label": "computer chip cartridge",
+   "code": "cb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/cd",
+   "label": "computer disc",
+   "code": "cd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/ce",
+   "label": "computer disc cartridge",
+   "code": "ce"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/ca",
+   "label": "computer tape cartridge",
+   "code": "ca"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/cf",
+   "label": "computer tape cassette",
+   "code": "cf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/ch",
+   "label": "computer tape reel",
+   "code": "ch"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/mc",
+   "label": "film cartridge",
+   "code": "mc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/mf",
+   "label": "film cassette",
+   "code": "mf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/mr",
+   "label": "film reel",
+   "code": "mr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/mo",
+   "label": "film roll",
+   "code": "mo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/gd",
+   "label": "filmslip",
+   "code": "gd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/gf",
+   "label": "filmstrip",
+   "code": "gf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/gc",
+   "label": "filmstrip cartridge",
+   "code": "gc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/nn",
+   "label": "flipchart",
+   "code": "nn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/he",
+   "label": "microfiche",
+   "code": "he"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hf",
+   "label": "microfiche cassette",
+   "code": "hf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hb",
+   "label": "microfilm cartridge",
+   "code": "hb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hc",
+   "label": "microfilm cassette",
+   "code": "hc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hd",
+   "label": "microfilm reel",
+   "code": "hd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hj",
+   "label": "microfilm roll",
+   "code": "hj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hh",
+   "label": "microfilm slip",
+   "code": "hh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hg",
+   "label": "microopaque",
+   "code": "hg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/pp",
+   "label": "microscope slide",
+   "code": "pp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/nr",
+   "label": "object",
+   "code": "nr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+   "label": "online resource",
+   "code": "cr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/sz",
+   "label": "other audio carrier",
+   "code": "sz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/cz",
+   "label": "other computer carrier",
+   "code": "cz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/hz",
+   "label": "other microform carrier",
+   "code": "hz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/pz",
+   "label": "other microscopic carrier",
+   "code": "pz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/mz",
+   "label": "other projected carrier",
+   "code": "mz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/ez",
+   "label": "other stereographic carrier",
+   "code": "ez"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/nz",
+   "label": "other unmediated carrier",
+   "code": "nz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/vz",
+   "label": "other video carrier",
+   "code": "vz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/gt",
+   "label": "overhead transparency",
+   "code": "gt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/na",
+   "label": "roll",
+   "code": "na"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/nb",
+   "label": "sheet",
+   "code": "nb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/gs",
+   "label": "slide",
+   "code": "gs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/si",
+   "label": "sound track reel",
+   "code": "si"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/eh",
+   "label": "stereograph card",
+   "code": "eh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/es",
+   "label": "stereograph disc",
+   "code": "es"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/vc",
+   "label": "video cartridge",
+   "code": "vc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/vf",
+   "label": "videocassette",
+   "code": "vf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/vd",
+   "label": "videodisc",
+   "code": "vd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/vr",
+   "label": "videotape reel",
+   "code": "vr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+   "label": "volume",
+   "code": "nc"
+  }
+ ],
+ "mediaTypes": [
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/s",
+   "label": "audio",
+   "code": "s"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+   "label": "computer",
+   "code": "c"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/h",
+   "label": "microform",
+   "code": "h"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/p",
+   "label": "microscopic",
+   "code": "p"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/x",
+   "label": "other",
+   "code": "x"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/g",
+   "label": "projected",
+   "code": "g"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/e",
+   "label": "stereographic",
+   "code": "e"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+   "label": "unmediated",
+   "code": "n"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/z",
+   "label": "unspecified",
+   "code": "z"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/mediaTypes/v",
+   "label": "video",
+   "code": "v"
+  }
+ ],
+ "contentTypes": [
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/crd",
+   "label": "cartographic dataset",
+   "code": "crd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/cri",
+   "label": "cartographic image",
+   "code": "cri"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/crm",
+   "label": "cartographic moving image",
+   "code": "crm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/crt",
+   "label": "cartographic tactile image",
+   "code": "crt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/crn",
+   "label": "cartographic tactile three-dimensional form",
+   "code": "crn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/crf",
+   "label": "cartographic three-dimensional form",
+   "code": "crf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/cod",
+   "label": "computer dataset",
+   "code": "cod"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/cop",
+   "label": "computer program",
+   "code": "cop"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/ntv",
+   "label": "notated movement",
+   "code": "ntv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/ntm",
+   "label": "notated music",
+   "code": "ntm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/xxx",
+   "label": "other",
+   "code": "xxx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/prm",
+   "label": "performed music",
+   "code": "prm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/snd",
+   "label": "sounds",
+   "code": "snd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/spw",
+   "label": "spoken word",
+   "code": "spw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+   "label": "still image",
+   "code": "sti"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tci",
+   "label": "tactile image",
+   "code": "tci"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tcn",
+   "label": "tactile notated movement",
+   "code": "tcn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tcm",
+   "label": "tactile notated music",
+   "code": "tcm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tct",
+   "label": "tactile text",
+   "code": "tct"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tcf",
+   "label": "tactile three-dimensional form",
+   "code": "tcf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+   "label": "text",
+   "code": "txt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tdf",
+   "label": "three-dimensional form",
+   "code": "tdf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tdm",
+   "label": "three-dimensional moving image",
+   "code": "tdm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/tdi",
+   "label": "two-dimensional moving image",
+   "code": "tdi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/contentTypes/zzz",
+   "label": "unspecified",
+   "code": "zzz"
+  }
+ ],
+ "issuance": [
+  {
+   "uri": "http://id.loc.gov/vocabulary/issuance/intg",
+   "label": "integrating resource",
+   "code": "intg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+   "label": "multipart monograph",
+   "code": "mulm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/issuance/mult",
+   "label": "multiple unit",
+   "code": "mult"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/issuance/serl",
+   "label": "serial",
+   "code": "serl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+   "label": "single unit",
+   "code": "mono"
+  }
+ ],
+ "relators": [
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/abr",
+   "label": "abridger",
+   "code": "abr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/act",
+   "label": "actor",
+   "code": "act"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/adp",
+   "label": "adapter",
+   "code": "adp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rcp",
+   "label": "addressee",
+   "code": "rcp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/anl",
+   "label": "analyst",
+   "code": "anl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/anm",
+   "label": "animator",
+   "code": "anm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ann",
+   "label": "annotator",
+   "code": "ann"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/anc",
+   "label": "announcer",
+   "code": "anc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/apl",
+   "label": "appellant",
+   "code": "apl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ape",
+   "label": "appellee",
+   "code": "ape"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/app",
+   "label": "applicant",
+   "code": "app"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/arc",
+   "label": "architect",
+   "code": "arc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/arr",
+   "label": "arranger",
+   "code": "arr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/acp",
+   "label": "art copyist",
+   "code": "acp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/adi",
+   "label": "art director",
+   "code": "adi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/art",
+   "label": "artist",
+   "code": "art"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ard",
+   "label": "artistic director",
+   "code": "ard"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/asg",
+   "label": "assignee",
+   "code": "asg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/asn",
+   "label": "associated name",
+   "code": "asn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/att",
+   "label": "attributed name",
+   "code": "att"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/auc",
+   "label": "auctioneer",
+   "code": "auc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aue",
+   "label": "audio engineer",
+   "code": "aue"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aup",
+   "label": "audio producer",
+   "code": "aup"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aut",
+   "label": "author",
+   "code": "aut"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aqt",
+   "label": "author in quotations or text abstracts",
+   "code": "aqt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aft",
+   "label": "author of afterword, colophon, etc.",
+   "code": "aft"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aud",
+   "label": "author of dialog",
+   "code": "aud"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aui",
+   "label": "author of introduction, etc.",
+   "code": "aui"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ato",
+   "label": "autographer",
+   "code": "ato"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ant",
+   "label": "bibliographic antecedent",
+   "code": "ant"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bnd",
+   "label": "binder",
+   "code": "bnd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bdd",
+   "label": "binding designer",
+   "code": "bdd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/blw",
+   "label": "blurb writer",
+   "code": "blw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bka",
+   "label": "book artist",
+   "code": "bka"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bkd",
+   "label": "book designer",
+   "code": "bkd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bkp",
+   "label": "book producer",
+   "code": "bkp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bjd",
+   "label": "bookjacket designer",
+   "code": "bjd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bpd",
+   "label": "bookplate designer",
+   "code": "bpd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/bsl",
+   "label": "bookseller",
+   "code": "bsl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/brl",
+   "label": "braille embosser",
+   "code": "brl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/brd",
+   "label": "broadcaster",
+   "code": "brd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cll",
+   "label": "calligrapher",
+   "code": "cll"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cop",
+   "label": "camera operator",
+   "code": "cop"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ctg",
+   "label": "cartographer",
+   "code": "ctg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cas",
+   "label": "caster",
+   "code": "cas"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cad",
+   "label": "casting director",
+   "code": "cad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cns",
+   "label": "censor",
+   "code": "cns"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/chr",
+   "label": "choreographer",
+   "code": "chr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cng",
+   "label": "cinematographer",
+   "code": "cng"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cli",
+   "label": "client",
+   "code": "cli"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cor",
+   "label": "collection registrar",
+   "code": "cor"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/col",
+   "label": "collector",
+   "code": "col"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/clt",
+   "label": "collotyper",
+   "code": "clt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/clr",
+   "label": "colorist",
+   "code": "clr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cmm",
+   "label": "commentator",
+   "code": "cmm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cwt",
+   "label": "commentator for written text",
+   "code": "cwt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/com",
+   "label": "compiler",
+   "code": "com"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cpl",
+   "label": "complainant",
+   "code": "cpl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cpt",
+   "label": "complainant-appellant",
+   "code": "cpt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cpe",
+   "label": "complainant-appellee",
+   "code": "cpe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cmp",
+   "label": "composer",
+   "code": "cmp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cmt",
+   "label": "compositor",
+   "code": "cmt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ccp",
+   "label": "conceptor",
+   "code": "ccp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cnd",
+   "label": "conductor",
+   "code": "cnd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/con",
+   "label": "conservator",
+   "code": "con"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/csl",
+   "label": "consultant",
+   "code": "csl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/csp",
+   "label": "consultant to a project",
+   "code": "csp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cos",
+   "label": "contestant",
+   "code": "cos"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cot",
+   "label": "contestant-appellant",
+   "code": "cot"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/coe",
+   "label": "contestant-appellee",
+   "code": "coe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cts",
+   "label": "contestee",
+   "code": "cts"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ctt",
+   "label": "contestee-appellant",
+   "code": "ctt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cte",
+   "label": "contestee-appellee",
+   "code": "cte"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ctr",
+   "label": "contractor",
+   "code": "ctr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ctb",
+   "label": "contributor",
+   "code": "ctb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cpc",
+   "label": "copyright claimant",
+   "code": "cpc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cph",
+   "label": "copyright holder",
+   "code": "cph"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/crr",
+   "label": "corrector",
+   "code": "crr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/crp",
+   "label": "correspondent",
+   "code": "crp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cst",
+   "label": "costume designer",
+   "code": "cst"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cou",
+   "label": "court governed",
+   "code": "cou"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/crt",
+   "label": "court reporter",
+   "code": "crt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cov",
+   "label": "cover designer",
+   "code": "cov"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cre",
+   "label": "creator",
+   "code": "cre"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/cur",
+   "label": "curator",
+   "code": "cur"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dnc",
+   "label": "dancer",
+   "code": "dnc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dtc",
+   "label": "data contributor",
+   "code": "dtc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dtm",
+   "label": "data manager",
+   "code": "dtm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dte",
+   "label": "dedicatee",
+   "code": "dte"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dto",
+   "label": "dedicator",
+   "code": "dto"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dfd",
+   "label": "defendant",
+   "code": "dfd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dft",
+   "label": "defendant-appellant",
+   "code": "dft"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dfe",
+   "label": "defendant-appellee",
+   "code": "dfe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dgc",
+   "label": "degree committee member",
+   "code": "dgc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dgg",
+   "label": "degree granting institution",
+   "code": "dgg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dgs",
+   "label": "degree supervisor",
+   "code": "dgs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dln",
+   "label": "delineator",
+   "code": "dln"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dpc",
+   "label": "depicted",
+   "code": "dpc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dpt",
+   "label": "depositor",
+   "code": "dpt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dsr",
+   "label": "designer",
+   "code": "dsr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/drt",
+   "label": "director",
+   "code": "drt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dis",
+   "label": "dissertant",
+   "code": "dis"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dbp",
+   "label": "distribution place",
+   "code": "dbp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dst",
+   "label": "distributor",
+   "code": "dst"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/djo",
+   "label": "dj",
+   "code": "djo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dnr",
+   "label": "donor",
+   "code": "dnr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/drm",
+   "label": "draftsman",
+   "code": "drm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dbd",
+   "label": "dubbing director",
+   "code": "dbd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/dub",
+   "label": "dubious author",
+   "code": "dub"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/edt",
+   "label": "editor",
+   "code": "edt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/edc",
+   "label": "editor of compilation",
+   "code": "edc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/edm",
+   "label": "editor of moving image work",
+   "code": "edm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/edd",
+   "label": "editorial director",
+   "code": "edd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/elg",
+   "label": "electrician",
+   "code": "elg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/elt",
+   "label": "electrotyper",
+   "code": "elt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/enj",
+   "label": "enacting jurisdiction",
+   "code": "enj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/eng",
+   "label": "engineer",
+   "code": "eng"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/egr",
+   "label": "engraver",
+   "code": "egr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/etr",
+   "label": "etcher",
+   "code": "etr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/evp",
+   "label": "event place",
+   "code": "evp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/exp",
+   "label": "expert",
+   "code": "exp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fac",
+   "label": "facsimilist",
+   "code": "fac"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fld",
+   "label": "field director",
+   "code": "fld"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fmd",
+   "label": "film director",
+   "code": "fmd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fds",
+   "label": "film distributor",
+   "code": "fds"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/flm",
+   "label": "film editor",
+   "code": "flm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fmp",
+   "label": "film producer",
+   "code": "fmp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fmk",
+   "label": "filmmaker",
+   "code": "fmk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fpy",
+   "label": "first party",
+   "code": "fpy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/frg",
+   "label": "forger",
+   "code": "frg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fmo",
+   "label": "former owner",
+   "code": "fmo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fon",
+   "label": "founder",
+   "code": "fon"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/fnd",
+   "label": "funder",
+   "code": "fnd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/gdv",
+   "label": "game developer",
+   "code": "gdv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/gis",
+   "label": "geographic information specialist",
+   "code": "gis"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/hnr",
+   "label": "honoree",
+   "code": "hnr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/hst",
+   "label": "host",
+   "code": "hst"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/his",
+   "label": "host institution",
+   "code": "his"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ilu",
+   "label": "illuminator",
+   "code": "ilu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ill",
+   "label": "illustrator",
+   "code": "ill"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ink",
+   "label": "inker",
+   "code": "ink"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ins",
+   "label": "inscriber",
+   "code": "ins"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/itr",
+   "label": "instrumentalist",
+   "code": "itr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ive",
+   "label": "interviewee",
+   "code": "ive"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ivr",
+   "label": "interviewer",
+   "code": "ivr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/inv",
+   "label": "inventor",
+   "code": "inv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/isb",
+   "label": "issuing body",
+   "code": "isb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/jud",
+   "label": "judge",
+   "code": "jud"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/jug",
+   "label": "jurisdiction governed",
+   "code": "jug"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lbr",
+   "label": "laboratory",
+   "code": "lbr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ldr",
+   "label": "laboratory director",
+   "code": "ldr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lsa",
+   "label": "landscape architect",
+   "code": "lsa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/led",
+   "label": "lead",
+   "code": "led"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/len",
+   "label": "lender",
+   "code": "len"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ltr",
+   "label": "letterer",
+   "code": "ltr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lil",
+   "label": "libelant",
+   "code": "lil"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lit",
+   "label": "libelant-appellant",
+   "code": "lit"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lie",
+   "label": "libelant-appellee",
+   "code": "lie"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lel",
+   "label": "libelee",
+   "code": "lel"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/let",
+   "label": "libelee-appellant",
+   "code": "let"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lee",
+   "label": "libelee-appellee",
+   "code": "lee"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lbt",
+   "label": "librettist",
+   "code": "lbt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lse",
+   "label": "licensee",
+   "code": "lse"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lso",
+   "label": "licensor",
+   "code": "lso"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lgd",
+   "label": "lighting designer",
+   "code": "lgd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ltg",
+   "label": "lithographer",
+   "code": "ltg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/lyr",
+   "label": "lyricist",
+   "code": "lyr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mka",
+   "label": "makeup artist",
+   "code": "mka"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mfp",
+   "label": "manufacture place",
+   "code": "mfp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mfr",
+   "label": "manufacturer",
+   "code": "mfr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mrb",
+   "label": "marbler",
+   "code": "mrb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mrk",
+   "label": "markup editor",
+   "code": "mrk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/med",
+   "label": "medium",
+   "code": "med"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mdc",
+   "label": "metadata contact",
+   "code": "mdc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mte",
+   "label": "metal engraver",
+   "code": "mte"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mtk",
+   "label": "minute taker",
+   "code": "mtk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mxe",
+   "label": "mixing engineer",
+   "code": "mxe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mod",
+   "label": "moderator",
+   "code": "mod"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mon",
+   "label": "monitor",
+   "code": "mon"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mcp",
+   "label": "music copyist",
+   "code": "mcp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mup",
+   "label": "music programmer",
+   "code": "mup"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/msd",
+   "label": "musical director",
+   "code": "msd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/mus",
+   "label": "musician",
+   "code": "mus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/nrt",
+   "label": "narrator",
+   "code": "nrt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/nan",
+   "label": "news anchor",
+   "code": "nan"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/onp",
+   "label": "onscreen participant",
+   "code": "onp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/osp",
+   "label": "onscreen presenter",
+   "code": "osp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/opn",
+   "label": "opponent",
+   "code": "opn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/orm",
+   "label": "organizer",
+   "code": "orm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/org",
+   "label": "originator",
+   "code": "org"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/oth",
+   "label": "other",
+   "code": "oth"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/own",
+   "label": "owner",
+   "code": "own"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pan",
+   "label": "panelist",
+   "code": "pan"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ppm",
+   "label": "papermaker",
+   "code": "ppm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pta",
+   "label": "patent applicant",
+   "code": "pta"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pth",
+   "label": "patent holder",
+   "code": "pth"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pat",
+   "label": "patron",
+   "code": "pat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pnc",
+   "label": "penciller",
+   "code": "pnc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prf",
+   "label": "performer",
+   "code": "prf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pma",
+   "label": "permitting agency",
+   "code": "pma"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pht",
+   "label": "photographer",
+   "code": "pht"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pad",
+   "label": "place of address",
+   "code": "pad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ptf",
+   "label": "plaintiff",
+   "code": "ptf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ptt",
+   "label": "plaintiff-appellant",
+   "code": "ptt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pte",
+   "label": "plaintiff-appellee",
+   "code": "pte"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/plt",
+   "label": "platemaker",
+   "code": "plt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pra",
+   "label": "praeses",
+   "code": "pra"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pre",
+   "label": "presenter",
+   "code": "pre"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prt",
+   "label": "printer",
+   "code": "prt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pop",
+   "label": "printer of plates",
+   "code": "pop"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prm",
+   "label": "printmaker",
+   "code": "prm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prc",
+   "label": "process contact",
+   "code": "prc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pro",
+   "label": "producer",
+   "code": "pro"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prn",
+   "label": "production company",
+   "code": "prn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prs",
+   "label": "production designer",
+   "code": "prs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pmn",
+   "label": "production manager",
+   "code": "pmn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prd",
+   "label": "production personnel",
+   "code": "prd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prp",
+   "label": "production place",
+   "code": "prp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prg",
+   "label": "programmer",
+   "code": "prg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pdr",
+   "label": "project director",
+   "code": "pdr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pfr",
+   "label": "proofreader",
+   "code": "pfr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/prv",
+   "label": "provider",
+   "code": "prv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pup",
+   "label": "publication place",
+   "code": "pup"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pbl",
+   "label": "publisher",
+   "code": "pbl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/pbd",
+   "label": "publisher director",
+   "code": "pbd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ppt",
+   "label": "puppeteer",
+   "code": "ppt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rdd",
+   "label": "radio director",
+   "code": "rdd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rpc",
+   "label": "radio producer",
+   "code": "rpc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rap",
+   "label": "rapporteur",
+   "code": "rap"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rce",
+   "label": "recording engineer",
+   "code": "rce"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rcd",
+   "label": "recordist",
+   "code": "rcd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/red",
+   "label": "redaktor",
+   "code": "red"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rxa",
+   "label": "remix artist",
+   "code": "rxa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ren",
+   "label": "renderer",
+   "code": "ren"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rpt",
+   "label": "reporter",
+   "code": "rpt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rps",
+   "label": "repository",
+   "code": "rps"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rth",
+   "label": "research team head",
+   "code": "rth"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rtm",
+   "label": "research team member",
+   "code": "rtm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/res",
+   "label": "researcher",
+   "code": "res"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rsp",
+   "label": "respondent",
+   "code": "rsp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rst",
+   "label": "respondent-appellant",
+   "code": "rst"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rse",
+   "label": "respondent-appellee",
+   "code": "rse"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rpy",
+   "label": "responsible party",
+   "code": "rpy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rsg",
+   "label": "restager",
+   "code": "rsg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rsr",
+   "label": "restorationist",
+   "code": "rsr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rev",
+   "label": "reviewer",
+   "code": "rev"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/rbr",
+   "label": "rubricator",
+   "code": "rbr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sce",
+   "label": "scenarist",
+   "code": "sce"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sad",
+   "label": "scientific advisor",
+   "code": "sad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/aus",
+   "label": "screenwriter",
+   "code": "aus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/scr",
+   "label": "scribe",
+   "code": "scr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/scl",
+   "label": "sculptor",
+   "code": "scl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/spy",
+   "label": "second party",
+   "code": "spy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sec",
+   "label": "secretary",
+   "code": "sec"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sll",
+   "label": "seller",
+   "code": "sll"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/std",
+   "label": "set designer",
+   "code": "std"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/stg",
+   "label": "setting",
+   "code": "stg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sgn",
+   "label": "signer",
+   "code": "sgn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sng",
+   "label": "singer",
+   "code": "sng"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/swd",
+   "label": "software developer",
+   "code": "swd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sds",
+   "label": "sound designer",
+   "code": "sds"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sde",
+   "label": "sound engineer",
+   "code": "sde"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/spk",
+   "label": "speaker",
+   "code": "spk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sfx",
+   "label": "special effects provider",
+   "code": "sfx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/spn",
+   "label": "sponsor",
+   "code": "spn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sgd",
+   "label": "stage director",
+   "code": "sgd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/stm",
+   "label": "stage manager",
+   "code": "stm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/stn",
+   "label": "standards body",
+   "code": "stn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/str",
+   "label": "stereotyper",
+   "code": "str"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/stl",
+   "label": "storyteller",
+   "code": "stl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/sht",
+   "label": "supporting host",
+   "code": "sht"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/srv",
+   "label": "surveyor",
+   "code": "srv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tch",
+   "label": "teacher",
+   "code": "tch"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tad",
+   "label": "technical advisor",
+   "code": "tad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tcd",
+   "label": "technical director",
+   "code": "tcd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tld",
+   "label": "television director",
+   "code": "tld"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tlg",
+   "label": "television guest",
+   "code": "tlg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tlh",
+   "label": "television host",
+   "code": "tlh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tlp",
+   "label": "television producer",
+   "code": "tlp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tau",
+   "label": "television writer",
+   "code": "tau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/ths",
+   "label": "thesis advisor",
+   "code": "ths"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/trc",
+   "label": "transcriber",
+   "code": "trc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/trl",
+   "label": "translator",
+   "code": "trl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tyd",
+   "label": "type designer",
+   "code": "tyd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/tyg",
+   "label": "typographer",
+   "code": "tyg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/uvp",
+   "label": "university place",
+   "code": "uvp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/vdg",
+   "label": "videographer",
+   "code": "vdg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/vfx",
+   "label": "visual effects provider",
+   "code": "vfx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/voc",
+   "label": "vocalist",
+   "code": "voc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/vac",
+   "label": "voice actor",
+   "code": "vac"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wit",
+   "label": "witness",
+   "code": "wit"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wde",
+   "label": "wood engraver",
+   "code": "wde"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wdc",
+   "label": "woodcutter",
+   "code": "wdc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wam",
+   "label": "writer of accompanying material",
+   "code": "wam"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wac",
+   "label": "writer of added commentary",
+   "code": "wac"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wal",
+   "label": "writer of added lyrics",
+   "code": "wal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wat",
+   "label": "writer of added text",
+   "code": "wat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/waw",
+   "label": "writer of afterword",
+   "code": "waw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wfs",
+   "label": "writer of film story",
+   "code": "wfs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wfw",
+   "label": "writer of foreword",
+   "code": "wfw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wft",
+   "label": "writer of intertitles",
+   "code": "wft"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/win",
+   "label": "writer of introduction",
+   "code": "win"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wpr",
+   "label": "writer of preface",
+   "code": "wpr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wst",
+   "label": "writer of supplementary textual content",
+   "code": "wst"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/relators/wts",
+   "label": "writer of television story",
+   "code": "wts"
+  }
+ ],
+ "languages": [
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/abk",
+   "label": "Abkhaz",
+   "code": "abk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ace",
+   "label": "Achinese",
+   "code": "ace"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ach",
+   "label": "Acoli",
+   "code": "ach"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ada",
+   "label": "Adangme",
+   "code": "ada"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ady",
+   "label": "Adygei",
+   "code": "ady"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/aar",
+   "label": "Afar",
+   "code": "aar"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/afh",
+   "label": "Afrihili (Artificial language)",
+   "code": "afh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/afr",
+   "label": "Afrikaans",
+   "code": "afr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/afa",
+   "label": "Afroasiatic (Other)",
+   "code": "afa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ain",
+   "label": "Ainu",
+   "code": "ain"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/aka",
+   "label": "Akan",
+   "code": "aka"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/akk",
+   "label": "Akkadian",
+   "code": "akk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/alb",
+   "label": "Albanian",
+   "code": "alb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ale",
+   "label": "Aleut",
+   "code": "ale"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/alg",
+   "label": "Algonquian (Other)",
+   "code": "alg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/alt",
+   "label": "Altai",
+   "code": "alt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tut",
+   "label": "Altaic (Other)",
+   "code": "tut"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/amh",
+   "label": "Amharic",
+   "code": "amh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/anp",
+   "label": "Angika",
+   "code": "anp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/apa",
+   "label": "Apache languages",
+   "code": "apa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ara",
+   "label": "Arabic",
+   "code": "ara"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/arg",
+   "label": "Aragonese",
+   "code": "arg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/arc",
+   "label": "Aramaic",
+   "code": "arc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/arp",
+   "label": "Arapaho",
+   "code": "arp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/arw",
+   "label": "Arawak",
+   "code": "arw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/arm",
+   "label": "Armenian",
+   "code": "arm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/rup",
+   "label": "Aromanian",
+   "code": "rup"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/art",
+   "label": "Artificial (Other)",
+   "code": "art"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/asm",
+   "label": "Assamese",
+   "code": "asm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ath",
+   "label": "Athapascan (Other)",
+   "code": "ath"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/aus",
+   "label": "Australian languages",
+   "code": "aus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/map",
+   "label": "Austronesian (Other)",
+   "code": "map"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ava",
+   "label": "Avaric",
+   "code": "ava"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ave",
+   "label": "Avestan",
+   "code": "ave"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/awa",
+   "label": "Awadhi",
+   "code": "awa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/aym",
+   "label": "Aymara",
+   "code": "aym"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/aze",
+   "label": "Azerbaijani",
+   "code": "aze"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ast",
+   "label": "Bable",
+   "code": "ast"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ban",
+   "label": "Balinese",
+   "code": "ban"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bat",
+   "label": "Baltic (Other)",
+   "code": "bat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bal",
+   "label": "Baluchi",
+   "code": "bal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bam",
+   "label": "Bambara",
+   "code": "bam"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bai",
+   "label": "Bamileke languages",
+   "code": "bai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bad",
+   "label": "Banda languages",
+   "code": "bad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bnt",
+   "label": "Bantu (Other)",
+   "code": "bnt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bas",
+   "label": "Basa",
+   "code": "bas"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bak",
+   "label": "Bashkir",
+   "code": "bak"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/baq",
+   "label": "Basque",
+   "code": "baq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/btk",
+   "label": "Batak",
+   "code": "btk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bej",
+   "label": "Beja",
+   "code": "bej"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bel",
+   "label": "Belarusian",
+   "code": "bel"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bem",
+   "label": "Bemba",
+   "code": "bem"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ben",
+   "label": "Bengali",
+   "code": "ben"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ber",
+   "label": "Berber (Other)",
+   "code": "ber"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bho",
+   "label": "Bhojpuri",
+   "code": "bho"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bih",
+   "label": "Bihari (Other)",
+   "code": "bih"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bik",
+   "label": "Bikol",
+   "code": "bik"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/byn",
+   "label": "Bilin",
+   "code": "byn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bis",
+   "label": "Bislama",
+   "code": "bis"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zbl",
+   "label": "Blissymbolics",
+   "code": "zbl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bos",
+   "label": "Bosnian",
+   "code": "bos"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bra",
+   "label": "Braj",
+   "code": "bra"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bre",
+   "label": "Breton",
+   "code": "bre"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bug",
+   "label": "Bugis",
+   "code": "bug"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bul",
+   "label": "Bulgarian",
+   "code": "bul"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bua",
+   "label": "Buriat",
+   "code": "bua"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bur",
+   "label": "Burmese",
+   "code": "bur"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cad",
+   "label": "Caddo",
+   "code": "cad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/car",
+   "label": "Carib",
+   "code": "car"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cat",
+   "label": "Catalan",
+   "code": "cat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cau",
+   "label": "Caucasian (Other)",
+   "code": "cau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ceb",
+   "label": "Cebuano",
+   "code": "ceb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cel",
+   "label": "Celtic (Other)",
+   "code": "cel"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cai",
+   "label": "Central American Indian (Other)",
+   "code": "cai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chg",
+   "label": "Chagatai",
+   "code": "chg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cmc",
+   "label": "Chamic languages",
+   "code": "cmc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cha",
+   "label": "Chamorro",
+   "code": "cha"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/che",
+   "label": "Chechen",
+   "code": "che"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chr",
+   "label": "Cherokee",
+   "code": "chr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chy",
+   "label": "Cheyenne",
+   "code": "chy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chb",
+   "label": "Chibcha",
+   "code": "chb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chi",
+   "label": "Chinese",
+   "code": "chi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chn",
+   "label": "Chinook jargon",
+   "code": "chn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chp",
+   "label": "Chipewyan",
+   "code": "chp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cho",
+   "label": "Choctaw",
+   "code": "cho"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chu",
+   "label": "Church Slavic",
+   "code": "chu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chk",
+   "label": "Chuukese",
+   "code": "chk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chv",
+   "label": "Chuvash",
+   "code": "chv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cop",
+   "label": "Coptic",
+   "code": "cop"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cor",
+   "label": "Cornish",
+   "code": "cor"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cos",
+   "label": "Corsican",
+   "code": "cos"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cre",
+   "label": "Cree",
+   "code": "cre"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mus",
+   "label": "Creek",
+   "code": "mus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/crp",
+   "label": "Creoles and Pidgins (Other)",
+   "code": "crp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cpe",
+   "label": "Creoles and Pidgins, English-based (Other)",
+   "code": "cpe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cpf",
+   "label": "Creoles and Pidgins, French-based (Other)",
+   "code": "cpf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cpp",
+   "label": "Creoles and Pidgins, Portuguese-based (Other)",
+   "code": "cpp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/crh",
+   "label": "Crimean Tatar",
+   "code": "crh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hrv",
+   "label": "Croatian",
+   "code": "hrv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cus",
+   "label": "Cushitic (Other)",
+   "code": "cus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cze",
+   "label": "Czech",
+   "code": "cze"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dak",
+   "label": "Dakota",
+   "code": "dak"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dan",
+   "label": "Danish",
+   "code": "dan"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dar",
+   "label": "Dargwa",
+   "code": "dar"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/day",
+   "label": "Dayak",
+   "code": "day"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/del",
+   "label": "Delaware",
+   "code": "del"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/din",
+   "label": "Dinka",
+   "code": "din"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/div",
+   "label": "Divehi",
+   "code": "div"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/doi",
+   "label": "Dogri",
+   "code": "doi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dra",
+   "label": "Dravidian (Other)",
+   "code": "dra"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dua",
+   "label": "Duala",
+   "code": "dua"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dut",
+   "label": "Dutch",
+   "code": "dut"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dum",
+   "label": "Dutch, Middle (ca. 1050-1350)",
+   "code": "dum"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dyu",
+   "label": "Dyula",
+   "code": "dyu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dzo",
+   "label": "Dzongkha",
+   "code": "dzo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/frs",
+   "label": "East Frisian",
+   "code": "frs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bin",
+   "label": "Edo",
+   "code": "bin"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/efi",
+   "label": "Efik",
+   "code": "efi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/egy",
+   "label": "Egyptian",
+   "code": "egy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/eka",
+   "label": "Ekajuk",
+   "code": "eka"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/elx",
+   "label": "Elamite",
+   "code": "elx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/eng",
+   "label": "English",
+   "code": "eng"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/enm",
+   "label": "English, Middle (1100-1500)",
+   "code": "enm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ang",
+   "label": "English, Old (ca. 450-1100)",
+   "code": "ang"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/myv",
+   "label": "Erzya",
+   "code": "myv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/epo",
+   "label": "Esperanto",
+   "code": "epo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/est",
+   "label": "Estonian",
+   "code": "est"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gez",
+   "label": "Ethiopic",
+   "code": "gez"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ewe",
+   "label": "Ewe",
+   "code": "ewe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ewo",
+   "label": "Ewondo",
+   "code": "ewo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fan",
+   "label": "Fang",
+   "code": "fan"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fat",
+   "label": "Fanti",
+   "code": "fat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fao",
+   "label": "Faroese",
+   "code": "fao"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fij",
+   "label": "Fijian",
+   "code": "fij"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fil",
+   "label": "Filipino",
+   "code": "fil"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fin",
+   "label": "Finnish",
+   "code": "fin"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fiu",
+   "label": "Finno-Ugrian (Other)",
+   "code": "fiu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fon",
+   "label": "Fon",
+   "code": "fon"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fre",
+   "label": "French",
+   "code": "fre"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/frm",
+   "label": "French, Middle (ca. 1300-1600)",
+   "code": "frm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fro",
+   "label": "French, Old (ca. 842-1300)",
+   "code": "fro"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fry",
+   "label": "Frisian",
+   "code": "fry"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/fur",
+   "label": "Friulian",
+   "code": "fur"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ful",
+   "label": "Fula",
+   "code": "ful"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gaa",
+   "label": "Gã",
+   "code": "gaa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/glg",
+   "label": "Galician",
+   "code": "glg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lug",
+   "label": "Ganda",
+   "code": "lug"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gay",
+   "label": "Gayo",
+   "code": "gay"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gba",
+   "label": "Gbaya",
+   "code": "gba"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/geo",
+   "label": "Georgian",
+   "code": "geo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ger",
+   "label": "German",
+   "code": "ger"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gmh",
+   "label": "German, Middle High (ca. 1050-1500)",
+   "code": "gmh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/goh",
+   "label": "German, Old High (ca. 750-1050)",
+   "code": "goh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gem",
+   "label": "Germanic (Other)",
+   "code": "gem"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gil",
+   "label": "Gilbertese",
+   "code": "gil"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gon",
+   "label": "Gondi",
+   "code": "gon"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gor",
+   "label": "Gorontalo",
+   "code": "gor"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/got",
+   "label": "Gothic",
+   "code": "got"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/grb",
+   "label": "Grebo",
+   "code": "grb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/grc",
+   "label": "Greek, Ancient (to 1453)",
+   "code": "grc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gre",
+   "label": "Greek, Modern (1453- )",
+   "code": "gre"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/grn",
+   "label": "Guarani",
+   "code": "grn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/guj",
+   "label": "Gujarati",
+   "code": "guj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gwi",
+   "label": "Gwich'in",
+   "code": "gwi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hai",
+   "label": "Haida",
+   "code": "hai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hat",
+   "label": "Haitian French Creole",
+   "code": "hat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hau",
+   "label": "Hausa",
+   "code": "hau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/haw",
+   "label": "Hawaiian",
+   "code": "haw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/heb",
+   "label": "Hebrew",
+   "code": "heb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/her",
+   "label": "Herero",
+   "code": "her"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hil",
+   "label": "Hiligaynon",
+   "code": "hil"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hin",
+   "label": "Hindi",
+   "code": "hin"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hmo",
+   "label": "Hiri Motu",
+   "code": "hmo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hit",
+   "label": "Hittite",
+   "code": "hit"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hmn",
+   "label": "Hmong",
+   "code": "hmn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hun",
+   "label": "Hungarian",
+   "code": "hun"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hup",
+   "label": "Hupa",
+   "code": "hup"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/iba",
+   "label": "Iban",
+   "code": "iba"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ice",
+   "label": "Icelandic",
+   "code": "ice"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ido",
+   "label": "Ido",
+   "code": "ido"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ibo",
+   "label": "Igbo",
+   "code": "ibo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ijo",
+   "label": "Ijo",
+   "code": "ijo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ilo",
+   "label": "Iloko",
+   "code": "ilo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/smn",
+   "label": "Inari Sami",
+   "code": "smn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/inc",
+   "label": "Indic (Other)",
+   "code": "inc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ine",
+   "label": "Indo-European (Other)",
+   "code": "ine"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ind",
+   "label": "Indonesian",
+   "code": "ind"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/inh",
+   "label": "Ingush",
+   "code": "inh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ina",
+   "label": "Interlingua (International Auxiliary Language Association)",
+   "code": "ina"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ile",
+   "label": "Interlingue",
+   "code": "ile"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/iku",
+   "label": "Inuktitut",
+   "code": "iku"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ipk",
+   "label": "Inupiaq",
+   "code": "ipk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ira",
+   "label": "Iranian (Other)",
+   "code": "ira"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gle",
+   "label": "Irish",
+   "code": "gle"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mga",
+   "label": "Irish, Middle (ca. 1100-1550)",
+   "code": "mga"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sga",
+   "label": "Irish, Old (to 1100)",
+   "code": "sga"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/iro",
+   "label": "Iroquoian (Other)",
+   "code": "iro"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ita",
+   "label": "Italian",
+   "code": "ita"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/jpn",
+   "label": "Japanese",
+   "code": "jpn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/jav",
+   "label": "Javanese",
+   "code": "jav"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/jrb",
+   "label": "Judeo-Arabic",
+   "code": "jrb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/jpr",
+   "label": "Judeo-Persian",
+   "code": "jpr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kbd",
+   "label": "Kabardian",
+   "code": "kbd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kab",
+   "label": "Kabyle",
+   "code": "kab"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kac",
+   "label": "Kachin",
+   "code": "kac"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kal",
+   "label": "Kalâtdlisut",
+   "code": "kal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kam",
+   "label": "Kamba",
+   "code": "kam"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kan",
+   "label": "Kannada",
+   "code": "kan"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kau",
+   "label": "Kanuri",
+   "code": "kau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kaa",
+   "label": "Kara-Kalpak",
+   "code": "kaa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/krc",
+   "label": "Karachay-Balkar",
+   "code": "krc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/krl",
+   "label": "Karelian",
+   "code": "krl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kar",
+   "label": "Karen languages",
+   "code": "kar"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kas",
+   "label": "Kashmiri",
+   "code": "kas"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/csb",
+   "label": "Kashubian",
+   "code": "csb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kaw",
+   "label": "Kawi",
+   "code": "kaw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kaz",
+   "label": "Kazakh",
+   "code": "kaz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kha",
+   "label": "Khasi",
+   "code": "kha"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/khm",
+   "label": "Khmer",
+   "code": "khm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/khi",
+   "label": "Khoisan (Other)",
+   "code": "khi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kho",
+   "label": "Khotanese",
+   "code": "kho"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kik",
+   "label": "Kikuyu",
+   "code": "kik"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kmb",
+   "label": "Kimbundu",
+   "code": "kmb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kin",
+   "label": "Kinyarwanda",
+   "code": "kin"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tlh",
+   "label": "Klingon (Artificial language)",
+   "code": "tlh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kom",
+   "label": "Komi",
+   "code": "kom"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kon",
+   "label": "Kongo",
+   "code": "kon"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kok",
+   "label": "Konkani",
+   "code": "kok"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kut",
+   "label": "Kootenai",
+   "code": "kut"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kor",
+   "label": "Korean",
+   "code": "kor"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kos",
+   "label": "Kosraean",
+   "code": "kos"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kpe",
+   "label": "Kpelle",
+   "code": "kpe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kro",
+   "label": "Kru (Other)",
+   "code": "kro"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kua",
+   "label": "Kuanyama",
+   "code": "kua"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kum",
+   "label": "Kumyk",
+   "code": "kum"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kur",
+   "label": "Kurdish",
+   "code": "kur"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kru",
+   "label": "Kurukh",
+   "code": "kru"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/kir",
+   "label": "Kyrgyz",
+   "code": "kir"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lad",
+   "label": "Ladino",
+   "code": "lad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lah",
+   "label": "Lahndā",
+   "code": "lah"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lam",
+   "label": "Lamba (Zambia and Congo)",
+   "code": "lam"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lao",
+   "label": "Lao",
+   "code": "lao"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lat",
+   "label": "Latin",
+   "code": "lat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lav",
+   "label": "Latvian",
+   "code": "lav"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lez",
+   "label": "Lezgian",
+   "code": "lez"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lim",
+   "label": "Limburgish",
+   "code": "lim"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lin",
+   "label": "Lingala",
+   "code": "lin"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lit",
+   "label": "Lithuanian",
+   "code": "lit"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/jbo",
+   "label": "Lojban (Artificial language)",
+   "code": "jbo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nds",
+   "label": "Low German",
+   "code": "nds"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dsb",
+   "label": "Lower Sorbian",
+   "code": "dsb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/loz",
+   "label": "Lozi",
+   "code": "loz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lub",
+   "label": "Luba-Katanga",
+   "code": "lub"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lua",
+   "label": "Luba-Lulua",
+   "code": "lua"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lui",
+   "label": "Luiseño",
+   "code": "lui"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/smj",
+   "label": "Lule Sami",
+   "code": "smj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lun",
+   "label": "Lunda",
+   "code": "lun"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/luo",
+   "label": "Luo (Kenya and Tanzania)",
+   "code": "luo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lus",
+   "label": "Lushai",
+   "code": "lus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ltz",
+   "label": "Luxembourgish",
+   "code": "ltz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mas",
+   "label": "Maasai",
+   "code": "mas"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mac",
+   "label": "Macedonian",
+   "code": "mac"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mad",
+   "label": "Madurese",
+   "code": "mad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mag",
+   "label": "Magahi",
+   "code": "mag"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mai",
+   "label": "Maithili",
+   "code": "mai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mak",
+   "label": "Makasar",
+   "code": "mak"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mlg",
+   "label": "Malagasy",
+   "code": "mlg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/may",
+   "label": "Malay",
+   "code": "may"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mal",
+   "label": "Malayalam",
+   "code": "mal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mlt",
+   "label": "Maltese",
+   "code": "mlt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mnc",
+   "label": "Manchu",
+   "code": "mnc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mdr",
+   "label": "Mandar",
+   "code": "mdr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/man",
+   "label": "Mandingo",
+   "code": "man"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mni",
+   "label": "Manipuri",
+   "code": "mni"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mno",
+   "label": "Manobo languages",
+   "code": "mno"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/glv",
+   "label": "Manx",
+   "code": "glv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mao",
+   "label": "Maori",
+   "code": "mao"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/arn",
+   "label": "Mapuche",
+   "code": "arn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mar",
+   "label": "Marathi",
+   "code": "mar"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/chm",
+   "label": "Mari",
+   "code": "chm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mah",
+   "label": "Marshallese",
+   "code": "mah"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mwr",
+   "label": "Marwari",
+   "code": "mwr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/myn",
+   "label": "Mayan languages",
+   "code": "myn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/men",
+   "label": "Mende",
+   "code": "men"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mic",
+   "label": "Micmac",
+   "code": "mic"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/min",
+   "label": "Minangkabau",
+   "code": "min"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mwl",
+   "label": "Mirandese",
+   "code": "mwl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mis",
+   "label": "Miscellaneous languages",
+   "code": "mis"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/moh",
+   "label": "Mohawk",
+   "code": "moh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mdf",
+   "label": "Moksha",
+   "code": "mdf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mkh",
+   "label": "Mon-Khmer (Other)",
+   "code": "mkh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/lol",
+   "label": "Mongo-Nkundu",
+   "code": "lol"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mon",
+   "label": "Mongolian",
+   "code": "mon"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/cnr",
+   "label": "Montenegrin",
+   "code": "cnr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mos",
+   "label": "Mooré",
+   "code": "mos"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mul",
+   "label": "Multiple languages",
+   "code": "mul"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/mun",
+   "label": "Munda (Other)",
+   "code": "mun"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nqo",
+   "label": "N'Ko",
+   "code": "nqo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nah",
+   "label": "Nahuatl",
+   "code": "nah"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nau",
+   "label": "Nauru",
+   "code": "nau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nav",
+   "label": "Navajo",
+   "code": "nav"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nbl",
+   "label": "Ndebele (South Africa)",
+   "code": "nbl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nde",
+   "label": "Ndebele (Zimbabwe)",
+   "code": "nde"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ndo",
+   "label": "Ndonga",
+   "code": "ndo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nap",
+   "label": "Neapolitan Italian",
+   "code": "nap"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nep",
+   "label": "Nepali",
+   "code": "nep"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/new",
+   "label": "Newari",
+   "code": "new"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nwc",
+   "label": "Newari, Old",
+   "code": "nwc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nia",
+   "label": "Nias",
+   "code": "nia"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nic",
+   "label": "Niger-Kordofanian (Other)",
+   "code": "nic"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ssa",
+   "label": "Nilo-Saharan (Other)",
+   "code": "ssa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/niu",
+   "label": "Niuean",
+   "code": "niu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zxx",
+   "label": "No linguistic content",
+   "code": "zxx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nog",
+   "label": "Nogai",
+   "code": "nog"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nai",
+   "label": "North American Indian (Other)",
+   "code": "nai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/frr",
+   "label": "North Frisian",
+   "code": "frr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sme",
+   "label": "Northern Sami",
+   "code": "sme"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nso",
+   "label": "Northern Sotho",
+   "code": "nso"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nor",
+   "label": "Norwegian",
+   "code": "nor"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nob",
+   "label": "Norwegian (Bokmål)",
+   "code": "nob"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nno",
+   "label": "Norwegian (Nynorsk)",
+   "code": "nno"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nub",
+   "label": "Nubian languages",
+   "code": "nub"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nym",
+   "label": "Nyamwezi",
+   "code": "nym"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nya",
+   "label": "Nyanja",
+   "code": "nya"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nyn",
+   "label": "Nyankole",
+   "code": "nyn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nyo",
+   "label": "Nyoro",
+   "code": "nyo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/nzi",
+   "label": "Nzima",
+   "code": "nzi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/oci",
+   "label": "Occitan (post-1500)",
+   "code": "oci"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/xal",
+   "label": "Oirat",
+   "code": "xal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/oji",
+   "label": "Ojibwa",
+   "code": "oji"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/non",
+   "label": "Old Norse",
+   "code": "non"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/peo",
+   "label": "Old Persian (ca. 600-400 B.C.)",
+   "code": "peo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ori",
+   "label": "Oriya",
+   "code": "ori"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/orm",
+   "label": "Oromo",
+   "code": "orm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/osa",
+   "label": "Osage",
+   "code": "osa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/oss",
+   "label": "Ossetic",
+   "code": "oss"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/oto",
+   "label": "Otomian languages",
+   "code": "oto"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pal",
+   "label": "Pahlavi",
+   "code": "pal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pau",
+   "label": "Palauan",
+   "code": "pau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pli",
+   "label": "Pali",
+   "code": "pli"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pam",
+   "label": "Pampanga",
+   "code": "pam"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pag",
+   "label": "Pangasinan",
+   "code": "pag"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pan",
+   "label": "Panjabi",
+   "code": "pan"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pap",
+   "label": "Papiamento",
+   "code": "pap"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/paa",
+   "label": "Papuan (Other)",
+   "code": "paa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/per",
+   "label": "Persian",
+   "code": "per"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/phi",
+   "label": "Philippine (Other)",
+   "code": "phi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/phn",
+   "label": "Phoenician",
+   "code": "phn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pon",
+   "label": "Pohnpeian",
+   "code": "pon"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pol",
+   "label": "Polish",
+   "code": "pol"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/por",
+   "label": "Portuguese",
+   "code": "por"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pra",
+   "label": "Prakrit languages",
+   "code": "pra"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pro",
+   "label": "Provençal (to 1500)",
+   "code": "pro"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/pus",
+   "label": "Pushto",
+   "code": "pus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/que",
+   "label": "Quechua",
+   "code": "que"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/roh",
+   "label": "Raeto-Romance",
+   "code": "roh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/raj",
+   "label": "Rajasthani",
+   "code": "raj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/rap",
+   "label": "Rapanui",
+   "code": "rap"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/rar",
+   "label": "Rarotongan",
+   "code": "rar"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/roa",
+   "label": "Romance (Other)",
+   "code": "roa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/rom",
+   "label": "Romani",
+   "code": "rom"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/rum",
+   "label": "Romanian",
+   "code": "rum"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/run",
+   "label": "Rundi",
+   "code": "run"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/rus",
+   "label": "Russian",
+   "code": "rus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sal",
+   "label": "Salishan languages",
+   "code": "sal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sam",
+   "label": "Samaritan Aramaic",
+   "code": "sam"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/smi",
+   "label": "Sami",
+   "code": "smi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/smo",
+   "label": "Samoan",
+   "code": "smo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sad",
+   "label": "Sandawe",
+   "code": "sad"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sag",
+   "label": "Sango (Ubangi Creole)",
+   "code": "sag"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/san",
+   "label": "Sanskrit",
+   "code": "san"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sat",
+   "label": "Santali",
+   "code": "sat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/srd",
+   "label": "Sardinian",
+   "code": "srd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sas",
+   "label": "Sasak",
+   "code": "sas"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sco",
+   "label": "Scots",
+   "code": "sco"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gla",
+   "label": "Scottish Gaelic",
+   "code": "gla"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sel",
+   "label": "Selkup",
+   "code": "sel"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sem",
+   "label": "Semitic (Other)",
+   "code": "sem"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/srp",
+   "label": "Serbian",
+   "code": "srp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/srr",
+   "label": "Serer",
+   "code": "srr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/shn",
+   "label": "Shan",
+   "code": "shn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sna",
+   "label": "Shona",
+   "code": "sna"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/iii",
+   "label": "Sichuan Yi",
+   "code": "iii"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/scn",
+   "label": "Sicilian Italian",
+   "code": "scn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sid",
+   "label": "Sidamo",
+   "code": "sid"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sgn",
+   "label": "Sign languages",
+   "code": "sgn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/bla",
+   "label": "Siksika",
+   "code": "bla"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/snd",
+   "label": "Sindhi",
+   "code": "snd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sin",
+   "label": "Sinhalese",
+   "code": "sin"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sit",
+   "label": "Sino-Tibetan (Other)",
+   "code": "sit"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sio",
+   "label": "Siouan (Other)",
+   "code": "sio"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sms",
+   "label": "Skolt Sami",
+   "code": "sms"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/den",
+   "label": "Slavey",
+   "code": "den"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sla",
+   "label": "Slavic (Other)",
+   "code": "sla"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/slo",
+   "label": "Slovak",
+   "code": "slo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/slv",
+   "label": "Slovenian",
+   "code": "slv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sog",
+   "label": "Sogdian",
+   "code": "sog"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/som",
+   "label": "Somali",
+   "code": "som"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/son",
+   "label": "Songhai",
+   "code": "son"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/snk",
+   "label": "Soninke",
+   "code": "snk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/wen",
+   "label": "Sorbian (Other)",
+   "code": "wen"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sot",
+   "label": "Sotho",
+   "code": "sot"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sai",
+   "label": "South American Indian (Other)",
+   "code": "sai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sma",
+   "label": "Southern Sami",
+   "code": "sma"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/spa",
+   "label": "Spanish",
+   "code": "spa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/srn",
+   "label": "Sranan",
+   "code": "srn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/suk",
+   "label": "Sukuma",
+   "code": "suk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sux",
+   "label": "Sumerian",
+   "code": "sux"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sun",
+   "label": "Sundanese",
+   "code": "sun"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sus",
+   "label": "Susu",
+   "code": "sus"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/swa",
+   "label": "Swahili",
+   "code": "swa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ssw",
+   "label": "Swazi",
+   "code": "ssw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/swe",
+   "label": "Swedish",
+   "code": "swe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/gsw",
+   "label": "Swiss German",
+   "code": "gsw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/syc",
+   "label": "Syriac",
+   "code": "syc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/syr",
+   "label": "Syriac, Modern",
+   "code": "syr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tgl",
+   "label": "Tagalog",
+   "code": "tgl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tah",
+   "label": "Tahitian",
+   "code": "tah"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tai",
+   "label": "Tai (Other)",
+   "code": "tai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tgk",
+   "label": "Tajik",
+   "code": "tgk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tmh",
+   "label": "Tamashek",
+   "code": "tmh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tam",
+   "label": "Tamil",
+   "code": "tam"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tat",
+   "label": "Tatar",
+   "code": "tat"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tel",
+   "label": "Telugu",
+   "code": "tel"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tem",
+   "label": "Temne",
+   "code": "tem"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ter",
+   "label": "Terena",
+   "code": "ter"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tet",
+   "label": "Tetum",
+   "code": "tet"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tha",
+   "label": "Thai",
+   "code": "tha"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tib",
+   "label": "Tibetan",
+   "code": "tib"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tig",
+   "label": "Tigré",
+   "code": "tig"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tir",
+   "label": "Tigrinya",
+   "code": "tir"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tiv",
+   "label": "Tiv",
+   "code": "tiv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/dgr",
+   "label": "Tlicho",
+   "code": "dgr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tli",
+   "label": "Tlingit",
+   "code": "tli"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tpi",
+   "label": "Tok Pisin",
+   "code": "tpi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tkl",
+   "label": "Tokelauan",
+   "code": "tkl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tog",
+   "label": "Tonga (Nyasa)",
+   "code": "tog"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ton",
+   "label": "Tongan",
+   "code": "ton"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tsi",
+   "label": "Tsimshian",
+   "code": "tsi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tso",
+   "label": "Tsonga",
+   "code": "tso"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tsn",
+   "label": "Tswana",
+   "code": "tsn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tum",
+   "label": "Tumbuka",
+   "code": "tum"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tup",
+   "label": "Tupi languages",
+   "code": "tup"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tur",
+   "label": "Turkish",
+   "code": "tur"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ota",
+   "label": "Turkish, Ottoman",
+   "code": "ota"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tuk",
+   "label": "Turkmen",
+   "code": "tuk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tvl",
+   "label": "Tuvaluan",
+   "code": "tvl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/tyv",
+   "label": "Tuvinian",
+   "code": "tyv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/twi",
+   "label": "Twi",
+   "code": "twi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/udm",
+   "label": "Udmurt",
+   "code": "udm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/uga",
+   "label": "Ugaritic",
+   "code": "uga"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/uig",
+   "label": "Uighur",
+   "code": "uig"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ukr",
+   "label": "Ukrainian",
+   "code": "ukr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/umb",
+   "label": "Umbundu",
+   "code": "umb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/und",
+   "label": "Undetermined",
+   "code": "und"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/hsb",
+   "label": "Upper Sorbian",
+   "code": "hsb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/urd",
+   "label": "Urdu",
+   "code": "urd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/uzb",
+   "label": "Uzbek",
+   "code": "uzb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/vai",
+   "label": "Vai",
+   "code": "vai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ven",
+   "label": "Venda",
+   "code": "ven"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/vie",
+   "label": "Vietnamese",
+   "code": "vie"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/vol",
+   "label": "Volapük",
+   "code": "vol"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/vot",
+   "label": "Votic",
+   "code": "vot"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/wak",
+   "label": "Wakashan languages",
+   "code": "wak"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/wln",
+   "label": "Walloon",
+   "code": "wln"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/war",
+   "label": "Waray",
+   "code": "war"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/was",
+   "label": "Washoe",
+   "code": "was"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/wel",
+   "label": "Welsh",
+   "code": "wel"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/him",
+   "label": "Western Pahari languages",
+   "code": "him"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/wal",
+   "label": "Wolayta",
+   "code": "wal"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/wol",
+   "label": "Wolof",
+   "code": "wol"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/xho",
+   "label": "Xhosa",
+   "code": "xho"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/sah",
+   "label": "Yakut",
+   "code": "sah"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/yao",
+   "label": "Yao (Africa)",
+   "code": "yao"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/yap",
+   "label": "Yapese",
+   "code": "yap"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/yid",
+   "label": "Yiddish",
+   "code": "yid"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/yor",
+   "label": "Yoruba",
+   "code": "yor"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/ypk",
+   "label": "Yupik languages",
+   "code": "ypk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/znd",
+   "label": "Zande languages",
+   "code": "znd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zap",
+   "label": "Zapotec",
+   "code": "zap"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zza",
+   "label": "Zaza",
+   "code": "zza"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zen",
+   "label": "Zenaga",
+   "code": "zen"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zha",
+   "label": "Zhuang",
+   "code": "zha"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zul",
+   "label": "Zulu",
+   "code": "zul"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/languages/zun",
+   "label": "Zuni",
+   "code": "zun"
+  }
+ ],
+ "countries": [
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/af",
+   "label": "Afghanistan",
+   "code": "af"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/alu",
+   "label": "Alabama",
+   "code": "alu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/aku",
+   "label": "Alaska",
+   "code": "aku"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/aa",
+   "label": "Albania",
+   "code": "aa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/abc",
+   "label": "Alberta",
+   "code": "abc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ae",
+   "label": "Algeria",
+   "code": "ae"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/as",
+   "label": "American Samoa",
+   "code": "as"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/an",
+   "label": "Andorra",
+   "code": "an"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ao",
+   "label": "Angola",
+   "code": "ao"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/am",
+   "label": "Anguilla",
+   "code": "am"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ay",
+   "label": "Antarctica",
+   "code": "ay"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/aq",
+   "label": "Antigua and Barbuda",
+   "code": "aq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ag",
+   "label": "Argentina",
+   "code": "ag"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/azu",
+   "label": "Arizona",
+   "code": "azu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/aru",
+   "label": "Arkansas",
+   "code": "aru"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ai",
+   "label": "Armenia (Republic)",
+   "code": "ai"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/aw",
+   "label": "Aruba",
+   "code": "aw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/at",
+   "label": "Australia",
+   "code": "at"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/aca",
+   "label": "Australian Capital Territory",
+   "code": "aca"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/au",
+   "label": "Austria",
+   "code": "au"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/aj",
+   "label": "Azerbaijan",
+   "code": "aj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bf",
+   "label": "Bahamas",
+   "code": "bf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ba",
+   "label": "Bahrain",
+   "code": "ba"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bg",
+   "label": "Bangladesh",
+   "code": "bg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bb",
+   "label": "Barbados",
+   "code": "bb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bw",
+   "label": "Belarus",
+   "code": "bw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/be",
+   "label": "Belgium",
+   "code": "be"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bh",
+   "label": "Belize",
+   "code": "bh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/dm",
+   "label": "Benin",
+   "code": "dm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bm",
+   "label": "Bermuda Islands",
+   "code": "bm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bt",
+   "label": "Bhutan",
+   "code": "bt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bo",
+   "label": "Bolivia",
+   "code": "bo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bn",
+   "label": "Bosnia and Herzegovina",
+   "code": "bn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bs",
+   "label": "Botswana",
+   "code": "bs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bv",
+   "label": "Bouvet Island",
+   "code": "bv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bl",
+   "label": "Brazil",
+   "code": "bl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bcc",
+   "label": "British Columbia",
+   "code": "bcc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bi",
+   "label": "British Indian Ocean Territory",
+   "code": "bi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vb",
+   "label": "British Virgin Islands",
+   "code": "vb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bx",
+   "label": "Brunei",
+   "code": "bx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bu",
+   "label": "Bulgaria",
+   "code": "bu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/uv",
+   "label": "Burkina Faso",
+   "code": "uv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/br",
+   "label": "Burma",
+   "code": "br"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bd",
+   "label": "Burundi",
+   "code": "bd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cv",
+   "label": "Cabo Verde",
+   "code": "cv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cau",
+   "label": "California",
+   "code": "cau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cb",
+   "label": "Cambodia",
+   "code": "cb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cm",
+   "label": "Cameroon",
+   "code": "cm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xxc",
+   "label": "Canada",
+   "code": "xxc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ca",
+   "label": "Caribbean Netherlands",
+   "code": "ca"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cj",
+   "label": "Cayman Islands",
+   "code": "cj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cx",
+   "label": "Central African Republic",
+   "code": "cx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cd",
+   "label": "Chad",
+   "code": "cd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cl",
+   "label": "Chile",
+   "code": "cl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cc",
+   "label": "China",
+   "code": "cc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ch",
+   "label": "China (Republic : 1949- )",
+   "code": "ch"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xa",
+   "label": "Christmas Island (Indian Ocean)",
+   "code": "xa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xb",
+   "label": "Cocos (Keeling) Islands",
+   "code": "xb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ck",
+   "label": "Colombia",
+   "code": "ck"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cou",
+   "label": "Colorado",
+   "code": "cou"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cq",
+   "label": "Comoros",
+   "code": "cq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cf",
+   "label": "Congo (Brazzaville)",
+   "code": "cf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cg",
+   "label": "Congo (Democratic Republic)",
+   "code": "cg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ctu",
+   "label": "Connecticut",
+   "code": "ctu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cw",
+   "label": "Cook Islands",
+   "code": "cw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xga",
+   "label": "Coral Sea Islands Territory",
+   "code": "xga"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cr",
+   "label": "Costa Rica",
+   "code": "cr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/iv",
+   "label": "Côte d'Ivoire",
+   "code": "iv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ci",
+   "label": "Croatia",
+   "code": "ci"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cu",
+   "label": "Cuba",
+   "code": "cu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/co",
+   "label": "Curaçao",
+   "code": "co"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/cy",
+   "label": "Cyprus",
+   "code": "cy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xr",
+   "label": "Czech Republic",
+   "code": "xr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/deu",
+   "label": "Delaware",
+   "code": "deu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/dk",
+   "label": "Denmark",
+   "code": "dk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/dcu",
+   "label": "District of Columbia",
+   "code": "dcu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ft",
+   "label": "Djibouti",
+   "code": "ft"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/dq",
+   "label": "Dominica",
+   "code": "dq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/dr",
+   "label": "Dominican Republic",
+   "code": "dr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ec",
+   "label": "Ecuador",
+   "code": "ec"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ua",
+   "label": "Egypt",
+   "code": "ua"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/es",
+   "label": "El Salvador",
+   "code": "es"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/enk",
+   "label": "England",
+   "code": "enk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/eg",
+   "label": "Equatorial Guinea",
+   "code": "eg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ea",
+   "label": "Eritrea",
+   "code": "ea"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/er",
+   "label": "Estonia",
+   "code": "er"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sq",
+   "label": "Eswatini",
+   "code": "sq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/et",
+   "label": "Ethiopia",
+   "code": "et"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fk",
+   "label": "Falkland Islands",
+   "code": "fk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fa",
+   "label": "Faroe Islands",
+   "code": "fa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fj",
+   "label": "Fiji",
+   "code": "fj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fi",
+   "label": "Finland",
+   "code": "fi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/flu",
+   "label": "Florida",
+   "code": "flu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fr",
+   "label": "France",
+   "code": "fr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fg",
+   "label": "French Guiana",
+   "code": "fg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fp",
+   "label": "French Polynesia",
+   "code": "fp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/go",
+   "label": "Gabon",
+   "code": "go"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gm",
+   "label": "Gambia",
+   "code": "gm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gz",
+   "label": "Gaza Strip",
+   "code": "gz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gau",
+   "label": "Georgia",
+   "code": "gau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gs",
+   "label": "Georgia (Republic)",
+   "code": "gs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gw",
+   "label": "Germany",
+   "code": "gw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gh",
+   "label": "Ghana",
+   "code": "gh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gi",
+   "label": "Gibraltar",
+   "code": "gi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gr",
+   "label": "Greece",
+   "code": "gr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gl",
+   "label": "Greenland",
+   "code": "gl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gd",
+   "label": "Grenada",
+   "code": "gd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gp",
+   "label": "Guadeloupe",
+   "code": "gp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gu",
+   "label": "Guam",
+   "code": "gu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gt",
+   "label": "Guatemala",
+   "code": "gt"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gg",
+   "label": "Guernsey",
+   "code": "gg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gv",
+   "label": "Guinea",
+   "code": "gv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pg",
+   "label": "Guinea-Bissau",
+   "code": "pg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gy",
+   "label": "Guyana",
+   "code": "gy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ht",
+   "label": "Haiti",
+   "code": "ht"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/hiu",
+   "label": "Hawaii",
+   "code": "hiu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/hm",
+   "label": "Heard and McDonald Islands",
+   "code": "hm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ho",
+   "label": "Honduras",
+   "code": "ho"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/hu",
+   "label": "Hungary",
+   "code": "hu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ic",
+   "label": "Iceland",
+   "code": "ic"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/idu",
+   "label": "Idaho",
+   "code": "idu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ilu",
+   "label": "Illinois",
+   "code": "ilu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ii",
+   "label": "India",
+   "code": "ii"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/inu",
+   "label": "Indiana",
+   "code": "inu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/io",
+   "label": "Indonesia",
+   "code": "io"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/iau",
+   "label": "Iowa",
+   "code": "iau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ir",
+   "label": "Iran",
+   "code": "ir"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/iq",
+   "label": "Iraq",
+   "code": "iq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/iy",
+   "label": "Iraq-Saudi Arabia Neutral Zone",
+   "code": "iy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ie",
+   "label": "Ireland",
+   "code": "ie"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/im",
+   "label": "Isle of Man",
+   "code": "im"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/is",
+   "label": "Israel",
+   "code": "is"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/it",
+   "label": "Italy",
+   "code": "it"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/jm",
+   "label": "Jamaica",
+   "code": "jm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ja",
+   "label": "Japan",
+   "code": "ja"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/je",
+   "label": "Jersey",
+   "code": "je"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ji",
+   "label": "Johnston Atoll",
+   "code": "ji"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/jo",
+   "label": "Jordan",
+   "code": "jo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ksu",
+   "label": "Kansas",
+   "code": "ksu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/kz",
+   "label": "Kazakhstan",
+   "code": "kz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/kyu",
+   "label": "Kentucky",
+   "code": "kyu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ke",
+   "label": "Kenya",
+   "code": "ke"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/gb",
+   "label": "Kiribati",
+   "code": "gb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/kn",
+   "label": "Korea (North)",
+   "code": "kn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ko",
+   "label": "Korea (South)",
+   "code": "ko"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/kv",
+   "label": "Kosovo",
+   "code": "kv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ku",
+   "label": "Kuwait",
+   "code": "ku"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/kg",
+   "label": "Kyrgyzstan",
+   "code": "kg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ls",
+   "label": "Laos",
+   "code": "ls"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/lv",
+   "label": "Latvia",
+   "code": "lv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/le",
+   "label": "Lebanon",
+   "code": "le"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/lo",
+   "label": "Lesotho",
+   "code": "lo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/lb",
+   "label": "Liberia",
+   "code": "lb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ly",
+   "label": "Libya",
+   "code": "ly"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/lh",
+   "label": "Liechtenstein",
+   "code": "lh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/li",
+   "label": "Lithuania",
+   "code": "li"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/lau",
+   "label": "Louisiana",
+   "code": "lau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/lu",
+   "label": "Luxembourg",
+   "code": "lu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mg",
+   "label": "Madagascar",
+   "code": "mg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/meu",
+   "label": "Maine",
+   "code": "meu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mw",
+   "label": "Malawi",
+   "code": "mw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/my",
+   "label": "Malaysia",
+   "code": "my"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xc",
+   "label": "Maldives",
+   "code": "xc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ml",
+   "label": "Mali",
+   "code": "ml"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mm",
+   "label": "Malta",
+   "code": "mm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mbc",
+   "label": "Manitoba",
+   "code": "mbc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xe",
+   "label": "Marshall Islands",
+   "code": "xe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mq",
+   "label": "Martinique",
+   "code": "mq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mdu",
+   "label": "Maryland",
+   "code": "mdu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mau",
+   "label": "Massachusetts",
+   "code": "mau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mu",
+   "label": "Mauritania",
+   "code": "mu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mf",
+   "label": "Mauritius",
+   "code": "mf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ot",
+   "label": "Mayotte",
+   "code": "ot"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mx",
+   "label": "Mexico",
+   "code": "mx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/miu",
+   "label": "Michigan",
+   "code": "miu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fm",
+   "label": "Micronesia (Federated States)",
+   "code": "fm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xf",
+   "label": "Midway Islands",
+   "code": "xf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mnu",
+   "label": "Minnesota",
+   "code": "mnu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/msu",
+   "label": "Mississippi",
+   "code": "msu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mou",
+   "label": "Missouri",
+   "code": "mou"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mv",
+   "label": "Moldova",
+   "code": "mv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mc",
+   "label": "Monaco",
+   "code": "mc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mp",
+   "label": "Mongolia",
+   "code": "mp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mtu",
+   "label": "Montana",
+   "code": "mtu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mo",
+   "label": "Montenegro",
+   "code": "mo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mj",
+   "label": "Montserrat",
+   "code": "mj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mr",
+   "label": "Morocco",
+   "code": "mr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mz",
+   "label": "Mozambique",
+   "code": "mz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sx",
+   "label": "Namibia",
+   "code": "sx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nu",
+   "label": "Nauru",
+   "code": "nu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nbu",
+   "label": "Nebraska",
+   "code": "nbu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/np",
+   "label": "Nepal",
+   "code": "np"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ne",
+   "label": "Netherlands",
+   "code": "ne"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nvu",
+   "label": "Nevada",
+   "code": "nvu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nkc",
+   "label": "New Brunswick",
+   "code": "nkc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nl",
+   "label": "New Caledonia",
+   "code": "nl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nhu",
+   "label": "New Hampshire",
+   "code": "nhu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nju",
+   "label": "New Jersey",
+   "code": "nju"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nmu",
+   "label": "New Mexico",
+   "code": "nmu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xna",
+   "label": "New South Wales",
+   "code": "xna"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nyu",
+   "label": "New York (State)",
+   "code": "nyu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nz",
+   "label": "New Zealand",
+   "code": "nz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nfc",
+   "label": "Newfoundland and Labrador",
+   "code": "nfc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nq",
+   "label": "Nicaragua",
+   "code": "nq"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ng",
+   "label": "Niger",
+   "code": "ng"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nr",
+   "label": "Nigeria",
+   "code": "nr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xh",
+   "label": "Niue",
+   "code": "xh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xx",
+   "label": "No place, unknown, or undetermined",
+   "code": "xx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nx",
+   "label": "Norfolk Island",
+   "code": "nx"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ncu",
+   "label": "North Carolina",
+   "code": "ncu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ndu",
+   "label": "North Dakota",
+   "code": "ndu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xn",
+   "label": "North Macedonia",
+   "code": "xn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nik",
+   "label": "Northern Ireland",
+   "code": "nik"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nw",
+   "label": "Northern Mariana Islands",
+   "code": "nw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xoa",
+   "label": "Northern Territory",
+   "code": "xoa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ntc",
+   "label": "Northwest Territories",
+   "code": "ntc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/no",
+   "label": "Norway",
+   "code": "no"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nsc",
+   "label": "Nova Scotia",
+   "code": "nsc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nuc",
+   "label": "Nunavut",
+   "code": "nuc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ohu",
+   "label": "Ohio",
+   "code": "ohu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/oku",
+   "label": "Oklahoma",
+   "code": "oku"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/mk",
+   "label": "Oman",
+   "code": "mk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/onc",
+   "label": "Ontario",
+   "code": "onc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/oru",
+   "label": "Oregon",
+   "code": "oru"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pk",
+   "label": "Pakistan",
+   "code": "pk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pw",
+   "label": "Palau",
+   "code": "pw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pn",
+   "label": "Panama",
+   "code": "pn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pp",
+   "label": "Papua New Guinea",
+   "code": "pp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pf",
+   "label": "Paracel Islands]",
+   "code": "pf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/py",
+   "label": "Paraguay",
+   "code": "py"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pau",
+   "label": "Pennsylvania",
+   "code": "pau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pe",
+   "label": "Peru",
+   "code": "pe"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ph",
+   "label": "Philippines",
+   "code": "ph"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pc",
+   "label": "Pitcairn Island",
+   "code": "pc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pl",
+   "label": "Poland",
+   "code": "pl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/po",
+   "label": "Portugal",
+   "code": "po"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pic",
+   "label": "Prince Edward Island",
+   "code": "pic"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/pr",
+   "label": "Puerto Rico",
+   "code": "pr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/qa",
+   "label": "Qatar",
+   "code": "qa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/quc",
+   "label": "Québec (Province)",
+   "code": "quc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/qea",
+   "label": "Queensland",
+   "code": "qea"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/re",
+   "label": "Réunion",
+   "code": "re"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/riu",
+   "label": "Rhode Island",
+   "code": "riu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/rm",
+   "label": "Romania",
+   "code": "rm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ru",
+   "label": "Russia (Federation)",
+   "code": "ru"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/rw",
+   "label": "Rwanda",
+   "code": "rw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xj",
+   "label": "Saint Helena",
+   "code": "xj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xd",
+   "label": "Saint Kitts-Nevis",
+   "code": "xd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xk",
+   "label": "Saint Lucia",
+   "code": "xk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xl",
+   "label": "Saint Pierre and Miquelon",
+   "code": "xl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xm",
+   "label": "Saint Vincent and the Grenadines",
+   "code": "xm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sc",
+   "label": "Saint-Barthélemy",
+   "code": "sc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/st",
+   "label": "Saint-Martin",
+   "code": "st"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ws",
+   "label": "Samoa",
+   "code": "ws"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sm",
+   "label": "San Marino",
+   "code": "sm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sf",
+   "label": "Sao Tome and Principe",
+   "code": "sf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/snc",
+   "label": "Saskatchewan",
+   "code": "snc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/su",
+   "label": "Saudi Arabia",
+   "code": "su"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/stk",
+   "label": "Scotland",
+   "code": "stk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sg",
+   "label": "Senegal",
+   "code": "sg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/rb",
+   "label": "Serbia",
+   "code": "rb"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/se",
+   "label": "Seychelles",
+   "code": "se"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sl",
+   "label": "Sierra Leone",
+   "code": "sl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/si",
+   "label": "Singapore",
+   "code": "si"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sn",
+   "label": "Sint Maarten",
+   "code": "sn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xo",
+   "label": "Slovakia",
+   "code": "xo"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xv",
+   "label": "Slovenia",
+   "code": "xv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/bp",
+   "label": "Solomon Islands",
+   "code": "bp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/so",
+   "label": "Somalia",
+   "code": "so"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sa",
+   "label": "South Africa",
+   "code": "sa"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xra",
+   "label": "South Australia",
+   "code": "xra"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/scu",
+   "label": "South Carolina",
+   "code": "scu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sdu",
+   "label": "South Dakota",
+   "code": "sdu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xs",
+   "label": "South Georgia and the South Sandwich Islands",
+   "code": "xs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sd",
+   "label": "South Sudan",
+   "code": "sd"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sp",
+   "label": "Spain",
+   "code": "sp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sh",
+   "label": "Spanish North Africa",
+   "code": "sh"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xp",
+   "label": "Spratly Island",
+   "code": "xp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ce",
+   "label": "Sri Lanka",
+   "code": "ce"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sj",
+   "label": "Sudan",
+   "code": "sj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sr",
+   "label": "Surinam",
+   "code": "sr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sw",
+   "label": "Sweden",
+   "code": "sw"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sz",
+   "label": "Switzerland",
+   "code": "sz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/sy",
+   "label": "Syria",
+   "code": "sy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ta",
+   "label": "Tajikistan",
+   "code": "ta"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tz",
+   "label": "Tanzania",
+   "code": "tz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tma",
+   "label": "Tasmania",
+   "code": "tma"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tnu",
+   "label": "Tennessee",
+   "code": "tnu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/fs",
+   "label": "Terres australes et antarctiques françaises",
+   "code": "fs"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/txu",
+   "label": "Texas",
+   "code": "txu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/th",
+   "label": "Thailand",
+   "code": "th"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/em",
+   "label": "Timor-Leste",
+   "code": "em"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tg",
+   "label": "Togo",
+   "code": "tg"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tl",
+   "label": "Tokelau",
+   "code": "tl"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/to",
+   "label": "Tonga",
+   "code": "to"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tr",
+   "label": "Trinidad and Tobago",
+   "code": "tr"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ti",
+   "label": "Tunisia",
+   "code": "ti"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tu",
+   "label": "Turkey",
+   "code": "tu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tk",
+   "label": "Turkmenistan",
+   "code": "tk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tc",
+   "label": "Turks and Caicos Islands",
+   "code": "tc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/tv",
+   "label": "Tuvalu",
+   "code": "tv"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ug",
+   "label": "Uganda",
+   "code": "ug"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/un",
+   "label": "Ukraine",
+   "code": "un"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ts",
+   "label": "United Arab Emirates",
+   "code": "ts"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xxk",
+   "label": "United Kingdom",
+   "code": "xxk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/xxu",
+   "label": "United States",
+   "code": "xxu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/uc",
+   "label": "United States Misc. Caribbean Islands",
+   "code": "uc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/up",
+   "label": "United States Misc. Pacific Islands",
+   "code": "up"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/uy",
+   "label": "Uruguay",
+   "code": "uy"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/utu",
+   "label": "Utah",
+   "code": "utu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/uz",
+   "label": "Uzbekistan",
+   "code": "uz"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/nn",
+   "label": "Vanuatu",
+   "code": "nn"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vp",
+   "label": "Various places",
+   "code": "vp"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vc",
+   "label": "Vatican City",
+   "code": "vc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ve",
+   "label": "Venezuela",
+   "code": "ve"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vtu",
+   "label": "Vermont",
+   "code": "vtu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vra",
+   "label": "Victoria",
+   "code": "vra"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vm",
+   "label": "Vietnam",
+   "code": "vm"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vi",
+   "label": "Virgin Islands of the United States",
+   "code": "vi"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/vau",
+   "label": "Virginia",
+   "code": "vau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wk",
+   "label": "Wake Island",
+   "code": "wk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wlk",
+   "label": "Wales",
+   "code": "wlk"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wf",
+   "label": "Wallis and Futuna",
+   "code": "wf"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wau",
+   "label": "Washington (State)",
+   "code": "wau"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wj",
+   "label": "West Bank of the Jordan River",
+   "code": "wj"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wvu",
+   "label": "West Virginia",
+   "code": "wvu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wea",
+   "label": "Western Australia",
+   "code": "wea"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ss",
+   "label": "Western Sahara",
+   "code": "ss"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wiu",
+   "label": "Wisconsin",
+   "code": "wiu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/wyu",
+   "label": "Wyoming",
+   "code": "wyu"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ye",
+   "label": "Yemen",
+   "code": "ye"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/ykc",
+   "label": "Yukon Territory",
+   "code": "ykc"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/za",
+   "label": "Zambia",
+   "code": "za"
+  },
+  {
+   "uri": "http://id.loc.gov/vocabulary/countries/rh",
+   "label": "Zimbabwe",
+   "code": "rh"
+  }
+ ]
+}

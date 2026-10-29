@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { change } from '../doc/log'
-import { fragment, getNode, type Key } from '../doc/model'
+import { fragment, getNode, type Doc, type Key } from '../doc/model'
 import { sourcesFor } from '../lookup/sources'
 import { useDescription } from './context'
 import { entryFor, fieldKind, newValue } from './form'
@@ -91,7 +91,15 @@ export function AddValue({
         </span>
       )
     case 'link':
-      return <Lookup label={label} sources={sourcesFor(prop)} onPick={(hit) => add(hit)} onCancel={close} />
+      return (
+        <Lookup
+          label={label}
+          sources={sourcesFor(prop)}
+          already={linkedFrom(doc, node, prop)}
+          onPick={(hit) => add(hit)}
+          onCancel={close}
+        />
+      )
     case 'node':
       return (
         <span className="adding">
@@ -113,4 +121,15 @@ export function AddValue({
         </span>
       )
   }
+}
+
+/** The URIs a property already links to. */
+function linkedFrom(doc: Doc, node: Key, prop: string): Set<string> {
+  const values = getNode(doc, node).props[prop] ?? []
+  return new Set(
+    values.flatMap((value) => {
+      const id = 'node' in value ? getNode(doc, value.node).keywords['@id'] : undefined
+      return typeof id === 'string' ? [id] : []
+    }),
+  )
 }

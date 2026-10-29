@@ -11,7 +11,8 @@
     "typecheck": "tsc -b",
     "lint": "eslint .",
     "test": "vitest run",
-    "vendor:bibframe-json": "node scripts/vendor-bibframe-json.mjs"
+    "vendor:bibframe-json": "node scripts/vendor-bibframe-json.mjs",
+    "vendor:lc-vocabularies": "node scripts/vendor-lc-vocabularies.mjs"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible-mono": "^5.3.0",
