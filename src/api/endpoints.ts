@@ -22,6 +22,13 @@ export function resourceUrl(uri: string): string {
   return uri
 }
 
+/** Where Blue Core uses an entity it doesn't hold as a resource of its own, such as an LC name. */
+export function usageUrl(uri: string): string {
+  const url = new URL('api/usage/', config.bluecoreUrl)
+  url.search = new URLSearchParams({ uri }).toString()
+  return url.href
+}
+
 export function searchUrl(query: string, offset = 0, limit = 20): string {
   const url = new URL('api/search/', config.bluecoreUrl)
   url.search = new URLSearchParams({ q: query, type: 'instances', limit: String(limit), offset: String(offset) }).toString()

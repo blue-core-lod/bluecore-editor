@@ -34,3 +34,8 @@ export function searchVocabulary(name: Vocabulary, query: string, limit = 20): H
     .slice(0, limit)
     .map(({ term }) => term)
 }
+
+/** A term's label by its URI, such as "author" for relators/aut. */
+export function vocabularyLabel(name: Vocabulary, uri: string): string | undefined {
+  return vocabularies[name].find((term) => term.uri === uri)?.label
+}

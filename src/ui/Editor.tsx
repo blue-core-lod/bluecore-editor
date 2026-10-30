@@ -375,6 +375,7 @@ export function Editor({ uri }: { uri: string }) {
               uri={previewing.uri}
               name={previewing.label}
               previewing
+              record={{ title: titleOf(session.current), work: typeof workUri === 'string' ? workUri : undefined }}
               hints={hints}
               close={() => {
                 setPreviewing(null)
@@ -387,6 +388,7 @@ export function Editor({ uri }: { uri: string }) {
                 key="selected"
                 uri={selected}
                 name={refName(selected, refLabels(session.current))}
+                record={{ title: titleOf(session.current), work: typeof workUri === 'string' ? workUri : undefined }}
                 hints={hints}
                 close={() => setSelected(null)}
               />

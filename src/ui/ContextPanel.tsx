@@ -2,9 +2,12 @@ import { useState, type ReactNode } from 'react'
 
 import { disagreements } from '../context/disagreements'
 import { fetchLcAuthority, lcAuthorityId, type Citation, type LcAuthority } from '../context/lc'
+import { fetchUsage, matchingWorks, type Usage } from '../context/usage'
 import { useSource, type Fetched } from '../context/useSource'
 import { fetchWikidata, type WikidataFacts } from '../context/wikidata'
 import { fetchWikipedia } from '../context/wikipedia'
+import { vocabularyLabel } from '../lookup/local'
+import { termLabel } from './labels'
 
 /**
  * What the sources say about the linked entity the cataloger is looking at:
@@ -16,6 +19,7 @@ export function ContextPanel({
   uri,
   name,
   previewing = false,
+  record,
   hints,
   close,
 }: {
@@ -23,6 +27,8 @@ export function ContextPanel({
   name: string
   /** A lookup result, not yet in the record. */
   previewing?: boolean
+  /** The record being edited: its title, and its Work's URI. */
+  record: { title: string; work?: string }
   hints: boolean
   close: () => void
 }) {
@@ -31,6 +37,9 @@ export function ContextPanel({
   const wikidata = useSource('wikidata', lccn, fetchWikidata)
   const wikidataFacts = wikidata?.state === 'done' ? wikidata.value : null
   const wikipedia = useSource('wikipedia', wikidataFacts?.wikipedia, fetchWikipedia)
+  const usage = useSource('usage', uri, fetchUsage) ?? loading
+  const usageFacts = usage.state === 'done' ? usage.value : null
+  const matches = usageFacts && usageFacts.usedAs.contribution ? matchingWorks(usageFacts, record.title, record.work) : []
 
   const authority = lc.state === 'done' ? lc.value : null
   const conflicts = authority && wikidataFacts ? disagreements(authority, wikidataFacts) : []
@@ -48,6 +57,8 @@ export function ContextPanel({
         </button>
       </header>
 
+      {usageFacts && matches.length > 0 && <WorkSuggestion usage={usageFacts} matches={matches} />}
+
       {conflicts.map((conflict) => (
         <p key={conflict} className="context-disagreement">
           {conflict}
@@ -56,6 +67,10 @@ export function ContextPanel({
 
       <SourceSection title={authority?.kind ?? 'LC authority'} fetched={lc} missing="id.loc.gov doesn’t have this record.">
         {(record) => <LcRecord record={record} hints={hints} />}
+      </SourceSection>
+
+      <SourceSection title="In Blue Core" fetched={usage} missing="">
+        {(facts) => <UsageView usage={facts} />}
       </SourceSection>
 
       {wikidata && (
@@ -235,4 +250,76 @@ function Facts({ rows }: { rows: [string, string | undefined][] }) {
       ))}
     </dl>
   )
+}
+
+/**
+ * A Work already in Blue Core with this record's title and this contributor:
+ * likely the work being cataloged (design.md, Suggestions). Shown for the
+ * cataloger to look at; attaching the record to it is still to come.
+ */
+function WorkSuggestion({ usage, matches }: { usage: Usage; matches: Usage['recentWorks'] }) {
+  const [first] = matches
+  if (!first) return null
+  return (
+    <div className="context-suggestion">
+      <p className="context-suggestion-title">
+        {usage.works === 1 ? 'This name is on 1 Work in Blue Core' : `This name is on ${usage.works} Works in Blue Core`}
+      </p>
+      <p>
+        {usage.works === 1 ? 'That Work, ' : matches.length === 1 ? 'One of them, ' : `${matches.length} of them, including `}
+        <a href={first.uri} target="_blank" rel="noreferrer">
+          {first.title}
+        </a>
+        , has your record’s title
+        {first.instances > 0 &&
+          `, with ${first.instances === 1 ? '1 Instance' : `${first.instances} Instances`} already`}
+        . It may be the work you’re cataloging.
+      </p>
+      <p className="context-credit">From Blue Core usage</p>
+    </div>
+  )
+}
+
+function UsageView({ usage }: { usage: Usage }) {
+  if (usage.works === 0 && usage.records === 0) return <p className="muted">Not used in Blue Core yet.</p>
+  const roles = Object.entries(usage.roles)
+  const named = roles.slice(0, 3).map(([role, count]) => `${vocabularyLabel('relators', role) ?? role.split('/').pop()} in ${count}`)
+  const others = roles.slice(3).reduce((sum, [, count]) => sum + count, 0)
+  if (others > 0) named.push(`other roles in ${others}`)
+  const uses = Object.entries(usage.usedAs).filter(([prop]) => prop !== 'contribution')
+  return (
+    <>
+      <p>
+        Used in {plural(usage.records, 'record')}
+        {usage.works > 0 && <>, across {plural(usage.works, 'Work')}</>}
+      </p>
+      {named.length > 0 && <p>{capitalize(named.join(', '))}</p>}
+      {uses.map(([prop, count]) => (
+        <p key={prop}>
+          {termLabel(prop)} in {plural(count, 'Work')}
+        </p>
+      ))}
+      <Listing
+        title="Recent Works"
+        hints={false}
+        items={usage.recentWorks}
+        render={(work) => (
+          <>
+            <a href={work.uri} target="_blank" rel="noreferrer">
+              {work.title}
+            </a>
+            <span className="muted"> {plural(work.instances, 'Instance')}</span>
+          </>
+        )}
+      />
+    </>
+  )
+}
+
+function plural(count: number, noun: string): string {
+  return `${count} ${noun}${count === 1 ? '' : 's'}`
+}
+
+function capitalize(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1)
 }

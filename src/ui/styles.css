@@ -474,6 +474,25 @@ button.add:hover {
   margin: 0.15rem 0 0;
   font-size: 0.9rem;
 }
+.context-suggestion {
+  margin: 0.8rem 1.1rem 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  background: var(--linked);
+  border: 1px solid #b9cbe3;
+  font-size: 0.9rem;
+}
+.context-suggestion p {
+  margin: 0;
+}
+.context-suggestion .context-suggestion-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.15rem;
+}
+.context-suggestion .context-credit {
+  margin-top: 0.4rem;
+}
 .context-disagreement {
   margin: 0.8rem 1.1rem 0;
   padding: 0.6rem 0.9rem;

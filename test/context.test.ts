@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { disagreements } from '../src/context/disagreements'
+import { fetchUsage, matchingWorks, type Usage } from '../src/context/usage'
 import { citation, fetchLcAuthority, marcKey, fromSuggest, hasContext, lcAuthorityId, type LcAuthority } from '../src/context/lc'
 import { date, fromEntity, wikidataDescriptions, wikidataItemFor, type Entity, type WikidataFacts } from '../src/context/wikidata'
 
@@ -209,5 +210,48 @@ describe('disagreements', () => {
     expect(disagreements(twain(), { ...twainFacts(), pseudonyms: [], died: '1911' })).toEqual([
       'Wikidata gives the death date as 1911; the LC record has 1910-04-21.',
     ])
+  })
+})
+
+describe('Blue Core usage', () => {
+  const usage = (titles: [string, string][]): Usage => ({
+    works: titles.length,
+    records: titles.length,
+    usedAs: { contribution: titles.length },
+    roles: {},
+    recentWorks: titles.map(([uri, title]) => ({ uri, title, instances: 1 })),
+  })
+
+  it('matches a Work by its title, ignoring case, punctuation, a leading article and the subtitle', () => {
+    const found = usage([
+      ['https://bcld.info/works/1', 'The crying of lot 49'],
+      ['https://bcld.info/works/2', 'Gravity’s rainbow'],
+    ])
+    expect(matchingWorks(found, 'Crying of Lot 49 : a novel').map((work) => work.uri)).toEqual([
+      'https://bcld.info/works/1',
+    ])
+    expect(matchingWorks(found, 'Vineland')).toEqual([])
+  })
+
+  it('leaves out the record’s own Work', () => {
+    const found = usage([['https://bcld.info/works/1', 'The crying of lot 49']])
+    expect(matchingWorks(found, 'The crying of lot 49', 'https://bcld.info/works/1')).toEqual([])
+  })
+
+  it('reads the endpoint’s answer, and asks with the uri as a parameter', async () => {
+    const fetch = vi.fn<(url: string) => Promise<Response>>(async () =>
+      Response.json({ works: 2, records: 4, used_as: { contribution: 2 }, roles: { aut: 1 }, recent_works: [] }),
+    )
+    vi.stubGlobal('fetch', fetch)
+    expect(await fetchUsage('http://id.loc.gov/authorities/names/n79099184')).toEqual({
+      works: 2,
+      records: 4,
+      usedAs: { contribution: 2 },
+      roles: { aut: 1 },
+      recentWorks: [],
+    })
+    const url = new URL(fetch.mock.calls[0]?.[0] as string)
+    expect(url.pathname.endsWith('/api/usage/')).toBe(true)
+    expect(url.searchParams.get('uri')).toBe('http://id.loc.gov/authorities/names/n79099184')
   })
 })
