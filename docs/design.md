@@ -52,6 +52,12 @@ The profile editing gap is narrower than it first appeared: LC's DCTAP Dancer no
 - **Teaching warnings:** bibframe-json's ontology checks run as quiet notes, such as when `mainTitle` is added to the Work. They catch Work/Instance mistakes without blocking anyone.
 - **Fixed fields as named controls:** information from 008, 006, and 007 becomes labeled pickers for language, content type, carrier type, and so on.
 
+**The linked data view.** The MARC preview shows the description as the old format sees it; the visualization shows what BIBFRAME gives that MARC can't, and it matters at least as much.
+
+- **Visualize:** a read-only panel draws the description as resources and their relationships: the Instance, its Work, and the agents, subjects, places, and vocabulary terms they link to, each with its label and source badge, and each relationship labelled in cataloging terms ("instance of," "author," "subject"). It updates as the cataloger edits, and selecting a resource scrolls to its field.
+- **Highlighting the value of the data:** the drawing emphasizes what a MARC record can't express. The Work is one resource shared by its Instances, and the other Instances in Blue Core appear beside it. Linked entities lead out to id.loc.gov, Wikidata, and other sources. Blue Core can show how many other descriptions use the same agent or subject, so fixing one is visibly fixing it everywhere. Plain text that could be linked appears as a dead end, which makes the case for linking better than a warning would.
+- **Built from what the editor holds:** the drawing comes from the bibframe-json tree and its `@id` links, not from parsing RDF in the client, so it shows exactly what will be saved. Like the MARC preview, it comes near the end of the work, once core editing is in place.
+
 ## Guidance: what catalogers see first
 
 The schema decides what's valid (Appendix A). What's shown first comes from how resources are actually described.
@@ -172,6 +178,7 @@ Assistance from a model could have a narrow, useful place, as long as it adds to
 1. **Share this writeup** with the Blue Core team and the Marva and Dancer developers at LC.
 2. **Mock up one realistic print monograph** with static data, one author in LC NAF and Wikidata and one in neither. The screens and states to cover:
    - the description view with Work/Instance badges, MARC hints, and the MARC preview;
+   - the visualization of the description's resources and relationships, including a Work shared by several Instances;
    - starting from an ISBN, with existing descriptions offered;
    - the three guidance tiers and "add field" with tag search and usage numbers;
    - an agent lookup with clustered, "probably the same," and timed-out results;
