@@ -30,7 +30,7 @@ A new record ("Start a new record") has no Blue Core URIs yet. Until it's saved,
 
 ## Copying a record from LC
 
-**Deferred (2026-10-30)** until there is more agreement around how the editor will be used. This section records where things stood, for when it comes back. bluecore_api's `frame` branch has the `/frame` route; the editor has none of this.
+**Deferred (2026-10-30).** Creating and updating Blue Core's own records is the editor's main job, so that comes first, and this comes back once it works well. See [Decision](#decision) for where we landed. This section records where things stood: bluecore_api's `frame` branch has the `/frame` route, and the editor has none of this.
 
 This was the planned ISBN start:
 
@@ -65,11 +65,27 @@ The editor's current two-POST flow (Work, then Instance) would hit the worst cel
 ### Ways forward
 
 1. **One Instance POST for a copy.** The editor sends the Instance with LC's Work in it, and doesn't POST the Work. Blue Core links an existing Work or creates a new one, and never overwrites one. The start page offers to open an existing copy instead of copying again, using `derivedFrom` in Blue Core's search results. This needs no API change. It does need a test of what Blue Core creates for an embedded Work it doesn't have (the open cell in the table), and the editor would have to say that Work edits in a copy aren't saved when the Work already exists.
-2. **Creates that refuse to update.** Blue Core's create routes answer 409, with the existing resource's URI, when the payload names something already derived into Blue Core. The editor then opens or links that resource. This is the most predictable for every client, but it changes create behavior that the batch loaders or other clients may rely on.
+2. **Creates that refuse to update.** Blue Core's create routes answer 409, with the existing resource's URI, when the payload names something already derived into Blue Core. The editor then opens or links that resource. This is the most predictable for every client. The bulk loaders call bluecore_models directly, so they aren't affected, but another client that POSTs with its own URIs could be (Sinopia's Blue Core mode is the one to check).
 3. **Start clean after all.** Copies use empty ids and always make new resources. This is the simplest, but it loses the link to LC and duplicates LC Works Blue Core already has.
+
+### Decision
+
+**Option 2, when this comes back:** a create never becomes an update.
+
+- **The Instance is already in Blue Core:** the editor doesn't save, says so, and offers to open the record Blue Core has.
+- **The Work is already in Blue Core:** this is the ordinary copy-cataloging case, a new Instance of a Work Blue Core already has, so it shouldn't block the save. The editor loads Blue Core's Work into the record in place of LC's, and the cataloger saves the new Instance against it.
+
+This will likely need bluecore_models as well as bluecore_api. The check belongs inside the save, in the same transaction, so two catalogers copying the same record at once can't both pass it. That could be a "create only" mode in `save()` that raises, naming the existing resource, when the primary resource's URI is already derived. The API turns that into the 409. The two would land together, models first.
+
+**But most of the time there will be nothing to copy.** The plan is to load all of LC's data into Blue Core and keep it current, so almost anything found at id.loc.gov will already be in Blue Core. Once loaded, an LC Work or Instance is effectively Blue Core's own, a fork that is edited and updated there. So the ISBN start becomes:
+
+1. Search Blue Core by ISBN. The identifier search already matches with or without hyphens, and opens what it finds.
+2. Only if Blue Core has nothing, look at id.loc.gov, and copy from there using `/frame` and the create rule above.
+
+Keeping LC reloads and local edits in step is being worked on separately, outside the editor.
 
 ## Open questions
 
-- What does an Instance POST create for an embedded Work Blue Core doesn't have: LC's full description, or a stub?
-- Should a create ever update an existing resource? If so, should it honor `If-Match`?
+- What does an Instance POST create for an embedded Work Blue Core doesn't have: LC's full description, or a stub? (Only matters for option 1.)
+- Which other clients POST with their own URIs, and would a 409 break them?
 - Underneath both: should "which kind is primary" decide whether a resource is overwritten, or should that come from what the client asked for? bluecore_models' save is complicated enough that reasoning about outcomes like these takes reading the code; that's a separate issue.
