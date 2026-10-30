@@ -1,6 +1,6 @@
 import { getNode, type Doc, type Key, type Value } from '../doc/model'
 import { principals } from '../doc/resources'
-import { belongsOn } from '../schema/fields'
+import { belongsOn, domainOf } from '../schema/fields'
 import { refName, termLabel, typesOf, type RefLabel } from './labels'
 import {
   identifierMarc,
@@ -30,6 +30,16 @@ export interface Row {
   values: Value[]
   /** On the last row of a field: what "Add another" adds, such as "Contributor". */
   addAnother?: string
+  /** Set when the ontology puts the property on another class: the makings of a teaching note. */
+  misplaced?: Misplaced
+}
+
+/** A property on a resource the ontology doesn't put it on, such as Dimensions on the Work. */
+export interface Misplaced {
+  /** The class it belongs on, from its rdfs:domain. */
+  domain: string
+  /** The other resource in the description, where it does belong, if there is one. */
+  moveTo?: { resource: ResourceKind; node: Key }
 }
 
 /** A field a section offers that the description doesn't have yet, and where a value for it would go. */
@@ -61,6 +71,14 @@ export function layout(doc: Doc, labels: Map<string, RefLabel>): Layout {
   const resources: [ResourceKind, Key][] = [['Instance', instance]]
   if (work) resources.push(['Work', work])
 
+  // Only a note, never a block: bibframe-json reads the ontology as warnings.
+  const misplacement = (key: Key, prop: string): { misplaced?: Misplaced } => {
+    const domain = domainOf(prop)
+    if (!domain || belongsOn(prop, typesOf(getNode(doc, key)))) return {}
+    const other = resources.find(([, node]) => node !== key && belongsOn(prop, typesOf(getNode(doc, node))))
+    return { misplaced: { domain, moveTo: other && { resource: other[0], node: other[1] } } }
+  }
+
   const claimed = new Set<string>()
   const rowsFor = (spec: FieldSpec): Row[] =>
     resources.flatMap(([kind, key]) => {
@@ -68,7 +86,7 @@ export function layout(doc: Doc, labels: Map<string, RefLabel>): Layout {
       const values = getNode(doc, key).props[spec.prop]
       if (!values?.length) return []
       claimed.add(`${key} ${spec.prop}`)
-      const row = { resource: kind, node: key, prop: spec.prop }
+      const row = { resource: kind, node: key, prop: spec.prop, ...misplacement(key, spec.prop) }
       if (!spec.perValue) {
         return [
           { ...row, id: `${key} ${spec.prop}`, label: spec.label, marc: spec.marc, values, addAnother: spec.label },
@@ -112,6 +130,7 @@ export function layout(doc: Doc, labels: Map<string, RefLabel>): Layout {
           prop,
           values,
           addAnother: termLabel(prop),
+          ...misplacement(key, prop),
         })),
     )
 

@@ -70,6 +70,11 @@ const domains = new Map(
   }),
 )
 
+/** The class a property belongs on, if the ontology gives it a domain. */
+export function domainOf(prop: string): string | undefined {
+  return domains.get(prop)
+}
+
 /** Whether a property may go on a node of these types; one with no domain may go anywhere. */
 export function belongsOn(prop: string, types: readonly string[]): boolean {
   const domain = domains.get(prop)

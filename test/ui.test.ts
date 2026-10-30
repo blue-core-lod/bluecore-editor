@@ -4,7 +4,8 @@ import { loadBounded } from '../src/api/bluecore'
 import { instanceUri, isBluecore } from '../src/api/endpoints'
 import { getNode, normalize, type Doc, type JsonObject } from '../src/doc/model'
 import { without } from '../src/doc/patch'
-import { principals } from '../src/doc/resources'
+import { applyChange, change } from '../src/doc/log'
+import { linkedResource, moveOps, principals } from '../src/doc/resources'
 import { refLabels } from '../src/ui/labels'
 import { layout, type Row } from '../src/ui/layout'
 import { marcLinks } from '../src/ui/presentation'
@@ -84,6 +85,55 @@ describe('layout', () => {
     const doc = normalize(example('bounded'))
     const isbn = rowsOf(doc).find((row) => row.prop === 'identifiedBy')
     expect([isbn?.label, isbn?.marc]).toEqual(['ISBN', '020'])
+  })
+})
+
+describe('teaching notes', () => {
+  /** The example with dimensions on its Work as well as the Instance. */
+  function onTheWork(): Doc {
+    const bounded = example('bounded')
+    const [work] = bounded.instanceOf as JsonObject[]
+    if (!work) throw new Error('the example has no Work')
+    return normalize({ ...bounded, instanceOf: [{ ...work, dimensions: ['24 cm'] }] })
+  }
+
+  it('says nothing about a description that follows the ontology', () => {
+    expect(rowsOf(normalize(example('bounded'))).filter((row) => row.misplaced)).toEqual([])
+  })
+
+  it('notes a property on the resource the ontology does not put it on, and where it would go', () => {
+    const doc = onTheWork()
+    const { instance } = principals(doc)
+    const dimensions = rowsOf(doc).filter((row) => row.prop === 'dimensions')
+    expect(dimensions.map((row) => [row.resource, row.misplaced])).toEqual([
+      ['Instance', undefined],
+      ['Work', { domain: 'Instance', moveTo: { resource: 'Instance', node: instance } }],
+    ])
+  })
+
+  it('moves the values to the other resource, after its own, in one change that undoes whole', () => {
+    const doc = onTheWork()
+    const { instance, work } = principals(doc)
+    const row = rowsOf(doc).find((row) => row.prop === 'dimensions' && row.misplaced)
+    if (!row?.misplaced?.moveTo || !work) throw new Error('no misplaced dimensions')
+    const moved = applyChange(doc, change('Moved', moveOps(doc, row.node, row.prop, row.values, row.misplaced.moveTo.node)))
+    expect(linkedResource(moved, work).dimensions).toBeUndefined()
+    expect(linkedResource(moved, instance).dimensions).toEqual([...(example('bounded').dimensions as string[]), '24 cm'])
+  })
+
+  it('moves a node with everything below it', () => {
+    const bounded = example('bounded')
+    const [work] = bounded.instanceOf as JsonObject[]
+    if (!work) throw new Error('the example has no Work')
+    const publication = { '@type': ['Publication'], place: [{ '@id': 'http://id.loc.gov/vocabulary/countries/nyu', 'rdfs:label': ['New York (State)'] }], date: ['2020'] }
+    const doc = normalize({ ...without(bounded, 'provisionActivity'), instanceOf: [{ ...work, provisionActivity: [publication] }] })
+    const { instance, work: workKey } = principals(doc)
+    const row = rowsOf(doc).find((row) => row.prop === 'provisionActivity')
+    if (!row?.misplaced?.moveTo || !workKey) throw new Error('no misplaced publication')
+    expect(row.resource).toBe('Work')
+    const moved = applyChange(doc, change('Moved', moveOps(doc, row.node, row.prop, row.values, row.misplaced.moveTo.node)))
+    expect(linkedResource(moved, instance).provisionActivity).toEqual([publication])
+    expect(rowsOf(moved).filter((row) => row.misplaced)).toEqual([])
   })
 })
 

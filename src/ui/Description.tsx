@@ -2,14 +2,14 @@ import { useMemo, useState, type ReactNode } from 'react'
 
 import { change, type Change } from '../doc/log'
 import { getNode, isValueObject, type Doc, type Json, type Key, type Literal, type Node, type Value } from '../doc/model'
-import { isEmpty } from '../doc/resources'
-import { definitionOf, modeledProperties } from '../schema/fields'
+import { isEmpty, moveOps } from '../doc/resources'
+import { belongsOn, definitionOf, domainOf, modeledProperties } from '../schema/fields'
 import { AddField } from './AddField'
 import { AddValue } from './AddValue'
 import { DescriptionContext, useDescription } from './context'
 import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
-import { layout, type Missing, type Row } from './layout'
+import { layout, type Misplaced, type Missing, type Row } from './layout'
 import { marcLinks, primerUrl, type ResourceKind } from './presentation'
 
 /**
@@ -83,10 +83,55 @@ function FieldRow({ row }: { row: Row }) {
         {row.addAnother && (
           <AddValue node={row.node} prop={row.prop} label={row.addAnother} prompt="Add another" />
         )}
+        {row.misplaced && <TeachingNote row={row} misplaced={row.misplaced} />}
       </div>
       {hints && <Badge kind={row.resource} />}
     </div>
   )
+}
+
+/**
+ * A quiet note that a field is on a resource the ontology doesn't put it on,
+ * with the move one click away. Shown with hints off too: this is where the
+ * Work/Instance split changes what gets saved. It never blocks a save, and
+ * the cataloger may know better than the ontology.
+ */
+function TeachingNote({ row, misplaced }: { row: Row; misplaced: Misplaced }) {
+  const { doc, record } = useDescription()
+  const { moveTo } = misplaced
+  return (
+    <p className="teaching-note">
+      BIBFRAME puts {row.label.toLowerCase()} on {article(termLabel(misplaced.domain))}, not the {row.resource}.{' '}
+      <a href={primerUrl} target="_blank" rel="noreferrer">
+        Why?
+      </a>
+      {moveTo && (
+        <>
+          {' '}
+          <button
+            type="button"
+            className="secondary"
+            onClick={() =>
+              record(
+                change(
+                  `Moved ${row.label} to the ${moveTo.resource}`,
+                  moveOps(doc, row.node, row.prop, row.values, moveTo.node),
+                ),
+              )
+            }
+          >
+            Move to {moveTo.resource}
+          </button>
+        </>
+      )}
+    </p>
+  )
+}
+
+/** "the Instance" and "the Work" for the two resources, "a Title" for anything else. */
+function article(cls: string): string {
+  if (cls === 'Instance' || cls === 'Work') return `the ${cls}`
+  return /^[AEIOU]/.test(cls) ? `an ${cls}` : `a ${cls}`
 }
 
 function MarcTag({ marc }: { marc: string }) {
@@ -267,16 +312,24 @@ function Subnode(props: ValueProps & { child: Node }) {
         {isEmpty(doc, child.key) && <span className="empty-note">Empty, so it won&rsquo;t be saved</span>}
         <RemoveButton name={label} onClick={remove} />
       </div>
-      {Object.entries(child.props).map(([prop, values]) => (
-        <div className="subfield" key={prop}>
-          <span className="subfield-label">{termLabel(prop)}</span>
-          <div className="row-values">
-            {values.map((value) => (
-              <ValueView key={value.key} node={child.key} prop={prop} value={value} label={termLabel(prop)} />
-            ))}
+      {Object.entries(child.props).map(([prop, values]) => {
+        const domain = domainOf(prop)
+        return (
+          <div className="subfield" key={prop}>
+            <span className="subfield-label">{termLabel(prop)}</span>
+            <div className="row-values">
+              {values.map((value) => (
+                <ValueView key={value.key} node={child.key} prop={prop} value={value} label={termLabel(prop)} />
+              ))}
+              {domain && typesOf(child).length > 0 && !belongsOn(prop, typesOf(child)) && (
+                <p className="teaching-note">
+                  BIBFRAME puts {termLabel(prop).toLowerCase()} on {article(termLabel(domain))}.
+                </p>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      })}
       {Array.isArray(list) && <ListItems items={list as Json[]} />}
       <EmptyFields doc={doc} child={child} owner={label} />
     </div>

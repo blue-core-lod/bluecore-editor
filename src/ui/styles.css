@@ -538,6 +538,15 @@ button.remove:hover {
   font-size: 0.8rem;
   color: var(--muted);
 }
+.teaching-note {
+  flex-basis: 100%;
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--note-text);
+}
+.teaching-note button {
+  margin-left: 0.4rem;
+}
 .empty-note {
   font-size: 0.8rem;
   color: var(--note-text);

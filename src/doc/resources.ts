@@ -1,5 +1,5 @@
-import { denormalize, getNode, type Doc, type Json, type JsonObject, type Key } from './model'
-import { sameJson, without } from './patch'
+import { denormalize, getNode, type Doc, type Json, type JsonObject, type Key, type Value } from './model'
+import { sameJson, subtree, without, type Op } from './patch'
 
 /**
  * Bounded in, linked out. The editor reads an Instance and its Work as one
@@ -26,6 +26,30 @@ export function principals(doc: Doc): { instance: Key; work: Key | null } {
   const root = getNode(doc, doc.root)
   const work = (root.props.instanceOf ?? []).find((value) => 'node' in value && getNode(doc, value.node).keywords['@id'])
   return { instance: doc.root, work: work && 'node' in work ? work.node : null }
+}
+
+/**
+ * Move values from one node to another, as when Dimensions entered on the Work
+ * goes to the Instance: each is removed, then added after the target's own
+ * values, with the nodes it holds and their keys unchanged.
+ */
+export function moveOps(doc: Doc, from: Key, prop: string, values: readonly Value[], to: Key): Op[] {
+  let after = getNode(doc, to).props[prop]?.at(-1)?.key ?? null
+  const removes: Op[] = values.map((value) => ({ op: 'remove', node: from, prop, value: value.key }))
+  const inserts: Op[] = values.map((value) => {
+    // The value's own node now hangs on the target; the nodes below it are unchanged.
+    const nodes =
+      'node' in value
+        ? subtree(doc, value.node).map((key) => {
+            const node = getNode(doc, key)
+            return key === value.node ? { ...node, parent: { node: to, prop, value: value.key } } : node
+          })
+        : []
+    const op: Op = { op: 'insert', node: to, prop, after, value, nodes }
+    after = value.key
+    return op
+  })
+  return [...removes, ...inserts]
 }
 
 /** The resource a node's data is saved with: where its Work/Instance badge comes from. */
