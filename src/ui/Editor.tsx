@@ -65,7 +65,7 @@ export function Editor({ uri }: { uri: string }) {
         if (!live) return
         const fresh = sessionFrom(loaded, null)
         const state = draft && restore(draft)
-        if (draft && !state) setProblem('Your unsaved changes to this description couldn’t be restored.')
+        if (draft && !state) setProblem('Your unsaved changes to this record couldn’t be restored.')
         const resumed = draft && state?.log.changes.length ? resume(draft, state, loaded, fresh) : null
         setSession(resumed?.session ?? fresh)
         setRestored(resumed?.restored ?? null)
@@ -148,7 +148,7 @@ export function Editor({ uri }: { uri: string }) {
       }
     } catch (error) {
       setProblem(
-        `Saved, but couldn’t read the description back from Blue Core: ${error instanceof Error ? error.message : String(error)}. Reload before editing further.`,
+        `Saved, but couldn’t read the record back from Blue Core: ${error instanceof Error ? error.message : String(error)}. Reload before editing further.`,
       )
     } finally {
       setSaving(false)
@@ -203,7 +203,7 @@ export function Editor({ uri }: { uri: string }) {
           <h1>{titleOf(session.current)}</h1>
           <p className="muted">
             {isPlaceholder(uri) ? (
-              <>A new description, not in Blue Core until it’s saved</>
+              <>A new record, not in Blue Core until it’s saved</>
             ) : (
               <>
                 <a href={uri} target="_blank" rel="noreferrer">
@@ -298,7 +298,7 @@ export function Editor({ uri }: { uri: string }) {
       <main className="page">
         {session.shapeProblems > 0 && (
           <p className="note">
-            This description doesn’t quite have bibframe-json’s bounded shape ({session.shapeProblems}{' '}
+            This record doesn’t quite have bibframe-json’s bounded shape ({session.shapeProblems}{' '}
             {session.shapeProblems === 1 ? 'problem' : 'problems'}), so it may not save cleanly.
           </p>
         )}
@@ -307,7 +307,7 @@ export function Editor({ uri }: { uri: string }) {
             Restored {restored.changes === 1 ? '1 unsaved change' : `${restored.changes} unsaved changes`} from{' '}
             {restored.updatedAt.toLocaleString()}.
             {restored.stale &&
-              ' Blue Core’s description has changed since, so saving will ask whether to keep your version or theirs.'}{' '}
+              ' Blue Core’s copy has changed since, so saving will ask whether to keep your version or theirs.'}{' '}
             <button type="button" className="link" onClick={() => setRestored(null)}>
               Keep them
             </button>{' '}

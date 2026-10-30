@@ -13,8 +13,8 @@ export function App() {
       <>
         <Header />
         <main className="page start">
-          <h1>Blue Core description editor</h1>
-          <p>Sign in with your Blue Core account to open and edit descriptions.</p>
+          <h1>Blue Core record editor</h1>
+          <p>Sign in with your Blue Core account to open and edit records.</p>
           {error && (
             <p className="note" role="alert">
               Sign-in didn’t work: {error}

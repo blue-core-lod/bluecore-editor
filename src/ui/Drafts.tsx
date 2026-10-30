@@ -36,7 +36,7 @@ export function Drafts({ user }: { user: string }) {
 
   return (
     <section className="drafts">
-      <h2>Unsaved descriptions</h2>
+      <h2>Unsaved records</h2>
       <ul className="results">
         {drafts.map((draft) => {
           const changes = draft.log.changes.length
@@ -53,12 +53,12 @@ export function Drafts({ user }: { user: string }) {
                 {titleOf(restore(draft)?.current ?? draft.log.base)}
               </a>
               <span className="muted draft-about">
-                {isPlaceholder(draft.uri) ? 'New, not in Blue Core yet' : 'Edits to a description in Blue Core'} ·{' '}
+                {isPlaceholder(draft.uri) ? 'New, not in Blue Core yet' : 'Edits to a record in Blue Core'} ·{' '}
                 {counted} · {draft.updatedAt.toLocaleString()}
               </span>
               {discarding === draft.id ? (
                 <span className="draft-actions" role="group" aria-label="Discard this draft?">
-                  {isPlaceholder(draft.uri) ? 'Discard this new description?' : `Discard ${counted}?`}{' '}
+                  {isPlaceholder(draft.uri) ? 'Discard this new record?' : `Discard ${counted}?`}{' '}
                   <button type="button" className="secondary" onClick={() => void discard(draft)}>
                     Discard
                   </button>

@@ -39,7 +39,7 @@ export function Start() {
     <>
       <Header />
       <main className="page start">
-        <h1>Open a description</h1>
+        <h1>Open a record</h1>
         <form onSubmit={(event) => void submit(event)}>
           <label htmlFor="find">Search Blue Core’s Instances, or paste an Instance URI or UUID</label>
           <div className="find">
@@ -52,7 +52,7 @@ export function Start() {
         <p className="start-new">
           Or{' '}
           <button type="button" className="secondary" onClick={() => open(placeholderUri(newKey()))}>
-            Start a new description
+            Start a new record
           </button>
         </p>
         <Drafts user={user} />
