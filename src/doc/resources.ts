@@ -1,4 +1,5 @@
 import { denormalize, getNode, type Doc, type Json, type JsonObject, type Key, type Value } from './model'
+import type { Change } from './log'
 import { sameJson, subtree, without, type Op } from './patch'
 
 /**
@@ -56,6 +57,30 @@ export function moveOps(doc: Doc, from: Key, prop: string, values: readonly Valu
 export function withId(doc: Doc, key: Key, uri: string): Doc {
   const node = getNode(doc, key)
   return { ...doc, nodes: { ...doc.nodes, [key]: { ...node, keywords: { ...node.keywords, '@id': uri } } } }
+}
+
+/**
+ * The other Instances the Work describes, by URI, from its hasInstance: the
+ * records an edit to the Work would also change. Blue Core stores the list
+ * in the Work, so the record says it without another request.
+ */
+export function otherInstances(doc: Doc): string[] {
+  const { instance, work } = principals(doc)
+  if (!work) return []
+  const self = getNode(doc, instance).keywords['@id']
+  const uris = (getNode(doc, work).props.hasInstance ?? []).flatMap((value) => {
+    if ('literal' in value) return typeof value.literal === 'string' ? [value.literal] : []
+    const id = getNode(doc, value.node).keywords['@id']
+    return typeof id === 'string' ? [id] : []
+  })
+  return [...new Set(uris)].filter((uri) => uri !== self)
+}
+
+/** Whether a change edits what is saved with the Work, rather than the Instance. */
+export function changesWork(doc: Doc, change: Change): boolean {
+  const { work } = principals(doc)
+  // A node the change itself adds isn't in the document yet; the op that adds it names its parent.
+  return work !== null && change.ops.some((op) => doc.nodes[op.node] && resourceOf(doc, op.node) === work)
 }
 
 /** The resource a node's data is saved with: where its Work/Instance badge comes from. */

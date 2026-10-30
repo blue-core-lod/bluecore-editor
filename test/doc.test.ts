@@ -1,9 +1,17 @@
 import { describe, expect, it } from 'vitest'
 
 import { change, record, replay, undo, type Log } from '../src/doc/log'
-import { denormalize, fragment, getNode, normalize, type Doc, type Value } from '../src/doc/model'
+import { denormalize, fragment, getNode, normalize, type Doc, type JsonObject, type Value } from '../src/doc/model'
 import { apply, ConflictError, without } from '../src/doc/patch'
-import { assembleBounded, changedResources, linkedResource, principals, resourceOf } from '../src/doc/resources'
+import {
+  assembleBounded,
+  changedResources,
+  changesWork,
+  linkedResource,
+  otherInstances,
+  principals,
+  resourceOf,
+} from '../src/doc/resources'
 import { acceptedDocuments, example } from './fixtures'
 
 describe('normalize', () => {
@@ -197,5 +205,38 @@ describe('resources', () => {
     const after = replay(doc, [edit])
     expect(changedResources(doc, after)).toEqual([workOf(doc)])
     expect(changedResources(doc, replay(doc, []))).toEqual([])
+  })
+})
+
+describe('shared Works', () => {
+  /** The example, its Work shared with another Instance. */
+  function shared(): Doc {
+    const bounded = example('bounded')
+    const [work] = bounded.instanceOf as JsonObject[]
+    if (!work) throw new Error('no Work')
+    const other = 'https://bibframe.example/instances/other'
+    return normalize({ ...bounded, instanceOf: [{ ...work, hasInstance: [...(work.hasInstance as string[]), other] }] })
+  }
+
+  it('finds the other Instances a Work describes, leaving out this one', () => {
+    expect(otherInstances(normalize(example('bounded')))).toEqual([])
+    expect(otherInstances(shared())).toEqual(['https://bibframe.example/instances/other'])
+  })
+
+  it('tells an edit to the Work, or to anything inside it, from one to the Instance', () => {
+    const doc = shared()
+    const { instance, work } = principals(doc)
+    if (!work) throw new Error('no Work')
+    const removeFrom = (node: string, prop: string) => {
+      const value = getNode(doc, node).props[prop]?.[0]
+      if (!value) throw new Error(`no ${prop}`)
+      return change('Removed', [{ op: 'remove', node, prop, value: value.key }])
+    }
+    expect(changesWork(doc, removeFrom(work, 'subject'))).toBe(true)
+    expect(changesWork(doc, removeFrom(instance, 'extent'))).toBe(false)
+    // Inside the Work's title, a node of its own.
+    const title = getNode(doc, work).props.title?.[0]
+    if (!title || !('node' in title)) throw new Error('no Work title')
+    expect(changesWork(doc, removeFrom(title.node, 'mainTitle'))).toBe(true)
   })
 })

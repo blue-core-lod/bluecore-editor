@@ -7,7 +7,7 @@ import { blankDescription, isPlaceholder } from '../doc/blank'
 import { record as recordChange, undo, type Change } from '../doc/log'
 import { getNode, normalize } from '../doc/model'
 import { ConflictError } from '../doc/patch'
-import { principals, snapshot, unsaved } from '../doc/resources'
+import { changesWork, otherInstances, principals, snapshot, unsaved } from '../doc/resources'
 import { deleteDraft, readDraft, restore, writeDraft, type Draft } from '../drafts/drafts'
 import { getValidators } from '../schema/validate'
 import { Description } from './Description'
@@ -17,6 +17,7 @@ import { titleOf } from './labels'
 import { primerUrl } from './presentation'
 import { replace } from './route'
 import { SaveReport } from './SaveReport'
+import { ScopePrompt } from './ScopePrompt'
 
 interface Session extends SaveState {
   loadedAt: Date
@@ -98,7 +99,14 @@ export function Editor({ uri }: { uri: string }) {
     return () => window.removeEventListener('beforeunload', warn)
   }, [draftsKept, changes])
 
-  const record = useCallback((change: Change) => {
+  // An edit to a Work other Instances share waits here until the cataloger says
+  // it's meant for all of them; once they have, the rest go through.
+  const [asking, setAsking] = useState<Change | null>(null)
+  const [sharedAgreed, setSharedAgreed] = useState(false)
+  // Bumped when an edit is cancelled, so fields drop what was typed for it.
+  const [formKey, setFormKey] = useState(0)
+
+  const apply = useCallback((change: Change) => {
     setSession((session) => {
       if (!session) return session
       try {
@@ -110,6 +118,15 @@ export function Editor({ uri }: { uri: string }) {
       }
     })
   }, [])
+
+  const record = useCallback(
+    (change: Change) => {
+      const doc = session?.current
+      if (doc && !sharedAgreed && changesWork(doc, change) && otherInstances(doc).length > 0) setAsking(change)
+      else apply(change)
+    },
+    [session, sharedAgreed, apply],
+  )
 
   const undoChanges = (ids: string[]): Change[] | null => {
     if (!session) return null
@@ -337,7 +354,23 @@ export function Editor({ uri }: { uri: string }) {
             </button>
           </p>
         )}
-        <Description doc={session.current} hints={hints} record={record} />
+        <Description key={formKey} doc={session.current} hints={hints} record={record} />
+        {asking && typeof workUri === 'string' && (
+          <ScopePrompt
+            change={asking}
+            others={otherInstances(session.current).length}
+            workUri={workUri}
+            changeAll={() => {
+              setSharedAgreed(true)
+              apply(asking)
+              setAsking(null)
+            }}
+            cancel={() => {
+              setAsking(null)
+              setFormKey((key) => key + 1)
+            }}
+          />
+        )}
       </main>
     </>
   )

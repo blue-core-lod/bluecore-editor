@@ -207,6 +207,57 @@ button.link {
   margin-top: 0;
 }
 
+/* The scope prompt: the one dialog that stops the cataloger, so it looks like one. */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(23 32 43 / 0.35);
+}
+.scope-prompt {
+  max-width: 32rem;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgb(23 32 43 / 0.2);
+}
+.scope-prompt h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+}
+.scope-change {
+  padding: 0.5rem 0.75rem;
+  background: var(--ground);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+.scope-change .muted {
+  display: block;
+  font-size: 0.8rem;
+}
+button.scope-choice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+}
+.scope-choice span {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+.scope-more {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0 0;
+}
+
 /* Adding values: dashed outlines, as in the mockups. */
 button.add {
   background: transparent;
