@@ -563,6 +563,14 @@ button.remove:hover {
   color: var(--muted);
   padding-top: 0.3rem;
 }
+/* Each level of nesting takes a label column's width, so from two down the label goes above its value. */
+.subnode .subnode .subfield {
+  grid-template-columns: 1fr;
+  gap: 0.15rem;
+}
+.subnode .subnode .subfield-label {
+  padding-top: 0;
+}
 .list {
   margin: 0;
   padding-left: 1.25rem;

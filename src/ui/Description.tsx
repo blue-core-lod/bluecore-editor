@@ -100,30 +100,48 @@ function TeachingNote({ row, misplaced }: { row: Row; misplaced: Misplaced }) {
   const { doc, record } = useDescription()
   const { moveTo } = misplaced
   return (
+    <OntologyNote field={row.label} domain={misplaced.domain} not={row.resource}>
+      {moveTo && (
+        <button
+          type="button"
+          className="secondary"
+          onClick={() =>
+            record(
+              change(
+                `Moved ${row.label} to the ${moveTo.resource}`,
+                moveOps(doc, row.node, row.prop, row.values, moveTo.node),
+              ),
+            )
+          }
+        >
+          Move to {moveTo.resource}
+        </button>
+      )}
+    </OntologyNote>
+  )
+}
+
+/** "BIBFRAME puts dimensions on the Instance, not the Work. Why?", and anything to do about it. */
+function OntologyNote({
+  field,
+  domain,
+  not,
+  children,
+}: {
+  field: string
+  domain: string
+  /** Where the field is instead, when that's worth saying. */
+  not?: string
+  children?: ReactNode
+}) {
+  return (
     <p className="teaching-note">
-      BIBFRAME puts {row.label.toLowerCase()} on {article(termLabel(misplaced.domain))}, not the {row.resource}.{' '}
+      BIBFRAME puts {field.toLowerCase()} on {article(termLabel(domain))}
+      {not && `, not the ${not}`}.{' '}
       <a href={primerUrl} target="_blank" rel="noreferrer">
         Why?
       </a>
-      {moveTo && (
-        <>
-          {' '}
-          <button
-            type="button"
-            className="secondary"
-            onClick={() =>
-              record(
-                change(
-                  `Moved ${row.label} to the ${moveTo.resource}`,
-                  moveOps(doc, row.node, row.prop, row.values, moveTo.node),
-                ),
-              )
-            }
-          >
-            Move to {moveTo.resource}
-          </button>
-        </>
-      )}
+      {children}
     </p>
   )
 }
@@ -322,9 +340,7 @@ function Subnode(props: ValueProps & { child: Node }) {
                 <ValueView key={value.key} node={child.key} prop={prop} value={value} label={termLabel(prop)} />
               ))}
               {domain && typesOf(child).length > 0 && !belongsOn(prop, typesOf(child)) && (
-                <p className="teaching-note">
-                  BIBFRAME puts {termLabel(prop).toLowerCase()} on {article(termLabel(domain))}.
-                </p>
+                <OntologyNote field={termLabel(prop)} domain={domain} />
               )}
             </div>
           </div>
