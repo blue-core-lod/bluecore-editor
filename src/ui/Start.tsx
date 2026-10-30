@@ -49,13 +49,6 @@ export function Start() {
             </button>
           </div>
         </form>
-        <p className="start-new">
-          Or{' '}
-          <button type="button" className="secondary" onClick={() => open(placeholderUri(newKey()))}>
-            Start a new record
-          </button>
-        </p>
-        <Drafts user={user} />
         {error && (
           <p className="note" role="alert">
             {error}
@@ -85,6 +78,13 @@ export function Start() {
             </ul>
           </section>
         )}
+        <p className="start-new">
+          Or{' '}
+          <button type="button" className="secondary" onClick={() => open(placeholderUri(newKey()))}>
+            Start a new record
+          </button>
+        </p>
+        <Drafts user={user} />
       </main>
     </>
   )
