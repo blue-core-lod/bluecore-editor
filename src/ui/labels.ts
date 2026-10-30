@@ -28,6 +28,7 @@ const overrides: Record<string, string> = {
   'rdf:value': 'Value',
   'rdfs:label': 'Label',
   'bflc:marcKey': 'MARC key',
+  'bflc:aap': 'Authorized access point',
   'bflc:catalogerId': 'Cataloger ID',
 }
 

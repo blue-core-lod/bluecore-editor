@@ -285,8 +285,14 @@ function Chip(props: ValueProps & { uri: string }) {
   )
 }
 
-/** Subforms that don't offer their empty fields: record-keeping, not cataloging. */
-const noEmptyFields = new Set(['AdminMetadata'])
+/**
+ * Subforms that don't offer their empty fields. Admin metadata is
+ * record-keeping, not cataloging. A Work, Instance or Hub described inside
+ * another, such as the unnamed Work at the other end of a Relation, is a
+ * resource of its own: offering all of a Work's fields there buries the
+ * record it sits in.
+ */
+const noEmptyFields = new Set(['AdminMetadata', 'Work', 'Instance', 'Hub'])
 
 /** A node described in place, such as a Title or an Extent: its own small form. */
 function Subnode(props: ValueProps & { child: Node }) {
