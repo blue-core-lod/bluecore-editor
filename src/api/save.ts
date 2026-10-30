@@ -49,8 +49,9 @@ export async function writeResource(
 
 /**
  * Create a resource, sent with an empty @id for Blue Core to mint its URI.
- * Its reply carries no ETag, so a resource created this way is read back
- * before it can be saved again (Editor, after a save).
+ * Its reply carries no ETag, so the new resource is read once for its
+ * version: a Work created in a save whose Instance then failed can be edited
+ * and saved again before the retry.
  */
 export async function createResource(
   kind: 'Instance' | 'Work',
@@ -68,7 +69,19 @@ export async function createResource(
   if (!response.ok) return { ok: false, conflict: false, message: await failure(response) }
   const body = (await response.json().catch(() => null)) as { uri?: unknown } | null
   if (typeof body?.uri !== 'string') return { ok: false, conflict: false, message: 'Blue Core didn’t say what it created' }
-  return { ok: true, etag: null, created: body.uri }
+  return { ok: true, etag: await versionOf(body.uri, token), created: body.uri }
+}
+
+/** A resource's current ETag, or null if it can't be read; a later save of it is then refused rather than unguarded. */
+async function versionOf(uri: string, token: string | undefined): Promise<string | null> {
+  const headers: Record<string, string> = { Accept: 'application/ld+json' }
+  if (token) headers.Authorization = `Bearer ${token}`
+  try {
+    const response = await fetch(resourceUrl(uri), { headers })
+    return response.ok ? response.headers.get('ETag') : null
+  } catch {
+    return null
+  }
 }
 
 async function failure(response: Response): Promise<string> {

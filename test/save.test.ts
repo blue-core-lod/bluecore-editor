@@ -55,7 +55,7 @@ function blueCore(answers: Record<string, () => Response>): Call[] {
         url,
         method: init.method ?? 'GET',
         headers: init.headers as Record<string, string>,
-        body: JSON.parse(String(init.body)) as Record<string, unknown>,
+        body: (init.body === undefined ? {} : JSON.parse(String(init.body))) as Record<string, unknown>,
       })
       const answer = answers[url]
       if (!answer) throw new Error(`unexpected request to ${url}`)
@@ -214,19 +214,28 @@ describe('new descriptions', () => {
   })
 
   it('creates the Work, then the Instance naming the Work by the URI Blue Core minted', async () => {
-    const calls = blueCore({ [createUrl('Work')]: created(minted.work), [createUrl('Instance')]: created(minted.instance) })
+    const calls = blueCore({
+      [createUrl('Work')]: created(minted.work),
+      [createUrl('Instance')]: created(minted.instance),
+      [minted.work]: ok('"w1"'),
+      [minted.instance]: ok('"i1"'),
+    })
     const state = started()
     const results = await saveDescription(state, 'token')
 
     expect(calls.map((call) => [call.method, call.url])).toEqual([
       ['POST', createUrl('Work')],
+      ['GET', minted.work],
       ['POST', createUrl('Instance')],
+      ['GET', minted.instance],
     ])
-    const [work, instance] = calls
+    const [work, , instance] = calls
     expect(work?.body['@id']).toBe('')
     expect(instance?.body['@id']).toBe('')
     expect(instance?.body.instanceOf).toEqual([minted.work])
     expect(JSON.stringify(calls.map((call) => call.body))).not.toContain('urn:bluecore-editor')
+    // Read once for its version, since a create's reply has none.
+    expect(results.map((result) => result.outcome.ok && result.outcome.etag)).toEqual(['"w1"', '"i1"'])
 
     const after = afterSave(state, results)
     const { instance: instanceKey, work: workKey } = principals(after.current)
@@ -237,15 +246,17 @@ describe('new descriptions', () => {
   })
 
   it('keeps the minted Work when the Instance fails, so a retry creates only the Instance', async () => {
-    blueCore({ [createUrl('Work')]: created(minted.work), [createUrl('Instance')]: refused })
+    blueCore({ [createUrl('Work')]: created(minted.work), [minted.work]: ok('"w1"'), [createUrl('Instance')]: refused })
     const state = started()
     const first = await saveDescription(state, 'token')
     const after = afterSave(state, first)
     expect(first.map((result) => result.outcome.ok)).toEqual([true, false])
 
-    const calls = blueCore({ [createUrl('Instance')]: created(minted.instance) })
+    expect(after.etags[principals(after.current).work ?? '']).toBe('"w1"')
+
+    const calls = blueCore({ [createUrl('Instance')]: created(minted.instance), [minted.instance]: ok('"i1"') })
     await saveDescription(after, 'token')
-    expect(calls.map((call) => call.url)).toEqual([createUrl('Instance')])
+    expect(calls.filter((call) => call.method === 'POST').map((call) => call.url)).toEqual([createUrl('Instance')])
     expect(calls[0]?.body.instanceOf).toEqual([minted.work])
   })
 

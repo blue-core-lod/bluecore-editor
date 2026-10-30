@@ -26,7 +26,7 @@ A new record ("Start a new record") has no Blue Core URIs yet. Until it's saved,
 
 1. `POST /api/works/` with the Work and an empty `@id`. Blue Core mints a URI and returns it.
 2. `POST /api/instances/` with the Instance and an empty `@id`, its `instanceOf` now the Work's new URI. Blue Core links the two from `instanceOf`.
-3. The editor replaces the placeholders with the minted URIs. If the Instance failed, a retry creates only the Instance. Once both exist, the editor opens the record at its new URI, which reads it back with ETags. A create's reply carries no ETag.
+3. The editor replaces the placeholders with the minted URIs. If the Instance failed, a retry creates only the Instance. A create's reply carries no ETag, so the editor reads each new resource once for its version; a Work created in a save whose Instance failed can then be edited and saved again before the retry. Once both exist, the editor opens the record at its new URI, which reads it back.
 
 ## Copying a record from LC
 
