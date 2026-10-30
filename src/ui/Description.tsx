@@ -4,6 +4,7 @@ import { change, type Change } from '../doc/log'
 import { getNode, isValueObject, type Doc, type Json, type Key, type Literal, type Node, type Value } from '../doc/model'
 import { isEmpty, moveOps } from '../doc/resources'
 import { belongsOn, definitionOf, domainOf, modeledProperties } from '../schema/fields'
+import { hasContext } from '../context/lc'
 import { AddField } from './AddField'
 import { AddValue } from './AddValue'
 import { DescriptionContext, useDescription } from './context'
@@ -18,10 +19,25 @@ import { marcLinks, primerUrl, type ResourceKind } from './presentation'
  * to the document directly; the parent replays the log.
  */
 
-export function Description({ doc, hints, record }: { doc: Doc; hints: boolean; record: (change: Change) => void }) {
+export function Description({
+  doc,
+  hints,
+  record,
+  selected,
+  select,
+}: {
+  doc: Doc
+  hints: boolean
+  record: (change: Change) => void
+  selected: string | null
+  select: (uri: string) => void
+}) {
   const labels = useMemo(() => refLabels(doc), [doc])
   const view = useMemo(() => layout(doc, labels), [doc, labels])
-  const context = useMemo(() => ({ doc, labels, hints, record }), [doc, labels, hints, record])
+  const context = useMemo(
+    () => ({ doc, labels, hints, record, selected, select }),
+    [doc, labels, hints, record, selected, select],
+  )
 
   return (
     <DescriptionContext value={context}>
@@ -269,16 +285,33 @@ function LiteralField(
   )
 }
 
+/**
+ * A linked value. One the context panel can tell more about opens it there;
+ * any other opens where it links to.
+ */
 function Chip(props: ValueProps & { uri: string }) {
-  const { labels } = useDescription()
+  const { labels, selected, select } = useDescription()
   const name = refName(props.uri, labels)
   const source = sourceOf(props.uri)
   const remove = useRemove(props, name)
+  const isSelected = selected === props.uri
   return (
-    <span className="chip">
-      <a href={props.uri} target="_blank" rel="noreferrer" title={props.uri}>
-        {name}
-      </a>
+    <span className={isSelected ? 'chip selected' : 'chip'}>
+      {hasContext(props.uri) ? (
+        <button
+          type="button"
+          className="chip-name"
+          aria-pressed={isSelected}
+          title={`More about ${name}`}
+          onClick={() => select(props.uri)}
+        >
+          {name}
+        </button>
+      ) : (
+        <a href={props.uri} target="_blank" rel="noreferrer" title={props.uri}>
+          {name}
+        </a>
+      )}
       {source && <span className="source">{source}</span>}
       <RemoveButton name={name} onClick={remove} />
     </span>

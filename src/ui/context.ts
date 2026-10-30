@@ -10,6 +10,10 @@ export interface DescriptionContextValue {
   labels: Map<string, RefLabel>
   hints: boolean
   record: (change: Change) => void
+  /** The linked entity the context panel is showing, if any. */
+  selected: string | null
+  /** Show an entity in the context panel. */
+  select: (uri: string) => void
 }
 
 export const DescriptionContext = createContext<DescriptionContextValue | null>(null)

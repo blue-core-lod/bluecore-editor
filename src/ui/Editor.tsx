@@ -10,10 +10,11 @@ import { ConflictError } from '../doc/patch'
 import { changesWork, otherInstances, principals, snapshot, unsaved } from '../doc/resources'
 import { deleteDraft, readDraft, restore, writeDraft, type Draft } from '../drafts/drafts'
 import { getValidators } from '../schema/validate'
+import { ContextPanel } from './ContextPanel'
 import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
-import { titleOf } from './labels'
+import { refLabels, refName, titleOf } from './labels'
 import { primerUrl } from './presentation'
 import { replace } from './route'
 import { SaveReport } from './SaveReport'
@@ -48,6 +49,8 @@ export function Editor({ uri }: { uri: string }) {
   const [panel, setPanel] = useState<'history' | 'hints' | null>(explained ? null : 'hints')
   const [saving, setSaving] = useState(false)
   const [report, setReport] = useState<ResourceSave[] | null>(null)
+  /** The linked entity in the context panel. */
+  const [selected, setSelected] = useState<string | null>(null)
   // Bumped to read the description from Blue Core again, discarding the session.
   const [generation, setGeneration] = useState(0)
 
@@ -312,7 +315,7 @@ export function Editor({ uri }: { uri: string }) {
           </button>
         </div>
       )}
-      <main className="page">
+      <main className={selected ? 'page with-context' : 'page'}>
         {session.shapeProblems > 0 && (
           <p className="note">
             This record doesn’t quite have bibframe-json’s bounded shape ({session.shapeProblems}{' '}
@@ -354,7 +357,24 @@ export function Editor({ uri }: { uri: string }) {
             </button>
           </p>
         )}
-        <Description key={formKey} doc={session.current} hints={hints} record={record} />
+        <div className="workspace">
+          <Description
+            key={formKey}
+            doc={session.current}
+            hints={hints}
+            record={record}
+            selected={selected}
+            select={setSelected}
+          />
+          {selected && (
+            <ContextPanel
+              uri={selected}
+              name={refName(selected, refLabels(session.current))}
+              hints={hints}
+              close={() => setSelected(null)}
+            />
+          )}
+        </div>
         {asking && typeof workUri === 'string' && (
           <ScopePrompt
             change={asking}

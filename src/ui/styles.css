@@ -412,6 +412,159 @@ button.add:hover {
   margin: 0 auto;
   padding: 1.5rem;
 }
+.page.with-context {
+  max-width: 92rem;
+}
+
+/* The record, with the context panel beside it when one is open (mockups: Context). */
+.workspace {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.workspace > .description {
+  flex: 999 1 32rem;
+  min-width: 0;
+}
+.context-panel {
+  flex: 1 1 22rem;
+  max-width: 32rem;
+  min-width: 0;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid #c9cecd;
+  border-radius: 10px;
+}
+.context-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.context-header > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.context-header h2 {
+  font-size: 1.2rem;
+}
+.context-header p {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+}
+.context-disagreement {
+  margin: 0.8rem 1.1rem 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  background: var(--note-ground);
+  border: 1px solid #e6c98a;
+  color: var(--note-text);
+  font-size: 0.9rem;
+}
+.context-section {
+  padding: 0.9rem 1.1rem;
+}
+.context-section + .context-section {
+  border-top: 1px solid var(--rule);
+}
+.context-section h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+.context-section p {
+  margin: 0;
+}
+.context-id {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+.context-marc {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 0.5rem;
+}
+.context-id .context-marc {
+  margin-left: 0;
+}
+.context-list {
+  margin-top: 0.7rem;
+}
+.context-list h4 {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+.context-list ul {
+  margin: 0.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.context-list li {
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+.context-list li + li {
+  margin-top: 0.2rem;
+}
+.context-list cite {
+  font-style: normal;
+}
+.context-list button.link {
+  font-size: 0.85rem;
+}
+.context-facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 1rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+}
+.context-facts > div {
+  display: contents;
+}
+.context-facts dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.context-facts dd {
+  margin: 0;
+}
+.context-wikidata {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+.context-wikidata img {
+  flex: 0 0 auto;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+.context-wikidata > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.context-wikidata .context-id {
+  margin-top: 0.4rem;
+}
+.context-lead {
+  font-size: 0.95rem;
+}
+.context-section .context-credit {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
 .start {
   max-width: 44rem;
 }
@@ -584,6 +737,21 @@ input[readonly] {
 .chip a:hover {
   text-decoration: underline;
 }
+/* A chip the context panel can say more about. */
+button.chip-name {
+  border: none;
+  background: none;
+  color: var(--text);
+  padding: 0;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+button.chip-name:hover {
+  text-decoration: underline;
+}
+.chip.selected {
+  outline: 2px solid var(--work);
+}
 .source {
   font-size: 0.7rem;
   font-weight: 700;
@@ -665,6 +833,12 @@ button.remove:hover {
 }
 
 @media (max-width: 40rem) {
+  /* Below the record rather than beside it, so it scrolls with the page. */
+  .context-panel {
+    position: static;
+    max-height: none;
+    max-width: none;
+  }
   .app-header,
   .page {
     padding-left: 1rem;
