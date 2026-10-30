@@ -427,13 +427,19 @@ button.add:hover {
   flex: 999 1 32rem;
   min-width: 0;
 }
+/* Sized by its own width, not the window's: the context panel takes some of it. */
+.description {
+  container-type: inline-size;
+}
+
 .context-panel {
   flex: 1 1 22rem;
   max-width: 32rem;
   min-width: 0;
+  /* Below the header, which is sticky too and wraps to more lines on narrower screens. */
   position: sticky;
-  top: 1rem;
-  max-height: calc(100vh - 2rem);
+  top: calc(var(--header-height, 0px) + 1rem);
+  max-height: calc(100vh - var(--header-height, 0px) - 2rem);
   overflow-y: auto;
   background: var(--surface);
   border: 1px solid #c9cecd;
@@ -512,7 +518,7 @@ button.add:hover {
 }
 .context-list li {
   font-size: 0.95rem;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .context-list li + li {
   margin-top: 0.2rem;
@@ -732,7 +738,9 @@ input[readonly] {
 .chip a {
   color: var(--text);
   text-decoration: none;
-  overflow-wrap: anywhere;
+  /* Not "anywhere": that lets a chip shrink to one letter's width, and Safari takes it up on that. */
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 .chip a:hover {
   text-decoration: underline;
@@ -744,7 +752,8 @@ button.chip-name {
   color: var(--text);
   padding: 0;
   text-align: left;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 button.chip-name:hover {
   text-decoration: underline;
@@ -775,6 +784,8 @@ button.remove:hover {
 
 .subnode {
   flex: 1 1 100%;
+  width: 100%;
+  min-width: 0;
   border-left: 3px solid var(--rule);
   padding: 0.1rem 0 0.1rem 0.75rem;
   display: flex;
@@ -810,7 +821,7 @@ button.remove:hover {
 }
 .subfield {
   display: grid;
-  grid-template-columns: minmax(6rem, 10rem) 1fr;
+  grid-template-columns: minmax(6rem, 10rem) minmax(0, 1fr);
   gap: 0.5rem;
   align-items: start;
 }
@@ -851,5 +862,24 @@ button.remove:hover {
   }
   .badge {
     justify-self: start;
+  }
+}
+
+/* After the rules it narrows, so it wins where it applies. */
+@container (max-width: 46rem) {
+  .row {
+    grid-template-columns: minmax(6rem, 9rem) minmax(0, 1fr);
+    gap: 0.5rem 0.75rem;
+  }
+  .hints .row {
+    grid-template-columns: minmax(6rem, 9rem) minmax(0, 1fr) auto;
+  }
+  /* A nested value keeps the width for itself, with its label above it. */
+  .subfield {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+  .subfield-label {
+    padding-top: 0;
   }
 }
