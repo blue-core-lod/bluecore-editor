@@ -1,6 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
+import { createUrl } from '../src/api/endpoints'
 import { afterSave, saveDescription, type SaveState } from '../src/api/save'
+import { blankDescription, isPlaceholder, placeholderUri } from '../src/doc/blank'
 import { change, record } from '../src/doc/log'
 import { fragment, getNode, normalize, type Doc, type Json } from '../src/doc/model'
 import { isEmpty, principals, snapshot, unsaved } from '../src/doc/resources'
@@ -43,7 +45,7 @@ interface Call {
   body: Record<string, unknown>
 }
 
-/** Answer each PUT by its URL; record what was sent. */
+/** Answer each request by its URL; record what was sent. */
 function blueCore(answers: Record<string, () => Response>): Call[] {
   const calls: Call[] = []
   vi.stubGlobal(
@@ -188,5 +190,69 @@ describe('empty nodes', () => {
     const { state, key } = addToInstance(opened(), 'carrier', { '@id': 'http://id.loc.gov/vocabulary/carriers/nb' })
     expect(isEmpty(state.current, key)).toBe(false)
     expect(unsaved(state.current, state.saved)).toHaveLength(1)
+  })
+})
+
+describe('new descriptions', () => {
+  const minted = { work: 'http://localhost/works/w-new', instance: 'http://localhost/instances/i-new' }
+  const created = (uri: string) => () => new Response(JSON.stringify({ uri }), { status: 201 })
+  const refused = () => new Response(JSON.stringify({ detail: 'nope' }), { status: 500 })
+
+  /** A new description with a main title added to the Instance's title. */
+  function started(): SaveState {
+    const doc = normalize(blankDescription(placeholderUri('abc')))
+    const { instance } = principals(doc)
+    const { value, nodes } = fragment({ '@type': ['Title'], mainTitle: ['A new book'] }, { node: instance, prop: 'title' })
+    const edit = change('Added title', [{ op: 'insert', node: instance, prop: 'title', after: null, value, nodes }])
+    return { saved: {}, etags: {}, ...record({ base: doc, changes: [] }, doc, edit) }
+  }
+
+  it('opens at ?new=<id> and back, so a new description can be reloaded', () => {
+    expect(isPlaceholder(placeholderUri('abc'))).toBe(true)
+    expect(isPlaceholder(instanceUri)).toBe(false)
+    expect(getValidators().bounded(blankDescription(placeholderUri('abc')))).toBe(true)
+  })
+
+  it('creates the Work, then the Instance naming the Work by the URI Blue Core minted', async () => {
+    const calls = blueCore({ [createUrl('Work')]: created(minted.work), [createUrl('Instance')]: created(minted.instance) })
+    const state = started()
+    const results = await saveDescription(state, 'token')
+
+    expect(calls.map((call) => [call.method, call.url])).toEqual([
+      ['POST', createUrl('Work')],
+      ['POST', createUrl('Instance')],
+    ])
+    const [work, instance] = calls
+    expect(work?.body['@id']).toBe('')
+    expect(instance?.body['@id']).toBe('')
+    expect(instance?.body.instanceOf).toEqual([minted.work])
+    expect(JSON.stringify(calls.map((call) => call.body))).not.toContain('urn:bluecore-editor')
+
+    const after = afterSave(state, results)
+    const { instance: instanceKey, work: workKey } = principals(after.current)
+    expect(getNode(after.current, instanceKey).keywords['@id']).toBe(minted.instance)
+    expect(workKey && getNode(after.current, workKey).keywords['@id']).toBe(minted.work)
+    expect(unsaved(after.current, after.saved)).toEqual([])
+    expect(results.map((result) => result.uri)).toEqual([minted.work, minted.instance])
+  })
+
+  it('keeps the minted Work when the Instance fails, so a retry creates only the Instance', async () => {
+    blueCore({ [createUrl('Work')]: created(minted.work), [createUrl('Instance')]: refused })
+    const state = started()
+    const first = await saveDescription(state, 'token')
+    const after = afterSave(state, first)
+    expect(first.map((result) => result.outcome.ok)).toEqual([true, false])
+
+    const calls = blueCore({ [createUrl('Instance')]: created(minted.instance) })
+    await saveDescription(after, 'token')
+    expect(calls.map((call) => call.url)).toEqual([createUrl('Instance')])
+    expect(calls[0]?.body.instanceOf).toEqual([minted.work])
+  })
+
+  it('doesn’t create the Instance when its Work couldn’t be', async () => {
+    const calls = blueCore({ [createUrl('Work')]: refused })
+    const results = await saveDescription(started(), 'token')
+    expect(calls).toHaveLength(1)
+    expect(results[1]?.outcome).toMatchObject({ ok: false, message: expect.stringContaining('Work isn’t in Blue Core') })
   })
 })

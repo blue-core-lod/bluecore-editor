@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { loadBounded, type Loaded } from '../api/bluecore'
 import { afterSave, saveDescription, type ResourceSave, type SaveState } from '../api/save'
 import { accessToken, useAuth } from '../auth/auth'
+import { blankDescription, isPlaceholder } from '../doc/blank'
 import { record as recordChange, undo, type Change } from '../doc/log'
 import { getNode, normalize, type Doc } from '../doc/model'
 import { ConflictError } from '../doc/patch'
@@ -14,6 +15,7 @@ import { Header } from './Header'
 import { History } from './History'
 import { literalText } from './labels'
 import { primerUrl } from './presentation'
+import { replace } from './route'
 import { SaveReport } from './SaveReport'
 
 interface Session extends SaveState {
@@ -54,7 +56,11 @@ export function Editor({ uri }: { uri: string }) {
       if (live) setDraftsKept(false)
       return null
     })
-    Promise.all([loadBounded(uri, accessToken()), draft])
+    // A new description starts empty, and isn't asked of Blue Core until it's saved.
+    const loading: Promise<Loaded> = isPlaceholder(uri)
+      ? Promise.resolve({ json: blankDescription(uri), etags: { instance: null, work: null } })
+      : loadBounded(uri, accessToken())
+    Promise.all([loading, draft])
       .then(([loaded, draft]) => {
         if (!live) return
         const fresh = sessionFrom(loaded, null)
@@ -127,6 +133,13 @@ export function Editor({ uri }: { uri: string }) {
       // it back rather than keep a copy that would send stale values next time.
       // Not if an edit was made meanwhile: that edit would be lost.
       if (results.every((result) => result.outcome.ok)) {
+        // A new description now has its URI: open it there, which reads it back.
+        const created = results.find((result) => result.kind === 'Instance' && result.outcome.ok && result.outcome.created)
+        if (created) {
+          await deleteDraft(user, uri).catch(() => setDraftsKept(false))
+          replace(created.uri)
+          return
+        }
         const loaded = await loadBounded(uri, accessToken())
         const savedAt = new Date()
         setSession((session) => (session && session.log.changes.length === 0 ? sessionFrom(loaded, savedAt) : session))
@@ -187,18 +200,24 @@ export function Editor({ uri }: { uri: string }) {
         <div className="title-block">
           <h1>{titleOf(session.current, instance)}</h1>
           <p className="muted">
-            <a href={uri} target="_blank" rel="noreferrer">
-              Instance
-            </a>
-            {typeof workUri === 'string' && (
+            {isPlaceholder(uri) ? (
+              <>A new description, not in Blue Core until it’s saved</>
+            ) : (
               <>
-                {' of '}
-                <a href={workUri} target="_blank" rel="noreferrer">
-                  Work
+                <a href={uri} target="_blank" rel="noreferrer">
+                  Instance
                 </a>
+                {typeof workUri === 'string' && !isPlaceholder(workUri) && (
+                  <>
+                    {' of '}
+                    <a href={workUri} target="_blank" rel="noreferrer">
+                      Work
+                    </a>
+                  </>
+                )}{' '}
+                in Blue Core
               </>
-            )}{' '}
-            in Blue Core
+            )}
           </p>
         </div>
         <div className="controls">
@@ -241,7 +260,9 @@ export function Editor({ uri }: { uri: string }) {
           startedFrom={
             session.savedAt
               ? `Saved to Blue Core at ${session.savedAt.toLocaleTimeString()}`
-              : `Opened from Blue Core at ${session.loadedAt.toLocaleTimeString()}`
+              : isPlaceholder(uri)
+                ? `Started at ${session.loadedAt.toLocaleTimeString()}`
+                : `Opened from Blue Core at ${session.loadedAt.toLocaleTimeString()}`
           }
           undo={undoChanges}
           discardAll={() => {
@@ -343,7 +364,8 @@ function sessionFrom(loaded: Loaded, savedAt: Date | null): Session {
   return {
     log: { base: doc, changes: [] },
     current: doc,
-    saved: snapshot(doc),
+    // Blue Core holds nothing of a new description, so all of it is unsaved.
+    saved: isPlaceholder(loaded.json['@id']) ? {} : snapshot(doc),
     etags: { [instance]: loaded.etags.instance, ...(work ? { [work]: loaded.etags.work } : {}) },
     loadedAt: new Date(),
     savedAt,

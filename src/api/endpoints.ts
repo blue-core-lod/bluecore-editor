@@ -12,6 +12,11 @@ export function boundedUrl(uri: string): string {
   return `${uri}.cbd.jsonld`
 }
 
+/** Where a new resource is created, for Blue Core to mint its URI. Not a resource, so under /api/. */
+export function createUrl(kind: 'Instance' | 'Work'): string {
+  return new URL(`api/${kind === 'Work' ? 'works' : 'instances'}/`, config.bluecoreUrl).href
+}
+
 /** Where a resource's linked description is written. */
 export function resourceUrl(uri: string): string {
   return uri

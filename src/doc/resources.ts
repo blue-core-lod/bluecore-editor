@@ -52,6 +52,12 @@ export function moveOps(doc: Doc, from: Key, prop: string, values: readonly Valu
   return [...removes, ...inserts]
 }
 
+/** The document with one node's @id changed, as when Blue Core mints a URI for a new resource. */
+export function withId(doc: Doc, key: Key, uri: string): Doc {
+  const node = getNode(doc, key)
+  return { ...doc, nodes: { ...doc.nodes, [key]: { ...node, keywords: { ...node.keywords, '@id': uri } } } }
+}
+
 /** The resource a node's data is saved with: where its Work/Instance badge comes from. */
 export function resourceOf(doc: Doc, key: Key): Key {
   const { work } = principals(doc)
