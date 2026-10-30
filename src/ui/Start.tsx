@@ -80,7 +80,7 @@ export function Start() {
         )}
         <p className="start-new">
           Or{' '}
-          <button type="button" className="secondary" onClick={() => open(placeholderUri(newKey()))}>
+          <button type="button" className="create" onClick={() => open(placeholderUri(newKey()))}>
             Start a new record
           </button>
         </p>

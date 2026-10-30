@@ -11,6 +11,7 @@
   --note-ground: #fff4dc;
   --note-text: #5a3b00;
   --focus: #1f4e8c;
+  --create: #1f6b3a;
   --sans: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
   --mono: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
 
@@ -67,6 +68,11 @@ button:disabled {
 button.secondary {
   background: var(--surface);
   color: var(--text);
+}
+/* Starting something new, set apart from opening what's there. */
+button.create {
+  background: var(--create);
+  border-color: var(--create);
 }
 button.round {
   border-radius: 50%;
