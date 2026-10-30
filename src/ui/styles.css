@@ -225,6 +225,9 @@ button.link {
   border-radius: 10px;
   box-shadow: 0 8px 32px rgb(23 32 43 / 0.2);
 }
+.scope-prompt:focus {
+  outline: none;
+}
 .scope-prompt h2 {
   font-size: 1.15rem;
   margin: 0 0 0.5rem;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 import type { Change } from '../doc/log'
 
@@ -25,6 +25,11 @@ export function ScopePrompt({
   changeAll: () => void
   cancel: () => void
 }) {
+  // Focus goes to the dialog, not to a choice: the Return that committed the
+  // edit is still arriving, and would otherwise choose "all" unseen.
+  const dialog = useRef<HTMLDivElement>(null)
+  useEffect(() => dialog.current?.focus(), [])
+
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') cancel()
@@ -35,7 +40,14 @@ export function ScopePrompt({
 
   return (
     <div className="scrim">
-      <div className="scope-prompt" role="dialog" aria-modal="true" aria-labelledby="scope-title">
+      <div
+        ref={dialog}
+        className="scope-prompt"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="scope-title"
+        tabIndex={-1}
+      >
         <h2 id="scope-title">
           {others === 1 ? '1 other Instance shares this Work' : `${others} other Instances share this Work`}
         </h2>
@@ -43,7 +55,7 @@ export function ScopePrompt({
         <p className="scope-change">
           <span className="muted">Your change</span> {change.label}
         </p>
-        <button type="button" className="scope-choice" onClick={changeAll} autoFocus>
+        <button type="button" className="scope-choice" onClick={changeAll}>
           <strong>Change the Work for all {others + 1} Instances</strong>
           <span>Right when the change is true of the work in every edition.</span>
         </button>
