@@ -90,7 +90,8 @@ export async function fetchLcAuthority(uri: string, signal?: AbortSignal): Promi
 export function fromSuggest(hit: SuggestHit, directory: string, id: string): LcAuthority {
   const more = hit.more ?? {}
   const list = (key: string): string[] =>
-    Array.isArray(more[key]) ? (more[key] as unknown[]).filter((v): v is string => typeof v === 'string') : []
+    // suggest2 repeats some values ("Authors" once per 374 field).
+    Array.isArray(more[key]) ? [...new Set((more[key] as unknown[]).filter((v): v is string => typeof v === 'string'))] : []
   return {
     uri: hit.uri ?? `http://id.loc.gov/authorities/${directory}/${id}`,
     label: hit.aLabel || hit.suggestLabel || id,

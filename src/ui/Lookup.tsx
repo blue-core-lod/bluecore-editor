@@ -1,5 +1,8 @@
 import { useEffect, useId, useState, type KeyboardEvent } from 'react'
 
+import { hasContext, lcAuthorityId } from '../context/lc'
+import { useSource } from '../context/useSource'
+import { wikidataDescriptions } from '../context/wikidata'
 import { searchSource, type Hit } from '../lookup/qa'
 import { isLocal, type Source } from '../lookup/sources'
 import { useDescription } from './context'
@@ -18,6 +21,9 @@ function hitsOf(result: SourceState | undefined): Hit[] {
 
 /** Wait this long after the last keystroke before searching a remote source. */
 const pause = 300
+
+/** Wait this long on a result before showing it in the context panel, so moving through the list doesn't ask the sources about each. */
+const dwell = 350
 
 /**
  * Finding the entity a link points to: a search across the field's sources,
@@ -40,7 +46,7 @@ export function Lookup({
   onPick: (hit: Hit) => void
   onCancel: () => void
 }) {
-  const { hints } = useDescription()
+  const { hints, select, preview } = useDescription()
   const listId = useId()
   const [query, setQuery] = useState('')
   const [pastedLabel, setPastedLabel] = useState('')
@@ -88,6 +94,32 @@ export function Lookup({
     : []
   const current = options[Math.min(active, options.length - 1)]
 
+  // Wikidata's short description for each LC result, in one query.
+  const lccns = options.flatMap((option) => lcAuthorityId(option.uri)?.id ?? []).join(' ')
+  const described = useSource('wikidata descriptions', lccns, wikidataDescriptions)
+  const descriptions = described?.state === 'done' ? described.value : {}
+  const descriptionOf = (uri: string) => {
+    const lccn = lcAuthorityId(uri)?.id
+    return lccn ? descriptions[lccn] : undefined
+  }
+
+  // The context panel follows the highlighted result, once it's rested there.
+  const previewUri = current && hasContext(current.uri) ? current.uri : null
+  const previewLabel = current?.label ?? ''
+  useEffect(() => {
+    if (!previewUri) return
+    const timer = setTimeout(() => preview({ uri: previewUri, label: previewLabel }), dwell)
+    return () => clearTimeout(timer)
+  }, [previewUri, previewLabel, preview])
+  // Closing the lookup gives the panel back to what it showed before.
+  useEffect(() => () => preview(null), [preview])
+
+  /** A chosen entity the panel can say more about stays there. */
+  const pick = (hit: Hit) => {
+    if (hasContext(hit.uri)) select(hit.uri)
+    onPick(hit)
+  }
+
   const onKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') onCancel()
     if (event.key === 'ArrowDown') {
@@ -100,7 +132,7 @@ export function Lookup({
     }
     if (event.key === 'Enter') {
       if (pasted) onPick({ uri: text, label: pastedLabel.trim() })
-      else if (current) onPick(current)
+      else if (current) pick(current)
     }
   }
 
@@ -188,12 +220,15 @@ export function Lookup({
                 role="option"
                 aria-selected={option === current}
                 onMouseDown={(event) => event.preventDefault()}
-                onClick={() => onPick(option)}
+                onClick={() => pick(option)}
                 onMouseEnter={() => setActive(options.indexOf(option))}
               >
                 <span>
                   {option.label}
                   {hints && option.code && <span className="code"> {option.code}</span>}
+                  {descriptionOf(option.uri) && (
+                    <span className="lookup-description">{descriptionOf(option.uri)}</span>
+                  )}
                 </span>
                 <span className="source">{option.source}</span>
               </li>

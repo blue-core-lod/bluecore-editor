@@ -12,7 +12,20 @@ import { fetchWikipedia } from '../context/wikipedia'
  * context panel). Each source appears as it answers. It reads, and never
  * changes the record.
  */
-export function ContextPanel({ uri, name, hints, close }: { uri: string; name: string; hints: boolean; close: () => void }) {
+export function ContextPanel({
+  uri,
+  name,
+  previewing = false,
+  hints,
+  close,
+}: {
+  uri: string
+  name: string
+  /** A lookup result, not yet in the record. */
+  previewing?: boolean
+  hints: boolean
+  close: () => void
+}) {
   const lccn = lcAuthorityId(uri)?.id
   const lc = useSource('lc', uri, fetchLcAuthority) ?? loading
   const wikidata = useSource('wikidata', lccn, fetchWikidata)
@@ -26,6 +39,7 @@ export function ContextPanel({ uri, name, hints, close }: { uri: string; name: s
     <aside className="context-panel" aria-label="Context">
       <header className="context-header">
         <div>
+          {previewing && <p className="context-previewing">Search result, not in the record yet</p>}
           <h2>{authority?.label ?? name}</h2>
           {wikidataFacts?.description && <p className="muted">{wikidataFacts.description}</p>}
         </div>

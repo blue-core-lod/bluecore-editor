@@ -11,6 +11,7 @@ import { changesWork, otherInstances, principals, snapshot, unsaved } from '../d
 import { deleteDraft, readDraft, restore, writeDraft, type Draft } from '../drafts/drafts'
 import { getValidators } from '../schema/validate'
 import { ContextPanel } from './ContextPanel'
+import type { Previewed } from './context'
 import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
@@ -49,8 +50,9 @@ export function Editor({ uri }: { uri: string }) {
   const [panel, setPanel] = useState<'history' | 'hints' | null>(explained ? null : 'hints')
   const [saving, setSaving] = useState(false)
   const [report, setReport] = useState<ResourceSave[] | null>(null)
-  /** The linked entity in the context panel. */
+  /** The linked entity in the context panel, and the lookup result shown there instead while it's highlighted. */
   const [selected, setSelected] = useState<string | null>(null)
+  const [previewing, setPreviewing] = useState<Previewed | null>(null)
   // Bumped to read the description from Blue Core again, discarding the session.
   const [generation, setGeneration] = useState(0)
 
@@ -315,7 +317,7 @@ export function Editor({ uri }: { uri: string }) {
           </button>
         </div>
       )}
-      <main className={selected ? 'page with-context' : 'page'}>
+      <main className={selected || previewing ? 'page with-context' : 'page'}>
         {session.shapeProblems > 0 && (
           <p className="note">
             This record doesn’t quite have bibframe-json’s bounded shape ({session.shapeProblems}{' '}
@@ -365,14 +367,30 @@ export function Editor({ uri }: { uri: string }) {
             record={record}
             selected={selected}
             select={setSelected}
+            preview={setPreviewing}
           />
-          {selected && (
+          {previewing ? (
             <ContextPanel
-              uri={selected}
-              name={refName(selected, refLabels(session.current))}
+              key="previewing"
+              uri={previewing.uri}
+              name={previewing.label}
+              previewing
               hints={hints}
-              close={() => setSelected(null)}
+              close={() => {
+                setPreviewing(null)
+                setSelected(null)
+              }}
             />
+          ) : (
+            selected && (
+              <ContextPanel
+                key="selected"
+                uri={selected}
+                name={refName(selected, refLabels(session.current))}
+                hints={hints}
+                close={() => setSelected(null)}
+              />
+            )
           )}
         </div>
         {asking && typeof workUri === 'string' && (

@@ -18,6 +18,8 @@ export interface WikidataFacts {
   occupations: string[]
   /** Pen names (P742). */
   pseudonyms: string[]
+  /** How many LC records the item names (P244): more than one where LC keeps a pseudonym apart. */
+  lcRecords: number
   /** A Commons thumbnail. */
   image?: string
   /** The English Wikipedia article's title. */
@@ -27,21 +29,54 @@ export interface WikidataFacts {
 const sparqlUrl = 'https://query.wikidata.org/sparql'
 const apiUrl = 'https://www.wikidata.org/w/api.php'
 
-/** The Wikidata item that records this LCCN, or null if none does. */
-export async function wikidataItemFor(lccn: string, signal?: AbortSignal): Promise<string | null> {
-  // The value is an LCCN, checked so nothing else reaches the query.
-  if (!/^[a-z]+\d+$/.test(lccn)) return null
-  const query = `SELECT ?item WHERE { ?item wdt:P244 "${lccn}" } LIMIT 2`
+/** LCCNs are checked before they go into a query, so nothing else reaches it. */
+function isLccn(text: string): boolean {
+  return /^[a-z]+\d+$/.test(text)
+}
+
+type Bindings = Record<string, { value?: string } | undefined>[]
+
+async function sparql(query: string, signal?: AbortSignal): Promise<Bindings> {
   const response = await fetch(`${sparqlUrl}?${new URLSearchParams({ query, format: 'json' })}`, {
     signal,
     headers: { Accept: 'application/sparql-results+json' },
   })
   if (!response.ok) throw new Error(`Wikidata returned ${response.status}`)
-  const json = (await response.json()) as { results?: { bindings?: { item?: { value?: string } }[] } }
-  const items = (json.results?.bindings ?? []).flatMap((b) => (b.item?.value ? [b.item.value] : []))
+  const json = (await response.json()) as { results?: { bindings?: Bindings } }
+  return json.results?.bindings ?? []
+}
+
+/** The Wikidata item that records this LCCN, or null if none does. */
+export async function wikidataItemFor(lccn: string, signal?: AbortSignal): Promise<string | null> {
+  if (!isLccn(lccn)) return null
+  const bindings = await sparql(`SELECT ?item WHERE { ?item wdt:P244 "${lccn}" } LIMIT 2`, signal)
+  const items = bindings.flatMap((b) => (b.item?.value ? [b.item.value] : []))
   // Two items claiming one LCCN is a Wikidata problem to fix, not a match to guess at.
   if (items.length !== 1) return null
   return (items[0] as string).split('/').pop() ?? null
+}
+
+/**
+ * Wikidata's short descriptions ("American novelist (born 1937)") for a set
+ * of LCCNs, in one query: enough to tell lookup results apart at a glance.
+ * The key is the LCCNs joined by spaces, so a result list is fetched once.
+ */
+export async function wikidataDescriptions(lccns: string, signal?: AbortSignal): Promise<Record<string, string>> {
+  const values = lccns.split(' ').filter(isLccn)
+  if (values.length === 0) return {}
+  const bindings = await sparql(
+    `SELECT ?lccn ?description WHERE { VALUES ?lccn { ${values.map((v) => `"${v}"`).join(' ')} } ` +
+      `?item wdt:P244 ?lccn . ?item schema:description ?description . FILTER(LANG(?description) = "en") }`,
+    signal,
+  )
+  const descriptions: Record<string, string> = {}
+  for (const binding of bindings) {
+    const lccn = binding.lccn?.value
+    const description = binding.description?.value
+    // Two items for one LCCN can't both describe it; neither is shown.
+    if (lccn && description) descriptions[lccn] = lccn in descriptions ? '' : description
+  }
+  return Object.fromEntries(Object.entries(descriptions).filter(([, description]) => description))
 }
 
 export async function fetchWikidata(lccn: string, signal?: AbortSignal): Promise<WikidataFacts | null> {
@@ -112,6 +147,7 @@ export function fromEntity(
       died: date(values('P570')[0]),
       occupations: [],
       pseudonyms: strings('P742'),
+      lcRecords: strings('P244').length,
       image: image && `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(image)}?width=160`,
       wikipedia: entity.sitelinks?.enwiki?.title,
     },

@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { disagreements } from '../src/context/disagreements'
 import { citation, fetchLcAuthority, marcKey, fromSuggest, hasContext, lcAuthorityId, type LcAuthority } from '../src/context/lc'
-import { date, fromEntity, wikidataItemFor, type Entity, type WikidataFacts } from '../src/context/wikidata'
+import { date, fromEntity, wikidataDescriptions, wikidataItemFor, type Entity, type WikidataFacts } from '../src/context/wikidata'
 
 // Trimmed from id.loc.gov's suggest2 and Wikidata's wbgetentities, 2026-10-30.
 const twainHit = {
@@ -14,7 +14,7 @@ const twainHit = {
     rdftypes: ['PersonalName', 'SimpleType', 'Name', 'Authority'],
     notes: ['[Machine-derived non-Latin script reference project.]'],
     variantLabels: ['Tvėn, Mark, 1835-1910', 'Twain, Marek, 1835-1910', 'Твен, Марк, 1835-1910'],
-    occupations: ['Authors', 'Lecturers', 'Humorists'],
+    occupations: ['Authors', 'Authors', 'Lecturers', 'Humorists'],
     activityfields: ['Literature', 'Humor'],
     sources: [
       'found : DAB, 1930 (Clemens, Samuel Langhorne, 1835-1910; better known under pseud. Mark Twain)',
@@ -42,6 +42,7 @@ const twainEntity: Entity = {
       { mainsnak: { datavalue: { value: { id: 'Q6625963' } } }, rank: 'deprecated' },
     ],
     P18: [{ mainsnak: { datavalue: { value: 'MarkTwain.LOC.jpg' } }, rank: 'normal' }],
+    P244: [{ mainsnak: { datavalue: { value: 'n79021164' } }, rank: 'normal' }],
     P742: [
       { mainsnak: { datavalue: { value: 'Mark Twain' } }, rank: 'normal' },
       { mainsnak: { datavalue: { value: 'Louis de Conte' } }, rank: 'normal' },
@@ -155,6 +156,26 @@ describe('Wikidata', () => {
     expect(await wikidataItemFor('n79021164')).toBeNull()
   })
 
+  it('describes a page of lookup results in one query, leaving out an LCCN two items claim', async () => {
+    const row = (lccn: string, description: string) => ({ lccn: { value: lccn }, description: { value: description } })
+    const fetch = vi.fn<(url: string) => Promise<Response>>(async () =>
+      Response.json({
+        results: {
+          bindings: [
+            row('n79099184', 'American novelist (born 1937)'),
+            row('n2', 'one item'),
+            row('n2', 'another item'),
+          ],
+        },
+      }),
+    )
+    vi.stubGlobal('fetch', fetch)
+    expect(await wikidataDescriptions('n79099184 n2 not-an-lccn')).toEqual({ n79099184: 'American novelist (born 1937)' })
+    expect(fetch).toHaveBeenCalledTimes(1)
+    const query = new URL(fetch.mock.calls[0]?.[0] as string).searchParams.get('query')
+    expect(query).toContain('VALUES ?lccn { "n79099184" "n2" }')
+  })
+
   it('sends nothing that isn’t an LCCN into the query', async () => {
     const fetch = vi.fn()
     vi.stubGlobal('fetch', fetch)
@@ -165,14 +186,22 @@ describe('Wikidata', () => {
 
 describe('disagreements', () => {
   it('finds none where the sources agree, matching pen names to headings in any order', () => {
-    const facts = { ...twainFacts(), pseudonyms: ['Mark Twain', 'Louis de Conte'] }
+    const facts = { ...twainFacts(), pseudonyms: ['Mark Twain', 'Sieur Louis de Conte'] }
     expect(disagreements(twain(), facts)).toEqual([])
   })
 
-  it('notes a pen name the LC record doesn’t have', () => {
+  it('notes pen names the LC record doesn’t have, in one note', () => {
     expect(disagreements(twain(), twainFacts())).toEqual([
       'Wikidata lists a pen name, Thomas Jefferson Snodgrass, that the LC record doesn’t include as a variant.',
     ])
+    const more = { ...twainFacts(), pseudonyms: ['Thomas Jefferson Snodgrass', 'J. W. Bothwell'] }
+    expect(disagreements(twain(), more)).toEqual([
+      'Wikidata lists pen names the LC record doesn’t include as variants: Thomas Jefferson Snodgrass; J. W. Bothwell.',
+    ])
+  })
+
+  it('leaves pen names alone where Wikidata holds several LC identities in one item', () => {
+    expect(disagreements(twain(), { ...twainFacts(), lcRecords: 2 })).toEqual([])
   })
 
   it('notes dates that differ, but not one that is only less precise', () => {

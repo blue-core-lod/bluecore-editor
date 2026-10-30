@@ -368,6 +368,11 @@ button.add:hover {
 .lookup-results .source {
   white-space: nowrap;
 }
+.lookup-description {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
 .lookup-results .code {
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -458,6 +463,12 @@ button.add:hover {
 }
 .context-header h2 {
   font-size: 1.2rem;
+}
+.context-header .context-previewing {
+  margin: 0 0 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
 }
 .context-header p {
   margin: 0.15rem 0 0;

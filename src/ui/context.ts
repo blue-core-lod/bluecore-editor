@@ -14,6 +14,14 @@ export interface DescriptionContextValue {
   selected: string | null
   /** Show an entity in the context panel. */
   select: (uri: string) => void
+  /** Show a lookup result in the context panel while it's highlighted, or stop. */
+  preview: (entity: Previewed | null) => void
+}
+
+/** A lookup result shown in the context panel before it's chosen. */
+export interface Previewed {
+  uri: string
+  label: string
 }
 
 export const DescriptionContext = createContext<DescriptionContextValue | null>(null)

@@ -7,7 +7,7 @@ import { belongsOn, definitionOf, domainOf, modeledProperties } from '../schema/
 import { hasContext } from '../context/lc'
 import { AddField } from './AddField'
 import { AddValue } from './AddValue'
-import { DescriptionContext, useDescription } from './context'
+import { DescriptionContext, useDescription, type Previewed } from './context'
 import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
 import { layout, type Misplaced, type Missing, type Row } from './layout'
@@ -25,18 +25,20 @@ export function Description({
   record,
   selected,
   select,
+  preview,
 }: {
   doc: Doc
   hints: boolean
   record: (change: Change) => void
   selected: string | null
   select: (uri: string) => void
+  preview: (entity: Previewed | null) => void
 }) {
   const labels = useMemo(() => refLabels(doc), [doc])
   const view = useMemo(() => layout(doc, labels), [doc, labels])
   const context = useMemo(
-    () => ({ doc, labels, hints, record, selected, select }),
-    [doc, labels, hints, record, selected, select],
+    () => ({ doc, labels, hints, record, selected, select, preview }),
+    [doc, labels, hints, record, selected, select, preview],
   )
 
   return (
