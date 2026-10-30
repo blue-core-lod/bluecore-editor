@@ -380,6 +380,10 @@ button.add:hover {
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--rule);
 }
+/* What follows a list draws its own rule, so the last item's would double it. */
+.results li:last-child {
+  border-bottom: none;
+}
 .drafts {
   margin-top: 1.75rem;
 }
