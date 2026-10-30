@@ -1,7 +1,7 @@
 import { isPlaceholder, mentionsPlaceholder, renamed } from '../doc/blank'
-import type { Log } from '../doc/log'
+import { record, type Log } from '../doc/log'
 import { getNode, type Doc, type JsonObject, type Key } from '../doc/model'
-import { principals, unsaved, withId, type Saved } from '../doc/resources'
+import { linkedResource, principals, replaceWork, unsaved, withId, type Saved } from '../doc/resources'
 import { getValidators } from '../schema/validate'
 import { createUrl, resourceUrl } from './endpoints'
 
@@ -173,4 +173,21 @@ export function afterSave<S extends SaveState>(state: S, results: readonly Resou
   }
   if (unsaved(current, saved).length === 0) log = { base: current, changes: [] }
   return { ...state, log, current, saved, etags }
+}
+
+/**
+ * The state after the record takes a Work Blue Core already has in place of
+ * its own (see replaceWork). The Work is recorded as saved at the version it
+ * was read at, so a save writes only the Instance, and a later edit to the
+ * Work is a guarded write like any other.
+ */
+export function withBluecoreWork<S extends SaveState>(state: S, work: JsonObject, etag: string | null, label: string): S {
+  const { change, key } = replaceWork(state.current, work, label)
+  const next = record(state.log, state.current, change)
+  return {
+    ...state,
+    ...next,
+    saved: { ...state.saved, [key]: linkedResource(next.current, key) },
+    etags: { ...state.etags, [key]: etag },
+  }
 }

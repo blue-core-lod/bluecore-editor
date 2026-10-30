@@ -1,5 +1,5 @@
-import { denormalize, getNode, type Doc, type Json, type JsonObject, type Key, type Value } from './model'
-import type { Change } from './log'
+import { denormalize, fragment, getNode, type Doc, type Json, type JsonObject, type Key, type Value } from './model'
+import { change, type Change } from './log'
 import { sameJson, subtree, without, type Op } from './patch'
 
 /**
@@ -27,6 +27,29 @@ export function principals(doc: Doc): { instance: Key; work: Key | null } {
   const root = getNode(doc, doc.root)
   const work = (root.props.instanceOf ?? []).find((value) => 'node' in value && getNode(doc, value.node).keywords['@id'])
   return { instance: doc.root, work: work && 'node' in work ? work.node : null }
+}
+
+/**
+ * Put a Work Blue Core already has in place of the record's own, as when a
+ * new record turns out to be another edition of a work Blue Core holds. One
+ * change, so it is undone like any other: the record's Work, with everything
+ * entered on it, is removed, and Blue Core's linked description of the Work
+ * takes its place under instanceOf. The key of the Work's node is returned,
+ * so the caller can record it as saved at the version it was read at.
+ */
+export function replaceWork(doc: Doc, work: JsonObject, label: string): { change: Change; key: Key } {
+  const { work: current } = principals(doc)
+  const values = getNode(doc, doc.root).props.instanceOf ?? []
+  const index = values.findIndex((value) => 'node' in value && value.node === current)
+  const old = values[index]
+  if (!old) throw new Error('the record has no Work to replace')
+  const { value, nodes } = fragment(without(work, '@context'), { node: doc.root, prop: 'instanceOf' })
+  if (!('node' in value)) throw new Error('the Work is not a node')
+  const ops: Op[] = [
+    { op: 'remove', node: doc.root, prop: 'instanceOf', value: old.key },
+    { op: 'insert', node: doc.root, prop: 'instanceOf', after: values[index - 1]?.key ?? null, value, nodes },
+  ]
+  return { change: change(label, ops), key: value.node }
 }
 
 /**

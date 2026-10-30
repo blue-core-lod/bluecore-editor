@@ -20,6 +20,7 @@ export function ContextPanel({
   name,
   previewing = false,
   record,
+  adoptWork,
   hints,
   close,
 }: {
@@ -29,6 +30,8 @@ export function ContextPanel({
   previewing?: boolean
   /** The record being edited: its title, and its Work's URI. */
   record: { title: string; work?: string }
+  /** Make the record an Instance of a Work Blue Core has; only offered while the record's own Work is new. */
+  adoptWork?: (uri: string, title: string) => void
   hints: boolean
   close: () => void
 }) {
@@ -57,7 +60,7 @@ export function ContextPanel({
         </button>
       </header>
 
-      {usageFacts && matches.length > 0 && <WorkSuggestion usage={usageFacts} matches={matches} />}
+      {usageFacts && matches.length > 0 && <WorkSuggestion usage={usageFacts} matches={matches} adoptWork={adoptWork} />}
 
       {conflicts.map((conflict) => (
         <p key={conflict} className="context-disagreement">
@@ -254,10 +257,18 @@ function Facts({ rows }: { rows: [string, string | undefined][] }) {
 
 /**
  * A Work already in Blue Core with this record's title and this contributor:
- * likely the work being cataloged (design.md, Suggestions). Shown for the
- * cataloger to look at; attaching the record to it is still to come.
+ * likely the work being cataloged (design.md, Suggestions). While the
+ * record's own Work is new, the cataloger can use that Work in its place.
  */
-function WorkSuggestion({ usage, matches }: { usage: Usage; matches: Usage['recentWorks'] }) {
+function WorkSuggestion({
+  usage,
+  matches,
+  adoptWork,
+}: {
+  usage: Usage
+  matches: Usage['recentWorks']
+  adoptWork?: (uri: string, title: string) => void
+}) {
   const [first] = matches
   if (!first) return null
   return (
@@ -275,6 +286,19 @@ function WorkSuggestion({ usage, matches }: { usage: Usage; matches: Usage['rece
           `, with ${first.instances === 1 ? '1 Instance' : `${first.instances} Instances`} already`}
         . It may be the work you’re cataloging.
       </p>
+      {adoptWork && (
+        <>
+          <p className="context-suggestion-actions">
+            <button type="button" onClick={() => adoptWork(first.uri, first.title)}>
+              Use this Work
+            </button>
+          </p>
+          <p className="muted">
+            Your record becomes another Instance of it. What you’ve entered on your record’s Work is replaced by Blue
+            Core’s, and you can undo it.
+          </p>
+        </>
+      )}
       <p className="context-credit">From Blue Core usage</p>
     </div>
   )

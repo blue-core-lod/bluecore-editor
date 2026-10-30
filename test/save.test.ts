@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { createUrl } from '../src/api/endpoints'
-import { afterSave, saveDescription, type SaveState } from '../src/api/save'
+import { afterSave, saveDescription, withBluecoreWork, type SaveState } from '../src/api/save'
 import { blankDescription, isPlaceholder, placeholderUri } from '../src/doc/blank'
-import { change, record } from '../src/doc/log'
+import { change, record, undo } from '../src/doc/log'
 import { fragment, getNode, normalize, type Doc, type Json } from '../src/doc/model'
-import { isEmpty, principals, snapshot, unsaved } from '../src/doc/resources'
+import { isEmpty, otherInstances, principals, snapshot, unsaved } from '../src/doc/resources'
 import { getValidators } from '../src/schema/validate'
 import { example } from './fixtures'
 
@@ -266,4 +266,53 @@ describe('new descriptions', () => {
     expect(calls).toHaveLength(1)
     expect(results[1]?.outcome).toMatchObject({ ok: false, message: expect.stringContaining('Work isn’t in Blue Core') })
   })
+
+  describe('using a Work Blue Core already has', () => {
+    const existing = 'http://localhost/works/w-existing'
+    const blueCoresWork = {
+      '@context': 'https://bibframe-json.org/v0.1/context/bibframe.jsonld',
+      '@id': existing,
+      '@type': ['Work', 'Text'],
+      title: [{ '@type': ['Title'], mainTitle: ['A new book'] }],
+      hasInstance: ['http://localhost/instances/i-other'],
+    }
+    const adopted = () => withBluecoreWork(started(), blueCoresWork, '"w-existing"', 'Used Blue Core’s Work')
+
+    it('creates only the Instance, as an Instance of that Work', async () => {
+      const calls = blueCore({ [createUrl('Instance')]: created(minted.instance), [minted.instance]: ok('"i1"') })
+      await saveDescription(adopted(), 'token')
+      expect(calls.map((call) => [call.method, call.url])).toEqual([
+        ['POST', createUrl('Instance')],
+        ['GET', minted.instance],
+      ])
+      expect(calls[0]?.body.instanceOf).toEqual([existing])
+    })
+
+    it('writes the Work against the version read, once it’s edited', async () => {
+      const calls = blueCore({
+        [existing]: ok('"w2"'),
+        [createUrl('Instance')]: created(minted.instance),
+        [minted.instance]: ok('"i1"'),
+      })
+      await saveDescription(retitle(adopted(), 'work', 'Another title'), 'token')
+      expect(calls[0]).toMatchObject({ method: 'PUT', url: existing })
+      expect(calls[0]?.headers['If-Match']).toBe('"w-existing"')
+    })
+
+    it('is one change, so undoing it gives the record its own Work back', () => {
+      const state = adopted()
+      expect(principalUri(state.current)).toBe(existing)
+      expect(otherInstances(state.current)).toEqual(['http://localhost/instances/i-other'])
+      const last = state.log.changes.at(-1)
+      if (!last) throw new Error('no change recorded')
+      const result = undo(state.log, [last.id])
+      if (!result.ok) throw new Error('undo failed')
+      expect(isPlaceholder(principalUri(result.current))).toBe(true)
+    })
+  })
 })
+
+function principalUri(doc: Doc): unknown {
+  const { work } = principals(doc)
+  return work && getNode(doc, work).keywords['@id']
+}

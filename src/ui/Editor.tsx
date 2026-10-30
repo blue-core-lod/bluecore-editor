@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { loadBounded, type Loaded } from '../api/bluecore'
-import { afterSave, saveDescription, type ResourceSave, type SaveState } from '../api/save'
+import { loadBounded, loadWork, type Loaded } from '../api/bluecore'
+import { afterSave, saveDescription, withBluecoreWork, type ResourceSave, type SaveState } from '../api/save'
 import { accessToken, useAuth } from '../auth/auth'
 import { blankDescription, isPlaceholder } from '../doc/blank'
 import { record as recordChange, undo, type Change } from '../doc/log'
@@ -133,6 +133,31 @@ export function Editor({ uri }: { uri: string }) {
     [session, sharedAgreed, apply],
   )
 
+  /**
+   * Make the record an Instance of a Work Blue Core already has. Its Work is
+   * recorded as saved at the version just read, so saving writes only the new
+   * Instance, and an edit to the Work later is a guarded write like any other.
+   */
+  const adoptWork = useCallback(async (uri: string, title: string) => {
+    let loaded: Awaited<ReturnType<typeof loadWork>>
+    try {
+      loaded = await loadWork(uri, accessToken())
+    } catch (error) {
+      setProblem(`Couldn’t read that Work from Blue Core: ${error instanceof Error ? error.message : String(error)}.`)
+      return
+    }
+    setSession((session) => {
+      if (!session) return session
+      try {
+        return withBluecoreWork(session, loaded.json, loaded.etag, `Used Blue Core’s Work: ${title}`)
+      } catch (error) {
+        if (!(error instanceof ConflictError)) throw error
+        queueMicrotask(() => setProblem(`That didn’t apply: ${error.message}.`))
+        return session
+      }
+    })
+  }, [])
+
   const undoChanges = (ids: string[]): Change[] | null => {
     if (!session) return null
     const result = undo(session.log, ids)
@@ -224,7 +249,15 @@ export function Editor({ uri }: { uri: string }) {
         <div className="title-block">
           <h1>{titleOf(session.current)}</h1>
           <p className="muted">
-            {isPlaceholder(uri) ? (
+            {isPlaceholder(uri) && typeof workUri === 'string' && !isPlaceholder(workUri) ? (
+              <>
+                A new Instance of a{' '}
+                <a href={workUri} target="_blank" rel="noreferrer">
+                  Work
+                </a>{' '}
+                in Blue Core. The Instance isn’t saved yet.
+              </>
+            ) : isPlaceholder(uri) ? (
               <>A new record, not in Blue Core until it’s saved</>
             ) : (
               <>
@@ -376,6 +409,7 @@ export function Editor({ uri }: { uri: string }) {
               name={previewing.label}
               previewing
               record={{ title: titleOf(session.current), work: typeof workUri === 'string' ? workUri : undefined }}
+              adoptWork={typeof workUri === 'string' && isPlaceholder(workUri) ? adoptWork : undefined}
               hints={hints}
               close={() => {
                 setPreviewing(null)
@@ -389,6 +423,7 @@ export function Editor({ uri }: { uri: string }) {
                 uri={selected}
                 name={refName(selected, refLabels(session.current))}
                 record={{ title: titleOf(session.current), work: typeof workUri === 'string' ? workUri : undefined }}
+              adoptWork={typeof workUri === 'string' && isPlaceholder(workUri) ? adoptWork : undefined}
                 hints={hints}
                 close={() => setSelected(null)}
               />

@@ -37,6 +37,21 @@ export async function loadBounded(uri: string, token?: string): Promise<Loaded> 
   }
 }
 
+/** A Work's linked description as Blue Core holds it, with its version. */
+export async function loadWork(uri: string, token?: string): Promise<{ json: JsonObject; etag: string | null }> {
+  if (!isBluecore(uri)) throw new ApiError(`${uri} is not a Blue Core Work`, 0)
+  const response = await request(uri, token)
+  const json: unknown = await response.json()
+  if (typeof json !== 'object' || json === null || Array.isArray(json)) {
+    throw new ApiError(`${uri} did not return a JSON-LD document`, response.status)
+  }
+  const document = json as JsonObject
+  if (document['@context'] !== contextUrl || document['@id'] !== uri) {
+    throw new ApiError(`${uri} is not a bibframe-json v0.1 Work`, response.status)
+  }
+  return { json: document, etag: response.headers.get('ETag') }
+}
+
 export interface SearchHit {
   uri: string
   title: string
