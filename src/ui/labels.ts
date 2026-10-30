@@ -1,6 +1,6 @@
 import vocabulary from '../schema/bibframe-json/vocabulary.json'
 import { config } from '../config'
-import { isValueObject, type Doc, type Literal, type Node } from '../doc/model'
+import { getNode, isValueObject, type Doc, type Literal, type Node } from '../doc/model'
 
 /**
  * Display text: what to call a property or class, and how to name a linked
@@ -111,4 +111,15 @@ export function sourceOf(uri: string): string | undefined {
 
 export function isUri(text: string): boolean {
   return /^https?:\/\/\S+$/.test(text)
+}
+
+/** "Main title : subtitle", from the Instance's first title. */
+export function titleOf(doc: Doc): string {
+  const title = getNode(doc, doc.root).props.title?.[0]
+  if (!title || !('node' in title)) return 'Untitled'
+  const part = (prop: string) => {
+    const value = getNode(doc, title.node).props[prop]?.[0]
+    return value && 'literal' in value ? literalText(value.literal) : undefined
+  }
+  return [part('mainTitle'), part('subtitle')].filter(Boolean).join(' : ') || 'Untitled'
 }

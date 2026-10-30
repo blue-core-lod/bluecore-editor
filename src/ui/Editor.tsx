@@ -5,7 +5,7 @@ import { afterSave, saveDescription, type ResourceSave, type SaveState } from '.
 import { accessToken, useAuth } from '../auth/auth'
 import { blankDescription, isPlaceholder } from '../doc/blank'
 import { record as recordChange, undo, type Change } from '../doc/log'
-import { getNode, normalize, type Doc } from '../doc/model'
+import { getNode, normalize } from '../doc/model'
 import { ConflictError } from '../doc/patch'
 import { principals, snapshot, unsaved } from '../doc/resources'
 import { deleteDraft, readDraft, restore, writeDraft, type Draft } from '../drafts/drafts'
@@ -13,7 +13,7 @@ import { getValidators } from '../schema/validate'
 import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
-import { literalText } from './labels'
+import { titleOf } from './labels'
 import { primerUrl } from './presentation'
 import { replace } from './route'
 import { SaveReport } from './SaveReport'
@@ -84,7 +84,9 @@ export function Editor({ uri }: { uri: string }) {
   // Keep unsaved work in the browser as it happens, and let it go once saved.
   useEffect(() => {
     if (!session) return
-    const write = changes > 0 || pending > 0 ? writeDraft(user, uri, session) : deleteDraft(user, uri)
+    // A new description no one has touched isn't kept: it would only clutter the list of drafts.
+    const keep = changes > 0 || (pending > 0 && !isPlaceholder(uri))
+    const write = keep ? writeDraft(user, uri, session) : deleteDraft(user, uri)
     write.catch(() => setDraftsKept(false))
   }, [session, changes, pending, user, uri])
 
@@ -190,7 +192,7 @@ export function Editor({ uri }: { uri: string }) {
     )
   }
 
-  const { instance, work } = principals(session.current)
+  const { work } = principals(session.current)
   const workUri = work ? getNode(session.current, work).keywords['@id'] : undefined
   const toggle = (next: 'history' | 'hints') => setPanel(panel === next ? null : next)
 
@@ -198,7 +200,7 @@ export function Editor({ uri }: { uri: string }) {
     <>
       <Header>
         <div className="title-block">
-          <h1>{titleOf(session.current, instance)}</h1>
+          <h1>{titleOf(session.current)}</h1>
           <p className="muted">
             {isPlaceholder(uri) ? (
               <>A new description, not in Blue Core until it’s saved</>
@@ -371,17 +373,6 @@ function sessionFrom(loaded: Loaded, savedAt: Date | null): Session {
     savedAt,
     shapeProblems: bounded(loaded.json) ? 0 : (bounded.errors?.length ?? 1),
   }
-}
-
-/** "Main title : subtitle", from the Instance's first title. */
-function titleOf(doc: Doc, instance: string): string {
-  const title = getNode(doc, instance).props.title?.[0]
-  if (!title || !('node' in title)) return 'Untitled'
-  const part = (prop: string) => {
-    const value = getNode(doc, title.node).props[prop]?.[0]
-    return value && 'literal' in value ? literalText(value.literal) : undefined
-  }
-  return [part('mainTitle'), part('subtitle')].filter(Boolean).join(' : ') || 'Untitled'
 }
 
 /**

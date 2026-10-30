@@ -2,14 +2,16 @@ import { useState, type SubmitEvent } from 'react'
 
 import { searchInstances, type SearchHit } from '../api/bluecore'
 import { instanceUri } from '../api/endpoints'
-import { accessToken } from '../auth/auth'
+import { accessToken, useAuth } from '../auth/auth'
 import { placeholderUri } from '../doc/blank'
 import { newKey } from '../doc/model'
+import { Drafts } from './Drafts'
 import { Header } from './Header'
 import { instanceHref, open } from './route'
 
 /** Find an Instance to open (search Blue Core, or paste its URI or UUID), or start a new one. */
 export function Start() {
+  const user = useAuth().user?.profile.sub ?? 'anonymous'
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<{ total: number; hits: SearchHit[] } | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -53,6 +55,7 @@ export function Start() {
             Start a new description
           </button>
         </p>
+        <Drafts user={user} />
         {error && (
           <p className="note" role="alert">
             {error}

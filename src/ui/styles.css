@@ -380,6 +380,24 @@ button.add:hover {
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--rule);
 }
+.drafts {
+  margin-top: 1.75rem;
+}
+.drafts h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+.draft-about {
+  display: block;
+  font-size: 0.85rem;
+}
+.draft-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+}
 .results .uri {
   display: block;
   font-size: 0.8rem;

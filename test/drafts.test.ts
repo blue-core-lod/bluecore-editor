@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { change, record } from '../src/doc/log'
 import { denormalize, getNode, normalize } from '../src/doc/model'
 import { snapshot } from '../src/doc/resources'
-import { deleteDraft, readDraft, restore, writeDraft } from '../src/drafts/drafts'
+import { deleteDraft, listDrafts, readDraft, restore, writeDraft } from '../src/drafts/drafts'
 import { example } from './fixtures'
 
 const uri = 'https://bibframe.example/instances/fb857a3a-f454-4392-ba6d-a3653c12be47'
@@ -32,6 +32,15 @@ describe('drafts', () => {
     expect(restored && denormalize(restored.current)).toEqual(denormalize(state.current))
     expect(restored?.log.changes.map((change) => change.label)).toEqual(['Removed edition'])
     expect(restored?.etags).toEqual(state.etags)
+  })
+
+  it('are listed for their cataloger only, most recently changed first', async () => {
+    const other = 'https://bibframe.example/instances/other'
+    await writeDraft('carol', uri, edited())
+    await writeDraft('dave', other, edited())
+    await new Promise((resolve) => setTimeout(resolve, 5))
+    await writeDraft('carol', other, edited())
+    expect((await listDrafts('carol')).map((draft) => draft.uri)).toEqual([other, uri])
   })
 
   it('are kept per cataloger', async () => {

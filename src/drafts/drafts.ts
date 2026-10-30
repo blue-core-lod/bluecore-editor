@@ -51,6 +51,12 @@ export async function readDraft(user: string, uri: string): Promise<Draft | null
   return (await (await db()).get('drafts', draftId(user, uri))) ?? null
 }
 
+/** Every draft this user has in this browser, most recently changed first. */
+export async function listDrafts(user: string): Promise<Draft[]> {
+  const drafts = await (await db()).getAll('drafts')
+  return drafts.filter((draft) => draft.user === user).toSorted((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+}
+
 export async function writeDraft(user: string, uri: string, state: SaveState & { loadedAt: Date }): Promise<void> {
   const { log, saved, etags, loadedAt } = state
   await (await db()).put('drafts', { id: draftId(user, uri), user, uri, log, saved, etags, loadedAt, updatedAt: new Date() })
