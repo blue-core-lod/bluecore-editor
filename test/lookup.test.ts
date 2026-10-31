@@ -2,8 +2,9 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { config } from '../src/config'
 import { searchVocabulary } from '../src/lookup/local'
-import { searchSource, searchUrl } from '../src/lookup/qa'
-import { isLocal, sourcesFor, type QaSource } from '../src/lookup/sources'
+import { browseUrl, isHeading } from '../src/lookup/browse'
+import { browses, searchSource, searchUrl } from '../src/lookup/qa'
+import { isLocal, sourcesFor, type QaSource, type Source } from '../src/lookup/sources'
 
 const names: QaSource = { label: 'LC Names', path: 'loc/names' }
 
@@ -88,5 +89,52 @@ describe('vendored vocabularies', () => {
     expect(isLocal(role)).toBe(true)
     expect(labels(await searchSource(role, 'editor'))[0]).toBe('editor')
     expect(fetch).not.toHaveBeenCalled()
+  })
+})
+
+describe('heading browse', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  const lcNames = sourcesFor('agent')[0] as QaSource
+
+  it('browses for text shaped like a heading, and searches by keyword otherwise', () => {
+    expect(isHeading('Twain, Mark')).toBe(true)
+    expect(isHeading('United States. Congress. House')).toBe(true)
+    expect(isHeading('Dogs--Training')).toBe(true)
+    expect(isHeading('pynchon lot 49')).toBe(false)
+    expect(browses(lcNames, 'United States. Congress. House')).toBe(true)
+    expect(browses(lcNames, 'congress house')).toBe(false)
+    expect(browses(sourcesFor('role')[0] as Source, 'editor, ')).toBe(false)
+  })
+
+  it('asks id.loc.gov for headings that begin with the text, written as LC writes them', () => {
+    const url = new URL(browseUrl('subjects', ' United States -- History '))
+    expect(url.origin + url.pathname).toBe('https://id.loc.gov/authorities/subjects/suggest2/')
+    expect(url.searchParams.get('searchtype')).toBe('leftanchored')
+    expect(url.searchParams.get('q')).toBe('United States--History')
+  })
+
+  it('finds the authorized heading, and the variant a match came from', async () => {
+    const fetch = stubFetch(200, {
+      searchtype: 'left-anchored',
+      hits: [
+        { aLabel: 'United States. Congress. House', vLabel: '', uri: 'http://id.loc.gov/authorities/names/n79107874' },
+        {
+          aLabel: 'United States. Congress. House. Committee on Merchant Marine and Fisheries. Ad Hoc Select Subcommittee on Maritime Education and Training',
+          vLabel: 'United States. Congress. House. Ad Hoc Select Subcommittee on Maritime Education and Training',
+          uri: 'http://id.loc.gov/authorities/names/n78075017',
+        },
+      ],
+    })
+    const hits = await searchSource(lcNames, 'United States. Congress. House')
+    expect(String(fetch.mock.calls[0]?.at(0))).toContain('searchtype=leftanchored')
+    expect(hits[0]).toEqual({ uri: 'http://id.loc.gov/authorities/names/n79107874', label: 'United States. Congress. House' })
+    expect(hits[1]?.variant).toBe('United States. Congress. House. Ad Hoc Select Subcommittee on Maritime Education and Training')
+  })
+
+  it('searches QA by keyword for anything else', async () => {
+    const fetch = stubFetch(200, [])
+    await searchSource(lcNames, 'congress house')
+    expect(String(fetch.mock.calls[0]?.at(0))).toContain(`${config.qaUrl}authorities/search/loc/names?`)
   })
 })

@@ -368,7 +368,8 @@ button.add:hover {
 .lookup-results .source {
   white-space: nowrap;
 }
-.lookup-description {
+.lookup-description,
+.lookup-variant {
   display: block;
   font-size: 0.85rem;
   color: var(--muted);

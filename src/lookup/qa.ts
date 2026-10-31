@@ -1,4 +1,5 @@
 import { config } from '../config'
+import { browseHeadings, isHeading } from './browse'
 import { searchVocabulary } from './local'
 import { isLocal, type QaSource, type Source } from './sources'
 
@@ -7,6 +8,8 @@ export interface Hit {
   label: string
   /** The MARC code, for a term from an LC vocabulary. */
   code?: string
+  /** The 4XX variant a heading browse matched, when it wasn't the authorized heading. */
+  variant?: string
 }
 
 /** What QA returns: a bare list from most authorities, wrapped with a header from some. */
@@ -20,9 +23,18 @@ export function searchUrl(source: QaSource, query: string, maxRecords = 10): str
   return `${config.qaUrl}authorities/search/${source.path}?${params}`
 }
 
-/** Search one source: a vendored vocabulary, or QA, which needs no token, so none is sent. */
+/** Whether this search browses the source's headings rather than searching by keyword. */
+export function browses(source: Source, query: string): boolean {
+  return !isLocal(source) && source.browse !== undefined && isHeading(query)
+}
+
+/**
+ * Search one source: a vendored vocabulary, a heading browse for text shaped
+ * like a heading, or QA. None needs a token, so none is sent.
+ */
 export async function searchSource(source: Source, query: string, signal?: AbortSignal): Promise<Hit[]> {
   if (isLocal(source)) return searchVocabulary(source.vocabulary, query)
+  if (source.browse && isHeading(query)) return browseHeadings(source.browse, query, signal)
   const response = await fetch(searchUrl(source, query), { signal, headers: { Accept: 'application/json' } })
   if (!response.ok) throw new Error(`${source.label} returned ${response.status}`)
   const json = (await response.json()) as QaHit[] | { results?: QaHit[] }

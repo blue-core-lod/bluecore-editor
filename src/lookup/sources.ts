@@ -13,6 +13,8 @@ export interface QaSource {
   label: string
   /** The QA search path, after authorities/search/. */
   path: string
+  /** The id.loc.gov directory to browse for input shaped like a heading (see browse.ts). */
+  browse?: string
 }
 
 /** An LC vocabulary vendored into the editor (see scripts/vendor-lc-vocabularies.mjs). */
@@ -27,13 +29,13 @@ export function isLocal(source: Source): source is VocabularySource {
   return 'vocabulary' in source
 }
 
-const lcNames: QaSource = { label: 'LC Names', path: 'loc/names' }
-const lcsh: QaSource = { label: 'LC Subjects', path: 'loc/subjects' }
+const lcNames: QaSource = { label: 'LC Names', path: 'loc/names', browse: 'names' }
+const lcsh: QaSource = { label: 'LC Subjects', path: 'loc/subjects', browse: 'subjects' }
 
 export const lookups: Record<string, Source[]> = {
   agent: [lcNames],
   subject: [lcsh, lcNames],
-  genreForm: [{ label: 'LC Genre/Form', path: 'loc/genreForms' }],
+  genreForm: [{ label: 'LC Genre/Form', path: 'loc/genreForms', browse: 'genreForms' }],
   carrier: [{ label: 'LC Carrier types', vocabulary: 'carriers' }],
   media: [{ label: 'LC Media types', vocabulary: 'mediaTypes' }],
   content: [{ label: 'LC Content types', vocabulary: 'contentTypes' }],

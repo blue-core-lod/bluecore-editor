@@ -3,7 +3,7 @@ import { useEffect, useId, useState, type KeyboardEvent } from 'react'
 import { hasContext, lcAuthorityId } from '../context/lc'
 import { useSource } from '../context/useSource'
 import { wikidataDescriptions } from '../context/wikidata'
-import { searchSource, type Hit } from '../lookup/qa'
+import { browses, searchSource, type Hit } from '../lookup/qa'
 import { isLocal, type Source } from '../lookup/sources'
 import { useDescription } from './context'
 import { isUri } from './labels'
@@ -59,6 +59,7 @@ export function Lookup({
   // A picklist (only vendored vocabularies) answers at once, and from the first keystroke, or none.
   const picklist = sources.length > 0 && sources.every(isLocal)
   const searching = !pasted && (picklist || text.length >= 2)
+  const browsing = searching && sources.some((source) => browses(source, text))
 
   useEffect(() => {
     if (!searching) return
@@ -83,7 +84,7 @@ export function Lookup({
   }, [searching, picklist, text, sources, attempt])
 
   const seen = new Set(already)
-  const options: Option[] = searching
+  const found: Option[] = searching
     ? sources.flatMap((source) => {
         const result = results[source.label]
         if (result?.state !== 'done') return []
@@ -92,6 +93,8 @@ export function Lookup({
           .map((hit) => ({ ...hit, id: `${listId}-${hit.uri}`, source: source.label }))
       })
     : []
+  // A browse reads as one list of headings in order, so "United States. Congress. House" in LC Names comes before its subdivisions in LC Subjects.
+  const options = browsing ? found.toSorted((a, b) => a.label.localeCompare(b.label, 'en')) : found
   const current = options[Math.min(active, options.length - 1)]
 
   // Wikidata's short description for each LC result, in one query.
@@ -203,6 +206,12 @@ export function Lookup({
           })}
         </p>
       )}
+      {browsing && (
+        <p className="muted hint">
+          Headings beginning &ldquo;{text}&rdquo;, in alphabetical order. Leave out commas, periods and dashes to search
+          by keyword.
+        </p>
+      )}
       {picklist && text && options.length === 0 && (
         <p className="muted hint">
           {/* Matches the field already has were left out, so "nothing" would be wrong. */}
@@ -226,6 +235,7 @@ export function Lookup({
                 <span>
                   {option.label}
                   {hints && option.code && <span className="code"> {option.code}</span>}
+                  {option.variant && <span className="lookup-variant">variant: {option.variant}</span>}
                   {descriptionOf(option.uri) && (
                     <span className="lookup-description">{descriptionOf(option.uri)}</span>
                   )}
