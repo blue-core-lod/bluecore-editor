@@ -44,13 +44,14 @@ How the editor handles LCSH headings with subdivisions, such as *United States--
 
 **One change.** Adding or editing a subject is one change that replaces the whole node where it was, so the history reads "Changed Subjects: Pynchon, Thomas--Criticism and interpretation--Sources", and one undo reverses it. The document model still keeps `@list` verbatim.
 
+**Saved and read back.** Blue Core keeps a linked part as a bare `@id` in the Work and its label, type and MARC key in a row of its own, linked to the Work; the bounded description puts them back together. It links only what the saved document describes, so the editor describes each linked resource once in what it saves, even one the record described only in another subject (bead `bce-0kg.5` is the Blue Core side of this).
+
 The code: `src/doc/complex.ts` reads and writes complex subjects, `src/lookup/compose.ts` holds the composing rules, and `src/ui/Lookup.tsx` and `ComplexSubject` in `src/ui/Description.tsx` are the interface.
 
 ## Not done yet
 
 - **Children's subjects** (`childrensSubjects`), and LC's hierarchical geographic headings.
 - **Reordering parts** is done by editing the line; there's no drag or move control.
-- **Saving a composed subject** hasn't been tried against Blue Core. The shape is the one Blue Core already returns for its own complex subjects.
 
 ## Open questions
 
