@@ -302,6 +302,36 @@ button.add:hover {
 .section h2 + .missing {
   border-top: none;
 }
+/* Fields some records of this kind have: quieter than the ones most have. */
+.suggested {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 0.5rem;
+}
+.section h2 + .suggested {
+  padding-top: 0;
+}
+.suggested-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.suggested button.add {
+  font-size: 0.8rem;
+  border-style: dotted;
+}
+/* What kind of resource the record is, which decides what's offered. */
+.resource-type {
+  font-weight: 700;
+  color: var(--text);
+  margin-right: 0.5rem;
+}
+.matches .usage {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
 .add-field input {
   width: 100%;
   margin-top: 0.5rem;

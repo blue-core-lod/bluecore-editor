@@ -15,6 +15,7 @@ import type { Previewed } from './context'
 import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
+import { resourceTypeOf } from '../schema/guidance'
 import { refLabels, refName, titleOf } from './labels'
 import { primerUrl } from './presentation'
 import { replace } from './route'
@@ -242,6 +243,7 @@ export function Editor({ uri }: { uri: string }) {
   const { work } = principals(session.current)
   const workUri = work ? getNode(session.current, work).keywords['@id'] : undefined
   const toggle = (next: 'history' | 'hints') => setPanel(panel === next ? null : next)
+  const kind = resourceTypeOf(session.current)
 
   return (
     <>
@@ -249,6 +251,14 @@ export function Editor({ uri }: { uri: string }) {
         <div className="title-block">
           <h1>{titleOf(session.current)}</h1>
           <p className="muted">
+            {kind && (
+              <span
+                className="resource-type"
+                title={`The fields offered first are the ones most of LC’s ${kind.plural} have`}
+              >
+                {kind.label}
+              </span>
+            )}
             {isPlaceholder(uri) && typeof workUri === 'string' && !isPlaceholder(workUri) ? (
               <>
                 A new Instance of a{' '}

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { normalize } from '../src/doc/model'
+import { normalize, type JsonObject } from '../src/doc/model'
 import { belongsOn, definitionOf, kindOf, modeledProperties } from '../src/schema/fields'
 import { entryFor, newValue } from '../src/ui/form'
 import { refLabels } from '../src/ui/labels'
@@ -67,17 +67,39 @@ describe('new values', () => {
 })
 
 describe('missing fields', () => {
-  it('are offered in their section, on the resource they belong to', () => {
-    const doc = normalize(example('bounded'))
-    const sections = layout(doc, refLabels(doc)).sections
-    const subjects = sections.find((section) => section.title === 'Subjects and genre/form')
-    const missing = Object.fromEntries(sections.flatMap((s) => s.missing).map((m) => [m.prop, m.resource]))
+  /** The example as a record of no kind guidance knows: its Work's content type taken away. */
+  function untyped() {
+    const bounded = example('bounded')
+    const [work] = bounded.instanceOf as JsonObject[]
+    if (!work) throw new Error('no Work')
+    return normalize({ ...bounded, instanceOf: [{ ...work, '@type': ['Work'] }] })
+  }
+
+  it('are all offered, in their section and on their resource, for a record of no known kind', () => {
+    const doc = untyped()
+    const view = layout(doc, refLabels(doc))
+    expect(view.type).toBeUndefined()
+    const missing = Object.fromEntries(view.sections.flatMap((s) => s.missing).map((m) => [m.prop, m.resource]))
     // The example has no series statement, which goes on the Instance.
     expect(missing.seriesStatement).toBe('Instance')
-    expect(subjects).toBeDefined()
+    expect(view.sections.flatMap((s) => s.suggested)).toEqual([])
     // A field the description has is not offered again; it gets "Add another" instead.
-    for (const section of sections) {
+    for (const section of view.sections) {
       for (const row of section.rows) expect(section.missing.map((m) => m.prop)).not.toContain(row.prop)
     }
+  })
+
+  it('are offered by how often LC uses them for that kind of record', () => {
+    const doc = normalize(example('bounded'))
+    const view = layout(doc, refLabels(doc))
+    expect(view.type?.id).toBe('book')
+    const missing = new Set(view.sections.flatMap((s) => s.missing).map((m) => m.prop))
+    const suggested = new Map(view.sections.flatMap((s) => s.suggested).map((m) => [m.prop, m.share]))
+    // Used in under 1% of LC's books: in Add field only.
+    expect(missing.has('seriesStatement') || suggested.has('seriesStatement')).toBe(false)
+    // Used in a third of them: suggested, with how often.
+    expect(suggested.get('summary')).toBeGreaterThan(0.1)
+    // A book's fields no section names have a section of their own.
+    expect(view.sections.map((s) => s.title)).toContain('Book details')
   })
 })

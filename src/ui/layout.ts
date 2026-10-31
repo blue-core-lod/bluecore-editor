@@ -1,6 +1,7 @@
 import { getNode, type Doc, type Key, type Value } from '../doc/model'
 import { principals } from '../doc/resources'
 import { belongsOn, domainOf } from '../schema/fields'
+import { guidedProperties, resourceTypeOf, usage, type ResourceType } from '../schema/guidance'
 import { refName, termLabel, typesOf, type RefLabel } from './labels'
 import {
   identifierMarc,
@@ -10,6 +11,7 @@ import {
   structural,
   type FieldSpec,
   type ResourceKind,
+  type SectionSpec,
 } from './presentation'
 
 /**
@@ -52,13 +54,23 @@ export interface Missing {
   prop: string
 }
 
+/** A field the record's kind often has, offered with how often: "Edition, 24% of maps". */
+export interface Suggestion extends Missing {
+  share: number
+}
+
 export interface SectionView {
   title: string
   rows: Row[]
+  /** Fields most records of this kind have: offered as empty fields to fill. */
   missing: Missing[]
+  /** Fields some records of this kind have: offered one click away. */
+  suggested: Suggestion[]
 }
 
 export interface Layout {
+  /** What kind of resource the record is, where guidance knows: it decides what's offered. */
+  type?: ResourceType
   sections: SectionView[]
   /** Properties no section claims, so nothing in the description is hidden. */
   other: Row[]
@@ -107,15 +119,24 @@ export function layout(doc: Doc, labels: Map<string, RefLabel>): Layout {
     return resources.find(([resource]) => resource === kind)
   }
 
-  const laidOut = sections.map((section) => {
+  // A record whose kind guidance knows offers what that kind usually has; any other, every field of every section.
+  const type = resourceTypeOf(doc)
+  const offered = (prop: string) => (type ? (usage(type.id, prop) ?? { tier: 'available' as const, share: 0 }) : undefined)
+
+  const laidOut = withTypeSection(type).map((section) => {
     const fields = section.fields.map((spec) => ({ spec, rows: rowsFor(spec) }))
-    const missing = fields.flatMap(({ spec, rows }) => {
+    const missing: Missing[] = []
+    const suggested: Suggestion[] = []
+    for (const { spec, rows } of fields) {
       const home = rows.length === 0 ? homeOf(spec) : undefined
-      if (!home) return []
+      if (!home) continue
       const [resource, node] = home
-      return [{ id: `${node} ${spec.prop}`, label: spec.label, marc: spec.marc, resource, node, prop: spec.prop }]
-    })
-    return { title: section.title, rows: fields.flatMap(({ rows }) => rows), missing }
+      const field = { id: `${node} ${spec.prop}`, label: spec.label, marc: spec.marc, resource, node, prop: spec.prop }
+      const guided = offered(spec.prop)
+      if (!guided || guided.tier === 'shown') missing.push(field)
+      else if (guided.tier === 'suggested') suggested.push({ ...field, share: guided.share })
+    }
+    return { title: section.title, rows: fields.flatMap(({ rows }) => rows), missing, suggested }
   })
 
   const leftovers = (keep: (prop: string, kind: ResourceKind) => boolean): Row[] =>
@@ -135,10 +156,27 @@ export function layout(doc: Doc, labels: Map<string, RefLabel>): Layout {
     )
 
   return {
+    ...(type ? { type } : {}),
     sections: laidOut,
     other: leftovers((prop, kind) => !recordProps.includes(prop) && !structural[kind].includes(prop)),
     record: leftovers((prop) => recordProps.includes(prop)),
   }
+}
+
+/**
+ * The sections, with one for the fields a kind of resource has that no section
+ * names, such as a map's scale and base material: "Map details", after the
+ * physical description.
+ */
+function withTypeSection(type: ResourceType | undefined): SectionSpec[] {
+  if (!type) return sections
+  const named = new Set(sections.flatMap((section) => section.fields.map((field) => field.prop)))
+  const fields: FieldSpec[] = guidedProperties(type.id)
+    .filter(({ prop }) => !named.has(prop) && !recordProps.includes(prop))
+    .map(({ prop, usage }) => ({ prop, home: usage.resource, label: termLabel(prop) }))
+  if (fields.length === 0) return sections
+  const after = sections.findIndex((section) => section.title === 'Physical description and carrier')
+  return sections.toSpliced(after + 1, 0, { title: `${type.label} details`, fields })
 }
 
 function perValueLabel(

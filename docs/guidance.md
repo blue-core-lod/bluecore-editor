@@ -63,12 +63,21 @@ LC doesn't give these Instances a subclass (Print, Electronic): 99% have none. W
 
 ## Overrides
 
-Still to come: a small, reviewed `src/schema/guidance-overrides.json` for what the numbers get wrong. Already visible in the measurements:
+`src/schema/guidance-overrides.json` holds what the numbers get wrong, kept apart from the measurements so a re-run doesn't lose it:
 
-- record-keeping and structure that's always there but never a cataloging field: `adminMetadata`, `instanceOf`, `hasInstance`, `bflc:aap`, `bflc:aap-normalized`, and `dcterms:isPartOf` (LC's dataset membership, on every record);
-- conversion habits, such as an LCCN on 99% of books because they're LC's records;
-- rare but important fields to promote, and local practice that differs from LC's.
+- `thresholds`: a field used in 50% or more of a kind's records is shown, 10–50% suggested, under 10% available only through Add field;
+- `never`: properties no form offers, because they're record-keeping or structure rather than cataloging: `adminMetadata`, `instanceOf`, `hasInstance`, `bflc:aap`, `bflc:aap-normalized`, and `dcterms:isPartOf` (LC's dataset membership, on every record);
+- `types`: per kind, fields to put in a tier whatever their share. Empty for now.
 
-## Next
+Likely next entries, visible in the measurements, to decide in use: conversion habits such as an LCCN on 99% of LC's records and `bflc:governmentPubType` (a MARC fixed field), LC internals such as `hasItem` and `acquisitionSource`, and fields to promote such as a recording's duration (22%).
 
-The editor detects a record's type with the same rules, shows it in the header, and lays out the form by tier, falling back to today's fixed lists (`src/ui/presentation.ts`) for a record whose type it doesn't know.
+## In the editor
+
+`src/schema/guidance.ts` reads the three files.
+
+- **The kind of record** (`resourceTypeOf`) comes from the same rules the sample was drawn with, and shows in the header ("Map").
+- **Each section offers by tier** (`src/ui/layout.ts`): a shown field the record lacks is an "Add …" button as before; a suggested one sits on a quieter line, "Also used for maps: Supplementary material 39%". Available fields aren't offered in the sections. A section with nothing in it and nothing to offer is left out.
+- **A section of the kind's own fields**, such as "Map details" with scale, geographic coverage and base material, holds the shown and suggested fields no other section names, after the physical description. Before, a record's values for these fell into "Other fields".
+- **Add field** says how often each match is used for the kind ("used in 6% of maps") and puts the most used first among equally good matches.
+- **A record of no kind the rules know** (no Work type they name) offers every field of every section, as before.
+- Values a record already has are always shown, whatever their tier.

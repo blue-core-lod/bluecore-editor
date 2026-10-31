@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import { getNode, type Key } from '../doc/model'
 import { principals } from '../doc/resources'
 import { allProperties, belongsOn } from '../schema/fields'
+import { resourceTypeOf, usage } from '../schema/guidance'
 import { AddValue } from './AddValue'
 import { useDescription } from './context'
 import { termLabel, typesOf } from './labels'
@@ -21,6 +22,8 @@ interface Match {
   marc: string | undefined
   /** Where it can go, by the ontology's domain. */
   on: [ResourceKind, Key][]
+  /** How many of LC's records of this kind use it, 0 to 1, where guidance knows the kind. */
+  share?: number
 }
 
 /**
@@ -38,6 +41,8 @@ export function AddField() {
     return work ? [['Instance', instance], ['Work', work]] : [['Instance', instance]]
   }, [doc])
 
+  const kind = useMemo(() => resourceTypeOf(doc), [doc])
+
   const matches = useMemo((): Match[] => {
     const text = query.trim().toLowerCase()
     if (!text) return []
@@ -54,11 +59,15 @@ export function AddField() {
               ? 2
               : null
         const on = resources.filter(([, key]) => belongsOn(prop, typesOf(getNode(doc, key))))
-        return { prop, label, marc, on, score }
+        const share = kind ? usage(kind.id, prop)?.share : undefined
+        return { prop, label, marc, on, score, ...(share ? { share } : {}) }
       })
       .filter((match): match is Match & { score: number } => match.score !== null && match.on.length > 0)
-    return scored.toSorted((a, b) => a.score - b.score || a.label.localeCompare(b.label)).slice(0, 8)
-  }, [query, resources, doc])
+    // Among equally good matches, what this kind of record uses most comes first.
+    return scored
+      .toSorted((a, b) => a.score - b.score || (b.share ?? 0) - (a.share ?? 0) || a.label.localeCompare(b.label))
+      .slice(0, 8)
+  }, [query, resources, doc, kind])
 
   if (chosen) {
     return (
@@ -98,6 +107,11 @@ export function AddField() {
               <span>
                 {match.label}
                 {hints && match.marc && <span className="marc"> {match.marc}</span>}
+                {kind && match.share !== undefined && match.share >= 0.01 && (
+                  <span className="usage">
+                    used in {Math.round(match.share * 100)}% of {kind.plural}
+                  </span>
+                )}
               </span>
               <span className="on">
                 {match.on.map(([kind, node]) => (

@@ -23,7 +23,7 @@ import { AddValue } from './AddValue'
 import { DescriptionContext, useDescription, type Previewed } from './context'
 import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
-import { layout, type Misplaced, type Missing, type Row } from './layout'
+import { layout, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
 import { Lookup } from './Lookup'
 import { marcLinks, primerUrl, type ResourceKind } from './presentation'
 
@@ -59,9 +59,9 @@ export function Description({
     <DescriptionContext value={context}>
       <div className={hints ? 'description hints' : 'description'}>
         {view.sections.map((section) => (
-          <Section key={section.title} title={section.title} rows={section.rows} missing={section.missing} />
+          <Section key={section.title} {...section} plural={view.type?.plural} />
         ))}
-        {view.other.length > 0 && <Section title="Other fields" rows={view.other} missing={[]} />}
+        {view.other.length > 0 && <Section title="Other fields" rows={view.other} missing={[]} suggested={[]} />}
         <AddField />
         {view.record.length > 0 && (
           <details className="record">
@@ -76,7 +76,22 @@ export function Description({
   )
 }
 
-function Section({ title, rows, missing }: { title: string; rows: Row[]; missing: Missing[] }) {
+function Section({
+  title,
+  rows,
+  missing,
+  suggested,
+  plural,
+}: {
+  title: string
+  rows: Row[]
+  missing: Missing[]
+  suggested: Suggestion[]
+  /** What records of this kind are called, "maps", for the suggestions' figures. */
+  plural?: string
+}) {
+  // A section with nothing in it and nothing this kind of record usually has is left out.
+  if (rows.length === 0 && missing.length === 0 && suggested.length === 0) return null
   return (
     <section className="section">
       <h2>{title}</h2>
@@ -92,6 +107,20 @@ function Section({ title, rows, missing }: { title: string; rows: Row[]; missing
               prop={field.prop}
               label={field.label}
               prompt={`Add ${field.label.toLowerCase()}`}
+            />
+          ))}
+        </div>
+      )}
+      {suggested.length > 0 && (
+        <div className="suggested">
+          <span className="suggested-note">Also used{plural ? ` for ${plural}` : ''}:</span>
+          {suggested.map((field) => (
+            <AddValue
+              key={field.id}
+              node={field.node}
+              prop={field.prop}
+              label={field.label}
+              prompt={`${field.label} ${Math.round(field.share * 100)}%`}
             />
           ))}
         </div>
