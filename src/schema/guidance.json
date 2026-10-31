@@ -1,0 +1,7779 @@
+{
+ "x-about": "How often each property is used, per resource type, measured by scripts/guidance from a sample of LC's CBD snapshot. The editor draws its shown/suggested/available tiers from these shares. Regenerate rather than edit; corrections go in guidance-overrides.json. See docs/guidance.md.",
+ "x-measured": {
+  "date": "2026-10-31",
+  "source": "LC CBD snapshot given to Blue Core to load"
+ },
+ "types": {
+  "book": {
+   "records": 500,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.078,
+     "kinds": {
+      "AcquisitionSource": 0.078
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:projectedProvisionDate": {
+     "share": 0.068
+    },
+    "carrier": {
+     "share": 1.0,
+     "kinds": {
+      "Carrier": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+       "label": "volume",
+       "share": 0.988
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cz",
+       "label": "other computer carrier",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cd",
+       "label": "computer disc",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/he",
+       "label": "microfiche",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/sd",
+       "label": "audio disc",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/hd",
+       "label": "microfilm reel",
+       "share": 0.002
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.01,
+     "kinds": {
+      "ColorContent": 0.01
+     }
+    },
+    "copyrightDate": {
+     "share": 0.086
+    },
+    "dimensions": {
+     "share": 0.888
+    },
+    "editionStatement": {
+     "share": 0.334
+    },
+    "extent": {
+     "share": 0.992,
+     "kinds": {
+      "Extent": 0.992
+     }
+    },
+    "hasItem": {
+     "share": 0.056,
+     "kinds": {
+      "Item": 0.056
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.994,
+     "kinds": {
+      "Lccn": 0.99,
+      "Isbn": 0.76,
+      "OclcNumber": 0.292,
+      "Local": 0.292,
+      "LcOverseasAcq": 0.048,
+      "Ean": 0.022,
+      "Nbn": 0.018
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 1.0
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 1.0
+      }
+     ]
+    },
+    "media": {
+     "share": 1.0,
+     "kinds": {
+      "Media": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.988
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/h",
+       "label": "microform",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/s",
+       "label": "audio",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.654,
+     "kinds": {
+      "Note": 0.654
+     }
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 1.0
+     }
+    },
+    "publicationStatement": {
+     "share": 1.0
+    },
+    "responsibilityStatement": {
+     "share": 0.906
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.018
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.012
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.03
+    },
+    "classification": {
+     "share": 0.89,
+     "kinds": {
+      "ClassificationLcc": 0.886,
+      "ClassificationDdc": 0.306,
+      "Classification": 0.02
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 1.0
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.084
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/spw",
+       "label": "spoken word",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/ntm",
+       "label": "notated music",
+       "share": 0.002
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.972,
+     "kinds": {
+      "PrimaryContribution": 0.81
+     }
+    },
+    "expressionOf": {
+     "share": 0.04,
+     "kinds": {
+      "Hub": 0.04
+     }
+    },
+    "genreForm": {
+     "share": 0.394,
+     "kinds": {
+      "GenreForm": 0.394
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026339",
+       "label": "Fiction",
+       "share": 0.082
+      },
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2014026339",
+       "label": "Fiction",
+       "share": 0.046
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026049",
+       "label": "Biographies",
+       "share": 0.036
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2015026020",
+       "label": "Novels",
+       "share": 0.03
+      },
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2014026049",
+       "label": "Biographies",
+       "share": 0.022
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026068",
+       "label": "Conference papers and proceedings",
+       "share": 0.02
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026047",
+       "label": "Autobiographies",
+       "share": 0.018
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026542",
+       "label": "Short stories",
+       "share": 0.018
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.362,
+     "kinds": {
+      "GeographicCoverage": 0.362
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "illustrativeContent": {
+     "share": 0.442,
+     "kinds": {
+      "Illustration": 0.442
+     }
+    },
+    "intendedAudience": {
+     "share": 0.13,
+     "kinds": {
+      "IntendedAudience": 0.13
+     }
+    },
+    "language": {
+     "share": 1.0,
+     "kinds": {
+      "Language": 0.672
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.48
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.076
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ara",
+       "label": "Arabic",
+       "share": 0.056
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.05
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ger",
+       "label": "German",
+       "share": 0.04
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/por",
+       "label": "Portuguese",
+       "share": 0.032
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ind",
+       "label": "Indonesian",
+       "share": 0.03
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/chi",
+       "label": "Chinese",
+       "share": 0.028
+      }
+     ]
+    },
+    "notation": {
+     "share": 0.03,
+     "kinds": {
+      "Script": 0.016,
+      "Notation": 0.012
+     }
+    },
+    "note": {
+     "share": 0.176,
+     "kinds": {
+      "Note": 0.176
+     }
+    },
+    "originDate": {
+     "share": 0.012
+    },
+    "place": {
+     "share": 0.012,
+     "kinds": {
+      "Place": 0.012
+     }
+    },
+    "relation": {
+     "share": 0.426,
+     "kinds": {
+      "Relation": 0.426
+     }
+    },
+    "subject": {
+     "share": 0.786,
+     "kinds": {
+      "Topic": 0.754,
+      "Place": 0.062,
+      "Person": 0.056,
+      "Organization": 0.022,
+      "Hub": 0.02,
+      "Temporal": 0.012
+     }
+    },
+    "summary": {
+     "share": 0.376,
+     "kinds": {
+      "Summary": 0.376
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.47,
+     "kinds": {
+      "SupplementaryContent": 0.47
+     }
+    },
+    "tableOfContents": {
+     "share": 0.16,
+     "kinds": {
+      "TableOfContents": 0.144
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.112,
+      "ParallelTitle": 0.038
+     }
+    }
+   },
+   "nodes": {
+    "AcquisitionSource": {
+     "count": 39,
+     "props": {
+      "rdfs:label": 0.667,
+      "acquisitionTerms": 0.308,
+      "identifiedBy": 0.051
+     }
+    },
+    "AdminMetadata": {
+     "count": 4098,
+     "props": {
+      "status": 0.757,
+      "date": 0.756,
+      "agent": 0.586,
+      "generationProcess": 0.279,
+      "bflc:marcKey": 0.244,
+      "descriptionLevel": 0.244,
+      "identifiedBy": 0.244,
+      "note": 0.244,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.244,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.244,
+      "bflc:encodingLevel": 0.229,
+      "descriptionConventions": 0.22,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.203,
+      "descriptionAuthentication": 0.197,
+      "descriptionLanguage": 0.189,
+      "descriptionModifier": 0.17,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.138,
+      "http://id.loc.gov/ontologies/lclocal/d999": 0.049
+     }
+    },
+    "Classification": {
+     "count": 14,
+     "props": {
+      "source": 1.0,
+      "classificationPortion": 0.929,
+      "rdfs:label": 0.071
+     }
+    },
+    "ClassificationDdc": {
+     "count": 154,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 0.981,
+      "source": 0.909,
+      "assigner": 0.76
+     }
+    },
+    "ClassificationLcc": {
+     "count": 452,
+     "props": {
+      "classificationPortion": 1.0,
+      "status": 0.989,
+      "assigner": 0.965,
+      "itemPortion": 0.909
+     }
+    },
+    "Distribution": {
+     "count": 5,
+     "props": {
+      "bflc:simpleAgent": 1.0,
+      "bflc:simplePlace": 1.0
+     }
+    },
+    "Ean": {
+     "count": 11,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Extent": {
+     "count": 496,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.458
+     }
+    },
+    "GenreForm": {
+     "count": 90,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.567,
+      "mads:authoritativeLabel": 0.478,
+      "mads:isMemberOfMADSScheme": 0.067
+     }
+    },
+    "IntendedAudience": {
+     "count": 47,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.766,
+      "note": 0.191
+     }
+    },
+    "Isbn": {
+     "count": 699,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.672,
+      "status": 0.163,
+      "acquisitionTerms": 0.016
+     }
+    },
+    "LcOverseasAcq": {
+     "count": 24,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Lccn": {
+     "count": 498,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Local": {
+     "count": 166,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.614,
+      "source": 0.096
+     }
+    },
+    "Nbn": {
+     "count": 10,
+     "props": {
+      "source": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Notation": {
+     "count": 6,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Note": {
+     "count": 575,
+     "props": {
+      "rdfs:label": 0.976,
+      "language": 0.024,
+      "bflc:citation": 0.023
+     }
+    },
+    "OclcNumber": {
+     "count": 149,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "ParallelTitle": {
+     "count": 20,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.35
+     }
+    },
+    "Place": {
+     "count": 9,
+     "props": {
+      "rdfs:label": 1.0,
+      "mads:componentList": 0.667,
+      "bflc:aap-normalized": 0.333,
+      "source": 0.333,
+      "mads:authoritativeLabel": 0.333,
+      "mads:isMemberOfMADSScheme": 0.333
+     }
+    },
+    "PrimaryContribution": {
+     "count": 405,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Publication": {
+     "count": 507,
+     "props": {
+      "bflc:simplePlace": 0.996,
+      "bflc:simpleDate": 0.986,
+      "date": 0.986,
+      "place": 0.986,
+      "bflc:simpleAgent": 0.972
+     }
+    },
+    "Relation": {
+     "count": 317,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.315
+     }
+    },
+    "Summary": {
+     "count": 192,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "SupplementaryContent": {
+     "count": 6,
+     "props": {
+      "electronicLocator": 1.0,
+      "note": 1.0
+     }
+    },
+    "SystemRequirement": {
+     "count": 8,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "TableOfContents": {
+     "count": 72,
+     "props": {
+      "rdfs:label": 1.0,
+      "status": 0.111
+     }
+    },
+    "Temporal": {
+     "count": 6,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Title": {
+     "count": 1028,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.261,
+      "bflc:nonSortNum": 0.187,
+      "partName": 0.011
+     }
+    },
+    "Topic": {
+     "count": 770,
+     "props": {
+      "bflc:aap-normalized": 0.995,
+      "source": 0.971,
+      "mads:authoritativeLabel": 0.968,
+      "rdfs:label": 0.936,
+      "mads:componentList": 0.808,
+      "mads:isMemberOfMADSScheme": 0.76
+     }
+    },
+    "VariantTitle": {
+     "count": 90,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.133,
+      "subtitle": 0.033,
+      "partName": 0.011
+     }
+    }
+   }
+  },
+  "book-online": {
+   "records": 500,
+   "Instance": {
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:projectedProvisionDate": {
+     "share": 0.082
+    },
+    "carrier": {
+     "share": 1.0,
+     "kinds": {
+      "Carrier": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+       "label": "online resource",
+       "share": 1.0
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.458,
+     "kinds": {
+      "ColorContent": 0.458
+     }
+    },
+    "copyrightDate": {
+     "share": 0.058
+    },
+    "digitalCharacteristic": {
+     "share": 0.174,
+     "kinds": {
+      "FileType": 0.174,
+      "EncodingFormat": 0.174
+     }
+    },
+    "editionStatement": {
+     "share": 0.25
+    },
+    "electronicLocator": {
+     "share": 0.48
+    },
+    "extent": {
+     "share": 1.0,
+     "kinds": {
+      "Extent": 1.0
+     }
+    },
+    "hasItem": {
+     "share": 0.47,
+     "kinds": {
+      "Item": 0.47
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 1.0,
+     "kinds": {
+      "Lccn": 1.0,
+      "Local": 0.664,
+      "Isbn": 0.544,
+      "OclcNumber": 0.45,
+      "Doi": 0.174
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 1.0
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 1.0
+      }
+     ]
+    },
+    "media": {
+     "share": 1.0,
+     "kinds": {
+      "Media": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 1.0
+      }
+     ]
+    },
+    "note": {
+     "share": 0.55,
+     "kinds": {
+      "Note": 0.55
+     }
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 1.0
+     }
+    },
+    "publicationStatement": {
+     "share": 1.0
+    },
+    "responsibilityStatement": {
+     "share": 0.55
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    },
+    "usageAndAccessPolicy": {
+     "share": 0.06,
+     "kinds": {
+      "AccessPolicy": 0.05,
+      "UsePolicy": 0.028
+     }
+    }
+   },
+   "Work": {
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.46
+    },
+    "classification": {
+     "share": 0.996,
+     "kinds": {
+      "ClassificationLcc": 0.996,
+      "ClassificationDdc": 0.488,
+      "Classification": 0.464,
+      "ClassificationNlm": 0.012
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 1.0
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.004
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.996,
+     "kinds": {
+      "PrimaryContribution": 0.812
+     }
+    },
+    "expressionOf": {
+     "share": 0.016,
+     "kinds": {
+      "Hub": 0.016
+     }
+    },
+    "genreForm": {
+     "share": 0.564,
+     "kinds": {
+      "GenreForm": 0.564
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026362",
+       "label": "Legislative materials",
+       "share": 0.448
+      },
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2014026049",
+       "label": "Biographies",
+       "share": 0.016
+      },
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2014026339",
+       "label": "Fiction",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026094",
+       "label": "Essays",
+       "share": 0.014
+      },
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2014026415",
+       "label": "Literature",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026339",
+       "label": "Fiction",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026481",
+       "label": "Poetry",
+       "share": 0.006
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2015026020",
+       "label": "Novels",
+       "share": 0.006
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.158,
+     "kinds": {
+      "GeographicCoverage": 0.158
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "illustrativeContent": {
+     "share": 0.116,
+     "kinds": {
+      "Illustration": 0.116
+     }
+    },
+    "intendedAudience": {
+     "share": 0.032,
+     "kinds": {
+      "IntendedAudience": 0.032
+     }
+    },
+    "language": {
+     "share": 1.0,
+     "kinds": {
+      "Language": 0.042
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "eng",
+       "share": 0.96
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/por",
+       "label": "Portuguese",
+       "share": 0.034
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.012
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/chi",
+       "label": "Chinese",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.026,
+     "kinds": {
+      "Note": 0.026
+     }
+    },
+    "relation": {
+     "share": 0.958,
+     "kinds": {
+      "Relation": 0.958
+     }
+    },
+    "subject": {
+     "share": 0.978,
+     "kinds": {
+      "Topic": 0.978,
+      "Person": 0.086,
+      "Place": 0.058,
+      "Organization": 0.046
+     }
+    },
+    "summary": {
+     "share": 0.416,
+     "kinds": {
+      "Summary": 0.416
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.332,
+     "kinds": {
+      "SupplementaryContent": 0.332
+     }
+    },
+    "tableOfContents": {
+     "share": 0.274,
+     "kinds": {
+      "TableOfContents": 0.274
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.498
+     }
+    }
+   },
+   "nodes": {
+    "AccessPolicy": {
+     "count": 25,
+     "props": {
+      "qualifier": 0.92,
+      "rdfs:label": 0.08
+     }
+    },
+    "AdminMetadata": {
+     "count": 3754,
+     "props": {
+      "date": 0.734,
+      "status": 0.734,
+      "agent": 0.654,
+      "generationProcess": 0.277,
+      "bflc:marcKey": 0.266,
+      "descriptionLanguage": 0.266,
+      "descriptionLevel": 0.266,
+      "identifiedBy": 0.266,
+      "note": 0.266,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.266,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.265,
+      "descriptionAuthentication": 0.187,
+      "bflc:encodingLevel": 0.147,
+      "descriptionConventions": 0.147,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.146,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.098,
+      "descriptionModifier": 0.08
+     }
+    },
+    "Classification": {
+     "count": 462,
+     "props": {
+      "source": 1.0,
+      "rdfs:label": 0.974,
+      "classificationPortion": 0.026
+     }
+    },
+    "ClassificationDdc": {
+     "count": 252,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 1.0,
+      "source": 1.0,
+      "assigner": 0.556
+     }
+    },
+    "ClassificationLcc": {
+     "count": 513,
+     "props": {
+      "classificationPortion": 1.0,
+      "status": 0.998,
+      "assigner": 0.801
+     }
+    },
+    "ClassificationNlm": {
+     "count": 6,
+     "props": {
+      "assigner": 1.0,
+      "classificationPortion": 1.0,
+      "status": 1.0,
+      "itemPortion": 0.167
+     }
+    },
+    "Doi": {
+     "count": 87,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Extent": {
+     "count": 500,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.174
+     }
+    },
+    "GenreForm": {
+     "count": 281,
+     "props": {
+      "rdfs:label": 1.0,
+      "mads:authoritativeLabel": 0.943,
+      "source": 0.815
+     }
+    },
+    "IntendedAudience": {
+     "count": 26,
+     "props": {
+      "source": 1.0,
+      "rdfs:label": 1.0,
+      "note": 0.077
+     }
+    },
+    "Isbn": {
+     "count": 626,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.804,
+      "status": 0.463
+     }
+    },
+    "Lccn": {
+     "count": 500,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Local": {
+     "count": 361,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.906
+     }
+    },
+    "Note": {
+     "count": 491,
+     "props": {
+      "rdfs:label": 0.984,
+      "language": 0.016
+     }
+    },
+    "OclcNumber": {
+     "count": 225,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Organization": {
+     "count": 14,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "bflc:marcKey": 1.0,
+      "source": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Person": {
+     "count": 41,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "bflc:marcKey": 1.0,
+      "source": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Place": {
+     "count": 13,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "mads:isMemberOfMADSScheme": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "PrimaryContribution": {
+     "count": 406,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Publication": {
+     "count": 501,
+     "props": {
+      "bflc:simpleAgent": 1.0,
+      "bflc:simplePlace": 1.0,
+      "bflc:simpleDate": 0.998,
+      "date": 0.998,
+      "place": 0.998
+     }
+    },
+    "Relation": {
+     "count": 1108,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.435
+     }
+    },
+    "Summary": {
+     "count": 210,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "TableOfContents": {
+     "count": 140,
+     "props": {
+      "rdfs:label": 1.0,
+      "status": 0.014
+     }
+    },
+    "Title": {
+     "count": 1236,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.129,
+      "bflc:nonSortNum": 0.07
+     }
+    },
+    "Topic": {
+     "count": 704,
+     "props": {
+      "source": 1.0,
+      "mads:isMemberOfMADSScheme": 0.688,
+      "bflc:aap-normalized": 0.611,
+      "mads:authoritativeLabel": 0.611,
+      "rdfs:label": 0.577,
+      "mads:componentList": 0.442,
+      "code": 0.389
+     }
+    },
+    "UsePolicy": {
+     "count": 14,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.643,
+      "qualifier": 0.357
+     }
+    },
+    "VariantTitle": {
+     "count": 252,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.897
+     }
+    }
+   }
+  },
+  "collection": {
+   "records": 473,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.068,
+     "kinds": {
+      "AcquisitionSource": 0.068
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "carrier": {
+     "share": 0.645,
+     "kinds": {
+      "Carrier": 0.645
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+       "label": "volume",
+       "share": 0.459
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nb",
+       "label": "sheet",
+       "share": 0.14
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+       "label": "online resource",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cz",
+       "label": "other computer carrier",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/no",
+       "label": "card",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nr",
+       "label": "object",
+       "share": 0.004
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.015,
+     "kinds": {
+      "ColorContent": 0.015
+     }
+    },
+    "copyrightDate": {
+     "share": 0.023
+    },
+    "dimensions": {
+     "share": 0.222
+    },
+    "distributionStatement": {
+     "share": 0.011
+    },
+    "editionStatement": {
+     "share": 0.063
+    },
+    "extent": {
+     "share": 0.992,
+     "kinds": {
+      "Extent": 0.992
+     }
+    },
+    "hasItem": {
+     "share": 0.452,
+     "kinds": {
+      "Item": 0.452
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 1.0,
+     "kinds": {
+      "Lccn": 1.0,
+      "Local": 0.488,
+      "Identifier": 0.323,
+      "Isbn": 0.097,
+      "LcOverseasAcq": 0.068,
+      "OclcNumber": 0.021
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Collection": 0.829,
+      "Monograph": 0.171
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+       "label": "multipart monograph",
+       "share": 0.82
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 0.18
+      }
+     ]
+    },
+    "media": {
+     "share": 0.693,
+     "kinds": {
+      "Media": 0.693
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.658
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 0.019
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/s",
+       "label": "audio",
+       "share": 0.017
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/v",
+       "label": "video",
+       "share": 0.006
+      }
+     ]
+    },
+    "note": {
+     "share": 0.854,
+     "kinds": {
+      "Note": 0.854
+     }
+    },
+    "productionStatement": {
+     "share": 0.123
+    },
+    "provisionActivity": {
+     "share": 0.677,
+     "kinds": {
+      "Publication": 0.622,
+      "Production": 0.152,
+      "Distribution": 0.011
+     }
+    },
+    "publicationStatement": {
+     "share": 0.457
+    },
+    "responsibilityStatement": {
+     "share": 0.129
+    },
+    "supplementaryContent": {
+     "share": 0.34,
+     "kinds": {
+      "SupplementaryContent": 0.34
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    },
+    "usageAndAccessPolicy": {
+     "share": 0.533,
+     "kinds": {
+      "AccessPolicy": 0.376,
+      "UsePolicy": 0.201
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.019
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.298
+    },
+    "capture": {
+     "share": 0.027,
+     "kinds": {
+      "Capture": 0.027
+     }
+    },
+    "classification": {
+     "share": 0.632,
+     "kinds": {
+      "ClassificationLcc": 0.632,
+      "ClassificationDdc": 0.021
+     }
+    },
+    "collectionArrangement": {
+     "share": 0.025,
+     "kinds": {
+      "CollectionArrangement": 0.025
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.985
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.027
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/cod",
+       "label": "computer dataset",
+       "share": 0.017
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/spw",
+       "label": "spoken word",
+       "share": 0.013
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/tdf",
+       "label": "three-dimensional form",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/tdi",
+       "label": "two-dimensional moving image",
+       "share": 0.002
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.985,
+     "kinds": {
+      "PrimaryContribution": 0.92
+     }
+    },
+    "expressionOf": {
+     "share": 0.059,
+     "kinds": {
+      "Hub": 0.059
+     }
+    },
+    "genreForm": {
+     "share": 0.359,
+     "kinds": {
+      "GenreForm": 0.359
+     },
+     "values": [
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2014026141",
+       "label": "Personal correspondence",
+       "share": 0.072
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026141",
+       "label": "Personal correspondence",
+       "share": 0.049
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026054",
+       "label": "Business correspondence",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026431",
+       "label": "Oral histories",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026339",
+       "label": "Fiction",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026115",
+       "label": "Interviews",
+       "share": 0.034
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026594",
+       "label": "Sound recordings",
+       "share": 0.03
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026723",
+       "label": "Video recordings",
+       "share": 0.03
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.199,
+     "kinds": {
+      "GeographicCoverage": 0.199
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "illustrativeContent": {
+     "share": 0.063,
+     "kinds": {
+      "Illustration": 0.063
+     }
+    },
+    "intendedAudience": {
+     "share": 0.302,
+     "kinds": {
+      "IntendedAudience": 0.302
+     }
+    },
+    "language": {
+     "share": 1.0,
+     "kinds": {
+      "Language": 0.499
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.812
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ger",
+       "label": "German",
+       "share": 0.068
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.036
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ita",
+       "label": "Italian",
+       "share": 0.015
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/lao",
+       "label": "lao",
+       "share": 0.015
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/tam",
+       "label": "Tamil",
+       "share": 0.013
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/kan",
+       "label": "Kannada",
+       "share": 0.011
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/san",
+       "label": "Sanskrit",
+       "share": 0.008
+      }
+     ]
+    },
+    "note": {
+     "share": 0.567,
+     "kinds": {
+      "Note": 0.567
+     }
+    },
+    "originDate": {
+     "share": 0.488
+    },
+    "place": {
+     "share": 0.011,
+     "kinds": {
+      "Place": 0.011
+     }
+    },
+    "relation": {
+     "share": 0.264,
+     "kinds": {
+      "Relation": 0.264
+     }
+    },
+    "subject": {
+     "share": 0.632,
+     "kinds": {
+      "Topic": 0.622,
+      "Person": 0.085,
+      "Organization": 0.08,
+      "Hub": 0.027,
+      "Place": 0.015,
+      "Family": 0.013
+     }
+    },
+    "summary": {
+     "share": 0.243,
+     "kinds": {
+      "Summary": 0.243
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.04,
+     "kinds": {
+      "SupplementaryContent": 0.04
+     }
+    },
+    "tableOfContents": {
+     "share": 0.078,
+     "kinds": {
+      "TableOfContents": 0.078
+     }
+    },
+    "temporalCoverage": {
+     "share": 0.017
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.395,
+      "ParallelTitle": 0.034
+     }
+    }
+   },
+   "nodes": {
+    "AccessPolicy": {
+     "count": 185,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.124
+     }
+    },
+    "AcquisitionSource": {
+     "count": 32,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "AdminMetadata": {
+     "count": 3916,
+     "props": {
+      "date": 0.758,
+      "status": 0.758,
+      "agent": 0.607,
+      "generationProcess": 0.276,
+      "bflc:encodingLevel": 0.242,
+      "bflc:marcKey": 0.242,
+      "descriptionLevel": 0.242,
+      "identifiedBy": 0.242,
+      "note": 0.242,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.242,
+      "descriptionConventions": 0.226,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.222,
+      "descriptionLanguage": 0.163,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.155,
+      "descriptionModifier": 0.152,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.125,
+      "http://id.loc.gov/ontologies/lclocal/d999": 0.066,
+      "descriptionAuthentication": 0.056
+     }
+    },
+    "Capture": {
+     "count": 14,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "ClassificationDdc": {
+     "count": 10,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 0.9,
+      "source": 0.8,
+      "assigner": 0.5
+     }
+    },
+    "ClassificationLcc": {
+     "count": 314,
+     "props": {
+      "assigner": 1.0,
+      "classificationPortion": 1.0,
+      "status": 0.997,
+      "itemPortion": 0.449
+     }
+    },
+    "CollectionArrangement": {
+     "count": 21,
+     "props": {
+      "collectionOrganization": 1.0
+     }
+    },
+    "Distribution": {
+     "count": 5,
+     "props": {
+      "bflc:simpleAgent": 1.0,
+      "bflc:simplePlace": 1.0,
+      "bflc:simpleDate": 0.2
+     }
+    },
+    "Extent": {
+     "count": 469,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.083,
+      "bflc:appliesTo": 0.023
+     }
+    },
+    "GenreForm": {
+     "count": 97,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.835,
+      "mads:authoritativeLabel": 0.66,
+      "mads:isMemberOfMADSScheme": 0.021
+     }
+    },
+    "Identifier": {
+     "count": 153,
+     "props": {
+      "qualifier": 1.0,
+      "source": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Isbn": {
+     "count": 146,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.671,
+      "status": 0.055
+     }
+    },
+    "LcOverseasAcq": {
+     "count": 32,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Lccn": {
+     "count": 477,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Local": {
+     "count": 378,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.537
+     }
+    },
+    "Note": {
+     "count": 1329,
+     "props": {
+      "rdfs:label": 0.984,
+      "electronicLocator": 0.038,
+      "language": 0.016,
+      "bflc:appliesTo": 0.013
+     }
+    },
+    "OclcNumber": {
+     "count": 10,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Organization": {
+     "count": 8,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "bflc:marcKey": 1.0,
+      "source": 1.0,
+      "rdfs:label": 1.0,
+      "mads:authoritativeLabel": 0.875,
+      "mads:isMemberOfMADSScheme": 0.875
+     }
+    },
+    "ParallelTitle": {
+     "count": 16,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.062
+     }
+    },
+    "Person": {
+     "count": 10,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "bflc:marcKey": 1.0,
+      "rdfs:label": 1.0,
+      "source": 0.7,
+      "mads:authoritativeLabel": 0.6,
+      "mads:isMemberOfMADSScheme": 0.6
+     }
+    },
+    "PrimaryContribution": {
+     "count": 435,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Production": {
+     "count": 72,
+     "props": {
+      "bflc:simpleDate": 0.75,
+      "date": 0.417,
+      "note": 0.417,
+      "place": 0.403,
+      "bflc:simplePlace": 0.083,
+      "bflc:simpleAgent": 0.028
+     }
+    },
+    "Publication": {
+     "count": 294,
+     "props": {
+      "place": 0.986,
+      "bflc:simpleDate": 0.728,
+      "date": 0.514,
+      "bflc:simpleAgent": 0.252,
+      "bflc:simplePlace": 0.252
+     }
+    },
+    "Relation": {
+     "count": 155,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.026
+     }
+    },
+    "Summary": {
+     "count": 140,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "SupplementaryContent": {
+     "count": 176,
+     "props": {
+      "electronicLocator": 1.0,
+      "note": 0.188
+     }
+    },
+    "TableOfContents": {
+     "count": 37,
+     "props": {
+      "rdfs:label": 1.0,
+      "status": 0.243
+     }
+    },
+    "Title": {
+     "count": 1160,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.043,
+      "bflc:nonSortNum": 0.017,
+      "partName": 0.013
+     }
+    },
+    "Topic": {
+     "count": 660,
+     "props": {
+      "source": 0.985,
+      "bflc:aap-normalized": 0.768,
+      "mads:componentList": 0.764,
+      "rdfs:label": 0.706,
+      "mads:authoritativeLabel": 0.511,
+      "mads:isMemberOfMADSScheme": 0.485,
+      "code": 0.232
+     }
+    },
+    "UsePolicy": {
+     "count": 96,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.354
+     }
+    },
+    "VariantTitle": {
+     "count": 224,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.027
+     }
+    }
+   }
+  },
+  "map": {
+   "records": 500,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.048,
+     "kinds": {
+      "AcquisitionSource": 0.048
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "baseMaterial": {
+     "share": 0.854,
+     "kinds": {
+      "BaseMaterial": 0.854
+     }
+    },
+    "carrier": {
+     "share": 0.904,
+     "kinds": {
+      "Carrier": 0.904
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nb",
+       "label": "sheet",
+       "share": 0.746
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+       "label": "volume",
+       "share": 0.186
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+       "label": "online resource",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cd",
+       "label": "computer disc",
+       "share": 0.006
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cz",
+       "label": "other computer carrier",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/ce",
+       "label": "computer disc cartridge",
+       "share": 0.002
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.862,
+     "kinds": {
+      "ColorContent": 0.862
+     }
+    },
+    "copyrightDate": {
+     "share": 0.028
+    },
+    "dimensions": {
+     "share": 0.986
+    },
+    "distributionStatement": {
+     "share": 0.012
+    },
+    "editionStatement": {
+     "share": 0.236
+    },
+    "extent": {
+     "share": 1.0,
+     "kinds": {
+      "Extent": 1.0
+     }
+    },
+    "generation": {
+     "share": 0.04,
+     "kinds": {
+      "Generation": 0.04
+     }
+    },
+    "genreForm": {
+     "share": 0.86,
+     "kinds": {
+      "GenreForm": 0.86
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026387",
+       "label": "Maps",
+       "share": 0.674
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026058",
+       "label": "Atlases",
+       "share": 0.182
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2018026045",
+       "label": "Views",
+       "share": 0.004
+      }
+     ]
+    },
+    "hasItem": {
+     "share": 0.108,
+     "kinds": {
+      "Item": 0.108
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.998,
+     "kinds": {
+      "Lccn": 0.998,
+      "Isbn": 0.07,
+      "CopyrightNumber": 0.058,
+      "Local": 0.02
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 0.996
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 0.996
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+       "label": "multipart monograph",
+       "share": 0.004
+      }
+     ]
+    },
+    "manufactureStatement": {
+     "share": 0.036
+    },
+    "media": {
+     "share": 0.904,
+     "kinds": {
+      "Media": 0.904
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.892
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 0.012
+      }
+     ]
+    },
+    "note": {
+     "share": 0.946,
+     "kinds": {
+      "Note": 0.946
+     }
+    },
+    "polarity": {
+     "share": 0.054,
+     "kinds": {
+      "Polarity": 0.054
+     }
+    },
+    "productionMethod": {
+     "share": 0.06,
+     "kinds": {
+      "ProductionMethod": 0.06
+     }
+    },
+    "productionStatement": {
+     "share": 0.052
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 1.0,
+      "Production": 0.052,
+      "Manufacture": 0.036,
+      "Distribution": 0.012
+     }
+    },
+    "publicationStatement": {
+     "share": 0.942
+    },
+    "responsibilityStatement": {
+     "share": 0.586
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.02
+     }
+    }
+   },
+   "Work": {
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.22
+    },
+    "cartographicAttributes": {
+     "share": 0.446,
+     "kinds": {
+      "Cartographic": 0.446
+     }
+    },
+    "classification": {
+     "share": 0.994,
+     "kinds": {
+      "ClassificationLcc": 0.994,
+      "ClassificationDdc": 0.044
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/cri",
+       "label": "cartographic image",
+       "share": 0.996
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/crd",
+       "label": "cartographic dataset",
+       "share": 0.004
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.93,
+     "kinds": {
+      "PrimaryContribution": 0.902
+     }
+    },
+    "genreForm": {
+     "share": 0.986,
+     "kinds": {
+      "GenreForm": 0.808
+     },
+     "values": [
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2011026387",
+       "label": "Maps",
+       "share": 0.548
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026387",
+       "label": "Maps",
+       "share": 0.36
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026058",
+       "label": "Atlases",
+       "share": 0.086
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026742",
+       "label": "World atlases",
+       "share": 0.064
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026385",
+       "label": "Manuscript maps",
+       "share": 0.06
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026106",
+       "label": "Cadastral maps",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026536",
+       "label": "Road maps",
+       "share": 0.032
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026697",
+       "label": "Topographic maps",
+       "share": 0.032
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.992,
+     "kinds": {
+      "GeographicCoverage": 0.974
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "language": {
+     "share": 1.0,
+     "kinds": {
+      "Language": 0.696
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.71
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.092
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ger",
+       "label": "German",
+       "share": 0.082
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/jpn",
+       "label": "Japanese",
+       "share": 0.064
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.056
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/kor",
+       "label": "Korean",
+       "share": 0.024
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ita",
+       "label": "Italian",
+       "share": 0.02
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/dut",
+       "label": "Dutch",
+       "share": 0.018
+      }
+     ]
+    },
+    "note": {
+     "share": 0.046,
+     "kinds": {
+      "Note": 0.046
+     }
+    },
+    "relation": {
+     "share": 0.164,
+     "kinds": {
+      "Relation": 0.164
+     }
+    },
+    "scale": {
+     "share": 0.988,
+     "kinds": {
+      "Scale": 0.988
+     }
+    },
+    "subject": {
+     "share": 0.96,
+     "kinds": {
+      "Topic": 0.78,
+      "Place": 0.654
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.386,
+     "kinds": {
+      "SupplementaryContent": 0.386
+     }
+    },
+    "tableOfContents": {
+     "share": 0.106,
+     "kinds": {
+      "TableOfContents": 0.106
+     }
+    },
+    "temporalCoverage": {
+     "share": 0.016
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.192,
+      "ParallelTitle": 0.03
+     }
+    }
+   },
+   "nodes": {
+    "AcquisitionSource": {
+     "count": 26,
+     "props": {
+      "rdfs:label": 1.0,
+      "identifiedBy": 0.231
+     }
+    },
+    "AdminMetadata": {
+     "count": 3980,
+     "props": {
+      "date": 0.749,
+      "status": 0.749,
+      "agent": 0.61,
+      "generationProcess": 0.251,
+      "bflc:encodingLevel": 0.251,
+      "bflc:marcKey": 0.251,
+      "descriptionLevel": 0.251,
+      "identifiedBy": 0.251,
+      "note": 0.251,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.251,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.251,
+      "descriptionConventions": 0.216,
+      "descriptionModifier": 0.139,
+      "descriptionLanguage": 0.124,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.123,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.021
+     }
+    },
+    "Cartographic": {
+     "count": 499,
+     "props": {
+      "relief": 0.617,
+      "coordinates": 0.331,
+      "projection": 0.094
+     }
+    },
+    "CartographicDataType": {
+     "count": 5,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "ClassificationDdc": {
+     "count": 22,
+     "props": {
+      "assigner": 1.0,
+      "classificationPortion": 1.0,
+      "edition": 1.0,
+      "source": 0.727
+     }
+    },
+    "ClassificationLcc": {
+     "count": 497,
+     "props": {
+      "assigner": 1.0,
+      "classificationPortion": 1.0,
+      "status": 1.0,
+      "itemPortion": 0.99
+     }
+    },
+    "CopyrightNumber": {
+     "count": 29,
+     "props": {
+      "assigner": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Distribution": {
+     "count": 6,
+     "props": {
+      "bflc:simpleAgent": 1.0,
+      "bflc:simpleDate": 1.0,
+      "bflc:simplePlace": 1.0
+     }
+    },
+    "EncodingFormat": {
+     "count": 5,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Extent": {
+     "count": 500,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.804,
+      "bflc:appliesTo": 0.01
+     }
+    },
+    "GenreForm": {
+     "count": 20,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.4
+     }
+    },
+    "Isbn": {
+     "count": 78,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.269,
+      "acquisitionTerms": 0.013,
+      "status": 0.013
+     }
+    },
+    "Lccn": {
+     "count": 501,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Local": {
+     "count": 11,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.364
+     }
+    },
+    "Manufacture": {
+     "count": 18,
+     "props": {
+      "bflc:simpleAgent": 1.0,
+      "bflc:simpleDate": 1.0,
+      "bflc:simplePlace": 1.0
+     }
+    },
+    "Note": {
+     "count": 1471,
+     "props": {
+      "rdfs:label": 1.0,
+      "bflc:citation": 0.018
+     }
+    },
+    "ParallelTitle": {
+     "count": 18,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.056
+     }
+    },
+    "Place": {
+     "count": 75,
+     "props": {
+      "rdfs:label": 1.0,
+      "bflc:aap-normalized": 0.973,
+      "source": 0.973,
+      "mads:isMemberOfMADSScheme": 0.973,
+      "mads:authoritativeLabel": 0.853,
+      "mads:componentList": 0.147
+     }
+    },
+    "PrimaryContribution": {
+     "count": 451,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Production": {
+     "count": 26,
+     "props": {
+      "bflc:simpleAgent": 1.0,
+      "bflc:simpleDate": 1.0,
+      "bflc:simplePlace": 0.962
+     }
+    },
+    "Publication": {
+     "count": 520,
+     "props": {
+      "place": 0.962,
+      "date": 0.96,
+      "bflc:simplePlace": 0.942,
+      "bflc:simpleDate": 0.91,
+      "bflc:simpleAgent": 0.858
+     }
+    },
+    "Relation": {
+     "count": 113,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.195
+     }
+    },
+    "Scale": {
+     "count": 962,
+     "props": {
+      "rdfs:label": 1.0,
+      "rdf:value": 0.302
+     }
+    },
+    "TableOfContents": {
+     "count": 53,
+     "props": {
+      "rdfs:label": 1.0,
+      "status": 0.057
+     }
+    },
+    "Title": {
+     "count": 1054,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.162,
+      "bflc:nonSortNum": 0.068
+     }
+    },
+    "Topic": {
+     "count": 654,
+     "props": {
+      "source": 0.997,
+      "mads:isMemberOfMADSScheme": 0.939,
+      "bflc:aap-normalized": 0.936,
+      "mads:authoritativeLabel": 0.933,
+      "rdfs:label": 0.931,
+      "mads:componentList": 0.927,
+      "code": 0.064
+     }
+    },
+    "VariantTitle": {
+     "count": 120,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.35,
+      "subtitle": 0.025
+     }
+    }
+   }
+  },
+  "music-recording": {
+   "records": 500,
+   "Instance": {
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "baseMaterial": {
+     "share": 0.936,
+     "kinds": {
+      "BaseMaterial": 0.936
+     }
+    },
+    "carrier": {
+     "share": 1.0,
+     "kinds": {
+      "Carrier": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/sd",
+       "label": "audio disc",
+       "share": 0.938
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/ss",
+       "label": "audiocassette",
+       "share": 0.056
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/st",
+       "label": "audiotape reel",
+       "share": 0.01
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/se",
+       "label": "audio cylinder",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+       "label": "volume",
+       "share": 0.002
+      }
+     ]
+    },
+    "copyrightDate": {
+     "share": 0.464
+    },
+    "digitalCharacteristic": {
+     "share": 0.262,
+     "kinds": {
+      "FileType": 0.26,
+      "EncodingFormat": 0.26
+     }
+    },
+    "dimensions": {
+     "share": 1.0
+    },
+    "distributionStatement": {
+     "share": 0.028
+    },
+    "duration": {
+     "share": 0.22
+    },
+    "editionStatement": {
+     "share": 0.01
+    },
+    "extent": {
+     "share": 0.998,
+     "kinds": {
+      "Extent": 0.998
+     }
+    },
+    "hasItem": {
+     "share": 0.052,
+     "kinds": {
+      "Item": 0.052
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 1.0,
+     "kinds": {
+      "Lccn": 1.0,
+      "AudioIssueNumber": 0.898,
+      "OclcNumber": 0.666,
+      "Upc": 0.28,
+      "Ean": 0.104,
+      "Local": 0.022
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 0.994
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 0.994
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+       "label": "multipart monograph",
+       "share": 0.006
+      }
+     ]
+    },
+    "media": {
+     "share": 1.0,
+     "kinds": {
+      "Media": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/s",
+       "label": "audio",
+       "share": 1.0
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.958,
+     "kinds": {
+      "Note": 0.958
+     }
+    },
+    "provisionActivity": {
+     "share": 0.992,
+     "kinds": {
+      "Publication": 0.992,
+      "Distribution": 0.198,
+      "Production": 0.18
+     }
+    },
+    "publicationStatement": {
+     "share": 0.986
+    },
+    "responsibilityStatement": {
+     "share": 0.678
+    },
+    "soundCharacteristic": {
+     "share": 1.0,
+     "kinds": {
+      "CaptureStorage": 0.998,
+      "PlayingSpeed": 0.978,
+      "PlaybackChannels": 0.94,
+      "RecordingMethod": 0.752,
+      "GrooveCharacteristic": 0.596,
+      "RecordingMedium": 0.266,
+      "TapeConfig": 0.058
+     }
+    },
+    "systemRequirement": {
+     "share": 0.012,
+     "kinds": {
+      "SystemRequirement": 0.012
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.252
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "capture": {
+     "share": 0.458,
+     "kinds": {
+      "Capture": 0.458
+     }
+    },
+    "classification": {
+     "share": 0.994,
+     "kinds": {
+      "ClassificationLcc": 0.994,
+      "ClassificationDdc": 0.122
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/prm",
+       "label": "performed music",
+       "share": 1.0
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/snd",
+       "label": "sounds",
+       "share": 0.002
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.918,
+     "kinds": {
+      "PrimaryContribution": 0.506
+     }
+    },
+    "ensemble": {
+     "share": 0.264,
+     "kinds": {
+      "Ensemble": 0.264
+     }
+    },
+    "expressionOf": {
+     "share": 0.118,
+     "kinds": {
+      "Hub": 0.088,
+      "NotatedMusic": 0.03
+     }
+    },
+    "genreForm": {
+     "share": 0.912,
+     "kinds": {
+      "GenreForm": 0.912
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014027009",
+       "label": "Popular music",
+       "share": 0.268
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014027103",
+       "label": "Songs",
+       "share": 0.238
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026879",
+       "label": "Jazz",
+       "share": 0.136
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014027054",
+       "label": "Rock music",
+       "share": 0.092
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026639",
+       "label": "Art music",
+       "share": 0.05
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026097",
+       "label": "Excerpts",
+       "share": 0.048
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026704",
+       "label": "Chamber music",
+       "share": 0.044
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026809",
+       "label": "Folk music",
+       "share": 0.042
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.162,
+     "kinds": {
+      "GeographicCoverage": 0.162
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "intendedAudience": {
+     "share": 0.018,
+     "kinds": {
+      "IntendedAudience": 0.018
+     }
+    },
+    "language": {
+     "share": 0.978,
+     "kinds": {
+      "Language": 0.53
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.466
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/zxx",
+       "label": "No linguistic content",
+       "share": 0.334
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.026
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/vie",
+       "label": "Vietnamese",
+       "share": 0.022
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ita",
+       "label": "Italian",
+       "share": 0.018
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/lat",
+       "label": "lat",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/und",
+       "label": "Undetermined",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.014
+      }
+     ]
+    },
+    "note": {
+     "share": 0.924,
+     "kinds": {
+      "Note": 0.924
+     }
+    },
+    "originDate": {
+     "share": 0.094
+    },
+    "relation": {
+     "share": 0.426,
+     "kinds": {
+      "Relation": 0.426
+     }
+    },
+    "subject": {
+     "share": 0.954,
+     "kinds": {
+      "Topic": 0.954,
+      "Temporal": 0.09,
+      "Place": 0.034,
+      "Person": 0.014
+     }
+    },
+    "summary": {
+     "share": 0.034,
+     "kinds": {
+      "Summary": 0.034
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.472,
+     "kinds": {
+      "SupplementaryContent": 0.472
+     }
+    },
+    "tableOfContents": {
+     "share": 0.864,
+     "kinds": {
+      "TableOfContents": 0.864
+     }
+    },
+    "temporalCoverage": {
+     "share": 0.13
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.172,
+      "ParallelTitle": 0.014
+     }
+    }
+   },
+   "nodes": {
+    "AdminMetadata": {
+     "count": 4000,
+     "props": {
+      "date": 0.75,
+      "status": 0.75,
+      "agent": 0.57,
+      "generationProcess": 0.25,
+      "bflc:encodingLevel": 0.25,
+      "bflc:marcKey": 0.25,
+      "descriptionLevel": 0.25,
+      "identifiedBy": 0.25,
+      "note": 0.25,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.25,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.25,
+      "descriptionConventions": 0.248,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.242,
+      "descriptionLanguage": 0.204,
+      "descriptionModifier": 0.18,
+      "descriptionAuthentication": 0.167,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.042
+     }
+    },
+    "AudioIssueNumber": {
+     "count": 586,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.991,
+      "qualifier": 0.179
+     }
+    },
+    "BaseMaterial": {
+     "count": 158,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.994
+     }
+    },
+    "Capture": {
+     "count": 347,
+     "props": {
+      "place": 0.654,
+      "note": 0.594,
+      "date": 0.573,
+      "rdfs:label": 0.213,
+      "bflc:appliesTo": 0.104
+     }
+    },
+    "Classification": {
+     "count": 5,
+     "props": {
+      "classificationPortion": 1.0,
+      "source": 1.0
+     }
+    },
+    "ClassificationDdc": {
+     "count": 61,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 0.967,
+      "source": 0.393,
+      "assigner": 0.23,
+      "itemPortion": 0.197
+     }
+    },
+    "ClassificationLcc": {
+     "count": 507,
+     "props": {
+      "assigner": 1.0,
+      "classificationPortion": 1.0,
+      "status": 1.0
+     }
+    },
+    "Distribution": {
+     "count": 99,
+     "props": {
+      "date": 0.889,
+      "place": 0.889,
+      "bflc:simpleAgent": 0.141,
+      "bflc:simplePlace": 0.131,
+      "bflc:simpleDate": 0.01
+     }
+    },
+    "Ean": {
+     "count": 57,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.158
+     }
+    },
+    "Ensemble": {
+     "count": 200,
+     "props": {
+      "mediumComponent": 1.0,
+      "ensembleSize": 0.865,
+      "bflc:appliesTo": 0.22,
+      "status": 0.07
+     }
+    },
+    "Extent": {
+     "count": 499,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.697,
+      "bflc:appliesTo": 0.02
+     }
+    },
+    "GenreForm": {
+     "count": 125,
+     "props": {
+      "rdfs:label": 0.976,
+      "mads:authoritativeLabel": 0.952,
+      "source": 0.92,
+      "mads:isMemberOfMADSScheme": 0.032,
+      "code": 0.024
+     }
+    },
+    "Lccn": {
+     "count": 541,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.076
+     }
+    },
+    "Local": {
+     "count": 12,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.25,
+      "source": 0.25
+     }
+    },
+    "MatrixNumber": {
+     "count": 9,
+     "props": {
+      "assigner": 1.0,
+      "rdf:value": 1.0,
+      "qualifier": 0.556
+     }
+    },
+    "Note": {
+     "count": 1721,
+     "props": {
+      "rdfs:label": 0.983,
+      "language": 0.017
+     }
+    },
+    "OclcNumber": {
+     "count": 333,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "ParallelTitle": {
+     "count": 10,
+     "props": {
+      "mainTitle": 1.0
+     }
+    },
+    "PlayingSpeed": {
+     "count": 254,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.016
+     }
+    },
+    "PrimaryContribution": {
+     "count": 253,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Production": {
+     "count": 90,
+     "props": {
+      "date": 1.0,
+      "note": 0.022,
+      "place": 0.022
+     }
+    },
+    "Publication": {
+     "count": 504,
+     "props": {
+      "bflc:simplePlace": 0.98,
+      "bflc:simpleDate": 0.978,
+      "bflc:simpleAgent": 0.976,
+      "place": 0.806,
+      "date": 0.802
+     }
+    },
+    "Relation": {
+     "count": 1319,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.012
+     }
+    },
+    "Summary": {
+     "count": 17,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "SystemRequirement": {
+     "count": 6,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "TableOfContents": {
+     "count": 467,
+     "props": {
+      "rdfs:label": 1.0,
+      "status": 0.032
+     }
+    },
+    "Temporal": {
+     "count": 45,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Title": {
+     "count": 1026,
+     "props": {
+      "mainTitle": 1.0,
+      "bflc:nonSortNum": 0.097,
+      "subtitle": 0.094,
+      "partNumber": 0.039
+     }
+    },
+    "Topic": {
+     "count": 432,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 0.986,
+      "mads:componentList": 0.516,
+      "mads:isMemberOfMADSScheme": 0.426
+     }
+    },
+    "Upc": {
+     "count": 145,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.014
+     }
+    },
+    "VariantTitle": {
+     "count": 111,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.342,
+      "subtitle": 0.081,
+      "partNumber": 0.045,
+      "partName": 0.027
+     }
+    }
+   }
+  },
+  "score": {
+   "records": 498,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.016,
+     "kinds": {
+      "AcquisitionSource": 0.016
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "appliedMaterial": {
+     "share": 0.01,
+     "kinds": {
+      "AppliedMaterial": 0.01
+     }
+    },
+    "baseMaterial": {
+     "share": 0.11,
+     "kinds": {
+      "BaseMaterial": 0.11
+     }
+    },
+    "carrier": {
+     "share": 0.952,
+     "kinds": {
+      "Carrier": 0.952
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+       "label": "volume",
+       "share": 0.783
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nb",
+       "label": "sheet",
+       "share": 0.157
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/hd",
+       "label": "microfilm reel",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/sd",
+       "label": "audio disc",
+       "share": 0.002
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.038,
+     "kinds": {
+      "ColorContent": 0.038
+     }
+    },
+    "copyrightDate": {
+     "share": 0.143
+    },
+    "dimensions": {
+     "share": 0.888
+    },
+    "distributionStatement": {
+     "share": 0.028
+    },
+    "duration": {
+     "share": 0.12
+    },
+    "editionStatement": {
+     "share": 0.151
+    },
+    "emulsion": {
+     "share": 0.038,
+     "kinds": {
+      "Emulsion": 0.038
+     }
+    },
+    "extent": {
+     "share": 0.966,
+     "kinds": {
+      "Extent": 0.966
+     }
+    },
+    "generation": {
+     "share": 0.038,
+     "kinds": {
+      "Generation": 0.038
+     }
+    },
+    "hasItem": {
+     "share": 0.169,
+     "kinds": {
+      "Item": 0.169
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.998,
+     "kinds": {
+      "Lccn": 0.996,
+      "Local": 0.285,
+      "CopyrightNumber": 0.191,
+      "MusicPlate": 0.183,
+      "MusicPublisherNumber": 0.165,
+      "OclcNumber": 0.145,
+      "Isbn": 0.086,
+      "Ismn": 0.06,
+      "Upc": 0.026,
+      "Ean": 0.018
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 0.978,
+      "Collection": 0.022
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 0.998
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+       "label": "multipart monograph",
+       "share": 0.002
+      }
+     ]
+    },
+    "media": {
+     "share": 0.97,
+     "kinds": {
+      "Media": 0.97
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.932
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/h",
+       "label": "microform",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/s",
+       "label": "audio",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.938,
+     "kinds": {
+      "Note": 0.938
+     }
+    },
+    "polarity": {
+     "share": 0.038,
+     "kinds": {
+      "Polarity": 0.038
+     }
+    },
+    "productionMethod": {
+     "share": 0.02,
+     "kinds": {
+      "ProductionMethod": 0.02
+     }
+    },
+    "productionStatement": {
+     "share": 0.114
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 0.998,
+      "Production": 0.116,
+      "Distribution": 0.028
+     }
+    },
+    "publicationStatement": {
+     "share": 0.878
+    },
+    "responsibilityStatement": {
+     "share": 0.807
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    },
+    "usageAndAccessPolicy": {
+     "share": 0.024,
+     "kinds": {
+      "UsePolicy": 0.024
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.163
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "classification": {
+     "share": 0.952,
+     "kinds": {
+      "ClassificationLcc": 0.952,
+      "ClassificationDdc": 0.022
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 0.998
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/ntm",
+       "label": "notated music",
+       "share": 0.996
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.01
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/prm",
+       "label": "performed music",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/ntn",
+       "label": "ntn",
+       "share": 0.002
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.978,
+     "kinds": {
+      "PrimaryContribution": 0.759
+     }
+    },
+    "ensemble": {
+     "share": 0.522,
+     "kinds": {
+      "Ensemble": 0.522
+     }
+    },
+    "expressionOf": {
+     "share": 0.355,
+     "kinds": {
+      "Hub": 0.203,
+      "NotatedMusic": 0.151
+     }
+    },
+    "genreForm": {
+     "share": 0.924,
+     "kinds": {
+      "GenreForm": 0.924
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014027077",
+       "label": "Scores",
+       "share": 0.506
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026950",
+       "label": "Motion picture music",
+       "share": 0.265
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014027091",
+       "label": "Silent film music",
+       "share": 0.257
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026986",
+       "label": "Parts (Music)",
+       "share": 0.203
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014027103",
+       "label": "Songs",
+       "share": 0.161
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2021026020",
+       "label": "Cue sheets (Music)",
+       "share": 0.141
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026704",
+       "label": "Chamber music",
+       "share": 0.096
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026952",
+       "label": "Music",
+       "share": 0.082
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.062,
+     "kinds": {
+      "GeographicCoverage": 0.062
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.032,
+     "kinds": {
+      "ThematicCatalogNumber": 0.014,
+      "OpusNumber": 0.012
+     }
+    },
+    "intendedAudience": {
+     "share": 0.124,
+     "kinds": {
+      "IntendedAudience": 0.124
+     }
+    },
+    "keyMode": {
+     "share": 0.01,
+     "kinds": {
+      "KeyMode": 0.01
+     }
+    },
+    "language": {
+     "share": 0.904,
+     "kinds": {
+      "Language": 0.705
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/zxx",
+       "label": "No linguistic content",
+       "share": 0.502
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.199
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ger",
+       "label": "German",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/yid",
+       "label": "Yiddish",
+       "share": 0.036
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/lat",
+       "label": "Latin",
+       "share": 0.024
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.024
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ita",
+       "label": "Italian",
+       "share": 0.022
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.014
+      }
+     ]
+    },
+    "musicFormat": {
+     "share": 0.789,
+     "kinds": {
+      "MusicFormat": 0.665
+     }
+    },
+    "notation": {
+     "share": 0.649,
+     "kinds": {
+      "MusicNotation": 0.645,
+      "Notation": 0.046
+     }
+    },
+    "note": {
+     "share": 0.215,
+     "kinds": {
+      "Note": 0.215
+     }
+    },
+    "originDate": {
+     "share": 0.054
+    },
+    "originPlace": {
+     "share": 0.01
+    },
+    "relation": {
+     "share": 0.554,
+     "kinds": {
+      "Relation": 0.554
+     }
+    },
+    "subject": {
+     "share": 0.93,
+     "kinds": {
+      "Topic": 0.93,
+      "Person": 0.02,
+      "Place": 0.016
+     }
+    },
+    "summary": {
+     "share": 0.016,
+     "kinds": {
+      "Summary": 0.016
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.155,
+     "kinds": {
+      "SupplementaryContent": 0.155
+     }
+    },
+    "tableOfContents": {
+     "share": 0.124,
+     "kinds": {
+      "TableOfContents": 0.124
+     }
+    },
+    "temporalCoverage": {
+     "share": 0.03
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.213,
+      "ParallelTitle": 0.1
+     }
+    }
+   },
+   "nodes": {
+    "AcquisitionSource": {
+     "count": 8,
+     "props": {
+      "rdfs:label": 1.0,
+      "acquisitionTerms": 0.75
+     }
+    },
+    "AdminMetadata": {
+     "count": 3940,
+     "props": {
+      "date": 0.747,
+      "status": 0.747,
+      "agent": 0.627,
+      "generationProcess": 0.253,
+      "bflc:marcKey": 0.253,
+      "descriptionLevel": 0.253,
+      "identifiedBy": 0.253,
+      "note": 0.253,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.253,
+      "bflc:encodingLevel": 0.238,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.223,
+      "descriptionConventions": 0.216,
+      "descriptionLanguage": 0.202,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.169,
+      "descriptionAuthentication": 0.165,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.157,
+      "descriptionModifier": 0.12,
+      "http://id.loc.gov/ontologies/lclocal/d999": 0.016
+     }
+    },
+    "AppliedMaterial": {
+     "count": 5,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "BaseMaterial": {
+     "count": 35,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "ClassificationDdc": {
+     "count": 11,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 1.0,
+      "source": 0.727,
+      "assigner": 0.455,
+      "itemPortion": 0.091
+     }
+    },
+    "ClassificationLcc": {
+     "count": 505,
+     "props": {
+      "classificationPortion": 1.0,
+      "status": 1.0,
+      "assigner": 0.99,
+      "itemPortion": 0.939
+     }
+    },
+    "CopyrightNumber": {
+     "count": 95,
+     "props": {
+      "assigner": 1.0,
+      "date": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Distribution": {
+     "count": 14,
+     "props": {
+      "bflc:simpleAgent": 0.929,
+      "bflc:simplePlace": 0.929,
+      "bflc:simpleDate": 0.071
+     }
+    },
+    "Ean": {
+     "count": 9,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Ensemble": {
+     "count": 346,
+     "props": {
+      "mediumComponent": 1.0,
+      "ensembleSize": 0.737,
+      "status": 0.223,
+      "bflc:appliesTo": 0.017
+     }
+    },
+    "Extent": {
+     "count": 481,
+     "props": {
+      "rdfs:label": 1.0,
+      "bflc:appliesTo": 0.133,
+      "note": 0.046
+     }
+    },
+    "GenreForm": {
+     "count": 138,
+     "props": {
+      "rdfs:label": 0.964,
+      "source": 0.775,
+      "mads:authoritativeLabel": 0.746,
+      "identifiedBy": 0.072,
+      "code": 0.036
+     }
+    },
+    "Isbn": {
+     "count": 70,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.457,
+      "status": 0.071
+     }
+    },
+    "Ismn": {
+     "count": 58,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.672
+     }
+    },
+    "KeyMode": {
+     "count": 5,
+     "props": {
+      "rdfs:label": 1.0,
+      "bflc:appliesTo": 0.2
+     }
+    },
+    "Lccn": {
+     "count": 518,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.042
+     }
+    },
+    "Local": {
+     "count": 153,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.621,
+      "source": 0.026
+     }
+    },
+    "MusicNotation": {
+     "count": 67,
+     "props": {
+      "source": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "MusicPlate": {
+     "count": 104,
+     "props": {
+      "assigner": 1.0,
+      "rdf:value": 1.0,
+      "qualifier": 0.087
+     }
+    },
+    "MusicPublisherNumber": {
+     "count": 105,
+     "props": {
+      "assigner": 1.0,
+      "rdf:value": 1.0,
+      "qualifier": 0.029
+     }
+    },
+    "Notation": {
+     "count": 25,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Note": {
+     "count": 1529,
+     "props": {
+      "rdfs:label": 0.983,
+      "bflc:citation": 0.05,
+      "electronicLocator": 0.033,
+      "language": 0.017
+     }
+    },
+    "OclcNumber": {
+     "count": 116,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.06
+     }
+    },
+    "OpusNumber": {
+     "count": 7,
+     "props": {
+      "rdf:value": 1.0,
+      "bflc:appliesTo": 0.286
+     }
+    },
+    "ParallelTitle": {
+     "count": 89,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.112,
+      "partName": 0.011
+     }
+    },
+    "PrimaryContribution": {
+     "count": 378,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Production": {
+     "count": 58,
+     "props": {
+      "bflc:simpleDate": 0.914,
+      "bflc:simplePlace": 0.121,
+      "bflc:simpleAgent": 0.052,
+      "date": 0.017,
+      "note": 0.017,
+      "place": 0.017
+     }
+    },
+    "ProductionMethod": {
+     "count": 10,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Publication": {
+     "count": 508,
+     "props": {
+      "place": 0.978,
+      "date": 0.976,
+      "bflc:simpleDate": 0.86,
+      "bflc:simplePlace": 0.805,
+      "bflc:simpleAgent": 0.801
+     }
+    },
+    "Relation": {
+     "count": 571,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.222
+     }
+    },
+    "Summary": {
+     "count": 8,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "TableOfContents": {
+     "count": 104,
+     "props": {
+      "rdfs:label": 1.0,
+      "status": 0.029
+     }
+    },
+    "ThematicCatalogNumber": {
+     "count": 10,
+     "props": {
+      "source": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Title": {
+     "count": 1080,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.222,
+      "bflc:nonSortNum": 0.108,
+      "partName": 0.014
+     }
+    },
+    "Topic": {
+     "count": 308,
+     "props": {
+      "source": 0.974,
+      "bflc:aap-normalized": 0.925,
+      "mads:authoritativeLabel": 0.909,
+      "rdfs:label": 0.877,
+      "mads:isMemberOfMADSScheme": 0.718,
+      "mads:componentList": 0.682,
+      "code": 0.075
+     }
+    },
+    "Upc": {
+     "count": 14,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.143
+     }
+    },
+    "UsePolicy": {
+     "count": 12,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.75
+     }
+    },
+    "VariantTitle": {
+     "count": 128,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.07
+     }
+    }
+   }
+  },
+  "serial": {
+   "records": 500,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.224,
+     "kinds": {
+      "AcquisitionSource": 0.224
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "baseMaterial": {
+     "share": 0.032,
+     "kinds": {
+      "BaseMaterial": 0.032
+     }
+    },
+    "carrier": {
+     "share": 0.902,
+     "kinds": {
+      "Carrier": 0.902
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+       "label": "volume",
+       "share": 0.86
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/hd",
+       "label": "microfilm reel",
+       "share": 0.03
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cd",
+       "label": "computer disc",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/he",
+       "label": "microfiche",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cz",
+       "label": "other computer carrier",
+       "share": 0.004
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.036,
+     "kinds": {
+      "ColorContent": 0.036
+     }
+    },
+    "dimensions": {
+     "share": 0.946
+    },
+    "editionStatement": {
+     "share": 0.012
+    },
+    "electronicLocator": {
+     "share": 0.03
+    },
+    "emulsion": {
+     "share": 0.032,
+     "kinds": {
+      "Emulsion": 0.032
+     }
+    },
+    "extent": {
+     "share": 0.958,
+     "kinds": {
+      "Extent": 0.958
+     }
+    },
+    "firstIssue": {
+     "share": 0.416
+    },
+    "frequency": {
+     "share": 0.842,
+     "kinds": {
+      "Frequency": 0.842
+     }
+    },
+    "generation": {
+     "share": 0.034,
+     "kinds": {
+      "Generation": 0.034
+     }
+    },
+    "hasItem": {
+     "share": 0.062,
+     "kinds": {
+      "Item": 0.062
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.972,
+     "kinds": {
+      "Lccn": 0.97,
+      "OclcNumber": 0.932,
+      "Local": 0.432,
+      "Coden": 0.118,
+      "Nbn": 0.102,
+      "PostalRegistration": 0.078,
+      "Identifier": 0.026,
+      "LcOverseasAcq": 0.01
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Serial": 1.0
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/serl",
+       "label": "serial",
+       "share": 1.0
+      }
+     ]
+    },
+    "lastIssue": {
+     "share": 0.17
+    },
+    "media": {
+     "share": 0.936,
+     "kinds": {
+      "Media": 0.936
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.894
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/h",
+       "label": "microform",
+       "share": 0.034
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/sti",
+       "label": "sti",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.93,
+     "kinds": {
+      "Note": 0.93
+     }
+    },
+    "polarity": {
+     "share": 0.034,
+     "kinds": {
+      "Polarity": 0.034
+     }
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 1.0
+     }
+    },
+    "publicationStatement": {
+     "share": 1.0
+    },
+    "reductionRatio": {
+     "share": 0.012,
+     "kinds": {
+      "ReductionRatio": 0.012
+     }
+    },
+    "responsibilityStatement": {
+     "share": 0.178
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.064
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.044
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.228
+    },
+    "bflc:serialPubType": {
+     "share": 0.568
+    },
+    "classification": {
+     "share": 0.994,
+     "kinds": {
+      "ClassificationLcc": 0.992,
+      "ClassificationDdc": 0.558,
+      "ClassificationNlm": 0.098,
+      "Classification": 0.076,
+      "ClassificationNal": 0.062
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.992
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.05
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/ntm",
+       "label": "notated music",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/cop",
+       "label": "computer program",
+       "share": 0.004
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.76,
+     "kinds": {
+      "PrimaryContribution": 0.174
+     }
+    },
+    "expressionOf": {
+     "share": 0.16,
+     "kinds": {
+      "Hub": 0.15,
+      "Series": 0.01
+     }
+    },
+    "genreForm": {
+     "share": 0.926,
+     "kinds": {
+      "GenreForm": 0.926
+     },
+     "values": [
+      {
+       "uri": "http://id.worldcat.org/fast/1411641",
+       "label": "Periodicals",
+       "share": 0.686
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026139",
+       "label": "Periodicals",
+       "share": 0.33
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026181",
+       "label": "Statistics",
+       "share": 0.094
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026266",
+       "label": "Comics (Graphic works)",
+       "share": 0.07
+      },
+      {
+       "uri": "http://id.worldcat.org/fast/1423727",
+       "label": "Statistics",
+       "share": 0.064
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026351",
+       "label": "Law materials",
+       "share": 0.048
+      },
+      {
+       "uri": "http://id.worldcat.org/fast/1411628",
+       "label": "1411628",
+       "share": 0.038
+      },
+      {
+       "uri": "http://id.worldcat.org/fast/1921613",
+       "label": "Comics (Graphic works)",
+       "share": 0.032
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.598,
+     "kinds": {
+      "GeographicCoverage": 0.598
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.568,
+     "kinds": {
+      "Issn": 0.566,
+      "IssnL": 0.478
+     }
+    },
+    "intendedAudience": {
+     "share": 0.016,
+     "kinds": {
+      "IntendedAudience": 0.016
+     }
+    },
+    "language": {
+     "share": 0.998,
+     "kinds": {
+      "Language": 0.356
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.758
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.076
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ger",
+       "label": "German",
+       "share": 0.044
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/chi",
+       "label": "Chinese",
+       "share": 0.044
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.034
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/jpn",
+       "label": "Japanese",
+       "share": 0.034
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/iso639-3/eng",
+       "label": "English",
+       "share": 0.022
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/iso639-3/fra",
+       "label": "French",
+       "share": 0.02
+      }
+     ]
+    },
+    "notation": {
+     "share": 0.628,
+     "kinds": {
+      "Script": 0.628
+     }
+    },
+    "note": {
+     "share": 0.282,
+     "kinds": {
+      "Note": 0.282
+     }
+    },
+    "place": {
+     "share": 0.046,
+     "kinds": {
+      "Place": 0.046
+     }
+    },
+    "rdfs:label": {
+     "share": 0.024
+    },
+    "relation": {
+     "share": 0.778,
+     "kinds": {
+      "Relation": 0.778
+     }
+    },
+    "subject": {
+     "share": 0.97,
+     "kinds": {
+      "Topic": 0.916,
+      "Place": 0.526,
+      "Organization": 0.09,
+      "Temporal": 0.046,
+      "Person": 0.036
+     }
+    },
+    "summary": {
+     "share": 0.058,
+     "kinds": {
+      "Summary": 0.058
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.03,
+     "kinds": {
+      "SupplementaryContent": 0.03
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "KeyTitle": 0.45,
+      "VariantTitle": 0.39,
+      "AbbreviatedTitle": 0.336,
+      "ParallelTitle": 0.05
+     }
+    }
+   },
+   "nodes": {
+    "AbbreviatedTitle": {
+     "count": 179,
+     "props": {
+      "mainTitle": 1.0,
+      "assigner": 0.994,
+      "qualifier": 0.212
+     }
+    },
+    "AcquisitionSource": {
+     "count": 112,
+     "props": {
+      "rdfs:label": 1.0,
+      "acquisitionTerms": 0.08,
+      "identifiedBy": 0.018
+     }
+    },
+    "AdminMetadata": {
+     "count": 4000,
+     "props": {
+      "status": 0.751,
+      "date": 0.75,
+      "agent": 0.505,
+      "generationProcess": 0.25,
+      "bflc:marcKey": 0.25,
+      "descriptionLevel": 0.25,
+      "identifiedBy": 0.25,
+      "note": 0.249,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.247,
+      "bflc:encodingLevel": 0.242,
+      "descriptionModifier": 0.24,
+      "descriptionLanguage": 0.239,
+      "descriptionAuthentication": 0.233,
+      "descriptionConventions": 0.199,
+      "http://id.loc.gov/ontologies/lclocal/d999": 0.146,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.143,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.099,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.038
+     }
+    },
+    "Classification": {
+     "count": 64,
+     "props": {
+      "source": 1.0,
+      "rdfs:label": 0.781,
+      "classificationPortion": 0.219,
+      "assigner": 0.078,
+      "status": 0.016
+     }
+    },
+    "ClassificationDdc": {
+     "count": 303,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 0.993,
+      "source": 0.512,
+      "assigner": 0.492,
+      "itemPortion": 0.089
+     }
+    },
+    "ClassificationLcc": {
+     "count": 583,
+     "props": {
+      "classificationPortion": 1.0,
+      "assigner": 0.885,
+      "status": 0.882,
+      "itemPortion": 0.837
+     }
+    },
+    "ClassificationNal": {
+     "count": 34,
+     "props": {
+      "classificationPortion": 1.0,
+      "assigner": 0.853,
+      "status": 0.853,
+      "itemPortion": 0.618
+     }
+    },
+    "ClassificationNlm": {
+     "count": 52,
+     "props": {
+      "classificationPortion": 1.0,
+      "itemPortion": 0.75,
+      "assigner": 0.712,
+      "status": 0.673
+     }
+    },
+    "Coden": {
+     "count": 68,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.059
+     }
+    },
+    "Extent": {
+     "count": 491,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.635
+     }
+    },
+    "Frequency": {
+     "count": 513,
+     "props": {
+      "status": 1.0,
+      "rdfs:label": 1.0,
+      "date": 0.363
+     }
+    },
+    "GenreForm": {
+     "count": 456,
+     "props": {
+      "rdfs:label": 1.0,
+      "mads:authoritativeLabel": 0.596,
+      "source": 0.52,
+      "mads:isMemberOfMADSScheme": 0.103,
+      "identifiedBy": 0.039
+     }
+    },
+    "Identifier": {
+     "count": 26,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.538,
+      "source": 0.077
+     }
+    },
+    "IntendedAudience": {
+     "count": 5,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.2
+     }
+    },
+    "Issn": {
+     "count": 318,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.764,
+      "status": 0.123
+     }
+    },
+    "IssnL": {
+     "count": 239,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.816
+     }
+    },
+    "KeyTitle": {
+     "count": 235,
+     "props": {
+      "mainTitle": 1.0,
+      "qualifier": 0.234,
+      "bflc:nonSortNum": 0.077
+     }
+    },
+    "LcOverseasAcq": {
+     "count": 5,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Lccn": {
+     "count": 651,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.237
+     }
+    },
+    "Local": {
+     "count": 521,
+     "props": {
+      "rdf:value": 1.0,
+      "source": 0.988
+     }
+    },
+    "Nbn": {
+     "count": 57,
+     "props": {
+      "source": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Note": {
+     "count": 1613,
+     "props": {
+      "rdfs:label": 0.999
+     }
+    },
+    "OclcNumber": {
+     "count": 479,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "ParallelTitle": {
+     "count": 27,
+     "props": {
+      "mainTitle": 1.0,
+      "date": 0.148,
+      "partName": 0.037
+     }
+    },
+    "Place": {
+     "count": 41,
+     "props": {
+      "rdfs:label": 1.0,
+      "mads:componentList": 0.61,
+      "source": 0.415,
+      "bflc:aap-normalized": 0.39,
+      "mads:authoritativeLabel": 0.39,
+      "mads:isMemberOfMADSScheme": 0.39,
+      "mads:isIdentifiedByAuthority": 0.024,
+      "relation": 0.024
+     }
+    },
+    "PostalRegistration": {
+     "count": 42,
+     "props": {
+      "assigner": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "PrimaryContribution": {
+     "count": 89,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Publication": {
+     "count": 605,
+     "props": {
+      "bflc:simplePlace": 0.992,
+      "bflc:simpleAgent": 0.977,
+      "status": 0.846,
+      "place": 0.825,
+      "date": 0.823,
+      "bflc:simpleDate": 0.491,
+      "bflc:appliesTo": 0.19
+     }
+    },
+    "Relation": {
+     "count": 970,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "note": 0.026,
+      "seriesEnumeration": 0.016,
+      "mergedWith": 0.011
+     }
+    },
+    "Summary": {
+     "count": 29,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Temporal": {
+     "count": 23,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Title": {
+     "count": 1055,
+     "props": {
+      "mainTitle": 1.0,
+      "bflc:nonSortNum": 0.099,
+      "subtitle": 0.049,
+      "partName": 0.042
+     }
+    },
+    "Topic": {
+     "count": 1379,
+     "props": {
+      "bflc:aap-normalized": 0.98,
+      "source": 0.962,
+      "rdfs:label": 0.962,
+      "mads:authoritativeLabel": 0.953,
+      "mads:isMemberOfMADSScheme": 0.658,
+      "mads:componentList": 0.619,
+      "code": 0.02
+     }
+    },
+    "VariantTitle": {
+     "count": 323,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.149,
+      "date": 0.146,
+      "partName": 0.022
+     }
+    }
+   }
+  },
+  "serial-online": {
+   "records": 500,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.272,
+     "kinds": {
+      "AcquisitionSource": 0.272
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "carrier": {
+     "share": 1.0,
+     "kinds": {
+      "Carrier": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+       "label": "online resource",
+       "share": 1.0
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.24,
+     "kinds": {
+      "ColorContent": 0.24
+     }
+    },
+    "electronicLocator": {
+     "share": 0.492
+    },
+    "extent": {
+     "share": 0.53,
+     "kinds": {
+      "Extent": 0.53
+     }
+    },
+    "firstIssue": {
+     "share": 0.196
+    },
+    "frequency": {
+     "share": 0.96,
+     "kinds": {
+      "Frequency": 0.96
+     }
+    },
+    "hasItem": {
+     "share": 0.304,
+     "kinds": {
+      "Item": 0.304
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.994,
+     "kinds": {
+      "Lccn": 0.992,
+      "OclcNumber": 0.988,
+      "Local": 0.636,
+      "Nbn": 0.2,
+      "Coden": 0.146,
+      "Identifier": 0.024
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Serial": 1.0
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/serl",
+       "label": "serial",
+       "share": 1.0
+      }
+     ]
+    },
+    "manufactureStatement": {
+     "share": 0.014
+    },
+    "media": {
+     "share": 1.0,
+     "kinds": {
+      "Media": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 1.0
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/s",
+       "label": "audio",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.994,
+     "kinds": {
+      "Note": 0.994
+     }
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 1.0,
+      "Manufacture": 0.014
+     }
+    },
+    "publicationStatement": {
+     "share": 1.0
+    },
+    "responsibilityStatement": {
+     "share": 0.042
+    },
+    "supplementaryContent": {
+     "share": 0.014,
+     "kinds": {
+      "SupplementaryContent": 0.014
+     }
+    },
+    "systemRequirement": {
+     "share": 0.378,
+     "kinds": {
+      "SystemRequirement": 0.378
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "AbbreviatedTitle": 0.064
+     }
+    },
+    "usageAndAccessPolicy": {
+     "share": 0.136,
+     "kinds": {
+      "AccessPolicy": 0.136
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.038
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.04
+    },
+    "bflc:serialPubType": {
+     "share": 0.916
+    },
+    "classification": {
+     "share": 0.988,
+     "kinds": {
+      "ClassificationLcc": 0.988,
+      "ClassificationDdc": 0.686,
+      "ClassificationNlm": 0.228,
+      "ClassificationNal": 0.042,
+      "Classification": 0.036
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 1.0
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.01
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/tdi",
+       "label": "two-dimensional moving image",
+       "share": 0.002
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.57,
+     "kinds": {
+      "PrimaryContribution": 0.034
+     }
+    },
+    "expressionOf": {
+     "share": 0.404,
+     "kinds": {
+      "Hub": 0.398
+     }
+    },
+    "genreForm": {
+     "share": 0.978,
+     "kinds": {
+      "GenreForm": 0.978
+     },
+     "values": [
+      {
+       "uri": "http://id.worldcat.org/fast/1411641",
+       "label": "Periodicals",
+       "share": 0.852
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026139",
+       "label": "Periodicals",
+       "share": 0.532
+      },
+      {
+       "uri": "http://id.worldcat.org/fast/1423814",
+       "label": "Newspapers",
+       "share": 0.042
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026132",
+       "label": "Newspapers",
+       "share": 0.04
+      },
+      {
+       "uri": "http://id.worldcat.org/fast/1423772",
+       "label": "Conference papers and proceedings",
+       "share": 0.024
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026068",
+       "label": "Conference papers and proceedings",
+       "share": 0.022
+      },
+      {
+       "uri": "http://id.worldcat.org/fast/1411628",
+       "label": "1411628",
+       "share": 0.016
+      },
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2014026132",
+       "label": "Newspapers",
+       "share": 0.012
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.216,
+     "kinds": {
+      "GeographicCoverage": 0.216
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 0.93,
+     "kinds": {
+      "Issn": 0.928,
+      "IssnL": 0.658
+     }
+    },
+    "language": {
+     "share": 1.0,
+     "kinds": {
+      "Language": 0.174
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.922
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.048
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ger",
+       "label": "German",
+       "share": 0.044
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.028
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/rus",
+       "label": "Russian",
+       "share": 0.028
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/por",
+       "label": "Portuguese",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ita",
+       "label": "Italian",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/rum",
+       "label": "Romanian",
+       "share": 0.006
+      }
+     ]
+    },
+    "notation": {
+     "share": 0.716,
+     "kinds": {
+      "Script": 0.716
+     }
+    },
+    "note": {
+     "share": 0.248,
+     "kinds": {
+      "Note": 0.248
+     }
+    },
+    "place": {
+     "share": 0.048,
+     "kinds": {
+      "Place": 0.048
+     }
+    },
+    "relation": {
+     "share": 0.842,
+     "kinds": {
+      "Relation": 0.842
+     }
+    },
+    "subject": {
+     "share": 0.978,
+     "kinds": {
+      "Topic": 0.936,
+      "Place": 0.196,
+      "Organization": 0.022,
+      "Temporal": 0.012
+     }
+    },
+    "summary": {
+     "share": 0.052,
+     "kinds": {
+      "Summary": 0.052
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "KeyTitle": 0.64,
+      "VariantTitle": 0.542,
+      "AbbreviatedTitle": 0.346,
+      "ParallelTitle": 0.036
+     }
+    }
+   },
+   "nodes": {
+    "AbbreviatedTitle": {
+     "count": 218,
+     "props": {
+      "mainTitle": 1.0,
+      "assigner": 0.927,
+      "qualifier": 0.628
+     }
+    },
+    "AccessPolicy": {
+     "count": 70,
+     "props": {
+      "rdfs:label": 0.871,
+      "qualifier": 0.229,
+      "source": 0.129,
+      "bflc:appliesTo": 0.1
+     }
+    },
+    "AcquisitionSource": {
+     "count": 141,
+     "props": {
+      "rdfs:label": 0.993,
+      "identifiedBy": 0.085,
+      "acquisitionTerms": 0.078,
+      "note": 0.043
+     }
+    },
+    "AdminMetadata": {
+     "count": 3996,
+     "props": {
+      "status": 0.754,
+      "date": 0.75,
+      "agent": 0.503,
+      "generationProcess": 0.25,
+      "bflc:encodingLevel": 0.25,
+      "descriptionConventions": 0.25,
+      "descriptionLevel": 0.25,
+      "identifiedBy": 0.25,
+      "note": 0.25,
+      "descriptionLanguage": 0.249,
+      "descriptionAuthentication": 0.247,
+      "bflc:marcKey": 0.245,
+      "descriptionModifier": 0.244,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.24,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.236,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.236,
+      "http://id.loc.gov/ontologies/lclocal/d999": 0.176,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.159
+     }
+    },
+    "Classification": {
+     "count": 24,
+     "props": {
+      "source": 1.0,
+      "rdfs:label": 0.542,
+      "classificationPortion": 0.458,
+      "assigner": 0.042
+     }
+    },
+    "ClassificationDdc": {
+     "count": 353,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 0.983,
+      "source": 0.527,
+      "assigner": 0.467,
+      "itemPortion": 0.028
+     }
+    },
+    "ClassificationLcc": {
+     "count": 551,
+     "props": {
+      "classificationPortion": 1.0,
+      "assigner": 0.902,
+      "status": 0.902,
+      "itemPortion": 0.087
+     }
+    },
+    "ClassificationNal": {
+     "count": 23,
+     "props": {
+      "classificationPortion": 1.0,
+      "itemPortion": 0.87,
+      "assigner": 0.826,
+      "status": 0.826
+     }
+    },
+    "ClassificationNlm": {
+     "count": 118,
+     "props": {
+      "classificationPortion": 1.0,
+      "assigner": 0.873,
+      "status": 0.864,
+      "itemPortion": 0.653
+     }
+    },
+    "Coden": {
+     "count": 76,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.026
+     }
+    },
+    "Extent": {
+     "count": 269,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.067
+     }
+    },
+    "Frequency": {
+     "count": 724,
+     "props": {
+      "status": 1.0,
+      "rdfs:label": 1.0,
+      "date": 0.532
+     }
+    },
+    "GenreForm": {
+     "count": 1129,
+     "props": {
+      "rdfs:label": 1.0,
+      "mads:authoritativeLabel": 0.85,
+      "source": 0.787,
+      "mads:isMemberOfMADSScheme": 0.312,
+      "identifiedBy": 0.044
+     }
+    },
+    "Identifier": {
+     "count": 13,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.615,
+      "source": 0.077,
+      "qualifier": 0.077
+     }
+    },
+    "Issn": {
+     "count": 586,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.553,
+      "status": 0.234
+     }
+    },
+    "IssnL": {
+     "count": 330,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.567
+     }
+    },
+    "KeyTitle": {
+     "count": 321,
+     "props": {
+      "mainTitle": 1.0,
+      "qualifier": 0.773,
+      "bflc:nonSortNum": 0.022
+     }
+    },
+    "Lccn": {
+     "count": 522,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.042
+     }
+    },
+    "Local": {
+     "count": 606,
+     "props": {
+      "rdf:value": 1.0,
+      "source": 0.99
+     }
+    },
+    "Manufacture": {
+     "count": 7,
+     "props": {
+      "bflc:simpleAgent": 1.0,
+      "bflc:simplePlace": 1.0,
+      "bflc:appliesTo": 0.286
+     }
+    },
+    "Nbn": {
+     "count": 111,
+     "props": {
+      "source": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Note": {
+     "count": 2657,
+     "props": {
+      "rdfs:label": 0.996
+     }
+    },
+    "OclcNumber": {
+     "count": 498,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "ParallelTitle": {
+     "count": 23,
+     "props": {
+      "mainTitle": 1.0,
+      "date": 0.13,
+      "partName": 0.087,
+      "partNumber": 0.043
+     }
+    },
+    "Place": {
+     "count": 35,
+     "props": {
+      "rdfs:label": 1.0,
+      "mads:componentList": 0.686,
+      "bflc:aap-normalized": 0.314,
+      "source": 0.314,
+      "mads:authoritativeLabel": 0.314,
+      "mads:isMemberOfMADSScheme": 0.314,
+      "relation": 0.029
+     }
+    },
+    "PrimaryContribution": {
+     "count": 17,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Publication": {
+     "count": 720,
+     "props": {
+      "bflc:simpleAgent": 0.993,
+      "bflc:simplePlace": 0.993,
+      "status": 0.931,
+      "date": 0.694,
+      "place": 0.694,
+      "bflc:simpleDate": 0.392,
+      "bflc:appliesTo": 0.347
+     }
+    },
+    "Relation": {
+     "count": 663,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "note": 0.015
+     }
+    },
+    "Summary": {
+     "count": 26,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "SupplementaryContent": {
+     "count": 11,
+     "props": {
+      "electronicLocator": 1.0,
+      "note": 0.727
+     }
+    },
+    "SystemRequirement": {
+     "count": 191,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Temporal": {
+     "count": 6,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 1.0,
+      "mads:isMemberOfMADSScheme": 0.167
+     }
+    },
+    "Title": {
+     "count": 2197,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.061,
+      "bflc:nonSortNum": 0.031
+     }
+    },
+    "Topic": {
+     "count": 2399,
+     "props": {
+      "bflc:aap-normalized": 0.991,
+      "rdfs:label": 0.989,
+      "source": 0.871,
+      "mads:authoritativeLabel": 0.866,
+      "mads:isMemberOfMADSScheme": 0.436,
+      "mads:componentList": 0.406
+     }
+    },
+    "VariantTitle": {
+     "count": 528,
+     "props": {
+      "mainTitle": 1.0,
+      "date": 0.25,
+      "note": 0.104
+     }
+    }
+   }
+  },
+  "spoken-audio": {
+   "records": 500,
+   "Instance": {
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "baseMaterial": {
+     "share": 0.37,
+     "kinds": {
+      "BaseMaterial": 0.37
+     }
+    },
+    "carrier": {
+     "share": 0.974,
+     "kinds": {
+      "Carrier": 0.974
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/ss",
+       "label": "audiocassette",
+       "share": 0.456
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+       "label": "online resource",
+       "share": 0.388
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/sd",
+       "label": "audio disc",
+       "share": 0.37
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/st",
+       "label": "audiotape reel",
+       "share": 0.154
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/se",
+       "label": "audio cylinder",
+       "share": 0.006
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cz",
+       "label": "other computer carrier",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/ha",
+       "label": "aperture card",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nb",
+       "label": "sheet",
+       "share": 0.002
+      }
+     ]
+    },
+    "copyrightDate": {
+     "share": 0.154
+    },
+    "digitalCharacteristic": {
+     "share": 0.146,
+     "kinds": {
+      "FileType": 0.146,
+      "EncodingFormat": 0.144
+     }
+    },
+    "dimensions": {
+     "share": 0.578
+    },
+    "duration": {
+     "share": 0.228
+    },
+    "editionStatement": {
+     "share": 0.094
+    },
+    "extent": {
+     "share": 1.0,
+     "kinds": {
+      "Extent": 1.0
+     }
+    },
+    "hasItem": {
+     "share": 0.096,
+     "kinds": {
+      "Item": 0.096
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 1.0,
+     "kinds": {
+      "Lccn": 1.0,
+      "AudioIssueNumber": 0.304,
+      "OclcNumber": 0.286,
+      "Isbn": 0.134,
+      "Upc": 0.074,
+      "Ean": 0.06,
+      "Local": 0.044,
+      "MatrixNumber": 0.016
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 0.956,
+      "Collection": 0.044
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 0.996
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+       "label": "multipart monograph",
+       "share": 0.004
+      }
+     ]
+    },
+    "media": {
+     "share": 0.98,
+     "kinds": {
+      "Media": 0.98
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/s",
+       "label": "audio",
+       "share": 0.98
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 0.042
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/g",
+       "label": "projected",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.972,
+     "kinds": {
+      "Note": 0.972
+     }
+    },
+    "productionStatement": {
+     "share": 0.386
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 0.996,
+      "Production": 0.406,
+      "Distribution": 0.024
+     }
+    },
+    "publicationStatement": {
+     "share": 0.614
+    },
+    "responsibilityStatement": {
+     "share": 0.356
+    },
+    "soundCharacteristic": {
+     "share": 0.932,
+     "kinds": {
+      "CaptureStorage": 0.866,
+      "PlayingSpeed": 0.522,
+      "TapeConfig": 0.48,
+      "PlaybackChannels": 0.448,
+      "RecordingMethod": 0.288,
+      "GrooveCharacteristic": 0.184,
+      "RecordingMedium": 0.16
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.012,
+     "kinds": {
+      "SupplementaryContent": 0.012
+     }
+    },
+    "systemRequirement": {
+     "share": 0.026,
+     "kinds": {
+      "SystemRequirement": 0.026
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    },
+    "usageAndAccessPolicy": {
+     "share": 0.056,
+     "kinds": {
+      "AccessPolicy": 0.054,
+      "UsePolicy": 0.044
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.014
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "capture": {
+     "share": 0.574,
+     "kinds": {
+      "Capture": 0.574
+     }
+    },
+    "classification": {
+     "share": 0.608,
+     "kinds": {
+      "ClassificationLcc": 0.608,
+      "ClassificationDdc": 0.108
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/spw",
+       "label": "spoken word",
+       "share": 0.982
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/prm",
+       "label": "performed music",
+       "share": 0.042
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/snd",
+       "label": "sounds",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.006
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.002
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.946,
+     "kinds": {
+      "PrimaryContribution": 0.49
+     }
+    },
+    "expressionOf": {
+     "share": 0.106,
+     "kinds": {
+      "NonMusicAudio": 0.058,
+      "Hub": 0.046
+     }
+    },
+    "genreForm": {
+     "share": 0.928,
+     "kinds": {
+      "GenreForm": 0.928
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2013025040",
+       "label": "Poetry readings (Sound recordings)",
+       "share": 0.172
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026363",
+       "label": "Speeches",
+       "share": 0.138
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026063",
+       "label": "Audiobooks",
+       "share": 0.11
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026594",
+       "label": "Sound recordings",
+       "share": 0.104
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026115",
+       "label": "Interviews",
+       "share": 0.08
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026339",
+       "label": "Fiction",
+       "share": 0.074
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026110",
+       "label": "Humor",
+       "share": 0.072
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026481",
+       "label": "Poetry",
+       "share": 0.046
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.25,
+     "kinds": {
+      "GeographicCoverage": 0.25
+     }
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "intendedAudience": {
+     "share": 0.402,
+     "kinds": {
+      "IntendedAudience": 0.402
+     }
+    },
+    "language": {
+     "share": 0.992,
+     "kinds": {
+      "Language": 0.33
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.866
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.084
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/tgk",
+       "label": "Tajik",
+       "share": 0.006
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/zxx",
+       "label": "No linguistic content",
+       "share": 0.006
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/por",
+       "label": "Portuguese",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/chi",
+       "label": "Chinese",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/new",
+       "label": "Newari",
+       "share": 0.004
+      }
+     ]
+    },
+    "note": {
+     "share": 0.374,
+     "kinds": {
+      "Note": 0.374
+     }
+    },
+    "relation": {
+     "share": 0.61,
+     "kinds": {
+      "Relation": 0.61
+     }
+    },
+    "subject": {
+     "share": 0.622,
+     "kinds": {
+      "Topic": 0.58,
+      "Place": 0.054,
+      "Person": 0.048,
+      "Organization": 0.028,
+      "Temporal": 0.016
+     }
+    },
+    "summary": {
+     "share": 0.374,
+     "kinds": {
+      "Summary": 0.374
+     }
+    },
+    "supplementaryContent": {
+     "share": 0.086,
+     "kinds": {
+      "SupplementaryContent": 0.086
+     }
+    },
+    "tableOfContents": {
+     "share": 0.192,
+     "kinds": {
+      "TableOfContents": 0.19
+     }
+    },
+    "temporalCoverage": {
+     "share": 0.014
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.126
+     }
+    }
+   },
+   "nodes": {
+    "AccessPolicy": {
+     "count": 27,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.852
+     }
+    },
+    "AdminMetadata": {
+     "count": 4000,
+     "props": {
+      "date": 0.75,
+      "status": 0.75,
+      "agent": 0.642,
+      "generationProcess": 0.25,
+      "bflc:marcKey": 0.25,
+      "descriptionLevel": 0.25,
+      "identifiedBy": 0.25,
+      "note": 0.25,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.25,
+      "bflc:encodingLevel": 0.244,
+      "descriptionLanguage": 0.177,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.16,
+      "descriptionConventions": 0.153,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.129,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.111,
+      "descriptionModifier": 0.108,
+      "descriptionAuthentication": 0.077
+     }
+    },
+    "AudioIssueNumber": {
+     "count": 227,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.996,
+      "qualifier": 0.401
+     }
+    },
+    "BaseMaterial": {
+     "count": 32,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.969
+     }
+    },
+    "Capture": {
+     "count": 320,
+     "props": {
+      "rdfs:label": 0.853,
+      "place": 0.138,
+      "date": 0.122,
+      "note": 0.041
+     }
+    },
+    "ClassificationDdc": {
+     "count": 59,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 1.0,
+      "source": 0.678,
+      "itemPortion": 0.085
+     }
+    },
+    "ClassificationLcc": {
+     "count": 350,
+     "props": {
+      "assigner": 1.0,
+      "classificationPortion": 1.0,
+      "status": 1.0
+     }
+    },
+    "Distribution": {
+     "count": 12,
+     "props": {
+      "date": 0.917,
+      "place": 0.917,
+      "bflc:simpleAgent": 0.083,
+      "bflc:simplePlace": 0.083
+     }
+    },
+    "Ean": {
+     "count": 32,
+     "props": {
+      "rdf:value": 1.0,
+      "note": 0.344,
+      "qualifier": 0.062
+     }
+    },
+    "Extent": {
+     "count": 500,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.57,
+      "bflc:appliesTo": 0.03
+     }
+    },
+    "GenreForm": {
+     "count": 150,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.873,
+      "mads:authoritativeLabel": 0.847,
+      "mads:isMemberOfMADSScheme": 0.013
+     }
+    },
+    "Isbn": {
+     "count": 155,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.187
+     }
+    },
+    "Lccn": {
+     "count": 515,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.029
+     }
+    },
+    "Local": {
+     "count": 23,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.304,
+      "source": 0.087
+     }
+    },
+    "MatrixNumber": {
+     "count": 15,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.933,
+      "qualifier": 0.133
+     }
+    },
+    "Note": {
+     "count": 1384,
+     "props": {
+      "rdfs:label": 0.996
+     }
+    },
+    "OclcNumber": {
+     "count": 144,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "PlayingSpeed": {
+     "count": 60,
+     "props": {
+      "rdfs:label": 1.0,
+      "bflc:appliesTo": 0.017
+     }
+    },
+    "PrimaryContribution": {
+     "count": 245,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Production": {
+     "count": 203,
+     "props": {
+      "bflc:simpleDate": 0.951,
+      "date": 0.059
+     }
+    },
+    "Publication": {
+     "count": 500,
+     "props": {
+      "date": 0.972,
+      "place": 0.93,
+      "bflc:simpleDate": 0.61,
+      "bflc:simpleAgent": 0.486,
+      "bflc:simplePlace": 0.482
+     }
+    },
+    "Relation": {
+     "count": 554,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.103
+     }
+    },
+    "Summary": {
+     "count": 188,
+     "props": {
+      "rdfs:label": 1.0,
+      "bflc:appliesTo": 0.011
+     }
+    },
+    "SupplementaryContent": {
+     "count": 12,
+     "props": {
+      "electronicLocator": 1.0,
+      "note": 1.0
+     }
+    },
+    "SystemRequirement": {
+     "count": 13,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "TableOfContents": {
+     "count": 113,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Temporal": {
+     "count": 8,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Title": {
+     "count": 1048,
+     "props": {
+      "mainTitle": 1.0,
+      "bflc:nonSortNum": 0.109,
+      "subtitle": 0.079,
+      "partNumber": 0.033
+     }
+    },
+    "Topic": {
+     "count": 385,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "source": 0.995,
+      "rdfs:label": 0.948,
+      "mads:isMemberOfMADSScheme": 0.81,
+      "mads:componentList": 0.797
+     }
+    },
+    "Upc": {
+     "count": 40,
+     "props": {
+      "rdf:value": 1.0,
+      "note": 0.025
+     }
+    },
+    "UsePolicy": {
+     "count": 22,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "VariantTitle": {
+     "count": 79,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.291,
+      "partNumber": 0.038,
+      "subtitle": 0.038,
+      "partName": 0.013
+     }
+    }
+   }
+  },
+  "still-image": {
+   "records": 500,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.768,
+     "kinds": {
+      "AcquisitionSource": 0.768
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "baseMaterial": {
+     "share": 0.346,
+     "kinds": {
+      "BaseMaterial": 0.326
+     }
+    },
+    "carrier": {
+     "share": 1.0,
+     "kinds": {
+      "Carrier": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nb",
+       "label": "sheet",
+       "share": 0.992
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+       "label": "online resource",
+       "share": 0.25
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/nc",
+       "label": "volume",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/gs",
+       "label": "slide",
+       "share": 0.014
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/gt",
+       "label": "overhead transparency",
+       "share": 0.002
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.312,
+     "kinds": {
+      "ColorContent": 0.312
+     }
+    },
+    "copyrightDate": {
+     "share": 0.022
+    },
+    "custodialHistory": {
+     "share": 0.178
+    },
+    "dimensions": {
+     "share": 0.808
+    },
+    "extent": {
+     "share": 1.0,
+     "kinds": {
+      "Extent": 1.0
+     }
+    },
+    "genreForm": {
+     "share": 0.956,
+     "kinds": {
+      "GenreForm": 0.956
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/graphicMaterials/tgm007718",
+       "label": "Photographic prints",
+       "share": 0.488
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2017027255",
+       "label": "Prints",
+       "share": 0.144
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2017027251",
+       "label": "Pictures",
+       "share": 0.096
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/graphicMaterials/tgm009250",
+       "label": "Scientific illustrations",
+       "share": 0.082
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2019026026",
+       "label": "Negatives (Photographs)",
+       "share": 0.078
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2017027231",
+       "label": "Drawings",
+       "share": 0.056
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/graphicMaterials/tgm007730",
+       "label": "Photomechanical prints",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026152",
+       "label": "Posters",
+       "share": 0.004
+      }
+     ]
+    },
+    "hasItem": {
+     "share": 0.618,
+     "kinds": {
+      "Item": 0.618
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 1.0,
+     "kinds": {
+      "Lccn": 1.0,
+      "Local": 0.2,
+      "CopyrightNumber": 0.1
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 0.796,
+      "Collection": 0.204
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 0.992
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+       "label": "multipart monograph",
+       "share": 0.008
+      }
+     ]
+    },
+    "media": {
+     "share": 1.0,
+     "kinds": {
+      "Media": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.916
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 0.25
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/g",
+       "label": "projected",
+       "share": 0.002
+      }
+     ]
+    },
+    "mount": {
+     "share": 0.13,
+     "kinds": {
+      "Mount": 0.122
+     }
+    },
+    "note": {
+     "share": 0.982,
+     "kinds": {
+      "Note": 0.982
+     }
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 1.0,
+      "Production": 0.01
+     }
+    },
+    "publicationStatement": {
+     "share": 1.0
+    },
+    "responsibilityStatement": {
+     "share": 0.168
+    },
+    "soundContent": {
+     "share": 0.01,
+     "kinds": {
+      "SoundContent": 0.01
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    },
+    "usageAndAccessPolicy": {
+     "share": 0.99,
+     "kinds": {
+      "UsePolicy": 0.988,
+      "AccessPolicy": 0.39
+     }
+    }
+   },
+   "Work": {
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.01
+    },
+    "classification": {
+     "share": 1.0,
+     "kinds": {
+      "ClassificationLcc": 1.0
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.992
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.008
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.8,
+     "kinds": {
+      "PrimaryContribution": 0.77
+     }
+    },
+    "genreForm": {
+     "share": 1.0,
+     "kinds": {
+      "GenreForm": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/marcgt/gra",
+       "label": "graphic",
+       "share": 0.974
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/marcgt/ted",
+       "label": "technical drawing",
+       "share": 0.026
+      },
+      {
+       "uri": "https://id.loc.gov/authorities/genreForms/gf2017027249",
+       "label": "Photographs",
+       "share": 0.002
+      }
+     ]
+    },
+    "hasInstance": {
+     "share": 1.0
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "language": {
+     "share": 0.974,
+     "kinds": {
+      "Language": 0.224
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.958
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/ger",
+       "label": "German",
+       "share": 0.01
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/por",
+       "label": "Portuguese",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/jpn",
+       "label": "Japanese",
+       "share": 0.002
+      }
+     ]
+    },
+    "note": {
+     "share": 0.456,
+     "kinds": {
+      "Note": 0.456
+     }
+    },
+    "place": {
+     "share": 0.03,
+     "kinds": {
+      "Place": 0.03
+     }
+    },
+    "relation": {
+     "share": 0.612,
+     "kinds": {
+      "Relation": 0.612
+     }
+    },
+    "subject": {
+     "share": 0.962,
+     "kinds": {
+      "Topic": 0.956,
+      "Person": 0.172,
+      "Place": 0.14,
+      "Organization": 0.036
+     }
+    },
+    "summary": {
+     "share": 0.314,
+     "kinds": {
+      "Summary": 0.314
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    }
+   },
+   "nodes": {
+    "AccessPolicy": {
+     "count": 197,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.32
+     }
+    },
+    "AcquisitionSource": {
+     "count": 478,
+     "props": {
+      "acquisitionTerms": 1.0,
+      "identifiedBy": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "AdminMetadata": {
+     "count": 3900,
+     "props": {
+      "date": 0.744,
+      "status": 0.744,
+      "agent": 0.699,
+      "generationProcess": 0.256,
+      "bflc:encodingLevel": 0.256,
+      "bflc:marcKey": 0.256,
+      "descriptionConventions": 0.256,
+      "descriptionLevel": 0.256,
+      "identifiedBy": 0.256,
+      "note": 0.256,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.256,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.256,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.254,
+      "descriptionLanguage": 0.197,
+      "descriptionModifier": 0.045,
+      "http://id.loc.gov/ontologies/lclocal/d999": 0.014
+     }
+    },
+    "ClassificationLcc": {
+     "count": 501,
+     "props": {
+      "assigner": 1.0,
+      "classificationPortion": 1.0,
+      "status": 1.0,
+      "itemPortion": 0.972
+     }
+    },
+    "CopyrightNumber": {
+     "count": 50,
+     "props": {
+      "assigner": 1.0,
+      "rdf:value": 1.0
+     }
+    },
+    "Extent": {
+     "count": 500,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.926
+     }
+    },
+    "GenreForm": {
+     "count": 41,
+     "props": {
+      "source": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Lccn": {
+     "count": 500,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Local": {
+     "count": 124,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.694
+     }
+    },
+    "Note": {
+     "count": 1355,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.048
+     }
+    },
+    "Organization": {
+     "count": 7,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "bflc:marcKey": 1.0,
+      "source": 1.0,
+      "rdfs:label": 1.0
+     }
+    },
+    "Person": {
+     "count": 40,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "bflc:marcKey": 1.0,
+      "rdfs:label": 1.0,
+      "source": 0.975
+     }
+    },
+    "Place": {
+     "count": 76,
+     "props": {
+      "rdfs:label": 1.0,
+      "mads:componentList": 0.987,
+      "source": 0.961,
+      "bflc:aap-normalized": 0.829,
+      "mads:isMemberOfMADSScheme": 0.829,
+      "mads:authoritativeLabel": 0.013
+     }
+    },
+    "PrimaryContribution": {
+     "count": 385,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Production": {
+     "count": 5,
+     "props": {
+      "date": 1.0,
+      "note": 1.0,
+      "place": 0.8
+     }
+    },
+    "Publication": {
+     "count": 500,
+     "props": {
+      "bflc:simpleDate": 0.992,
+      "date": 0.982,
+      "place": 0.836,
+      "bflc:simplePlace": 0.25,
+      "bflc:simpleAgent": 0.21
+     }
+    },
+    "Relation": {
+     "count": 315,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0
+     }
+    },
+    "Summary": {
+     "count": 161,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "Title": {
+     "count": 1309,
+     "props": {
+      "mainTitle": 1.0,
+      "partName": 0.084,
+      "bflc:nonSortNum": 0.053
+     }
+    },
+    "Topic": {
+     "count": 2170,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "rdfs:label": 0.91,
+      "mads:componentList": 0.902,
+      "mads:authoritativeLabel": 0.899,
+      "source": 0.712,
+      "mads:isMemberOfMADSScheme": 0.708
+     }
+    },
+    "UsePolicy": {
+     "count": 494,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.419
+     }
+    },
+    "VariantTitle": {
+     "count": 5,
+     "props": {
+      "mainTitle": 1.0,
+      "variantType": 0.6,
+      "note": 0.2,
+      "bflc:nonSortNum": 0.2
+     }
+    }
+   }
+  },
+  "video": {
+   "records": 500,
+   "Instance": {
+    "acquisitionSource": {
+     "share": 0.068,
+     "kinds": {
+      "AcquisitionSource": 0.068
+     }
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "aspectRatio": {
+     "share": 0.012,
+     "kinds": {
+      "AspectRatio": 0.012
+     }
+    },
+    "baseMaterial": {
+     "share": 0.04,
+     "kinds": {
+      "BaseMaterial": 0.04
+     }
+    },
+    "carrier": {
+     "share": 0.754,
+     "kinds": {
+      "Carrier": 0.754
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+       "label": "online resource",
+       "share": 0.334
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/vd",
+       "label": "videodisc",
+       "share": 0.27
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/vf",
+       "label": "videocassette",
+       "share": 0.08
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/mr",
+       "label": "film reel",
+       "share": 0.06
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/mo",
+       "label": "film roll",
+       "share": 0.028
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/gf",
+       "label": "filmstrip",
+       "share": 0.028
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/cz",
+       "label": "other computer carrier",
+       "share": 0.008
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/carriers/gs",
+       "label": "slide",
+       "share": 0.004
+      }
+     ]
+    },
+    "colorContent": {
+     "share": 0.406,
+     "kinds": {
+      "ColorContent": 0.406
+     }
+    },
+    "contentAccessibility": {
+     "share": 0.024,
+     "kinds": {
+      "ContentAccessibility": 0.024
+     }
+    },
+    "copyrightDate": {
+     "share": 0.122
+    },
+    "digitalCharacteristic": {
+     "share": 0.248,
+     "kinds": {
+      "EncodingFormat": 0.248,
+      "FileType": 0.15,
+      "RegionalEncoding": 0.084,
+      "Resolution": 0.014
+     }
+    },
+    "dimensions": {
+     "share": 0.662
+    },
+    "distributionStatement": {
+     "share": 0.08
+    },
+    "editionStatement": {
+     "share": 0.046
+    },
+    "electronicLocator": {
+     "share": 0.316
+    },
+    "extent": {
+     "share": 1.0,
+     "kinds": {
+      "Extent": 1.0
+     }
+    },
+    "generation": {
+     "share": 0.036,
+     "kinds": {
+      "Generation": 0.036
+     }
+    },
+    "hasItem": {
+     "share": 0.46,
+     "kinds": {
+      "Item": 0.46
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "identifiedBy": {
+     "share": 1.0,
+     "kinds": {
+      "Lccn": 0.996,
+      "Local": 0.352,
+      "CopyrightNumber": 0.272,
+      "OclcNumber": 0.124,
+      "VideoRecordingNumber": 0.116,
+      "Upc": 0.106,
+      "Isbn": 0.04,
+      "LcOverseasAcq": 0.028,
+      "Ean": 0.018
+     }
+    },
+    "immediateAcquisition": {
+     "share": 0.012,
+     "kinds": {
+      "ImmediateAcquisition": 0.012
+     }
+    },
+    "instanceOf": {
+     "share": 1.0,
+     "kinds": {
+      "Monograph": 0.986,
+      "Collection": 0.01
+     }
+    },
+    "issuance": {
+     "share": 1.0,
+     "kinds": {
+      "Issuance": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+       "label": "single unit",
+       "share": 0.994
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/intg",
+       "label": "integrating resource",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/issuance/mulm",
+       "label": "multipart monograph",
+       "share": 0.002
+      }
+     ]
+    },
+    "media": {
+     "share": 0.974,
+     "kinds": {
+      "Media": 0.974
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/v",
+       "label": "video",
+       "share": 0.502
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+       "label": "computer",
+       "share": 0.328
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/g",
+       "label": "projected",
+       "share": 0.144
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/mediaTypes/n",
+       "label": "unmediated",
+       "share": 0.004
+      }
+     ]
+    },
+    "note": {
+     "share": 0.896,
+     "kinds": {
+      "Note": 0.896
+     }
+    },
+    "originPlace": {
+     "share": 0.424,
+     "kinds": {
+      "Place": 0.132
+     }
+    },
+    "polarity": {
+     "share": 0.036,
+     "kinds": {
+      "Polarity": 0.036
+     }
+    },
+    "productionStatement": {
+     "share": 0.01
+    },
+    "projectionCharacteristic": {
+     "share": 0.038,
+     "kinds": {
+      "PresentationFormat": 0.038
+     }
+    },
+    "provisionActivity": {
+     "share": 1.0,
+     "kinds": {
+      "Publication": 0.994,
+      "Distribution": 0.102,
+      "Production": 0.042
+     }
+    },
+    "publicationStatement": {
+     "share": 0.94
+    },
+    "responsibilityStatement": {
+     "share": 0.48
+    },
+    "soundCharacteristic": {
+     "share": 0.376,
+     "kinds": {
+      "RecordingMedium": 0.376,
+      "RecordingMethod": 0.172,
+      "PlaybackChannels": 0.132,
+      "PlaybackCharacteristic": 0.108
+     }
+    },
+    "soundContent": {
+     "share": 0.814,
+     "kinds": {
+      "SoundContent": 0.814
+     }
+    },
+    "systemRequirement": {
+     "share": 0.068,
+     "kinds": {
+      "SystemRequirement": 0.068
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0
+     }
+    },
+    "usageAndAccessPolicy": {
+     "share": 0.022,
+     "kinds": {
+      "AccessPolicy": 0.018,
+      "UsePolicy": 0.014
+     }
+    },
+    "videoCharacteristic": {
+     "share": 0.174,
+     "kinds": {
+      "BroadcastStandard": 0.114,
+      "VideoFormat": 0.064
+     }
+    }
+   },
+   "Work": {
+    "accompaniedBy": {
+     "share": 0.014
+    },
+    "adminMetadata": {
+     "share": 1.0,
+     "kinds": {
+      "AdminMetadata": 1.0
+     }
+    },
+    "bflc:aap": {
+     "share": 1.0
+    },
+    "bflc:aap-normalized": {
+     "share": 1.0
+    },
+    "bflc:governmentPubType": {
+     "share": 0.324
+    },
+    "bflc:movingImageTechnique": {
+     "share": 0.91
+    },
+    "capture": {
+     "share": 0.376,
+     "kinds": {
+      "Capture": 0.376
+     }
+    },
+    "classification": {
+     "share": 0.628,
+     "kinds": {
+      "ClassificationLcc": 0.628,
+      "ClassificationDdc": 0.038
+     }
+    },
+    "content": {
+     "share": 1.0,
+     "kinds": {
+      "Content": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/tdi",
+       "label": "two-dimensional moving image",
+       "share": 0.964
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/sti",
+       "label": "still image",
+       "share": 0.034
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+       "label": "text",
+       "share": 0.004
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/prm",
+       "label": "performed music",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/spw",
+       "label": "spoken word",
+       "share": 0.002
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/contentTypes/tdm",
+       "label": "three-dimensional moving image",
+       "share": 0.002
+      }
+     ]
+    },
+    "contribution": {
+     "share": 0.798,
+     "kinds": {
+      "PrimaryContribution": 0.014
+     }
+    },
+    "duration": {
+     "share": 0.482
+    },
+    "expressionOf": {
+     "share": 0.046,
+     "kinds": {
+      "MovingImage": 0.044
+     }
+    },
+    "genreForm": {
+     "share": 1.0,
+     "kinds": {
+      "GenreForm": 1.0
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026723",
+       "label": "Video recordings",
+       "share": 0.632
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026406",
+       "label": "Motion pictures",
+       "share": 0.342
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026250",
+       "label": "Fiction films",
+       "share": 0.138
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026247",
+       "label": "Feature films",
+       "share": 0.132
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2014026297",
+       "label": "Drama",
+       "share": 0.128
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026423",
+       "label": "Nonfiction films",
+       "share": 0.116
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026570",
+       "label": "Short films",
+       "share": 0.056
+      },
+      {
+       "uri": "http://id.loc.gov/authorities/genreForms/gf2011026575",
+       "label": "Silent films",
+       "share": 0.046
+      }
+     ]
+    },
+    "geographicCoverage": {
+     "share": 0.232,
+     "kinds": {
+      "GeographicCoverage": 0.23
+     }
+    },
+    "hasInstance": {
+     "share": 1.0,
+     "kinds": {
+      "Electronic": 0.316
+     }
+    },
+    "http://purl.org/dc/terms/isPartOf": {
+     "share": 1.0
+    },
+    "intendedAudience": {
+     "share": 0.132,
+     "kinds": {
+      "IntendedAudience": 0.132
+     }
+    },
+    "language": {
+     "share": 0.97,
+     "kinds": {
+      "Language": 0.562
+     },
+     "values": [
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/eng",
+       "label": "English",
+       "share": 0.734
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/und",
+       "label": "Undetermined",
+       "share": 0.054
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/kor",
+       "label": "Korean",
+       "share": 0.044
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/spa",
+       "label": "Spanish",
+       "share": 0.044
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/fre",
+       "label": "French",
+       "share": 0.026
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/jpn",
+       "label": "Japanese",
+       "share": 0.024
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/chi",
+       "label": "Chinese",
+       "share": 0.016
+      },
+      {
+       "uri": "http://id.loc.gov/vocabulary/languages/hin",
+       "label": "Hindi",
+       "share": 0.014
+      }
+     ]
+    },
+    "note": {
+     "share": 0.752,
+     "kinds": {
+      "Note": 0.752
+     }
+    },
+    "originDate": {
+     "share": 0.192
+    },
+    "relation": {
+     "share": 0.494,
+     "kinds": {
+      "Relation": 0.494
+     }
+    },
+    "subject": {
+     "share": 0.494,
+     "kinds": {
+      "Topic": 0.454,
+      "Person": 0.11,
+      "Place": 0.074,
+      "Organization": 0.03,
+      "Temporal": 0.012
+     }
+    },
+    "summary": {
+     "share": 0.702,
+     "kinds": {
+      "Summary": 0.702
+     }
+    },
+    "tableOfContents": {
+     "share": 0.078,
+     "kinds": {
+      "TableOfContents": 0.078
+     }
+    },
+    "title": {
+     "share": 1.0,
+     "kinds": {
+      "Title": 1.0,
+      "VariantTitle": 0.26,
+      "ParallelTitle": 0.032
+     }
+    }
+   },
+   "nodes": {
+    "AccessPolicy": {
+     "count": 9,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.444,
+      "bflc:appliesTo": 0.111
+     }
+    },
+    "AcquisitionSource": {
+     "count": 34,
+     "props": {
+      "rdfs:label": 0.971,
+      "note": 0.471,
+      "acquisitionTerms": 0.118,
+      "identifiedBy": 0.088
+     }
+    },
+    "AdminMetadata": {
+     "count": 3998,
+     "props": {
+      "date": 0.75,
+      "status": 0.75,
+      "agent": 0.66,
+      "generationProcess": 0.25,
+      "bflc:encodingLevel": 0.25,
+      "bflc:marcKey": 0.25,
+      "descriptionLevel": 0.25,
+      "identifiedBy": 0.25,
+      "note": 0.25,
+      "http://id.loc.gov/ontologies/lclocal/d906": 0.25,
+      "descriptionConventions": 0.225,
+      "descriptionLanguage": 0.134,
+      "http://id.loc.gov/ontologies/lclocal/d955": 0.114,
+      "http://id.loc.gov/ontologies/lclocal/d985": 0.104,
+      "descriptionModifier": 0.09,
+      "http://id.loc.gov/ontologies/lclocal/d925": 0.034,
+      "descriptionAuthentication": 0.03,
+      "http://id.loc.gov/ontologies/lclocal/d999": 0.016
+     }
+    },
+    "AspectRatio": {
+     "count": 6,
+     "props": {
+      "note": 0.833,
+      "rdf:value": 0.167
+     }
+    },
+    "Capture": {
+     "count": 207,
+     "props": {
+      "rdfs:label": 0.884,
+      "note": 0.116,
+      "date": 0.111,
+      "place": 0.043
+     }
+    },
+    "Classification": {
+     "count": 6,
+     "props": {
+      "source": 1.0,
+      "classificationPortion": 0.833,
+      "rdfs:label": 0.167
+     }
+    },
+    "ClassificationDdc": {
+     "count": 19,
+     "props": {
+      "classificationPortion": 1.0,
+      "edition": 1.0,
+      "assigner": 0.789,
+      "source": 0.211
+     }
+    },
+    "ClassificationLcc": {
+     "count": 448,
+     "props": {
+      "classificationPortion": 1.0,
+      "status": 0.996,
+      "assigner": 0.993,
+      "itemPortion": 0.011
+     }
+    },
+    "ContentAccessibility": {
+     "count": 13,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "CopyrightNumber": {
+     "count": 153,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.935
+     }
+    },
+    "Distribution": {
+     "count": 51,
+     "props": {
+      "bflc:simpleAgent": 0.784,
+      "bflc:simplePlace": 0.784,
+      "bflc:simpleDate": 0.745,
+      "date": 0.294,
+      "place": 0.294
+     }
+    },
+    "Ean": {
+     "count": 10,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Extent": {
+     "count": 500,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.666,
+      "bflc:appliesTo": 0.354
+     }
+    },
+    "GenreForm": {
+     "count": 140,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.886,
+      "mads:authoritativeLabel": 0.886,
+      "mads:isMemberOfMADSScheme": 0.086
+     }
+    },
+    "ImmediateAcquisition": {
+     "count": 6,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "IntendedAudience": {
+     "count": 38,
+     "props": {
+      "rdfs:label": 1.0,
+      "note": 0.026
+     }
+    },
+    "Isbn": {
+     "count": 50,
+     "props": {
+      "rdf:value": 1.0,
+      "qualifier": 0.12
+     }
+    },
+    "LcOverseasAcq": {
+     "count": 14,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Lccn": {
+     "count": 499,
+     "props": {
+      "rdf:value": 1.0
+     }
+    },
+    "Local": {
+     "count": 176,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.04,
+      "source": 0.011
+     }
+    },
+    "Note": {
+     "count": 2023,
+     "props": {
+      "rdfs:label": 0.929,
+      "language": 0.071,
+      "bflc:appliesTo": 0.048
+     }
+    },
+    "OclcNumber": {
+     "count": 159,
+     "props": {
+      "rdf:value": 1.0,
+      "status": 0.597
+     }
+    },
+    "ParallelTitle": {
+     "count": 17,
+     "props": {
+      "mainTitle": 1.0,
+      "subtitle": 0.059
+     }
+    },
+    "Person": {
+     "count": 11,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "bflc:marcKey": 1.0,
+      "rdfs:label": 1.0,
+      "source": 0.273
+     }
+    },
+    "Place": {
+     "count": 74,
+     "props": {
+      "rdfs:label": 1.0,
+      "bflc:aap-normalized": 0.095,
+      "mads:authoritativeLabel": 0.095,
+      "source": 0.068,
+      "mads:isMemberOfMADSScheme": 0.014,
+      "mads:componentList": 0.014
+     }
+    },
+    "PlaybackCharacteristic": {
+     "count": 8,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.5
+     }
+    },
+    "PrimaryContribution": {
+     "count": 7,
+     "props": {
+      "agent": 1.0,
+      "role": 1.0
+     }
+    },
+    "Production": {
+     "count": 21,
+     "props": {
+      "date": 0.762,
+      "bflc:simpleDate": 0.238,
+      "note": 0.048,
+      "place": 0.048
+     }
+    },
+    "Publication": {
+     "count": 513,
+     "props": {
+      "bflc:simpleDate": 0.943,
+      "place": 0.942,
+      "date": 0.94,
+      "bflc:simplePlace": 0.766,
+      "bflc:simpleAgent": 0.764
+     }
+    },
+    "Relation": {
+     "count": 322,
+     "props": {
+      "associatedResource": 1.0,
+      "relationship": 1.0,
+      "seriesEnumeration": 0.053
+     }
+    },
+    "Resolution": {
+     "count": 7,
+     "props": {
+      "rdfs:label": 1.0,
+      "source": 0.857
+     }
+    },
+    "Summary": {
+     "count": 358,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "SystemRequirement": {
+     "count": 38,
+     "props": {
+      "rdfs:label": 1.0
+     }
+    },
+    "TableOfContents": {
+     "count": 47,
+     "props": {
+      "rdfs:label": 1.0,
+      "status": 0.021
+     }
+    },
+    "Temporal": {
+     "count": 7,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "mads:authoritativeLabel": 1.0,
+      "rdfs:label": 1.0,
+      "source": 0.857
+     }
+    },
+    "Title": {
+     "count": 1230,
+     "props": {
+      "mainTitle": 1.0,
+      "bflc:nonSortNum": 0.124,
+      "partNumber": 0.107,
+      "partName": 0.093,
+      "subtitle": 0.059
+     }
+    },
+    "Topic": {
+     "count": 459,
+     "props": {
+      "bflc:aap-normalized": 1.0,
+      "mads:authoritativeLabel": 0.965,
+      "rdfs:label": 0.952,
+      "source": 0.878,
+      "mads:componentList": 0.858,
+      "mads:isMemberOfMADSScheme": 0.786
+     }
+    },
+    "Upc": {
+     "count": 64,
+     "props": {
+      "rdf:value": 1.0,
+      "note": 0.031
+     }
+    },
+    "UsePolicy": {
+     "count": 8,
+     "props": {
+      "rdfs:label": 1.0,
+      "electronicLocator": 0.25
+     }
+    },
+    "VariantTitle": {
+     "count": 173,
+     "props": {
+      "mainTitle": 1.0,
+      "note": 0.358,
+      "partNumber": 0.197,
+      "partName": 0.058,
+      "subtitle": 0.035,
+      "date": 0.012
+     }
+    },
+    "VideoRecordingNumber": {
+     "count": 74,
+     "props": {
+      "rdf:value": 1.0,
+      "assigner": 0.986,
+      "qualifier": 0.068
+     }
+    }
+   }
+  }
+ }
+}
