@@ -14,9 +14,9 @@ import {
   partsOf,
   pickedAt,
   replacePart,
-  sameHeading,
   type Picked,
 } from '../lookup/compose'
+import { sameHeading } from '../lookup/normalize'
 import { browses, searchSource, type Hit } from '../lookup/qa'
 import { composing as composeSources, isLocal, type Source } from '../lookup/sources'
 import { useDescription } from './context'

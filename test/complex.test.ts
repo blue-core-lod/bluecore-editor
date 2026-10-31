@@ -15,8 +15,8 @@ import {
   partsOf,
   pickedAt,
   replacePart,
-  sameHeading,
 } from '../src/lookup/compose'
+import { sameHeading } from '../src/lookup/normalize'
 import { refLabels } from '../src/ui/labels'
 
 const marriedWomen = {

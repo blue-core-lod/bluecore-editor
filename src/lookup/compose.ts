@@ -91,9 +91,3 @@ export function composed(parts: readonly Part[], picked: Picked, kinds: Readonly
     return [pickedAt(picked, parts, index) ?? { label: fromLine(part.text), type: kinds[index] ?? 'mads:Topic' }]
   })
 }
-
-/** Whether a heading LC has is the one composed, ignoring case and spacing around the dashes. */
-export function sameHeading(a: string, b: string): boolean {
-  const plain = (text: string) => text.replace(/\s*--\s*/g, '--').trim().toLowerCase()
-  return plain(a) === plain(b)
-}

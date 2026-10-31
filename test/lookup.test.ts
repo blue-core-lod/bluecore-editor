@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { config } from '../src/config'
 import { searchVocabulary } from '../src/lookup/local'
 import { browseUrl, isHeading } from '../src/lookup/browse'
+import { sameHeading } from '../src/lookup/normalize'
 import { browses, searchSource, searchUrl } from '../src/lookup/qa'
 import { isLocal, sourcesFor, type QaSource, type Source } from '../src/lookup/sources'
 
@@ -136,5 +137,43 @@ describe('heading browse', () => {
     const fetch = stubFetch(200, [])
     await searchSource(lcNames, 'congress house')
     expect(String(fetch.mock.calls[0]?.at(0))).toContain(`${config.qaUrl}authorities/search/loc/names?`)
+  })
+})
+
+describe('forgiving punctuation', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  const lcNames = sourcesFor('agent')[0] as QaSource
+
+  it('compares headings as NACO does', () => {
+    expect(sameHeading('United States Congress. Senate.', 'United States. Congress. Senate')).toBe(true)
+    expect(sameHeading('Jews -- Germany', 'Jews--Germany')).toBe(true)
+    expect(sameHeading('Gödel, Kurt', 'godel kurt')).toBe(true)
+    expect(sameHeading('Washington', 'Washington (State)')).toBe(false)
+    expect(sameHeading('', '--')).toBe(false)
+  })
+
+  it('puts a heading that is the text first, though the keyword search buries it', async () => {
+    const senate = { uri: 'http://id.loc.gov/authorities/names/n79055105', label: 'United States. Congress. Senate' }
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) =>
+        url.includes('suggest2')
+          ? Response.json({ hits: [{ aLabel: senate.label, uri: senate.uri }, { aLabel: 'United States. Congress. Senate (37th)', uri: 'x:2' }] })
+          : Response.json([{ uri: 'x:1', label: 'United States. Congress. Senate. Select Committee' }, senate]),
+      ),
+    )
+    const hits = await searchSource(lcNames, 'United States Congress Senate')
+    expect(hits.map((hit) => hit.uri)).toEqual([senate.uri, 'x:1'])
+  })
+
+  it('keeps the keyword results when the browse fails', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) =>
+        url.includes('suggest2') ? new Response('', { status: 503 }) : Response.json([{ uri: 'x:1', label: 'One' }]),
+      ),
+    )
+    expect(await searchSource(lcNames, 'one')).toEqual([{ uri: 'x:1', label: 'One' }])
   })
 })

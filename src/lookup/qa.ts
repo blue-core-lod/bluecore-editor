@@ -1,6 +1,7 @@
 import { config } from '../config'
 import { browseHeadings, isHeading } from './browse'
 import { searchVocabulary } from './local'
+import { sameHeading } from './normalize'
 import { isBrowse, isLocal, type QaSource, type Source } from './sources'
 
 export interface Hit {
@@ -40,6 +41,20 @@ export async function searchSource(source: Source, query: string, signal?: Abort
   if (isLocal(source)) return searchVocabulary(source.vocabulary, query)
   if (isBrowse(source)) return browseHeadings(source.browse, query, signal, source.memberOf)
   if (source.browse && isHeading(query)) return browseHeadings(source.browse, query, signal)
+  if (!source.browse) return keywordSearch(source, query, signal)
+  // QA's keyword ranking can bury the heading itself ("United States Congress Senate"), so LC's headings are
+  // browsed too, and one that is the text, as NACO compares, comes first. The browse is a help, not a source:
+  // if it fails, the keyword results stand.
+  const [keyword, browsed] = await Promise.all([
+    keywordSearch(source, query, signal),
+    browseHeadings(source.browse, query, signal).catch(() => []),
+  ])
+  const exact = browsed.filter((hit) => sameHeading(hit.label, query))
+  const found = new Set(exact.map((hit) => hit.uri))
+  return [...exact, ...keyword.filter((hit) => !found.has(hit.uri))]
+}
+
+async function keywordSearch(source: QaSource, query: string, signal?: AbortSignal): Promise<Hit[]> {
   const response = await fetch(searchUrl(source, query), { signal, headers: { Accept: 'application/json' } })
   if (!response.ok) throw new Error(`${source.label} returned ${response.status}`)
   const json = (await response.json()) as QaHit[] | { results?: QaHit[] }
