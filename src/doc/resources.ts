@@ -52,6 +52,18 @@ export function replaceWork(doc: Doc, work: JsonObject, label: string): { change
   return { change: change(label, ops), key: value.node }
 }
 
+/** Put a new value in place of one a property holds, where it was: as when a complex subject is edited. */
+export function replaceOps(doc: Doc, node: Key, prop: string, old: Key, json: Json): Op[] {
+  const values = getNode(doc, node).props[prop] ?? []
+  const index = values.findIndex((value) => value.key === old)
+  if (index === -1) throw new Error(`${prop} no longer has that value`)
+  const { value, nodes } = fragment(json, { node, prop })
+  return [
+    { op: 'remove', node, prop, value: old },
+    { op: 'insert', node, prop, after: values[index - 1]?.key ?? null, value, nodes },
+  ]
+}
+
 /**
  * Move values from one node to another, as when Dimensions entered on the Work
  * goes to the Instance: each is removed, then added after the target's own

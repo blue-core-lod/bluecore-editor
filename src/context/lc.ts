@@ -47,9 +47,15 @@ const directories: Record<string, string> = {
   childrensSubjects: 'LC children’s subject heading',
 }
 
-/** Where to find an LC authority, or undefined for a URI that isn't one. A real-world-object URI (/rwo/agents/) names the same record. */
+/**
+ * Where to find an LC authority, or undefined for a URI that isn't one. A
+ * real-world-object URI (/rwo/agents/) names the same record, and so does a
+ * place's URI as a geographic subdivision ("n79041717-781", from its 781).
+ */
 export function lcAuthorityId(uri: string): { directory: string; id: string; uri: string } | undefined {
-  const match = /^https?:\/\/id\.loc\.gov\/(?:authorities\/(\w+)|rwo\/agents)\/([a-z]+\d+)$/.exec(uri.replace(/\.html$/, ''))
+  const match = /^https?:\/\/id\.loc\.gov\/(?:authorities\/(\w+)|rwo\/agents)\/([a-z]+\d+)(?:-781)?$/.exec(
+    uri.replace(/\.html$/, ''),
+  )
   if (!match) return undefined
   const directory = match[1] ?? 'names'
   const id = match[2] as string

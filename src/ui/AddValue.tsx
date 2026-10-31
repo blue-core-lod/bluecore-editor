@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
+import { complexSubject, joinHeading } from '../doc/complex'
 import { change } from '../doc/log'
-import { fragment, getNode, type Doc, type Key } from '../doc/model'
-import { sourcesFor } from '../lookup/sources'
+import { fragment, getNode, type Doc, type Json, type Key } from '../doc/model'
+import { composes, sourcesFor } from '../lookup/sources'
 import { useDescription } from './context'
 import { entryFor, fieldKind, newValue } from './form'
 import { termLabel } from './labels'
@@ -49,15 +50,18 @@ export function AddValue({
     onDone?.()
   }
 
-  const add = (link?: { uri: string; label: string }) => {
-    const json = newValue(entry, { text, type, ...link })
-    if (json === null) return false
+  const insert = (json: Json, what: string) => {
     const values = getNode(doc, node).props[prop] ?? []
     const after = values.at(-1)?.key ?? null
     const { value, nodes } = fragment(json, { node, prop })
-    const what = entry.entry === 'node' ? termLabel(type) : link ? link.label || link.uri : text.trim()
     record(change(`Added ${changeLabel}: ${what}`, [{ op: 'insert', node, prop, after, value, nodes }]))
     close()
+  }
+
+  const add = (link?: { uri: string; label: string }) => {
+    const json = newValue(entry, { text, type, ...link })
+    if (json === null) return false
+    insert(json, entry.entry === 'node' ? termLabel(type) : link ? link.label || link.uri : text.trim())
     return true
   }
 
@@ -96,7 +100,9 @@ export function AddValue({
           label={label}
           sources={sourcesFor(prop)}
           already={linkedFrom(doc, node, prop)}
+          compose={composes(prop)}
           onPick={(hit) => add(hit)}
+          onCompose={(components) => insert(complexSubject(components), joinHeading(components))}
           onCancel={close}
         />
       )

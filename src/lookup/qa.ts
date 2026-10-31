@@ -1,7 +1,7 @@
 import { config } from '../config'
 import { browseHeadings, isHeading } from './browse'
 import { searchVocabulary } from './local'
-import { isLocal, type QaSource, type Source } from './sources'
+import { isBrowse, isLocal, type QaSource, type Source } from './sources'
 
 export interface Hit {
   uri: string
@@ -10,6 +10,10 @@ export interface Hit {
   code?: string
   /** The 4XX variant a heading browse matched, when it wasn't the authorized heading. */
   variant?: string
+  /** The MADS class, such as "mads:Geographic", where the source says. */
+  type?: string
+  /** The authority's MARC key, such as "181  $zCalifornia", where the source gives it. */
+  marcKey?: string
 }
 
 /** What QA returns: a bare list from most authorities, wrapped with a header from some. */
@@ -25,7 +29,7 @@ export function searchUrl(source: QaSource, query: string, maxRecords = 10): str
 
 /** Whether this search browses the source's headings rather than searching by keyword. */
 export function browses(source: Source, query: string): boolean {
-  return !isLocal(source) && source.browse !== undefined && isHeading(query)
+  return isBrowse(source) || (!isLocal(source) && source.browse !== undefined && isHeading(query))
 }
 
 /**
@@ -34,6 +38,7 @@ export function browses(source: Source, query: string): boolean {
  */
 export async function searchSource(source: Source, query: string, signal?: AbortSignal): Promise<Hit[]> {
   if (isLocal(source)) return searchVocabulary(source.vocabulary, query)
+  if (isBrowse(source)) return browseHeadings(source.browse, query, signal, source.memberOf)
   if (source.browse && isHeading(query)) return browseHeadings(source.browse, query, signal)
   const response = await fetch(searchUrl(source, query), { signal, headers: { Accept: 'application/json' } })
   if (!response.ok) throw new Error(`${source.label} returned ${response.status}`)

@@ -1,8 +1,20 @@
-import { useMemo, useState, type ReactNode } from 'react'
+import { Fragment, useMemo, useState, type ReactNode } from 'react'
 
+import { complexSubject, componentsOf, isComplexSubject, joinHeading, subfield, type Component } from '../doc/complex'
 import { change, type Change } from '../doc/log'
-import { getNode, isValueObject, type Doc, type Json, type Key, type Literal, type Node, type Value } from '../doc/model'
-import { isEmpty, moveOps } from '../doc/resources'
+import {
+  denormalize,
+  getNode,
+  isValueObject,
+  type Doc,
+  type Json,
+  type Key,
+  type Literal,
+  type Node,
+  type Value,
+} from '../doc/model'
+import { isEmpty, moveOps, replaceOps } from '../doc/resources'
+import { sourcesFor } from '../lookup/sources'
 import { belongsOn, definitionOf, domainOf, modeledProperties } from '../schema/fields'
 import { hasContext } from '../context/lc'
 import { AddField } from './AddField'
@@ -11,6 +23,7 @@ import { DescriptionContext, useDescription, type Previewed } from './context'
 import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
 import { layout, type Misplaced, type Missing, type Row } from './layout'
+import { Lookup } from './Lookup'
 import { marcLinks, primerUrl, type ResourceKind } from './presentation'
 
 /**
@@ -229,6 +242,7 @@ function ValueView(props: ValueProps) {
   const node = getNode(doc, value.node)
   const id = node.keywords['@id']
   if (typeof id === 'string') return <Chip {...props} uri={id} />
+  if (isComplexSubject(node)) return <ComplexSubject {...props} child={node} />
   return <Subnode {...props} child={node} />
 }
 
@@ -317,6 +331,94 @@ function Chip(props: ValueProps & { uri: string }) {
       {source && <span className="source">{source}</span>}
       <RemoveButton name={name} onClick={remove} />
     </span>
+  )
+}
+
+/**
+ * A complex subject, "Married women--California", as one row in its order.
+ * Each part found in LC opens in the context panel like any linked value; a
+ * part that isn't linked reads as text. Editing reopens it in the lookup, and
+ * the whole subject is replaced as one change.
+ */
+function ComplexSubject(props: ValueProps & { child: Node }) {
+  const { doc, labels, hints, record } = useDescription()
+  const [editing, setEditing] = useState(false)
+  const { node, prop, value, label, child } = props
+  const components = componentsOf(doc, child, (uri) => refName(uri, labels))
+  const heading = joinHeading(components)
+  const remove = useRemove(props, heading)
+
+  const replace = (json: Json, what: string) => {
+    record(change(`Changed ${label}: ${what}`, replaceOps(doc, node, prop, value.key, json)))
+    setEditing(false)
+  }
+
+  if (editing) {
+    return (
+      <Lookup
+        label={label}
+        sources={sourcesFor(prop)}
+        already={new Set()}
+        compose
+        initial={components}
+        onPick={(hit) => replace(hit.label ? { '@id': hit.uri, 'rdfs:label': [hit.label] } : { '@id': hit.uri }, hit.label || hit.uri)}
+        onCompose={(parts) => replace(complexSubject(parts, denormalize(doc, child.key)), joinHeading(parts))}
+        onCancel={() => setEditing(false)}
+      />
+    )
+  }
+
+  return (
+    <span className="chip complex">
+      <span className="heading">
+        {components.map((component, i) => (
+          <Fragment key={i}>
+            {i > 0 && <span className="dashes">--</span>}
+            <Part component={component} index={i} hints={hints} />
+          </Fragment>
+        ))}
+      </span>
+      {components.some((component) => component.uri) && <span className="source">LC</span>}
+      <button type="button" className="link edit" aria-label={`Edit ${heading}`} onClick={() => setEditing(true)}>
+        Edit
+      </button>
+      <RemoveButton name={heading} onClick={remove} />
+    </span>
+  )
+}
+
+/** One part of a complex subject: linked, or text, with its subfield beside it when hints are on. */
+function Part({ component, index, hints }: { component: Component; index: number; hints: boolean }) {
+  const { selected, select } = useDescription()
+  const { uri, label } = component
+  const code = hints && <span className="code">${subfield(component, index)}</span>
+  if (!uri) {
+    return (
+      <span className="part unlinked" title="Not linked to an LC authority">
+        {code}
+        {label}
+      </span>
+    )
+  }
+  if (!hasContext(uri)) {
+    return (
+      <a className="part" href={uri} target="_blank" rel="noreferrer" title={uri}>
+        {code}
+        {label}
+      </a>
+    )
+  }
+  return (
+    <button
+      type="button"
+      className={selected === uri ? 'part chip-name selected' : 'part chip-name'}
+      aria-pressed={selected === uri}
+      title={`More about ${label}`}
+      onClick={() => select(uri)}
+    >
+      {code}
+      {label}
+    </button>
   )
 }
 

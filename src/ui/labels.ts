@@ -74,6 +74,7 @@ export interface RefLabel {
 export function refLabels(doc: Doc): Map<string, RefLabel> {
   const labels = new Map<string, RefLabel>()
   for (const node of Object.values(doc.nodes)) {
+    listLabels(node.keywords['@list'], labels)
     const id = node.keywords['@id']
     if (typeof id !== 'string') continue
     const label = labelProps.map((prop) => firstText(node, prop)).find((text) => text !== undefined)
@@ -82,6 +83,22 @@ export function refLabels(doc: Doc): Map<string, RefLabel> {
     labels.set(id, { label: known?.label ?? label, code: known?.code ?? code })
   }
   return labels
+}
+
+/** The labels of the linked items in an RDF list, such as a complex subject's parts, which the model keeps as JSON. */
+function listLabels(list: unknown, labels: Map<string, RefLabel>) {
+  if (!Array.isArray(list)) return
+  for (const item of list as unknown[]) {
+    if (!item || typeof item !== 'object') continue
+    const json = item as Record<string, unknown>
+    const id = json['@id']
+    if (typeof id !== 'string' || labels.get(id)?.label) continue
+    const label = labelProps
+      .map((prop) => (Array.isArray(json[prop]) ? (json[prop] as unknown[])[0] : undefined))
+      .map((first) => (typeof first === 'string' ? first : isValueObject(first) ? String(first['@value']) : undefined))
+      .find((text) => text !== undefined)
+    if (label) labels.set(id, { label })
+  }
 }
 
 function firstText(node: Node, prop: string): string | undefined {

@@ -795,6 +795,71 @@ button.chip-name:hover {
 .chip.selected {
   outline: 2px solid var(--work);
 }
+/* A complex subject: one chip, its parts in order, each selectable on its own. */
+.chip.complex .heading {
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+.chip.complex .dashes {
+  color: var(--muted);
+}
+.chip.complex .part {
+  color: var(--text);
+  text-decoration: none;
+}
+.chip.complex button.part.selected {
+  outline: 2px solid var(--work);
+  border-radius: 3px;
+}
+.chip.complex .part .code,
+.composed .code {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-right: 0.15rem;
+}
+/* A part no authority stands behind: text, as the design's unlinked values are. */
+.part.unlinked,
+.composed .unlinked {
+  color: var(--muted);
+  font-style: italic;
+}
+.chip.complex button.edit {
+  font-size: 0.8rem;
+}
+
+/* The parts composed so far, under the lookup. */
+.composed {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+}
+.composed li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 1rem;
+  padding: 0.1rem 0.6rem;
+  background: var(--linked);
+}
+.composed li:has(.unlinked) {
+  background: var(--note-ground);
+}
+.composed li + li::before {
+  content: '--';
+  color: var(--muted);
+  margin-right: 0.3rem;
+}
+.composed li.current {
+  outline: 2px solid var(--focus);
+}
+.composed select {
+  font-size: 0.8rem;
+}
 .source {
   font-size: 0.7rem;
   font-weight: 700;

@@ -23,10 +23,23 @@ export interface VocabularySource {
   vocabulary: Vocabulary
 }
 
-export type Source = QaSource | VocabularySource
+/** Headings browsed at id.loc.gov whatever is typed, as the parts of a complex subject are. */
+export interface BrowseSource {
+  label: string
+  /** The id.loc.gov directory, such as "subjects". */
+  browse: string
+  /** One of LC's collections, such as its geographic subdivisions. */
+  memberOf?: string
+}
+
+export type Source = QaSource | VocabularySource | BrowseSource
 
 export function isLocal(source: Source): source is VocabularySource {
   return 'vocabulary' in source
+}
+
+export function isBrowse(source: Source): source is BrowseSource {
+  return 'browse' in source && !('path' in source)
 }
 
 const lcNames: QaSource = { label: 'LC Names', path: 'loc/names', browse: 'names' }
@@ -43,6 +56,39 @@ export const lookups: Record<string, Source[]> = {
   role: [{ label: 'LC Relators', vocabulary: 'relators' }],
   place: [{ label: 'MARC Countries', vocabulary: 'countries' }],
   issuance: [{ label: 'LC Issuance', vocabulary: 'issuance' }],
+}
+
+/**
+ * Composing a complex subject: the first part is a subject or a name, and
+ * each part after it a subdivision, from LC's collections of them. The
+ * established headings that begin with the whole of what's typed are offered
+ * too, so a heading LC already has is linked whole.
+ */
+const subdivision = (label: string, collection: string, browse = 'subjects'): BrowseSource => ({
+  label,
+  browse,
+  memberOf: `http://id.loc.gov/authorities/subjects/${collection}`,
+})
+
+export const composing = {
+  first: [
+    { label: 'LC Subjects', browse: 'subjects' },
+    { label: 'LC Names', browse: 'names' },
+  ] satisfies BrowseSource[],
+  subdivisions: [
+    subdivision('Topical', 'collection_TopicSubdivisions'),
+    // Countries, states and cities are name authorities; their subdivision forms ("Germany", n80125931-781) are in LC Names.
+    subdivision('Geographic (NAF)', 'collection_GeographicSubdivisions', 'names'),
+    subdivision('Geographic (LCSH)', 'collection_GeographicSubdivisions'),
+    subdivision('Form', 'collection_GenreFormSubdivisions'),
+    subdivision('Chronological', 'collection_TemporalSubdivisions'),
+  ],
+  whole: { label: 'Whole headings', browse: 'subjects' } satisfies BrowseSource,
+}
+
+/** Properties whose headings can be composed from parts. */
+export function composes(prop: string): boolean {
+  return prop === 'subject'
 }
 
 const none: Source[] = []
