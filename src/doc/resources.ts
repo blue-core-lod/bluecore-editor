@@ -130,17 +130,77 @@ export function resourceOf(doc: Doc, key: Key): Key {
  * One resource as the linked description Blue Core stores: everything below
  * it, except that another principal resource is a bare URI rather than
  * embedded, and with the document's @context. Empty nodes are left out (see
- * isEmpty).
+ * isEmpty), and every linked resource it mentions is described once (see
+ * describeOnce).
  */
 export function linkedResource(doc: Doc, key: Key): JsonObject {
   const { work } = principals(doc)
   const context = getNode(doc, doc.root).keywords['@context'] as Json | undefined
-  const json = withoutEmpty(denormalize(doc, key))
+  const json = describeOnce(doc, withoutEmpty(denormalize(doc, key)))
   if (key === doc.root && work) {
     const workId = getNode(doc, work).keywords['@id'] as string
     json.instanceOf = (json.instanceOf as Json[]).map((ref) => (idOf(ref) === workId ? workId : ref))
   }
   return context === undefined ? json : { '@context': context, ...json }
+}
+
+/**
+ * Blue Core embeds a linked resource once per bounded description, so the
+ * second subject with California, or the Instance's language when the Work
+ * has it too, is a bare @id. But Blue Core links a resource to the record it's
+ * saved with only where the saved document describes it, and drops the link
+ * otherwise; the next read then has no label for it. So each resource the
+ * document mentions only as a bare @id is described at its first mention,
+ * from wherever the record describes it. Works, Instances and Hubs are
+ * records of their own, and stay references.
+ */
+function describeOnce(doc: Doc, json: JsonObject): JsonObject {
+  const known = descriptions(doc)
+  const described = new Set<string>()
+  const bare = new Set<string>()
+  const scan = (value: Json) => {
+    if (Array.isArray(value)) return value.forEach(scan)
+    if (value === null || typeof value !== 'object') return
+    const id = value['@id']
+    if (typeof id === 'string') (Object.keys(value).length > 1 ? described : bare).add(id)
+    Object.values(value).forEach(scan)
+  }
+  scan(json)
+  const wanted = new Set([...bare].filter((id) => !described.has(id) && known.has(id)))
+  if (wanted.size === 0) return json
+  const fill = (value: Json): Json => {
+    if (Array.isArray(value)) return value.map(fill)
+    if (value === null || typeof value !== 'object') return value
+    const id = value['@id']
+    if (typeof id === 'string' && Object.keys(value).length === 1 && wanted.has(id)) {
+      wanted.delete(id)
+      return known.get(id) as JsonObject
+    }
+    return Object.fromEntries(Object.entries(value).map(([name, inner]) => [name, fill(inner)]))
+  }
+  return fill(json) as JsonObject
+}
+
+const records = new Set(['Work', 'Instance', 'Hub'])
+
+/** Where the document describes each linked resource that isn't a record of its own, by URI. */
+function descriptions(doc: Doc): Map<string, JsonObject> {
+  const found = new Map<string, JsonObject>()
+  const add = (json: Json) => {
+    if (json === null || typeof json !== 'object' || Array.isArray(json)) return
+    const id = json['@id']
+    const types = Array.isArray(json['@type']) ? json['@type'] : [json['@type']]
+    if (typeof id !== 'string' || Object.keys(json).length < 2 || found.has(id)) return
+    if (types.some((type) => typeof type === 'string' && records.has(type))) return
+    found.set(id, json)
+  }
+  for (const node of Object.values(doc.nodes)) {
+    if (typeof node.keywords['@id'] === 'string') add(denormalize(doc, node.key))
+    // A complex subject's parts are in its list, kept as JSON.
+    const list = node.keywords['@list']
+    if (Array.isArray(list)) (list as Json[]).forEach(add)
+  }
+  return found
 }
 
 /** The resources whose linked description differs between two versions of a document. */

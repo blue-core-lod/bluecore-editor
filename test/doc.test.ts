@@ -183,10 +183,52 @@ describe('resources', () => {
     expect(without(instance, 'instanceOf')).toEqual(without(example('bounded'), 'instanceOf'))
   })
 
-  it('reassembles the bounded description from its linked resources', () => {
+  it('saves the Instance as it was read, with its Work as a bare URI', () => {
     const doc = normalize(example('bounded'))
-    const assembled = assembleBounded(linkedResource(doc, doc.root), linkedResource(doc, workOf(doc)))
-    expect(assembled).toEqual(example('bounded'))
+    const bounded = example('bounded')
+    const work = (bounded.instanceOf as JsonObject[])[0] as JsonObject
+    expect(linkedResource(doc, doc.root)).toEqual({ ...bounded, instanceOf: [work['@id']] })
+  })
+
+  it('embeds the Work back under instanceOf', () => {
+    const doc = normalize(example('bounded'))
+    const work = linkedResource(doc, workOf(doc))
+    const assembled = assembleBounded(linkedResource(doc, doc.root), work)
+    expect((assembled.instanceOf as JsonObject[])[0]).toEqual(without(work, '@context'))
+  })
+
+  it('describes each linked resource the Work mentions, though the bounded description embedded it in the Instance', () => {
+    // Blue Core links a resource to a record only where the saved document describes it.
+    const doc = normalize(example('bounded'))
+    const work = linkedResource(doc, workOf(doc))
+    const described = (uri: string) => JSON.stringify(work).includes(`{"@id":"${uri}","@type"`)
+    expect(described('http://id.loc.gov/vocabulary/mstatus/c')).toBe(true)
+    expect(described('http://id.loc.gov/vocabulary/languages/eng')).toBe(true)
+  })
+
+  it('describes a resource once, at its first bare mention, from wherever the record describes it', () => {
+    const california = { '@id': 'http://id.loc.gov/rwo/agents/n79041717-781', '@type': ['mads:Geographic'], 'rdfs:label': ['California'] }
+    const doc = normalize({
+      '@id': 'http://localhost/works/1',
+      '@type': ['Work'],
+      subject: [
+        { '@type': ['mads:ComplexSubject'], 'mads:componentList': [{ '@list': [{ '@id': california['@id'] }] }] },
+        { '@id': california['@id'] },
+        { '@id': 'http://id.loc.gov/authorities/subjects/sh1' },
+      ],
+      hasInstance: [{ '@id': 'http://localhost/instances/1' }],
+    })
+    // The description it had came from a list in another record's subject: here, a node elsewhere.
+    const elsewhere = normalize({ '@id': 'http://x/1', note: [california] })
+    const merged = { ...doc, nodes: { ...doc.nodes, ...elsewhere.nodes } }
+    const saved = linkedResource(merged, doc.root)
+    expect(saved.subject).toEqual([
+      { '@type': ['mads:ComplexSubject'], 'mads:componentList': [{ '@list': [california] }] },
+      { '@id': california['@id'] },
+      // Nothing describes it, so it stays as it was.
+      { '@id': 'http://id.loc.gov/authorities/subjects/sh1' },
+    ])
+    expect(saved.hasInstance).toEqual([{ '@id': 'http://localhost/instances/1' }])
   })
 
   it('knows which resource a value is saved with', () => {
