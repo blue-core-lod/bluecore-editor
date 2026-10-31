@@ -61,6 +61,7 @@ export function Lookup({
   already,
   compose,
   initial,
+  initialText,
   onPick,
   onCompose,
   onCancel,
@@ -74,6 +75,8 @@ export function Lookup({
   compose?: boolean
   /** A complex subject being edited, as its parts. */
   initial?: readonly Component[]
+  /** Text to search for at once, as when linking a value written as text. */
+  initialText?: string
   onPick: (hit: Hit) => void
   /** A heading composed from parts. */
   onCompose?: (components: Component[]) => void
@@ -82,9 +85,12 @@ export function Lookup({
   const { hints, select, preview } = useDescription()
   const listId = useId()
   const input = useRef<HTMLInputElement>(null)
-  const [query, setQuery] = useState(() => initial?.map((component) => inLine(component.label)).join('--') ?? '')
+  const [query, setQuery] = useState(
+    () => initial?.map((component) => inLine(component.label)).join('--') ?? initialText ?? '',
+  )
   const [caret, setCaret] = useState(query.length)
-  const [moveCaret, setMoveCaret] = useState<number | null>(null)
+  // Text it opens with is there to be added to, so the cursor starts at its end.
+  const [moveCaret, setMoveCaret] = useState<number | null>(query ? query.length : null)
   const [picked, setPicked] = useState<Picked>(() => ({ ...initial }))
   const [kindOf, setKindOf] = useState<Record<number, string>>(() =>
     Object.fromEntries((initial ?? []).flatMap((component, i) => (component.uri ? [] : [[i, component.type]]))),
@@ -162,7 +168,10 @@ export function Lookup({
       .map((hit) => ({ ...hit, id: `${listId}-${hit.uri}`, source: source.label, whole: composing && whole }))
   })
   // A browse reads as one list of headings in order, so "United States. Congress. House" in LC Names comes before its subdivisions in LC Subjects.
-  const options = browsing ? found.toSorted((a, b) => a.label.localeCompare(b.label, 'en')) : found
+  const ordered = browsing ? found.toSorted((a, b) => a.label.localeCompare(b.label, 'en')) : found
+  // A heading that is exactly what's typed comes first, whichever source has it: "Washington (State)" is in LC Names, listed after LC Subjects.
+  const exact = (option: Option) => !option.whole && sameHeading(option.label, composing ? fromLine(partText) : text)
+  const options = ordered.toSorted((a, b) => Number(exact(b)) - Number(exact(a)))
   // Composing, a part already found leaves nothing chosen, so Enter adds the subject rather than a whole heading.
   const highlighted = active ?? (composing && (partPicked || !partText) ? -1 : 0)
   const current = highlighted >= 0 ? options[Math.min(highlighted, options.length - 1)] : undefined

@@ -828,6 +828,29 @@ button.chip-name:hover {
   font-size: 0.8rem;
 }
 
+/* A value written as text where the field links to authorities: a chip's outline, not its fill. */
+.unlinked-value {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 100%;
+}
+.unlinked-value:has(.subnode) {
+  flex: 1 1 100%;
+}
+.chip.unlinked {
+  background: none;
+  border: 1px dashed var(--muted);
+  flex-wrap: wrap;
+}
+.unlinked-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.chip.unlinked button.link {
+  font-size: 0.8rem;
+}
+
 /* The parts composed so far, under the lookup. */
 .composed {
   list-style: none;

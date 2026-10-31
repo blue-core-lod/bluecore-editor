@@ -1,6 +1,7 @@
 import { Fragment, useMemo, useState, type ReactNode } from 'react'
 
 import { complexSubject, componentsOf, isComplexSubject, joinHeading, subfield, type Component } from '../doc/complex'
+import { isUncontrolled, linked, unlinkedLabel } from '../doc/link'
 import { change, type Change } from '../doc/log'
 import {
   denormalize,
@@ -14,7 +15,7 @@ import {
   type Value,
 } from '../doc/model'
 import { isEmpty, moveOps, replaceOps } from '../doc/resources'
-import { sourcesFor } from '../lookup/sources'
+import { composes, sourcesFor } from '../lookup/sources'
 import { belongsOn, definitionOf, domainOf, modeledProperties } from '../schema/fields'
 import { hasContext } from '../context/lc'
 import { AddField } from './AddField'
@@ -243,6 +244,8 @@ function ValueView(props: ValueProps) {
   const id = node.keywords['@id']
   if (typeof id === 'string') return <Chip {...props} uri={id} />
   if (isComplexSubject(node)) return <ComplexSubject {...props} child={node} />
+  const text = sourcesFor(props.prop).length > 0 ? unlinkedLabel(node) : undefined
+  if (text) return <Unlinked {...props} child={node} text={text} />
   return <Subnode {...props} child={node} />
 }
 
@@ -383,6 +386,67 @@ function ComplexSubject(props: ValueProps & { child: Node }) {
         Edit
       </button>
       <RemoveButton name={heading} onClick={remove} />
+    </span>
+  )
+}
+
+/**
+ * A value written as text where the field links to authorities: shown muted,
+ * with the lookup it would have had a click away, already searching for the
+ * text. Linking it is one change; the cataloger may also leave it, or open
+ * its fields.
+ */
+function Unlinked(props: ValueProps & { child: Node; text: string }) {
+  const { doc, labels, record } = useDescription()
+  const [finding, setFinding] = useState(false)
+  const [fields, setFields] = useState(false)
+  const { node, prop, value, label, child, text } = props
+  const remove = useRemove(props, text)
+  const sources = sourcesFor(prop)
+  const scheme = child.props.source?.flatMap((source) => {
+    const id = 'node' in source ? getNode(doc, source.node).keywords['@id'] : undefined
+    return typeof id === 'string' ? [refName(id, labels)] : []
+  })[0]
+  const uncontrolled = isUncontrolled(child)
+
+  const replace = (json: Json, to: string) => {
+    record(change(`Linked ${label}: ${text} to ${to}`, replaceOps(doc, node, prop, value.key, json)))
+    setFinding(false)
+  }
+
+  if (finding) {
+    return (
+      <Lookup
+        label={label}
+        sources={sources}
+        already={new Set()}
+        compose={composes(prop)}
+        initialText={text}
+        onPick={(hit) => replace(linked(denormalize(doc, child.key), hit), hit.label || hit.uri)}
+        onCompose={(parts) => replace(complexSubject(parts), joinHeading(parts))}
+        onCancel={() => setFinding(false)}
+      />
+    )
+  }
+
+  return (
+    <span className="unlinked-value">
+      <span
+        className="chip unlinked"
+        title={`${uncontrolled ? 'Marked uncontrolled' : 'Not linked'}: written as text, so it isn’t the same ${label.toLowerCase()} as in other records`}
+      >
+        <span className="part unlinked">{text}</span>
+        {scheme && <span className="source">{scheme}</span>}
+        <span className="unlinked-note">{uncontrolled ? 'uncontrolled' : 'not linked'}</span>
+        <button type="button" className="link" onClick={() => setFinding(true)}>
+          Find authority
+        </button>
+        <button type="button" className="link" aria-expanded={fields} onClick={() => setFields(!fields)}>
+          Fields
+        </button>
+        <RemoveButton name={text} onClick={remove} />
+      </span>
+      {fields && <Subnode {...props} child={child} />}
     </span>
   )
 }
