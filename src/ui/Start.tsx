@@ -1,4 +1,4 @@
-import { useState, type SubmitEvent } from 'react'
+import { useEffect, useState, type SubmitEvent } from 'react'
 
 import { searchInstances, type SearchHit } from '../api/bluecore'
 import { instanceUri } from '../api/endpoints'
@@ -8,6 +8,8 @@ import { newKey } from '../doc/model'
 import { Drafts } from './Drafts'
 import { Header } from './Header'
 import { instanceHref, open } from './route'
+import { useStoredFlag } from './storedFlag'
+import { homeTour, startTour } from './tour'
 
 /** Find an Instance to open (search Blue Core, or paste its URI or UUID), or start a new one. */
 export function Start() {
@@ -16,6 +18,14 @@ export function Start() {
   const [results, setResults] = useState<{ total: number; hits: SearchHit[] } | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [toured, setToured] = useStoredFlag('bluecore-editor.home-toured', false)
+
+  // The first visit gets a short tour; a moment's wait lets the unsaved records, read from the browser, appear first.
+  useEffect(() => {
+    if (toured) return
+    const timer = window.setTimeout(() => startTour(homeTour, () => setToured(true)), 400)
+    return () => window.clearTimeout(timer)
+  }, [toured, setToured])
 
   const submit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()

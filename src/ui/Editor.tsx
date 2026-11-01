@@ -21,7 +21,8 @@ import { refLabels, refName, termLabel, titleOf } from './labels'
 import { Graph } from './Graph'
 import { recordGraph, type GraphNode } from './recordGraph'
 import { JsonView } from './JsonView'
-import { startTour } from './tour'
+import { useStoredFlag } from './storedFlag'
+import { editorTour, startTour } from './tour'
 import { layout, missingId, usuallyMissing, valueId } from './layout'
 import { primerUrl } from './presentation'
 import { replace } from './route'
@@ -105,7 +106,7 @@ export function Editor({ uri }: { uri: string }) {
     setView('record')
     // Once the record is shown again and laid out.
     requestAnimationFrame(() =>
-      startTour(() => {
+      startTour(editorTour, () => {
         touring.current = false
         setToured(true)
         setExplained(true)
@@ -646,30 +647,6 @@ function sessionFrom(loaded: Loaded, savedAt: Date | null): Session {
     savedAt,
     shapeProblems: bounded(loaded.json) ? 0 : (bounded.errors?.length ?? 1),
   }
-}
-
-/**
- * A per-browser preference. Storage can be missing or refuse (a private
- * window, blocked site data), so it falls back to the default quietly.
- */
-function useStoredFlag(name: string, initial: boolean): [boolean, (value: boolean) => void] {
-  const [value, setValue] = useState(() => {
-    try {
-      const stored = window.localStorage.getItem(name)
-      return stored === null ? initial : stored === 'true'
-    } catch {
-      return initial
-    }
-  })
-  const set = (next: boolean) => {
-    setValue(next)
-    try {
-      window.localStorage.setItem(name, String(next))
-    } catch {
-      // Not remembered beyond this page; nothing else depends on it.
-    }
-  }
-  return [value, set]
 }
 
 /** Why a record looks like another kind, as a cataloger would say it. */
