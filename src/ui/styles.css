@@ -12,6 +12,8 @@
   --note-text: #5a3b00;
   --focus: #1f4e8c;
   --create: #2e8540;
+  /* The kind of record (Map, Score): its own hue, apart from the Work's blue and the Instance's orange. */
+  --kind: #6b3fa0;
   --sans: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
   --mono: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
 
@@ -324,12 +326,16 @@ button.add:hover {
 /* What kind of resource the record is, which decides what's offered. */
 .resource-type {
   font-weight: 700;
-  color: var(--text);
+  color: var(--kind);
   margin-right: 0.5rem;
 }
 select.resource-type {
   font: inherit;
   font-weight: 700;
+  color: var(--kind);
+  border: 1px solid var(--kind);
+  border-radius: 4px;
+  background: var(--surface);
   padding: 0.1rem 0.25rem;
 }
 .matches .usage {
