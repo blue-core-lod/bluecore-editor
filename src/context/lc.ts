@@ -1,4 +1,4 @@
-import { placeCodeOf } from './places'
+import { lcTermOf } from './terms'
 
 /**
  * An LC authority record, read from id.loc.gov's suggest2 service. Searched by
@@ -65,9 +65,9 @@ export function lcAuthorityId(uri: string): { directory: string; id: string; uri
   return { directory, id, uri: `http://id.loc.gov/authorities/${directory}/${id}` }
 }
 
-/** Whether the context panel can say more about this URI: an LC authority, or a place given by its MARC code. */
+/** Whether the context panel can say more about this URI: an LC authority, vocabulary term or class number. */
 export function hasContext(uri: string): boolean {
-  return lcAuthorityId(uri) !== undefined || placeCodeOf(uri) !== undefined
+  return lcAuthorityId(uri) !== undefined || lcTermOf(uri) !== undefined
 }
 
 export function suggestUrl(directory: string, id: string): string {

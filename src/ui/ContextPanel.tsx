@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 
 import { disagreements } from '../context/disagreements'
 import { fetchLcAuthority, lcAuthorityId, type Citation, type LcAuthority } from '../context/lc'
-import { fetchPlaceCode, nameAuthorityUri, placeCodeOf, type PlaceCode } from '../context/places'
+import { authorityUriFor, fetchLcTerm, lcTermOf, type LcTerm } from '../context/terms'
 import { fetchUsage, matchingWorks, type Usage } from '../context/usage'
 import { useSource, type Fetched } from '../context/useSource'
 import { fetchWikidata, type WikidataFacts } from '../context/wikidata'
@@ -36,13 +36,13 @@ export function ContextPanel({
   hints: boolean
   close: () => void
 }) {
-  // A place given by its MARC code is read through the name authority for the same place.
-  const place = useSource('place', placeCodeOf(uri) ? uri : null, fetchPlaceCode)
-  const placeFacts = place?.state === 'done' ? place.value : null
-  const authorityUri = place ? (placeFacts?.lccn ? nameAuthorityUri(placeFacts.lccn) : null) : uri
+  // A vocabulary term or class number is read from suggest2, and through the LC authority for the same thing where there is one.
+  const term = useSource('term', lcTermOf(uri) ? uri : null, fetchLcTerm)
+  const termFacts = term?.state === 'done' ? term.value : null
+  const authorityUri = term ? ((termFacts?.lccn && authorityUriFor(termFacts.lccn)) ?? null) : uri
   const lccn = authorityUri ? lcAuthorityId(authorityUri)?.id : undefined
   const lc =
-    useSource('lc', authorityUri, fetchLcAuthority) ?? (place && place.state !== 'loading' ? noAuthority : loading)
+    useSource('lc', authorityUri, fetchLcAuthority) ?? (term && term.state !== 'loading' ? noAuthority : loading)
   const wikidata = useSource('wikidata', lccn, fetchWikidata)
   const wikidataFacts = wikidata?.state === 'done' ? wikidata.value : null
   const wikipedia = useSource('wikipedia', wikidataFacts?.wikipedia, fetchWikipedia)
@@ -58,7 +58,7 @@ export function ContextPanel({
       <header className="context-header">
         <div>
           {previewing && <p className="context-previewing">Search result, not in the record yet</p>}
-          <h2>{authority?.label ?? name}</h2>
+          <h2>{(term ? termFacts?.label : authority?.label) ?? name}</h2>
           {wikidataFacts?.description && <p className="muted">{wikidataFacts.description}</p>}
         </div>
         <button type="button" className="secondary" aria-label="Close context panel" onClick={close}>
@@ -74,19 +74,17 @@ export function ContextPanel({
         </p>
       ))}
 
-      {place && (
-        <SourceSection title={placeFacts?.kind ?? 'MARC code'} fetched={place} missing="">
-          {(facts) => <PlaceCodeView place={facts} />}
+      {term && (
+        <SourceSection title={termFacts?.kind ?? 'LC term'} fetched={term} missing="id.loc.gov doesn’t have this term.">
+          {(facts) => <LcTermView term={facts} />}
         </SourceSection>
       )}
 
-      <SourceSection
-        title={authority?.kind ?? 'LC authority'}
-        fetched={lc}
-        missing={place ? 'Wikidata doesn’t lead from this code to an LC name authority.' : 'id.loc.gov doesn’t have this record.'}
-      >
-        {(record) => <LcRecord record={record} hints={hints} />}
-      </SourceSection>
+      {(!term || authorityUri) && (
+        <SourceSection title={authority?.kind ?? 'LC authority'} fetched={lc} missing="id.loc.gov doesn’t have this record.">
+          {(record) => <LcRecord record={record} hints={hints} />}
+        </SourceSection>
+      )}
 
       <SourceSection title="In Blue Core" fetched={usage} missing="">
         {(facts) => <UsageView usage={facts} />}
@@ -117,16 +115,17 @@ export function ContextPanel({
 const loading: Fetched<never> = { state: 'loading' }
 const noAuthority: Fetched<null> = { state: 'done', value: null }
 
-/** A MARC place code, and the name authority it stands for. */
-function PlaceCodeView({ place }: { place: PlaceCode }) {
+/** A vocabulary term or class number, the classes above it, and whether an LC authority stands for the same thing. */
+function LcTermView({ term }: { term: LcTerm }) {
   return (
     <>
       <p className="context-id">
-        <a href={place.uri.replace(/^http:/, 'https:')} target="_blank" rel="noreferrer">
-          {place.code}
+        <a href={term.uri.replace(/^http:/, 'https:')} target="_blank" rel="noreferrer">
+          {term.code}
         </a>
       </p>
-      {place.lccn && <p className="muted">The same place as the LC name authority below, by way of Wikidata.</p>}
+      {term.broader.length > 0 && <Facts rows={[['Within', term.broader.join(' — ')]]} />}
+      {term.lccn && <p className="muted">The same as the LC authority below, by way of Wikidata.</p>}
     </>
   )
 }

@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { disagreements } from '../src/context/disagreements'
 import { fetchUsage, matchingWorks, type Usage } from '../src/context/usage'
 import { citation, fetchLcAuthority, marcKey, fromSuggest, hasContext, lcAuthorityId, type LcAuthority } from '../src/context/lc'
-import { nameAuthorityUri, placeCodeOf } from '../src/context/places'
+import { authorityUriFor, fetchLcTerm, lcTermOf } from '../src/context/terms'
 import {
   date,
   fromEntity,
@@ -76,7 +76,7 @@ describe('LC authorities', () => {
     expect(lcAuthorityId('http://id.loc.gov/authorities/names/n79021164')?.id).toBe('n79021164')
     expect(lcAuthorityId('https://id.loc.gov/authorities/subjects/sh85076502.html')?.directory).toBe('subjects')
     expect(lcAuthorityId('http://id.loc.gov/rwo/agents/n79021164')?.uri).toBe('http://id.loc.gov/authorities/names/n79021164')
-    expect(hasContext('http://id.loc.gov/vocabulary/relators/aut')).toBe(false)
+    expect(lcAuthorityId('http://id.loc.gov/vocabulary/relators/aut')).toBeUndefined()
     expect(hasContext('https://bluecore.example/works/1')).toBe(false)
   })
 
@@ -265,29 +265,79 @@ describe('Blue Core usage', () => {
   })
 })
 
-describe('places given by a MARC code', () => {
-  it('knows a country or geographic area code', () => {
-    expect(placeCodeOf('http://id.loc.gov/vocabulary/countries/nyu')).toEqual({ vocabulary: 'countries', code: 'nyu' })
-    expect(placeCodeOf('http://id.loc.gov/vocabulary/geographicAreas/n-us-ny')).toEqual({
-      vocabulary: 'geographicAreas',
-      code: 'n-us-ny',
+describe('LC vocabulary terms and class numbers', () => {
+  it('knows a vocabulary term or a class number', () => {
+    expect(lcTermOf('http://id.loc.gov/vocabulary/countries/nyu')).toEqual({
+      directory: 'vocabulary/countries',
+      scheme: 'countries',
+      code: 'nyu',
+    })
+    expect(lcTermOf('http://id.loc.gov/authorities/classification/G4282.R5')).toEqual({
+      directory: 'authorities/classification',
+      scheme: 'classification',
+      code: 'G4282.R5',
     })
   })
 
-  it('leaves other vocabularies alone', () => {
-    expect(placeCodeOf('http://id.loc.gov/vocabulary/relators/aut')).toBeUndefined()
-    expect(hasContext('http://id.loc.gov/vocabulary/carriers/nc')).toBe(false)
+  it('leaves authorities to the authority panel', () => {
+    expect(lcTermOf('http://id.loc.gov/authorities/names/n79021164')).toBeUndefined()
+    expect(lcTermOf('http://example.org/vocabulary/x')).toBeUndefined()
   })
 
   it('opens the context panel', () => {
-    expect(hasContext('http://id.loc.gov/vocabulary/countries/nyu')).toBe(true)
+    expect(hasContext('http://id.loc.gov/vocabulary/languages/eng')).toBe(true)
+    expect(hasContext('http://id.loc.gov/authorities/classification/G4282.R5')).toBe(true)
   })
 
-  it('leads to the name authority through its LCCN', () => {
-    expect(nameAuthorityUri('n80126293')).toBe('http://id.loc.gov/authorities/names/n80126293')
+  it('reads a term from suggest2, with the LC authority Wikidata gives for it', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) =>
+        url.startsWith('https://query.wikidata.org')
+          ? Response.json({
+              results: {
+                bindings: [{ item: { value: 'http://www.wikidata.org/entity/Q1860' }, lccn: { value: 'sh85043413' } }],
+              },
+            })
+          : Response.json({ hits: [{ uri: 'http://id.loc.gov/vocabulary/languages/eng', aLabel: 'English' }] }),
+      ),
+    )
+    expect(await fetchLcTerm('http://id.loc.gov/vocabulary/languages/eng')).toEqual({
+      uri: 'http://id.loc.gov/vocabulary/languages/eng',
+      label: 'English',
+      code: 'eng',
+      kind: 'MARC language code',
+      broader: [],
+      lccn: 'sh85043413',
+    })
   })
 
-  it('finds the LCCN through the one Wikidata item that gives the code', async () => {
+  it('gives a class number the classes above it, without asking Wikidata', async () => {
+    const fetched = vi.fn<(url: string) => Promise<Response>>(async () =>
+      Response.json({
+        hits: [
+          {
+            uri: 'http://id.loc.gov/authorities/classification/G4282.R5',
+            aLabel: 'Rimrock Lake',
+            more: { broaders: ['Geography--Maps', 'Washington (State)'] },
+          },
+        ],
+      }),
+    )
+    vi.stubGlobal('fetch', fetched)
+    const term = await fetchLcTerm('http://id.loc.gov/authorities/classification/G4282.R5')
+    expect(term).toMatchObject({ label: 'Rimrock Lake', kind: 'LC Classification number', lccn: null })
+    expect(term?.broader).toEqual(['Geography--Maps', 'Washington (State)'])
+    expect(fetched.mock.calls.every(([url]) => url.startsWith('https://id.loc.gov'))).toBe(true)
+  })
+
+  it('finds an authority’s directory by its LCCN', () => {
+    expect(authorityUriFor('n80126293')).toBe('http://id.loc.gov/authorities/names/n80126293')
+    expect(authorityUriFor('sh85043413')).toBe('http://id.loc.gov/authorities/subjects/sh85043413')
+    expect(authorityUriFor('gf2014026339')).toBe('http://id.loc.gov/authorities/genreForms/gf2014026339')
+  })
+
+  it('finds the LCCN through the one Wikidata item that gives the term', async () => {
     const bindings = (rows: [string, string][]) => ({
       results: {
         bindings: rows.map(([id, lccn]) => ({ item: { value: `http://www.wikidata.org/entity/${id}` }, lccn: { value: lccn } })),
