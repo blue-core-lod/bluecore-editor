@@ -19,6 +19,8 @@ export function Start() {
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [toured, setToured] = useStoredFlag('bluecore-editor.home-toured', false)
+  // Taking the tour from here carries on in the editor with the next record opened.
+  const [, setEditorToured] = useStoredFlag('bluecore-editor.toured', false)
 
   // The first visit gets a short tour; a moment's wait lets the unsaved records, read from the browser, appear first.
   useEffect(() => {
@@ -51,7 +53,14 @@ export function Start() {
       <main className="page start">
         <div className="start-heading">
           <h1>Open a record</h1>
-          <button type="button" className="link" onClick={() => startTour(homeTour, () => setToured(true))}>
+          <button
+            type="button"
+            className="link"
+            onClick={() => {
+              setEditorToured(false)
+              startTour(homeTour, () => setToured(true))
+            }}
+          >
             Take a tour
           </button>
         </div>

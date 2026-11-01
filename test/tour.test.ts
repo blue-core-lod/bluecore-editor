@@ -20,5 +20,6 @@ describe('the first-visit tour', () => {
   it('stays short enough to be read', () => {
     expect(editorTour.length).toBeLessThanOrEqual(9)
     expect(homeTour.length).toBeLessThanOrEqual(4)
+    expect(homeTour.at(-1)?.title).toBe('Next, the editor')
   })
 })

@@ -109,7 +109,10 @@ button.link {
   text-decoration: none;
   display: flex;
 }
-/* The Blue Core logo, from bluecore.info: the mark and the name. */
+/* The Blue Core logo, from bluecore.info: the mark and the name. At the top of a header that wraps to several lines, level with the record's title. */
+.brand {
+  align-self: flex-start;
+}
 .brand img {
   height: 32px;
   width: auto;

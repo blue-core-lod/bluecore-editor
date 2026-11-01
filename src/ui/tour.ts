@@ -40,6 +40,12 @@ export const homeTour: Step[] = [
     title: 'Unsaved records',
     description: 'Changes you haven’t saved to Blue Core are kept in this browser, and listed here until you save or discard them.',
   },
+  {
+    element: '.start-heading',
+    title: 'Next, the editor',
+    description:
+      'Open a record, from a search or a new one, and the tour carries on there. You can take it again any time from the “?” beside Hints.',
+  },
 ]
 
 export const editorTour: Step[] = [
