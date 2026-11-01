@@ -799,6 +799,18 @@ input[readonly] {
   flex: 1 1 100%;
   display: flex;
 }
+/* Hints: the BIBFRAME side, beside the MARC tags. */
+.primer {
+  margin-left: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.ontology {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
 .marc {
   font-family: var(--mono);
   font-weight: 400;

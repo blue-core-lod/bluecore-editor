@@ -1,3 +1,5 @@
+import vocabulary from '../schema/bibframe-json/vocabulary.json'
+
 /**
  * The presentation sidecar: how the description view groups and orders
  * properties, and their MARC hints. It is keyed by property name, which is
@@ -143,3 +145,45 @@ export function marcLinks(marc: string): { tag: string; href: string }[] {
 }
 
 export const primerUrl = 'https://bibframe.org/docs/view/documentation-bf-primer/index.md'
+
+/** A page of the BIBFRAME Primer, by its path in the Primer's tree. */
+export function primerPage(path: string): string {
+  return `https://bibframe.org/docs/view/documentation-bf-primer/${path}`
+}
+
+const common = 'data-model-common-properties-and-classes'
+const classes = 'data-model-resource-description-classes'
+
+/** Where the Primer explains what a section holds, by section title, for the hints. */
+export const sectionPrimer: Record<string, { label: string; path: string }[]> = {
+  'Title and statement of responsibility': [{ label: 'Titles', path: `${common}/titles.md` }],
+  'Creators and contributors': [{ label: 'Contributions', path: `${common}/contributions-and-contributors.md` }],
+  'Subjects and genre/form': [{ label: 'Subjects', path: `${common}/subjects.md` }],
+  'Publication and identifiers': [
+    { label: 'Provision activity', path: `${common}/provision-activity.md` },
+    { label: 'Identifiers', path: `${common}/identifiers.md` },
+  ],
+  'Language and notes': [
+    { label: 'Language', path: `${common}/language.md` },
+    { label: 'Notes', path: `${common}/notes.md` },
+  ],
+  'Record information': [{ label: 'Administrative metadata', path: `${common}/administrative-metadata.md` }],
+}
+
+/** The Primer's page on each of the two resources, for the Work and Instance badges. */
+export const resourcePrimer: Record<ResourceKind, string> = {
+  Work: primerPage(`${classes}/works.md`),
+  Instance: primerPage(`${classes}/instances.md`),
+}
+
+/**
+ * A BIBFRAME property's own URI, which leads to its entry in LC's BIBFRAME
+ * ontology, with the definition the vocabulary gives it. Undefined for a
+ * property from another vocabulary (bflc:, mads:), which bibframe-json's
+ * vocabulary doesn't define.
+ */
+export function ontologyEntry(prop: string): { href: string; definition: string } | undefined {
+  const term = (vocabulary.terms as Record<string, { definition?: string } | undefined>)[prop]
+  if (!term || !/^[a-z]/.test(prop)) return undefined
+  return { href: `https://id.loc.gov/ontologies/bibframe/${prop}`, definition: term.definition ?? '' }
+}

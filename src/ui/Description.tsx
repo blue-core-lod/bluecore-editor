@@ -25,7 +25,7 @@ import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
 import { layout, missingId, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
 import { Lookup } from './Lookup'
-import { marcLinks, primerUrl, type ResourceKind } from './presentation'
+import { marcLinks, ontologyEntry, primerPage, primerUrl, resourcePrimer, sectionPrimer, type ResourceKind } from './presentation'
 
 /**
  * The description as one document, in cataloging sections, with every value
@@ -65,7 +65,10 @@ export function Description({
         <AddField />
         {view.record.length > 0 && (
           <details className="record">
-            <summary>Record information</summary>
+            <summary>
+              Record information
+              <PrimerLinks title="Record information" />
+            </summary>
             {view.record.map((row) => (
               <FieldRow key={row.id} row={{ ...row, addAnother: undefined }} />
             ))}
@@ -94,7 +97,10 @@ function Section({
   if (rows.length === 0 && missing.length === 0 && suggested.length === 0) return null
   return (
     <section className="section">
-      <h2>{title}</h2>
+      <h2>
+        {title}
+        <PrimerLinks title={title} />
+      </h2>
       {rows.map((row) => (
         <FieldRow key={row.id} row={row} />
       ))}
@@ -137,6 +143,7 @@ function FieldRow({ row }: { row: Row }) {
       <div className="row-label">
         <span>{row.label}</span>
         {hints && row.marc && <MarcTag marc={row.marc} />}
+        {hints && <OntologyLink prop={row.prop} />}
       </div>
       <div className="row-values">
         {row.values.map((value) => (
@@ -235,11 +242,41 @@ function MarcTag({ marc }: { marc: string }) {
   )
 }
 
+/** With hints on, where the BIBFRAME Primer explains what a section holds. */
+function PrimerLinks({ title }: { title: string }) {
+  const { hints } = useDescription()
+  const pages = sectionPrimer[title]
+  if (!hints || !pages) return null
+  return (
+    <span className="primer">
+      {pages.map((page, i) => (
+        <span key={page.path}>
+          {i > 0 && ', '}
+          <a href={primerPage(page.path)} target="_blank" rel="noreferrer" title={`${page.label} in the BIBFRAME Primer`}>
+            {i === 0 ? `Primer: ${page.label}` : page.label}
+          </a>
+        </span>
+      ))}
+    </span>
+  )
+}
+
+/** The property's name, "bf:extent", linking to its entry in the BIBFRAME ontology, with its definition on hover. */
+function OntologyLink({ prop }: { prop: string }) {
+  const entry = ontologyEntry(prop)
+  if (!entry) return null
+  return (
+    <a className="ontology" href={entry.href} target="_blank" rel="noreferrer" title={entry.definition}>
+      bf:{prop}
+    </a>
+  )
+}
+
 function Badge({ kind }: { kind: ResourceKind }) {
   return (
     <a
       className={`badge badge-${kind.toLowerCase()}`}
-      href={primerUrl}
+      href={resourcePrimer[kind]}
       target="_blank"
       rel="noreferrer"
       title={`Saved with the ${kind}. What's the difference? The BIBFRAME Primer explains.`}
