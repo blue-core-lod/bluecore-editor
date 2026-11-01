@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { normalize, type JsonObject } from '../src/doc/model'
-import { guidedProperties, resourceTypeOf, usage } from '../src/schema/guidance'
+import { guidedProperties, kindShare, resourceTypeOf, usage } from '../src/schema/guidance'
 
 function record(workTypes: string[], instance: JsonObject = {}): ReturnType<typeof normalize> {
   return normalize({
@@ -53,5 +53,15 @@ describe('how a kind of resource uses a property', () => {
     const props = guidedProperties('map')
     expect(props.map((p) => p.prop)).toContain('baseMaterial')
     expect(props.map((p) => p.usage.share)).toEqual(props.map((p) => p.usage.share).toSorted((a, b) => b - a))
+  })
+})
+
+describe('how a kind of resource uses one kind of node', () => {
+  it('measures a variant title apart from titles', () => {
+    expect(kindShare('map', 'title', 'VariantTitle')).toBeLessThan(kindShare('map', 'title', 'Title') ?? 0)
+  })
+
+  it('knows nothing of a kind it never measured', () => {
+    expect(kindShare('map', 'title', 'Nonesuch')).toBeUndefined()
   })
 })

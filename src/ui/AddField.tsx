@@ -3,23 +3,29 @@ import { useMemo, useState } from 'react'
 import { getNode, type Key } from '../doc/model'
 import { principals } from '../doc/resources'
 import { allProperties, belongsOn } from '../schema/fields'
-import { resourceTypeOf, usage } from '../schema/guidance'
+import { kindShare, resourceTypeOf, usage } from '../schema/guidance'
 import { AddValue } from './AddValue'
 import { useDescription } from './context'
 import { termLabel, typesOf } from './labels'
 import { recordProps, sections, structural, type ResourceKind } from './presentation'
+import { isTagQuery, tagMatches } from './tags'
 
-/** MARC tags by property, from the sidecar, so "490" finds the series statement. */
-const marcOf = new Map(
-  sections.flatMap((section) => section.fields.flatMap((field) => (field.marc ? [[field.prop, field.marc] as const] : []))),
+/** The sidecar's label and MARC tag for a property ("Subjects", "650"), so a field is called the same here as in its section. */
+const sidecar = new Map(
+  sections.flatMap((section) => section.fields.flatMap((field) => (field.on === 'Work' ? [] : [[field.prop, field] as const]))),
 )
 
 const excluded = new Set([...recordProps, ...structural.Instance, ...structural.Work])
 
 interface Match {
+  id: string
   prop: string
   label: string
   marc: string | undefined
+  /** What MARC calls the tag, when the search was by tag. */
+  marcName?: string
+  /** The kind of node to start on, where the tag says. */
+  type?: string
   /** Where it can go, by the ontology's domain. */
   on: [ResourceKind, Key][]
   /** How many of LC's records of this kind use it, 0 to 1, where guidance knows the kind. */
@@ -34,7 +40,7 @@ interface Match {
 export function AddField() {
   const { doc, hints } = useDescription()
   const [query, setQuery] = useState('')
-  const [chosen, setChosen] = useState<{ prop: string; label: string; node: Key } | null>(null)
+  const [chosen, setChosen] = useState<{ prop: string; label: string; node: Key; type?: string } | null>(null)
 
   const resources = useMemo((): [ResourceKind, Key][] => {
     const { instance, work } = principals(doc)
@@ -46,21 +52,53 @@ export function AddField() {
   const matches = useMemo((): Match[] => {
     const text = query.trim().toLowerCase()
     if (!text) return []
+    const shareOf = (prop: string) => (kind ? usage(kind.id, prop)?.share : undefined)
+    const where = (prop: string, only?: ResourceKind) =>
+      resources.filter(([resource, key]) => (!only || resource === only) && belongsOn(prop, typesOf(getNode(doc, key))))
+
+    // By MARC tag: every field the tag leads to, in tag order.
+    if (isTagQuery(text)) {
+      return tagMatches(text)
+        .filter((entry) => !excluded.has(entry.prop))
+        .flatMap((entry): Match[] => {
+          const on = where(entry.prop, entry.on)
+          if (on.length === 0) return []
+          const label =
+            entry.prop === 'title' && entry.on === 'Work'
+              ? 'Preferred title'
+              : entry.type && entry.type !== 'Title'
+                ? termLabel(entry.type)
+                : labelOf(entry.prop)
+          // A tag that names a kind of node is used as often as that kind is: 246 as variant titles, not titles.
+          const share = entry.type && kind ? kindShare(kind.id, entry.prop, entry.type) : shareOf(entry.prop)
+          return [
+            {
+              id: `${entry.tag} ${entry.prop} ${entry.type ?? ''}`,
+              prop: entry.prop,
+              label,
+              marc: entry.tag,
+              ...(entry.name !== label ? { marcName: entry.name } : {}),
+              ...(entry.type ? { type: entry.type } : {}),
+              on,
+              ...(share ? { share } : {}),
+            },
+          ]
+        })
+        .slice(0, 12)
+    }
+
+    // By name.
     const scored = allProperties
       .filter((prop) => !excluded.has(prop))
       .map((prop) => {
-        const label = termLabel(prop)
-        const marc = marcOf.get(prop)
-        const score = marc?.startsWith(text)
-          ? 0
-          : label.toLowerCase().startsWith(text)
-            ? 1
-            : label.toLowerCase().includes(text) || prop.toLowerCase().includes(text)
-              ? 2
-              : null
-        const on = resources.filter(([, key]) => belongsOn(prop, typesOf(getNode(doc, key))))
-        const share = kind ? usage(kind.id, prop)?.share : undefined
-        return { prop, label, marc, on, score, ...(share ? { share } : {}) }
+        const label = labelOf(prop)
+        const score = label.toLowerCase().startsWith(text)
+          ? 1
+          : label.toLowerCase().includes(text) || prop.toLowerCase().includes(text)
+            ? 2
+            : null
+        const share = shareOf(prop)
+        return { id: prop, prop, label, marc: sidecar.get(prop)?.marc, on: where(prop), score, ...(share ? { share } : {}) }
       })
       .filter((match): match is Match & { score: number } => match.score !== null && match.on.length > 0)
     // Among equally good matches, what this kind of record uses most comes first.
@@ -72,7 +110,7 @@ export function AddField() {
   if (chosen) {
     return (
       <section className="section add-field">
-        <h2>Add {chosen.label.toLowerCase()}</h2>
+        <h2>Add {inSentence(chosen.label)}</h2>
         <AddValue
           node={chosen.node}
           prop={chosen.prop}
@@ -80,6 +118,7 @@ export function AddField() {
           prompt=""
           open
           focus
+          {...(chosen.type ? { type: chosen.type } : {})}
           onDone={() => {
             setChosen(null)
             setQuery('')
@@ -103,10 +142,16 @@ export function AddField() {
       {matches.length > 0 && (
         <ul className="matches">
           {matches.map((match) => (
-            <li key={match.prop}>
+            <li key={match.id}>
               <span>
                 {match.label}
-                {hints && match.marc && <span className="marc"> {match.marc}</span>}
+                {match.marc && (hints || isTagQuery(query)) && (
+                  <span className="marc">
+                    {' '}
+                    {match.marc}
+                    {match.marcName && ` ${match.marcName}`}
+                  </span>
+                )}
                 {kind && match.share !== undefined && match.share >= 0.01 && (
                   <span className="usage">
                     used in {Math.round(match.share * 100)}% of {kind.plural}
@@ -120,7 +165,9 @@ export function AddField() {
                     type="button"
                     className={`badge badge-${kind.toLowerCase()}`}
                     title={`Add ${match.label} to the ${kind}`}
-                    onClick={() => setChosen({ prop: match.prop, label: match.label, node })}
+                    onClick={() =>
+                      setChosen({ prop: match.prop, label: match.label, node, ...(match.type ? { type: match.type } : {}) })
+                    }
                   >
                     {match.on.length > 1 ? `on ${kind}` : `Add to ${kind}`}
                   </button>
@@ -132,4 +179,13 @@ export function AddField() {
       )}
     </section>
   )
+}
+
+function labelOf(prop: string): string {
+  return sidecar.get(prop)?.label ?? termLabel(prop)
+}
+
+/** A label as it reads mid-sentence: "Series statement" as "series statement", but "ISBN" kept. */
+function inSentence(label: string): string {
+  return label.split(' ').map((word) => (/^[A-Z][A-Z]/.test(word) ? word : word.toLowerCase())).join(' ')
 }

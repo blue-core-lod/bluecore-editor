@@ -22,6 +22,7 @@ export function AddValue({
   prompt,
   open: startOpen = false,
   focus = !startOpen,
+  type: startType,
   onDone,
 }: {
   node: Key
@@ -36,13 +37,17 @@ export function AddValue({
   open?: boolean
   /** Take the keyboard focus on opening; by default only a field opened by its button does. */
   focus?: boolean
+  /** The kind of node to start on, where the field takes several: "020" in Add field starts on an ISBN. */
+  type?: string
   onDone?: () => void
 }) {
   const { doc, record } = useDescription()
   const [open, setOpen] = useState(startOpen)
   const [text, setText] = useState('')
   const entry = entryFor(fieldKind(doc, node, prop))
-  const [type, setType] = useState(entry.entry === 'node' ? entry.preferred : '')
+  const [type, setType] = useState(
+    entry.entry !== 'node' ? '' : startType && entry.types.includes(startType) ? startType : entry.preferred,
+  )
 
   const close = () => {
     setText('')

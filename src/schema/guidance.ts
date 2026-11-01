@@ -38,6 +38,8 @@ interface Rule extends ResourceType {
 
 interface Measured {
   share: number
+  /** For a property whose values are typed nodes, the share using each kind: identifiedBy Isbn. */
+  kinds?: Record<string, number>
 }
 
 const rules: Rule[] = resourceTypes.types
@@ -87,6 +89,18 @@ export function usage(type: string, prop: string): Usage | undefined {
             ? 'suggested'
             : 'available'
   return { tier, share, resource }
+}
+
+/**
+ * The share of a kind of resource's records that use a property with one kind
+ * of node, such as identifiedBy with an Isbn; undefined where it isn't measured.
+ */
+export function kindShare(type: string, prop: string, cls: string): number | undefined {
+  const kind = measured[type]
+  const shares = [kind?.Instance[prop]?.kinds?.[cls], kind?.Work[prop]?.kinds?.[cls]].filter(
+    (share): share is number => share !== undefined,
+  )
+  return shares.length > 0 ? Math.max(...shares) : undefined
 }
 
 /** The properties a kind of resource shows or suggests, most used first. */
