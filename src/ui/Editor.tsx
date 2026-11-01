@@ -15,8 +15,8 @@ import type { Previewed } from './context'
 import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
-import { kindChange, kinds, resourceTypeOf } from '../schema/guidance'
-import { refLabels, refName, titleOf } from './labels'
+import { inferredKind, kindChange, kinds, resourceTypeOf, type Evidence } from '../schema/guidance'
+import { refLabels, refName, termLabel, titleOf } from './labels'
 import { primerUrl } from './presentation'
 import { replace } from './route'
 import { SaveReport } from './SaveReport'
@@ -111,6 +111,8 @@ export function Editor({ uri }: { uri: string }) {
   const [sharedAgreed, setSharedAgreed] = useState(false)
   // Bumped when an edit is cancelled, so fields drop what was typed for it.
   const [formKey, setFormKey] = useState(0)
+  // Kinds the cataloger said no to, so the suggestion doesn't come back for them.
+  const [declined, setDeclined] = useState<ReadonlySet<string>>(new Set())
 
   const apply = useCallback((change: Change) => {
     setSession((session) => {
@@ -246,6 +248,10 @@ export function Editor({ uri }: { uri: string }) {
   const kind = resourceTypeOf(session.current)
   // Only a record that is new through and through can change kind: an existing Work's type is Blue Core's.
   const choosable = isPlaceholder(uri) && typeof workUri === 'string' && isPlaceholder(workUri)
+  // Offered until the cataloger has chosen a kind themselves, whichever it was.
+  const chosen = session.log.changes.some((change) => change.kind !== undefined)
+  const inferred = choosable && !chosen ? inferredKind(session.current) : undefined
+  const suggestion = inferred && !declined.has(inferred.kind.id) ? inferred : undefined
 
   return (
     <>
@@ -308,6 +314,29 @@ export function Editor({ uri }: { uri: string }) {
               </>
             )}
           </p>
+          {suggestion && (
+            <p className="kind-suggestion">
+              This looks like {article(suggestion.kind.label)} {suggestion.kind.label.toLowerCase()}:{' '}
+              {reason(suggestion.because[0])}.{' '}
+              <button
+                type="button"
+                className="secondary"
+                onClick={() => {
+                  const change = kindChange(session.current, suggestion.kind.id)
+                  if (change) record(change)
+                }}
+              >
+                Make it {article(suggestion.kind.label)} {suggestion.kind.label.toLowerCase()}
+              </button>{' '}
+              <button
+                type="button"
+                className="link"
+                onClick={() => setDeclined((was) => new Set([...was, suggestion.kind.id]))}
+              >
+                Keep it {article(kind?.label ?? 'record')} {kind?.label.toLowerCase() ?? 'record'}
+              </button>
+            </p>
+          )}
         </div>
         <div className="controls">
           <button
@@ -537,4 +566,14 @@ function useStoredFlag(name: string, initial: boolean): [boolean, (value: boolea
     }
   }
   return [value, set]
+}
+
+/** Why a record looks like another kind, as a cataloger would say it. */
+function reason(evidence: Evidence | undefined): string {
+  if (!evidence) return ''
+  return 'content' in evidence ? `its content type is “${evidence.label}”` : `it has ${termLabel(evidence.prop).toLowerCase()}`
+}
+
+function article(word: string): string {
+  return /^[aeiou]/i.test(word) ? 'an' : 'a'
 }

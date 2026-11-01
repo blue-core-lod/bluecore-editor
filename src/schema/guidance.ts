@@ -52,6 +52,8 @@ interface Measured {
   share: number
   /** For a property whose values are typed nodes, the share using each kind: identifiedBy Isbn. */
   kinds?: Record<string, number>
+  /** For a linked property, its commonest values. */
+  values?: { uri: string; share: number }[]
 }
 
 const rules: Rule[] = resourceTypes.types
@@ -102,7 +104,85 @@ export function kindChange(doc: Doc, id: string): Change | null {
     ...relink(doc, instance, 'issuance', new Set(starts.flatMap((s) => (s.issuance ? [s.issuance] : []))), start.issuance),
     ...relink(doc, instance, 'carrier', new Set(starts.flatMap((s) => (s.carrier ? [s.carrier] : []))), start.carrier),
   ]
-  return change(`Made the record a ${rule.label.toLowerCase()}`, ops)
+  return { ...change(`Made the record a ${rule.label.toLowerCase()}`, ops), kind: id }
+}
+
+/** What made a kind look likely: a field the record has, or its content type. */
+export type Evidence = { prop: string } | { content: string; label: string }
+
+export interface Inferred {
+  kind: ResourceType
+  because: Evidence[]
+}
+
+/** A kind and its online counterpart are one family: serial and serial-online. */
+const family = (id: string) => id.replace(/-online$/, '')
+
+/**
+ * What tells a family of kinds apart, from the measurements: the fields most
+ * of its records have (30% or more) and almost no unrelated record does (under
+ * 5%), such as a map's scale, and the content type nearly all of them have
+ * (90% or more) and other families almost never do, such as cartographic image.
+ */
+const signals: Map<string, { props: Set<string>; content: Set<string> }> = (() => {
+  const shareOf = (type: string, prop: string) =>
+    Math.max(measured[type]?.Instance[prop]?.share ?? 0, measured[type]?.Work[prop]?.share ?? 0)
+  const contentOf = (type: string) =>
+    [...(measured[type]?.Work.content?.values ?? []), ...(measured[type]?.Instance.content?.values ?? [])].map(
+      (value) => ({ code: localName(value.uri), share: value.share }),
+    )
+  const types = Object.keys(measured)
+  const result = new Map<string, { props: Set<string>; content: Set<string> }>()
+  for (const type of types) {
+    const unrelated = types.filter((other) => family(other) !== family(type))
+    const entry = result.get(family(type)) ?? { props: new Set<string>(), content: new Set<string>() }
+    const kind = measured[type]
+    if (!kind) continue
+    for (const prop of new Set([...Object.keys(kind.Instance), ...Object.keys(kind.Work)])) {
+      if (never.has(prop) || shareOf(type, prop) < 0.3) continue
+      if (unrelated.every((other) => shareOf(other, prop) < 0.05)) entry.props.add(prop)
+    }
+    for (const { code, share } of contentOf(type)) {
+      if (share < 0.9) continue
+      const elsewhere = unrelated.some((other) => contentOf(other).some((value) => value.code === code && value.share >= 0.05))
+      if (!elsewhere) entry.content.add(code)
+    }
+    result.set(family(type), entry)
+  }
+  return result
+})()
+
+/**
+ * The kind a record's values point to, where it isn't the kind the record is:
+ * a "book" with a scale, or with cartographic image as its content type, looks
+ * like a map. The family with the most signals wins; an online record is
+ * offered the online kind of it, where there is one. Undefined when nothing
+ * points elsewhere.
+ */
+export function inferredKind(doc: Doc): Inferred | undefined {
+  const { instance, work } = principals(doc)
+  const resources = work ? [instance, work] : [instance]
+  const props = new Set(resources.flatMap((key) => Object.keys(getNode(doc, key).props)))
+  const content = new Set(resources.flatMap((key) => linksOf(doc, key, 'content')))
+  let best: { family: string; because: Evidence[] } | undefined
+  for (const [name, signal] of signals) {
+    const because: Evidence[] = [
+      ...[...signal.content].filter((code) => content.has(code)).map((code) => ({ content: code, label: contentLabel(code) })),
+      ...[...signal.props].filter((prop) => props.has(prop)).map((prop) => ({ prop })),
+    ]
+    if (because.length > (best?.because.length ?? 0)) best = { family: name, because }
+  }
+  const current = resourceTypeOf(doc)
+  if (!best || (current && family(current.id) === best.family)) return undefined
+  const carriers = linksOf(doc, instance, 'carrier')
+  const online = carriers.length === 1 && carriers[0] === 'cr'
+  const id = online && rules.some((rule) => rule.id === `${best.family}-online`) ? `${best.family}-online` : best.family
+  const kind = kinds.find((candidate) => candidate.id === id)
+  return kind && { kind, because: best.because }
+}
+
+function contentLabel(code: string): string {
+  return vocabularies.contentTypes.find((entry) => localName(entry.uri) === code)?.label ?? code
 }
 
 /** Swap a node's kind-defining type for another, keeping its other types. */

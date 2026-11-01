@@ -12,6 +12,8 @@ export interface Change {
   /** ISO 8601. */
   at: string
   ops: Op[]
+  /** Set on a change that made the record a kind of resource ("map"), so a suggestion to switch kinds knows a choice was made. */
+  kind?: string
 }
 
 /**

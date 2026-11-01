@@ -329,6 +329,15 @@ button.add:hover {
   color: var(--kind);
   margin-right: 0.5rem;
 }
+/* "This looks like a map": a suggestion to switch kinds, never a switch by itself. */
+.kind-suggestion {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--kind);
+}
+.kind-suggestion button {
+  font-size: 0.85rem;
+}
 select.resource-type {
   font: inherit;
   font-weight: 700;

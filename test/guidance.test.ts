@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { blankDescription, placeholderUri } from '../src/doc/blank'
 import { replay } from '../src/doc/log'
 import { denormalize, normalize, type JsonObject } from '../src/doc/model'
-import { guidedProperties, kindChange, kindShare, resourceTypeOf, usage } from '../src/schema/guidance'
+import { guidedProperties, inferredKind, kindChange, kindShare, resourceTypeOf, usage } from '../src/schema/guidance'
 
 function record(workTypes: string[], instance: JsonObject = {}): ReturnType<typeof normalize> {
   return normalize({
@@ -111,5 +111,48 @@ describe('making a new record a kind', () => {
     const online = denormalize(made(withVolume, 'book-online'))
     expect(ids(online, 'carrier')).toEqual(['nc', 'cr'])
     expect(resourceTypeOf(made(withVolume, 'book-online'))?.id).toBe('book')
+  })
+})
+
+describe('what kind a new record looks like', () => {
+  const book = blankDescription(placeholderUri('1')) as JsonObject & { instanceOf: JsonObject[] }
+  const withContent = (code: string) =>
+    normalize({
+      ...book,
+      instanceOf: [{ ...book.instanceOf[0], content: [{ '@id': `http://id.loc.gov/vocabulary/contentTypes/${code}` }] }],
+    })
+
+  it('goes by the content type', () => {
+    expect(inferredKind(withContent('cri'))?.kind.id).toBe('map')
+    expect(inferredKind(withContent('prm'))?.kind.id).toBe('music-recording')
+    expect(inferredKind(withContent('ntm'))?.kind.id).toBe('score')
+    expect(inferredKind(withContent('tdi'))?.kind.id).toBe('video')
+    expect(inferredKind(withContent('cri'))?.because).toEqual([{ content: 'cri', label: 'cartographic image' }])
+  })
+
+  it('says nothing when the values fit the kind', () => {
+    expect(inferredKind(withContent('txt'))).toBeUndefined()
+    expect(inferredKind(normalize(book))).toBeUndefined()
+  })
+
+  it('goes by a field only one kind has', () => {
+    const scaled = normalize({ ...book, scale: [{ '@type': ['Scale'], 'rdfs:label': ['1:24,000'] }] })
+    expect(inferredKind(scaled)).toMatchObject({ kind: { id: 'map' }, because: [{ prop: 'scale' }] })
+  })
+
+  it('offers the online kind of an online record', () => {
+    const monthly = normalize({
+      ...book,
+      frequency: [{ '@id': 'http://id.loc.gov/vocabulary/frequencies/mon' }],
+      carrier: [{ '@id': 'http://id.loc.gov/vocabulary/carriers/cr' }],
+    })
+    expect(inferredKind(monthly)?.kind.id).toBe('serial-online')
+  })
+
+  it('stops once the record is that kind', () => {
+    const map = withContent('cri')
+    const change = kindChange(map, 'map')
+    expect(change?.kind).toBe('map')
+    expect(inferredKind(replay(map, change ? [change] : []))).toBeUndefined()
   })
 })
