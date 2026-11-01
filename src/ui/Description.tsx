@@ -142,7 +142,9 @@ function FieldRow({ row }: { row: Row }) {
           <ValueView key={value.key} node={row.node} prop={row.prop} value={value} label={row.label} />
         ))}
         {row.addAnother && (
-          <AddValue node={row.node} prop={row.prop} label={row.addAnother} prompt="Add another" />
+          <div className="add-another">
+            <AddValue node={row.node} prop={row.prop} label={row.addAnother} prompt="Add another" />
+          </div>
         )}
         {row.misplaced && <TeachingNote row={row} misplaced={row.misplaced} />}
       </div>

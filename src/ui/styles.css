@@ -751,6 +751,11 @@ input[readonly] {
   align-items: flex-start;
   min-width: 0;
 }
+/* On a line of its own under the values, so it doesn't read as one of the chips. */
+.add-another {
+  flex: 1 1 100%;
+  display: flex;
+}
 .marc {
   font-family: var(--mono);
   font-weight: 400;
