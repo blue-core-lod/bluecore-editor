@@ -49,7 +49,12 @@ export function Start() {
     <>
       <Header />
       <main className="page start">
-        <h1>Open a record</h1>
+        <div className="start-heading">
+          <h1>Open a record</h1>
+          <button type="button" className="link" onClick={() => startTour(homeTour, () => setToured(true))}>
+            Take a tour
+          </button>
+        </div>
         <form onSubmit={(event) => void submit(event)}>
           <label htmlFor="find">Search Blue Core’s Instances, or paste an Instance URI or UUID</label>
           <div className="find">

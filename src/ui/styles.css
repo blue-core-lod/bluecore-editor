@@ -853,6 +853,13 @@ select.resource-type {
 .start h1 {
   margin-bottom: 1rem;
 }
+/* "Take a tour", always there beside the heading. */
+.start-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
 .find {
   display: flex;
   gap: 0.5rem;
