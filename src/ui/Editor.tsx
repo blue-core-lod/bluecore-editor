@@ -411,6 +411,7 @@ export function Editor({ uri }: { uri: string }) {
                 role="tab"
                 aria-selected={view === id}
                 className={view === id ? 'view-tab selected' : 'view-tab'}
+                data-view={id}
                 onClick={() => setView(id)}
               >
                 {label}

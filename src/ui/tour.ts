@@ -97,15 +97,29 @@ export const editorTour: Step[] = [
   {
     element: '.views',
     title: 'Graph and JSON',
-    description: 'See the record as a graph of what it links to, or as the bibframe-json Blue Core stores.',
+    description: 'See the record as a graph of what it links to, or as the bibframe-json Blue Core stores. Next shows the graph.',
+  },
+  {
+    element: '.graph-view',
+    requires: '.views',
+    prepare: () => tab('graph'),
+    title: 'The record as linked data',
+    description:
+      'The Instance and its Work, and everything they link to, grouped by relationship. Choose an entity for its context, or anything else to go to its field. Text where a link belongs shows dashed.',
   },
   {
     element: '[data-tour="changes"]',
+    prepare: () => tab('record'),
     title: 'Every change, undoable',
     description:
       'Each edit is listed here and can be undone on its own. Unsaved changes are kept in this browser until you save to Blue Core.',
   },
 ]
+
+/** Switch the editor to one of its views, by its tab. */
+function tab(view: 'record' | 'graph' | 'json'): void {
+  document.querySelector<HTMLElement>(`.views [data-view="${view}"]`)?.click()
+}
 
 /** The steps whose part of the page is there to point at, or will be once prepared. */
 export function presentSteps(steps: readonly Step[], find: (selector: string) => Element | null): Step[] {
@@ -149,7 +163,7 @@ export function startTour(tourSteps: readonly Step[], done: () => void): void {
     popoverClass: 'tour-popover',
     stagePadding: 6,
     onDestroyed: done,
-    // A step that makes its own element appear is shown once it has.
+    // A step that makes its own element appear is shown once it has, going forward or back.
     onNextClick: () => {
       const next = present[(tour.getActiveIndex() ?? 0) + 1]
       if (!next) {
@@ -157,13 +171,22 @@ export function startTour(tourSteps: readonly Step[], done: () => void): void {
         present.at(-1)?.finish?.then()
         return
       }
-      if (!next.prepare) {
-        tour.moveNext()
-        return
-      }
-      next.prepare()
-      void appeared(next.element).then(() => tour.moveNext())
+      go(next, () => tour.moveNext())
+    },
+    onPrevClick: () => {
+      const previous = present[(tour.getActiveIndex() ?? 0) - 1]
+      if (previous) go(previous, () => tour.movePrevious())
     },
   })
   tour.drive()
+}
+
+/** Show a step: at once, or once what it prepares has appeared. */
+function go(step: Step, move: () => void): void {
+  if (!step.prepare) {
+    move()
+    return
+  }
+  step.prepare()
+  void appeared(step.element).then(move)
 }
