@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { loadBounded, loadWork, type Loaded } from '../api/bluecore'
 import { afterSave, saveDescription, withBluecoreWork, type ResourceSave, type SaveState } from '../api/save'
@@ -21,6 +21,7 @@ import { refLabels, refName, termLabel, titleOf } from './labels'
 import { Graph } from './Graph'
 import { recordGraph, type GraphNode } from './recordGraph'
 import { JsonView } from './JsonView'
+import { startTour } from './tour'
 import { layout, missingId, usuallyMissing, valueId } from './layout'
 import { primerUrl } from './presentation'
 import { replace } from './route'
@@ -53,7 +54,9 @@ export function Editor({ uri }: { uri: string }) {
   const [problem, setProblem] = useState<string | null>(null)
   const [hints, setHints] = useStoredFlag('bluecore-editor.hints', true)
   const [explained, setExplained] = useStoredFlag('bluecore-editor.hints-explained', false)
-  const [panel, setPanel] = useState<'history' | 'hints' | null>(explained ? null : 'hints')
+  // The first visit gets the tour, which explains hints too; the hints explainer only opens by itself for someone who toured before it was added.
+  const [toured, setToured] = useStoredFlag('bluecore-editor.toured', false)
+  const [panel, setPanel] = useState<'history' | 'hints' | null>(explained || !toured ? null : 'hints')
   // The record as a form to edit, or one of the read-only views of it.
   const [view, setView] = useState<'record' | 'graph' | 'json'>('record')
   const [saving, setSaving] = useState(false)
@@ -94,6 +97,26 @@ export function Editor({ uri }: { uri: string }) {
 
   const changes = session?.log.changes.length ?? 0
   const pending = useMemo(() => (session ? unsaved(session.current, session.saved).length : 0), [session])
+  const touring = useRef(false)
+  const tour = useCallback(() => {
+    if (touring.current) return
+    touring.current = true
+    setPanel(null)
+    setView('record')
+    // Once the record is shown again and laid out.
+    requestAnimationFrame(() =>
+      startTour(() => {
+        touring.current = false
+        setToured(true)
+        setExplained(true)
+      }),
+    )
+  }, [setToured, setExplained])
+  const loaded = session !== null
+  useEffect(() => {
+    if (loaded && !toured) tour()
+  }, [loaded, toured, tour])
+
   const graph = useMemo(
     () => (session && view === 'graph' ? recordGraph(session.current, refLabels(session.current)) : null),
     [session, view],
@@ -399,6 +422,7 @@ export function Editor({ uri }: { uri: string }) {
             type="button"
             className="secondary"
             aria-expanded={panel === 'history'}
+            data-tour="changes"
             onClick={() => toggle('history')}
           >
             {changes === 0 ? 'No unsaved changes' : changes === 1 ? '1 unsaved change' : `${changes} unsaved changes`}
@@ -449,7 +473,8 @@ export function Editor({ uri }: { uri: string }) {
         <div className="explainer" role="dialog" aria-label="What hints show">
           <p>
             <strong>Hints</strong> show the MARC field each value corresponds to, linked to the MARC 21 bibliographic
-            format, and whether the value is saved with the <span className="badge badge-work">Work</span> or the{' '}
+            format, its BIBFRAME property, linked to the ontology, and whether the value is saved with the{' '}
+            <span className="badge badge-work">Work</span> or the{' '}
             <span className="badge badge-instance">Instance</span>. The{' '}
             <a href={primerUrl} target="_blank" rel="noreferrer">
               BIBFRAME Primer
@@ -464,6 +489,9 @@ export function Editor({ uri }: { uri: string }) {
             }}
           >
             Got it
+          </button>{' '}
+          <button type="button" className="secondary" onClick={tour}>
+            Take the tour
           </button>
         </div>
       )}

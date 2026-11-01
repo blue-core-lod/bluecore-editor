@@ -1264,3 +1264,42 @@ button.remove:hover {
     padding-top: 0;
   }
 }
+
+/* The first-visit tour (driver.js), in the editor's own type and colours. */
+.driver-popover.tour-popover {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--surface);
+  border-radius: 8px;
+  max-width: 22rem;
+  padding: 1rem 1.1rem;
+}
+.tour-popover .driver-popover-title {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.tour-popover .driver-popover-description {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.tour-popover .driver-popover-progress-text {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.tour-popover .driver-popover-footer button {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  text-shadow: none;
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  padding: 0.25rem 0.75rem;
+  background: var(--surface);
+  color: var(--text);
+}
+.tour-popover .driver-popover-footer .driver-popover-next-btn {
+  background: var(--text);
+  color: var(--surface);
+}
