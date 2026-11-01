@@ -18,11 +18,14 @@ export interface Step {
   requires?: string
   /** Done just before the step is shown, to make its element appear. */
   prepare?: () => void
+  /** On the last step: what its button says and does instead of just ending the tour. */
+  finish?: { label: string; then: () => void }
   title: string
   description: string
 }
 
-export const homeTour: Step[] = [
+/** The start page's tour; its last step carries on into the editor on a new record. */
+export const homeTour = (startNew: () => void): Step[] => [
   {
     element: '.start form',
     title: 'Open a record',
@@ -44,7 +47,8 @@ export const homeTour: Step[] = [
     element: '.start-heading',
     title: 'Next, the editor',
     description:
-      'Open a record, from a search or a new one, and the tour carries on there. You can take it again any time from the “?” beside Hints.',
+      'Open a record, from a search or a new one, and the tour carries on there, or try it now on a new record. You can take it again any time from the “?” beside Hints.',
+    finish: { label: 'Try it on a new record', then: startNew },
   },
 ]
 
@@ -129,7 +133,11 @@ export function startTour(tourSteps: readonly Step[], done: () => void): void {
   }
   const steps: DriveStep[] = present.map((step) => ({
     element: step.element,
-    popover: { title: step.title, description: step.description },
+    popover: {
+      title: step.title,
+      description: step.description,
+      ...(step.finish ? { doneBtnText: step.finish.label } : {}),
+    },
   }))
   const tour = driver({
     steps,
@@ -146,6 +154,7 @@ export function startTour(tourSteps: readonly Step[], done: () => void): void {
       const next = present[(tour.getActiveIndex() ?? 0) + 1]
       if (!next) {
         tour.destroy()
+        present.at(-1)?.finish?.then()
         return
       }
       if (!next.prepare) {

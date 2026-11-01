@@ -1,4 +1,4 @@
-import { useEffect, useState, type SubmitEvent } from 'react'
+import { useCallback, useEffect, useState, type SubmitEvent } from 'react'
 
 import { searchInstances, type SearchHit } from '../api/bluecore'
 import { instanceUri } from '../api/endpoints'
@@ -11,6 +11,11 @@ import { instanceHref, open } from './route'
 import { useStoredFlag } from './storedFlag'
 import { homeTour, startTour } from './tour'
 
+/** Open a new record, not in Blue Core until it's saved. */
+function startNew() {
+  open(placeholderUri(newKey()))
+}
+
 /** Find an Instance to open (search Blue Core, or paste its URI or UUID), or start a new one. */
 export function Start() {
   const user = useAuth().user?.profile.sub ?? 'anonymous'
@@ -21,13 +26,17 @@ export function Start() {
   const [toured, setToured] = useStoredFlag('bluecore-editor.home-toured', false)
   // Taking the tour from here carries on in the editor with the next record opened.
   const [, setEditorToured] = useStoredFlag('bluecore-editor.toured', false)
+  const tourThenNew = useCallback(() => {
+    setEditorToured(false)
+    startNew()
+  }, [setEditorToured])
 
   // The first visit gets a short tour; a moment's wait lets the unsaved records, read from the browser, appear first.
   useEffect(() => {
     if (toured) return
-    const timer = window.setTimeout(() => startTour(homeTour, () => setToured(true)), 400)
+    const timer = window.setTimeout(() => startTour(homeTour(tourThenNew), () => setToured(true)), 400)
     return () => window.clearTimeout(timer)
-  }, [toured, setToured])
+  }, [toured, setToured, tourThenNew])
 
   const submit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -58,7 +67,7 @@ export function Start() {
             className="link"
             onClick={() => {
               setEditorToured(false)
-              startTour(homeTour, () => setToured(true))
+              startTour(homeTour(tourThenNew), () => setToured(true))
             }}
           >
             Take a tour
@@ -104,7 +113,7 @@ export function Start() {
         )}
         <p className="start-new">
           Or{' '}
-          <button type="button" className="create" onClick={() => open(placeholderUri(newKey()))}>
+          <button type="button" className="create" onClick={startNew}>
             Start a new record
           </button>
         </p>

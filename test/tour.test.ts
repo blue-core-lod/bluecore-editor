@@ -19,7 +19,8 @@ describe('the first-visit tour', () => {
 
   it('stays short enough to be read', () => {
     expect(editorTour.length).toBeLessThanOrEqual(9)
-    expect(homeTour.length).toBeLessThanOrEqual(4)
-    expect(homeTour.at(-1)?.title).toBe('Next, the editor')
+    const home = homeTour(() => {})
+    expect(home.length).toBeLessThanOrEqual(4)
+    expect(home.at(-1)?.finish?.label).toBe('Try it on a new record')
   })
 })
