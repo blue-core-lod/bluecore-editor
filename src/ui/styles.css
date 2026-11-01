@@ -125,8 +125,10 @@ button.link {
   gap: 0.75rem 1.5rem;
   min-width: 0;
 }
+/* The record's title on a row of its own, below the buttons, so a long one has the header's whole width. */
 .title-block {
-  flex: 1 1 18rem;
+  order: 2;
+  flex: 1 1 100%;
   min-width: 0;
 }
 .title-block h1 {
@@ -140,6 +142,7 @@ button.link {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-left: auto;
 }
 .hints-control {
   display: flex;
@@ -151,6 +154,9 @@ button.link {
   gap: 0.6rem;
   align-items: center;
   font-size: 0.9rem;
+  /* Level with the buttons at the top, not centred on a header that's two rows tall. */
+  align-self: flex-start;
+  min-height: 2.4rem;
 }
 
 /* The Hints switch. */
