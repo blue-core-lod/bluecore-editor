@@ -31,7 +31,7 @@ export function Header({ children }: { children?: ReactNode }) {
           open(null)
         }}
       >
-        Blue Core
+        <img src={`${import.meta.env.BASE_URL}blue-core-logo.png`} alt="Blue Core" height={32} />
       </a>
       <div className="header-main">{children}</div>
       {user && (

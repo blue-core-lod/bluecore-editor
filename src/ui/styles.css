@@ -107,6 +107,12 @@ button.link {
   font-weight: 700;
   color: var(--text);
   text-decoration: none;
+  display: flex;
+}
+/* The Blue Core logo, from bluecore.info: the mark and the name. */
+.brand img {
+  height: 32px;
+  width: auto;
 }
 .header-main {
   flex: 1;
