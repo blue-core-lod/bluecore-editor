@@ -507,10 +507,174 @@ select.resource-type {
   align-items: flex-start;
   gap: 2rem;
 }
-.workspace > .description {
+.workspace > .view {
   flex: 999 1 32rem;
   min-width: 0;
 }
+.view[hidden] {
+  display: none;
+}
+/* A value's anchor for the graph view, with no box of its own so the record's layout is unchanged. */
+.value-anchor {
+  display: contents;
+}
+
+/* Record · Graph · JSON: views of the same record. */
+.views {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.4rem;
+}
+.view-tab {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.9rem;
+}
+.view-tab.selected {
+  color: var(--text);
+  border-bottom-color: var(--text);
+  font-weight: 700;
+}
+
+/* The graph view. */
+.graph-view,
+.json-view {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.graph-note {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+.graph {
+  width: 100%;
+  height: auto;
+  font-family: var(--sans);
+}
+.graph-edge {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1.5;
+}
+.graph-edge-label,
+.graph-heading {
+  font-size: 12px;
+  fill: var(--muted);
+}
+.graph-heading {
+  font-weight: 700;
+}
+.graph-hub,
+.graph-node {
+  cursor: pointer;
+}
+.graph-hub rect {
+  fill: var(--surface);
+  stroke-width: 2;
+}
+.graph-hub-instance rect {
+  stroke: var(--instance);
+}
+.graph-hub-work rect {
+  stroke: var(--work);
+}
+.graph-hub-kind {
+  font-size: 13px;
+  font-weight: 700;
+}
+.graph-hub-instance .graph-hub-kind {
+  fill: var(--instance);
+}
+.graph-hub-work .graph-hub-kind {
+  fill: var(--work);
+}
+.graph-hub-title {
+  font-size: 11px;
+  fill: var(--muted);
+}
+.graph-node rect {
+  fill: var(--linked);
+  stroke: none;
+}
+.graph-node text {
+  font-size: 12px;
+  fill: var(--text);
+}
+.graph-node .graph-source {
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--muted);
+}
+.graph-node-unlinked rect {
+  fill: none;
+  stroke: var(--muted);
+  stroke-dasharray: 4 3;
+}
+.graph-node-unlinked text {
+  font-style: italic;
+}
+.graph-node:hover rect,
+.graph-node.selected rect,
+.graph-node:focus-visible rect,
+.graph-hub:focus-visible rect {
+  stroke: var(--focus);
+  stroke-width: 2;
+}
+.graph :focus {
+  outline: none;
+}
+
+/* The JSON view. */
+.json-modes {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem;
+}
+.json-document header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.json-document h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.json-document header button {
+  margin-left: auto;
+}
+.json-changed {
+  font-size: 0.8rem;
+  color: var(--note-text);
+  background: var(--note-ground);
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+}
+.json-document pre {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  background: var(--ground);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.75rem;
+  overflow-x: auto;
+  margin: 0 0 1.25rem;
+}
+.json-key {
+  color: var(--work);
+}
+.json-link {
+  font: inherit;
+  padding: 0;
+}
+
 /* Sized by its own width, not the window's: the context panel takes some of it. */
 .description {
   container-type: inline-size;

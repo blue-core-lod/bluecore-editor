@@ -16,8 +16,12 @@ import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
 import { inferredKind, kindChange, kinds, resourceTypeOf, type Evidence } from '../schema/guidance'
+import { hasContext } from '../context/lc'
 import { refLabels, refName, termLabel, titleOf } from './labels'
-import { layout, missingId, usuallyMissing } from './layout'
+import { Graph } from './Graph'
+import { recordGraph, type GraphNode } from './recordGraph'
+import { JsonView } from './JsonView'
+import { layout, missingId, usuallyMissing, valueId } from './layout'
 import { primerUrl } from './presentation'
 import { replace } from './route'
 import { SaveReport } from './SaveReport'
@@ -50,6 +54,8 @@ export function Editor({ uri }: { uri: string }) {
   const [hints, setHints] = useStoredFlag('bluecore-editor.hints', true)
   const [explained, setExplained] = useStoredFlag('bluecore-editor.hints-explained', false)
   const [panel, setPanel] = useState<'history' | 'hints' | null>(explained ? null : 'hints')
+  // The record as a form to edit, or one of the read-only views of it.
+  const [view, setView] = useState<'record' | 'graph' | 'json'>('record')
   const [saving, setSaving] = useState(false)
   const [report, setReport] = useState<ResourceSave[] | null>(null)
   /** The linked entity in the context panel, and the lookup result shown there instead while it's highlighted. */
@@ -88,6 +94,14 @@ export function Editor({ uri }: { uri: string }) {
 
   const changes = session?.log.changes.length ?? 0
   const pending = useMemo(() => (session ? unsaved(session.current, session.saved).length : 0), [session])
+  const graph = useMemo(
+    () => (session && view === 'graph' ? recordGraph(session.current, refLabels(session.current)) : null),
+    [session, view],
+  )
+  const changed = useMemo(
+    () => new Set(session && view === 'json' ? unsaved(session.current, session.saved).map(({ key }) => key) : []),
+    [session, view],
+  )
   const usual = useMemo(
     () => (session ? usuallyMissing(layout(session.current, refLabels(session.current))) : []),
     [session],
@@ -359,6 +373,26 @@ export function Editor({ uri }: { uri: string }) {
               </button>
             </p>
           )}
+          <nav className="views" role="tablist" aria-label="Views of the record">
+            {(
+              [
+                ['record', 'Record'],
+                ['graph', 'Graph'],
+                ['json', 'JSON'],
+              ] as const
+            ).map(([id, label]) => (
+              <button
+                key={id}
+                type="button"
+                role="tab"
+                aria-selected={view === id}
+                className={view === id ? 'view-tab selected' : 'view-tab'}
+                onClick={() => setView(id)}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
         </div>
         <div className="controls">
           <button
@@ -476,15 +510,35 @@ export function Editor({ uri }: { uri: string }) {
           </p>
         )}
         <div className="workspace">
-          <Description
-            key={formKey}
-            doc={session.current}
-            hints={hints}
-            record={record}
-            selected={selected}
-            select={setSelected}
-            preview={setPreviewing}
-          />
+          {/* Kept while another view is open, so what's being typed survives a look at the graph. */}
+          <div className="view" hidden={view !== 'record'}>
+            <Description
+              key={formKey}
+              doc={session.current}
+              hints={hints}
+              record={record}
+              selected={selected}
+              select={setSelected}
+              preview={setPreviewing}
+            />
+          </div>
+          {view === 'graph' && graph && (
+            <div className="view">
+              <Graph
+                graph={graph}
+                selected={selected}
+                choose={(node: GraphNode) =>
+                  node.uri && hasContext(node.uri) ? setSelected(node.uri) : showField(() => setView('record'), valueId(node.valueKey))
+                }
+                goToResource={() => showField(() => setView('record'))}
+              />
+            </div>
+          )}
+          {view === 'json' && (
+            <div className="view">
+              <JsonView doc={session.current} changed={changed} select={setSelected} />
+            </div>
+          )}
           {previewing ? (
             <ContextPanel
               key="previewing"
@@ -606,4 +660,24 @@ function goTo(event: React.MouseEvent<HTMLElement>, id: string) {
   const target = document.getElementById(id)
   target?.scrollIntoView({ block: 'center', behavior: 'smooth' })
   target?.querySelector('button')?.focus({ preventScroll: true })
+}
+
+/**
+ * Back to the record from another view, at a value if one is given: the
+ * record is shown first, then scrolled to once it's laid out again.
+ */
+function showField(showRecord: () => void, id?: string) {
+  showRecord()
+  requestAnimationFrame(() => {
+    const anchor = id ? document.getElementById(id) : null
+    // The anchor has no box of its own (display: contents); its first child does.
+    const target = anchor?.firstElementChild
+    if (!target) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    target.scrollIntoView({ block: 'center', behavior: 'smooth' })
+    const focusable = target.matches('input, button, a') ? target : target.querySelector('input, button, a')
+    if (focusable instanceof HTMLElement) focusable.focus({ preventScroll: true })
+  })
 }

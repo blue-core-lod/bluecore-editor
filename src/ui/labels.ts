@@ -1,6 +1,7 @@
 import vocabulary from '../schema/bibframe-json/vocabulary.json'
 import { config } from '../config'
 import { getNode, isValueObject, type Doc, type Literal, type Node } from '../doc/model'
+import { anyVocabularyLabel } from '../lookup/local'
 
 /**
  * Display text: what to call a property or class, and how to name a linked
@@ -106,10 +107,20 @@ function firstText(node: Node, prop: string): string | undefined {
   return value && 'literal' in value ? literalText(value.literal) : undefined
 }
 
-/** A linked resource's display name: its label, else its code, else the end of its URI. */
+/**
+ * A linked resource's display name: its label, else the label of the LC
+ * vocabulary term it is (the editor keeps those lists), else its code, else
+ * the end of its URI.
+ */
 export function refName(uri: string, labels: Map<string, RefLabel>): string {
   const known = labels.get(uri)
-  return known?.label ?? known?.code ?? uri.replace(/\/+$/, '').split(/[/#]/).pop() ?? uri
+  return known?.label ?? anyVocabularyLabel(uri) ?? known?.code ?? uri.replace(/\/+$/, '').split(/[/#]/).pop() ?? uri
+}
+
+/** A contribution's role as a cataloger names it, "Contributor", even where the record keeps only the relator's URI. */
+export function roleName(uri: string, labels: Map<string, RefLabel>): string {
+  const label = refName(uri, labels)
+  return label.charAt(0).toUpperCase() + label.slice(1)
 }
 
 /** Where a linked resource comes from, as the badge on its chip says. */

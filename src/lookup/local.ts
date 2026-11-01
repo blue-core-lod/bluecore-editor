@@ -35,6 +35,14 @@ export function searchVocabulary(name: Vocabulary, query: string, limit = 20): H
     .map(({ term }) => term)
 }
 
+/** The labels of every vendored term, by URI, for naming a link the record gives no label for. */
+const allLabels = new Map(Object.values(vocabularies).flatMap((terms) => terms.map((term) => [term.uri, term.label] as const)))
+
+/** A vendored term's label by its URI, from whichever vocabulary has it: "contributor" for relators/ctb. */
+export function anyVocabularyLabel(uri: string): string | undefined {
+  return allLabels.get(uri)
+}
+
 /** A term's label by its URI, such as "author" for relators/aut. */
 export function vocabularyLabel(name: Vocabulary, uri: string): string | undefined {
   return vocabularies[name].find((term) => term.uri === uri)?.label

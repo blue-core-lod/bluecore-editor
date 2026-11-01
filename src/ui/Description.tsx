@@ -23,7 +23,7 @@ import { AddValue } from './AddValue'
 import { DescriptionContext, useDescription, type Previewed } from './context'
 import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
-import { layout, missingId, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
+import { layout, missingId, valueId, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
 import { Lookup } from './Lookup'
 import { marcLinks, ontologyEntry, primerPage, primerUrl, resourcePrimer, sectionPrimer, type ResourceKind } from './presentation'
 
@@ -295,7 +295,16 @@ interface ValueProps {
   label: string
 }
 
+/** A value, in an element the graph view can find it by. */
 function ValueView(props: ValueProps) {
+  return (
+    <span id={valueId(props.value.key)} className="value-anchor">
+      <ValueContent {...props} />
+    </span>
+  )
+}
+
+function ValueContent(props: ValueProps) {
   const { doc } = useDescription()
   const { value } = props
   if ('literal' in value) {

@@ -2,7 +2,7 @@ import { getNode, type Doc, type Key, type Value } from '../doc/model'
 import { principals } from '../doc/resources'
 import { belongsOn, domainOf } from '../schema/fields'
 import { guidedProperties, resourceTypeOf, usage, type ResourceType } from '../schema/guidance'
-import { refName, termLabel, typesOf, type RefLabel } from './labels'
+import { roleName, termLabel, typesOf, type RefLabel } from './labels'
 import {
   identifierMarc,
   provisionMarc,
@@ -197,7 +197,7 @@ function perValueLabel(
       // Labelled by role, as a cataloger names the field: "Author", not "Contribution".
       const role = node.props.role?.[0]
       const roleId = role && 'node' in role ? getNode(doc, role.node).keywords['@id'] : undefined
-      const label = typeof roleId === 'string' ? capitalize(refName(roleId, labels)) : spec.label
+      const label = typeof roleId === 'string' ? roleName(roleId, labels) : spec.label
       const primary = types.includes('PrimaryContribution')
       return { label, marc: kind === 'Work' && primary ? '100' : '700' }
     }
@@ -214,9 +214,6 @@ function perValueLabel(
   }
 }
 
-function capitalize(text: string): string {
-  return text.charAt(0).toUpperCase() + text.slice(1)
-}
 
 /**
  * The fields most of LC's records of this kind have and this one doesn't,
@@ -234,4 +231,9 @@ export function usuallyMissing(view: Layout): (Missing & { share: number })[] {
 /** The element id of a missing field's "Add …" button, so the header's list can take the cataloger to it. */
 export function missingId(field: Missing): string {
   return `missing-${field.id.replace(/\s+/g, '-')}`
+}
+
+/** The element id of a value in the record, so another view (the graph) can take the cataloger to it. */
+export function valueId(key: Key): string {
+  return `value-${key}`
 }
