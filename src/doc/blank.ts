@@ -25,9 +25,9 @@ export function placeholderId(uri: string): string {
 }
 
 /**
- * An empty print Instance of a text Work, the slice's one kind of resource
- * (design.md, Next steps). Choosing the kind up front is a stopgap; the design
- * has the editor infer it from the first few values instead.
+ * An empty print Instance of a text Work: a book, the commonest kind. The
+ * cataloger can make it another kind from the header (kindChange in
+ * schema/guidance.ts), so nothing has to be chosen before starting.
  */
 export function blankDescription(instanceUri: string): JsonObject {
   return {

@@ -1,5 +1,8 @@
-import { getNode, type Doc, type Key } from '../doc/model'
+import { change, type Change } from '../doc/log'
+import { fragment, getNode, type Doc, type Key } from '../doc/model'
+import type { Op } from '../doc/patch'
 import { principals } from '../doc/resources'
+import vocabularies from '../lookup/vocabularies.json'
 import guidance from './guidance.json'
 import overrides from './guidance-overrides.json'
 import resourceTypes from './resource-types.json'
@@ -34,6 +37,15 @@ interface Rule extends ResourceType {
   work?: string[]
   issuance?: string[]
   online?: boolean
+  start: Start
+}
+
+/** What a new record of a kind is written with: the types, and the issuance and carrier that define it. */
+interface Start {
+  work: string
+  instance?: string
+  issuance?: string
+  carrier?: string
 }
 
 interface Measured {
@@ -66,6 +78,65 @@ export function resourceTypeOf(doc: Doc): ResourceType | undefined {
       (!rule.online || online),
   )
   return rule && { id: rule.id, label: rule.label, plural: rule.plural }
+}
+
+/** Every kind of resource guidance knows, in the order the rules try them. */
+export const kinds: ResourceType[] = rules.map(({ id, label, plural }) => ({ id, label, plural }))
+
+/**
+ * Make a new record the given kind, as one change: the Work's and Instance's
+ * types, and the issuance and carrier the kind is defined by (a serial's
+ * issuance, an online resource as carrier). Only what an earlier kind wrote
+ * is taken away, so nothing the cataloger entered is lost. Null when the
+ * record is that kind already.
+ */
+export function kindChange(doc: Doc, id: string): Change | null {
+  const rule = rules.find((candidate) => candidate.id === id)
+  const { instance, work } = principals(doc)
+  if (!rule || !work || resourceTypeOf(doc)?.id === id) return null
+  const start = rule.start
+  const starts = rules.map((candidate) => candidate.start)
+  const ops: Op[] = [
+    ...retype(doc, work, new Set(rules.flatMap((candidate) => [...(candidate.work ?? []), candidate.start.work])), start.work),
+    ...retype(doc, instance, new Set(starts.flatMap((s) => (s.instance ? [s.instance] : []))), start.instance),
+    ...relink(doc, instance, 'issuance', new Set(starts.flatMap((s) => (s.issuance ? [s.issuance] : []))), start.issuance),
+    ...relink(doc, instance, 'carrier', new Set(starts.flatMap((s) => (s.carrier ? [s.carrier] : []))), start.carrier),
+  ]
+  return change(`Made the record a ${rule.label.toLowerCase()}`, ops)
+}
+
+/** Swap a node's kind-defining type for another, keeping its other types. */
+function retype(doc: Doc, key: Key, kinds: Set<string>, to: string | undefined): Op[] {
+  const from = getNode(doc, key).keywords['@type']
+  const types = typesOf(doc, key)
+  const next = [...types.filter((type) => !kinds.has(type)), ...(to ? [to] : [])]
+  return next.join() === types.join() ? [] : [{ op: 'keyword', node: key, name: '@type', from, to: next }]
+}
+
+/** Swap a kind-defining linked value (serl, cr) for another, leaving any the cataloger chose. */
+function relink(doc: Doc, key: Key, prop: string, codes: Set<string>, to: string | undefined): Op[] {
+  const values = getNode(doc, key).props[prop] ?? []
+  const ops: Op[] = []
+  let has = false
+  for (const value of values) {
+    const id = 'node' in value ? getNode(doc, value.node).keywords['@id'] : undefined
+    const code = typeof id === 'string' ? localName(id) : undefined
+    if (code === to) has = true
+    else if (code && codes.has(code)) ops.push({ op: 'remove', node: key, prop, value: value.key })
+  }
+  if (to && !has) {
+    const term = vocabularyTerm(prop, to)
+    const { value, nodes } = fragment({ '@id': term.uri, 'rdfs:label': [term.label] }, { node: key, prop })
+    ops.push({ op: 'insert', node: key, prop, after: values.at(-1)?.key ?? null, value, nodes })
+  }
+  return ops
+}
+
+function vocabularyTerm(prop: string, code: string): { uri: string; label: string } {
+  const list = prop === 'carrier' ? vocabularies.carriers : vocabularies.issuance
+  const term = list.find((entry) => localName(entry.uri) === code)
+  if (!term) throw new Error(`No ${prop} ${code} in the vocabularies`)
+  return term
 }
 
 /** How a kind of resource uses a property: its tier and share, or undefined for one no form offers. */

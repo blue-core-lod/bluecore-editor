@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
-import { normalize, type JsonObject } from '../src/doc/model'
-import { guidedProperties, kindShare, resourceTypeOf, usage } from '../src/schema/guidance'
+import { blankDescription, placeholderUri } from '../src/doc/blank'
+import { replay } from '../src/doc/log'
+import { denormalize, normalize, type JsonObject } from '../src/doc/model'
+import { guidedProperties, kindChange, kindShare, resourceTypeOf, usage } from '../src/schema/guidance'
 
 function record(workTypes: string[], instance: JsonObject = {}): ReturnType<typeof normalize> {
   return normalize({
@@ -63,5 +65,51 @@ describe('how a kind of resource uses one kind of node', () => {
 
   it('knows nothing of a kind it never measured', () => {
     expect(kindShare('map', 'title', 'Nonesuch')).toBeUndefined()
+  })
+})
+
+describe('making a new record a kind', () => {
+  const blank = () => normalize(blankDescription(placeholderUri('1')))
+  const made = (doc: ReturnType<typeof normalize>, id: string) => {
+    const change = kindChange(doc, id)
+    if (!change) throw new Error(`no change to ${id}`)
+    return replay(doc, [change])
+  }
+  const ids = (json: unknown, prop: string) =>
+    ((json as Record<string, { '@id': string }[]>)[prop] ?? []).map((value) => value['@id'].split('/').pop())
+
+  it('starts as a book, so making it one changes nothing', () => {
+    expect(resourceTypeOf(blank())?.id).toBe('book')
+    expect(kindChange(blank(), 'book')).toBeNull()
+  })
+
+  it('changes the Work’s type and keeps the rest', () => {
+    const map = made(blank(), 'map')
+    expect(resourceTypeOf(map)?.id).toBe('map')
+    const json = denormalize(map) as { '@type': string[]; instanceOf: { '@type': string[] }[] }
+    expect(json.instanceOf[0]?.['@type']).toEqual(['Work', 'Cartography'])
+    expect(json['@type']).toEqual(['Instance', 'Print'])
+  })
+
+  it('writes what defines an online serial, and takes it away again', () => {
+    const serial = made(blank(), 'serial-online')
+    expect(resourceTypeOf(serial)?.id).toBe('serial-online')
+    const json = denormalize(serial) as Record<string, unknown> & { '@type': string[] }
+    expect(json['@type']).toEqual(['Instance', 'Electronic'])
+    expect(ids(json, 'issuance')).toEqual(['serl'])
+    expect(ids(json, 'carrier')).toEqual(['cr'])
+
+    const book = denormalize(made(serial, 'book')) as Record<string, unknown> & { '@type': string[] }
+    expect(book['@type']).toEqual(['Instance', 'Print'])
+    expect(ids(book, 'issuance')).toEqual([])
+    expect(ids(book, 'carrier')).toEqual([])
+  })
+
+  it('leaves a carrier the cataloger chose', () => {
+    const json = blankDescription(placeholderUri('1'))
+    const withVolume = normalize({ ...json, carrier: [{ '@id': 'http://id.loc.gov/vocabulary/carriers/nc' }] })
+    const online = denormalize(made(withVolume, 'book-online'))
+    expect(ids(online, 'carrier')).toEqual(['nc', 'cr'])
+    expect(resourceTypeOf(made(withVolume, 'book-online'))?.id).toBe('book')
   })
 })

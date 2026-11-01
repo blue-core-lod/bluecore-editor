@@ -327,6 +327,11 @@ button.add:hover {
   color: var(--text);
   margin-right: 0.5rem;
 }
+select.resource-type {
+  font: inherit;
+  font-weight: 700;
+  padding: 0.1rem 0.25rem;
+}
 .matches .usage {
   display: block;
   font-size: 0.8rem;

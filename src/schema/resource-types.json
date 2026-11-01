@@ -1,16 +1,16 @@
 {
-  "x-about": "The kinds of resource the editor's guidance is measured for, and how to tell them. Read by scripts/guidance (to sample LC's records) and by the editor (to know what it's editing), so the two agree. The first rule that matches wins. A rule matches when the Work has one of its types, or the Instance one of its issuances; online rules also need the Instance's only carrier to be an online resource. Types, issuances and carriers are local names: Text, serl, cr. See docs/guidance.md.",
+  "x-about": "The kinds of resource the editor's guidance is measured for, and how to tell them. Read by scripts/guidance (to sample LC's records) and by the editor (to know what it's editing), so the two agree. The first rule that matches wins. A rule matches when the Work has one of its types, or the Instance one of its issuances; online rules also need the Instance's only carrier to be an online resource. Types, issuances and carriers are local names: Text, serl, cr. `start` is what the editor writes when a cataloger says a new record is of this kind: the Work's type, the Instance's, and for serials and online kinds the issuance and carrier that define them, never a value that is merely common. See docs/guidance.md.",
   "types": [
-    {"id": "serial-online", "label": "Serial (online)", "work": ["Serial"], "issuance": ["serl"], "online": true, "plural": "online serials"},
-    {"id": "serial", "label": "Serial", "work": ["Serial"], "issuance": ["serl"], "plural": "serials"},
-    {"id": "map", "label": "Map", "work": ["Cartography"], "plural": "maps"},
-    {"id": "score", "label": "Score", "work": ["NotatedMusic"], "plural": "scores"},
-    {"id": "music-recording", "label": "Music recording", "work": ["MusicAudio"], "plural": "music recordings"},
-    {"id": "spoken-audio", "label": "Spoken audio", "work": ["NonMusicAudio", "Audio"], "plural": "spoken audio recordings"},
-    {"id": "video", "label": "Video", "work": ["MovingImage"], "plural": "videos"},
-    {"id": "still-image", "label": "Still image", "work": ["StillImage"], "plural": "still images"},
-    {"id": "collection", "label": "Collection", "work": ["Collection", "MixedMaterial"], "issuance": ["mulm"], "plural": "collections"},
-    {"id": "book-online", "label": "Book (online)", "work": ["Text"], "online": true, "plural": "online books"},
-    {"id": "book", "label": "Book", "work": ["Text"], "plural": "books"}
+    {"id": "serial-online", "label": "Serial (online)", "work": ["Serial"], "issuance": ["serl"], "online": true, "plural": "online serials", "start": {"work": "Text", "instance": "Electronic", "issuance": "serl", "carrier": "cr"}},
+    {"id": "serial", "label": "Serial", "work": ["Serial"], "issuance": ["serl"], "plural": "serials", "start": {"work": "Text", "instance": "Print", "issuance": "serl"}},
+    {"id": "map", "label": "Map", "work": ["Cartography"], "plural": "maps", "start": {"work": "Cartography", "instance": "Print"}},
+    {"id": "score", "label": "Score", "work": ["NotatedMusic"], "plural": "scores", "start": {"work": "NotatedMusic", "instance": "Print"}},
+    {"id": "music-recording", "label": "Music recording", "work": ["MusicAudio"], "plural": "music recordings", "start": {"work": "MusicAudio"}},
+    {"id": "spoken-audio", "label": "Spoken audio", "work": ["NonMusicAudio", "Audio"], "plural": "spoken audio recordings", "start": {"work": "NonMusicAudio"}},
+    {"id": "video", "label": "Video", "work": ["MovingImage"], "plural": "videos", "start": {"work": "MovingImage"}},
+    {"id": "still-image", "label": "Still image", "work": ["StillImage"], "plural": "still images", "start": {"work": "StillImage"}},
+    {"id": "collection", "label": "Collection", "work": ["Collection", "MixedMaterial"], "issuance": ["mulm"], "plural": "collections", "start": {"work": "Collection"}},
+    {"id": "book-online", "label": "Book (online)", "work": ["Text"], "online": true, "plural": "online books", "start": {"work": "Text", "instance": "Electronic", "carrier": "cr"}},
+    {"id": "book", "label": "Book", "work": ["Text"], "plural": "books", "start": {"work": "Text", "instance": "Print"}}
   ]
 }

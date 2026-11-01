@@ -15,7 +15,7 @@ import type { Previewed } from './context'
 import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
-import { resourceTypeOf } from '../schema/guidance'
+import { kindChange, kinds, resourceTypeOf } from '../schema/guidance'
 import { refLabels, refName, titleOf } from './labels'
 import { primerUrl } from './presentation'
 import { replace } from './route'
@@ -244,6 +244,8 @@ export function Editor({ uri }: { uri: string }) {
   const workUri = work ? getNode(session.current, work).keywords['@id'] : undefined
   const toggle = (next: 'history' | 'hints') => setPanel(panel === next ? null : next)
   const kind = resourceTypeOf(session.current)
+  // Only a record that is new through and through can change kind: an existing Work's type is Blue Core's.
+  const choosable = isPlaceholder(uri) && typeof workUri === 'string' && isPlaceholder(workUri)
 
   return (
     <>
@@ -251,13 +253,33 @@ export function Editor({ uri }: { uri: string }) {
         <div className="title-block">
           <h1>{titleOf(session.current)}</h1>
           <p className="muted">
-            {kind && (
-              <span
+            {choosable ? (
+              <select
                 className="resource-type"
-                title={`The fields offered first are the ones most of LC’s ${kind.plural} have`}
+                aria-label="Kind of record"
+                title="What you’re describing decides which fields are offered first"
+                value={kind?.id ?? ''}
+                onChange={(event) => {
+                  const change = kindChange(session.current, event.target.value)
+                  if (change) record(change)
+                }}
               >
-                {kind.label}
-              </span>
+                {!kind && <option value="">Kind of record</option>}
+                {kinds.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              kind && (
+                <span
+                  className="resource-type"
+                  title={`The fields offered first are the ones most of LC’s ${kind.plural} have`}
+                >
+                  {kind.label}
+                </span>
+              )
             )}
             {isPlaceholder(uri) && typeof workUri === 'string' && !isPlaceholder(workUri) ? (
               <>
