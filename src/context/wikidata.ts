@@ -57,6 +57,21 @@ export async function wikidataItemFor(lccn: string, signal?: AbortSignal): Promi
 }
 
 /**
+ * The LCCN of the one Wikidata item that records an LC vocabulary term, by its
+ * LoC and MARC vocabularies ID (P4801), such as "countries/nyu": how a MARC
+ * code leads to the name authority for the same place. Null when no item, or
+ * more than one, gives the term, or the item gives no single LCCN.
+ */
+export async function lccnForVocabularyTerm(term: string, signal?: AbortSignal): Promise<string | null> {
+  if (!/^[A-Za-z]+\/[a-z0-9-]+$/.test(term)) return null
+  const bindings = await sparql(`SELECT ?item ?lccn WHERE { ?item wdt:P4801 "${term}" . ?item wdt:P244 ?lccn } LIMIT 3`, signal)
+  const items = new Set(bindings.flatMap((b) => (b.item?.value ? [b.item.value] : [])))
+  const lccns = [...new Set(bindings.flatMap((b) => (b.lccn?.value ? [b.lccn.value] : [])))]
+  if (items.size !== 1 || lccns.length !== 1) return null
+  return isLccn(lccns[0] as string) ? (lccns[0] as string) : null
+}
+
+/**
  * Wikidata's short descriptions ("American novelist (born 1937)") for a set
  * of LCCNs, in one query: enough to tell lookup results apart at a glance.
  * The key is the LCCNs joined by spaces, so a result list is fetched once.

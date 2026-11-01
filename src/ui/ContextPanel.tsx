@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 
 import { disagreements } from '../context/disagreements'
 import { fetchLcAuthority, lcAuthorityId, type Citation, type LcAuthority } from '../context/lc'
+import { fetchPlaceCode, nameAuthorityUri, placeCodeOf, type PlaceCode } from '../context/places'
 import { fetchUsage, matchingWorks, type Usage } from '../context/usage'
 import { useSource, type Fetched } from '../context/useSource'
 import { fetchWikidata, type WikidataFacts } from '../context/wikidata'
@@ -35,8 +36,13 @@ export function ContextPanel({
   hints: boolean
   close: () => void
 }) {
-  const lccn = lcAuthorityId(uri)?.id
-  const lc = useSource('lc', uri, fetchLcAuthority) ?? loading
+  // A place given by its MARC code is read through the name authority for the same place.
+  const place = useSource('place', placeCodeOf(uri) ? uri : null, fetchPlaceCode)
+  const placeFacts = place?.state === 'done' ? place.value : null
+  const authorityUri = place ? (placeFacts?.lccn ? nameAuthorityUri(placeFacts.lccn) : null) : uri
+  const lccn = authorityUri ? lcAuthorityId(authorityUri)?.id : undefined
+  const lc =
+    useSource('lc', authorityUri, fetchLcAuthority) ?? (place && place.state !== 'loading' ? noAuthority : loading)
   const wikidata = useSource('wikidata', lccn, fetchWikidata)
   const wikidataFacts = wikidata?.state === 'done' ? wikidata.value : null
   const wikipedia = useSource('wikipedia', wikidataFacts?.wikipedia, fetchWikipedia)
@@ -68,7 +74,17 @@ export function ContextPanel({
         </p>
       ))}
 
-      <SourceSection title={authority?.kind ?? 'LC authority'} fetched={lc} missing="id.loc.gov doesn’t have this record.">
+      {place && (
+        <SourceSection title={placeFacts?.kind ?? 'MARC code'} fetched={place} missing="">
+          {(facts) => <PlaceCodeView place={facts} />}
+        </SourceSection>
+      )}
+
+      <SourceSection
+        title={authority?.kind ?? 'LC authority'}
+        fetched={lc}
+        missing={place ? 'Wikidata doesn’t lead from this code to an LC name authority.' : 'id.loc.gov doesn’t have this record.'}
+      >
         {(record) => <LcRecord record={record} hints={hints} />}
       </SourceSection>
 
@@ -99,6 +115,21 @@ export function ContextPanel({
 }
 
 const loading: Fetched<never> = { state: 'loading' }
+const noAuthority: Fetched<null> = { state: 'done', value: null }
+
+/** A MARC place code, and the name authority it stands for. */
+function PlaceCodeView({ place }: { place: PlaceCode }) {
+  return (
+    <>
+      <p className="context-id">
+        <a href={place.uri.replace(/^http:/, 'https:')} target="_blank" rel="noreferrer">
+          {place.code}
+        </a>
+      </p>
+      {place.lccn && <p className="muted">The same place as the LC name authority below, by way of Wikidata.</p>}
+    </>
+  )
+}
 
 /** A source's part of the panel, in whichever state it's in, so a missing answer is never mistaken for "nothing to say". */
 function SourceSection<T>({

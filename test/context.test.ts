@@ -3,7 +3,16 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { disagreements } from '../src/context/disagreements'
 import { fetchUsage, matchingWorks, type Usage } from '../src/context/usage'
 import { citation, fetchLcAuthority, marcKey, fromSuggest, hasContext, lcAuthorityId, type LcAuthority } from '../src/context/lc'
-import { date, fromEntity, wikidataDescriptions, wikidataItemFor, type Entity, type WikidataFacts } from '../src/context/wikidata'
+import { nameAuthorityUri, placeCodeOf } from '../src/context/places'
+import {
+  date,
+  fromEntity,
+  lccnForVocabularyTerm,
+  wikidataDescriptions,
+  wikidataItemFor,
+  type Entity,
+  type WikidataFacts,
+} from '../src/context/wikidata'
 
 // Trimmed from id.loc.gov's suggest2 and Wikidata's wbgetentities, 2026-10-30.
 const twainHit = {
@@ -253,5 +262,40 @@ describe('Blue Core usage', () => {
     const url = new URL(fetch.mock.calls[0]?.[0] as string)
     expect(url.pathname.endsWith('/api/usage/')).toBe(true)
     expect(url.searchParams.get('uri')).toBe('http://id.loc.gov/authorities/names/n79099184')
+  })
+})
+
+describe('places given by a MARC code', () => {
+  it('knows a country or geographic area code', () => {
+    expect(placeCodeOf('http://id.loc.gov/vocabulary/countries/nyu')).toEqual({ vocabulary: 'countries', code: 'nyu' })
+    expect(placeCodeOf('http://id.loc.gov/vocabulary/geographicAreas/n-us-ny')).toEqual({
+      vocabulary: 'geographicAreas',
+      code: 'n-us-ny',
+    })
+  })
+
+  it('leaves other vocabularies alone', () => {
+    expect(placeCodeOf('http://id.loc.gov/vocabulary/relators/aut')).toBeUndefined()
+    expect(hasContext('http://id.loc.gov/vocabulary/carriers/nc')).toBe(false)
+  })
+
+  it('opens the context panel', () => {
+    expect(hasContext('http://id.loc.gov/vocabulary/countries/nyu')).toBe(true)
+  })
+
+  it('leads to the name authority through its LCCN', () => {
+    expect(nameAuthorityUri('n80126293')).toBe('http://id.loc.gov/authorities/names/n80126293')
+  })
+
+  it('finds the LCCN through the one Wikidata item that gives the code', async () => {
+    const bindings = (rows: [string, string][]) => ({
+      results: {
+        bindings: rows.map(([id, lccn]) => ({ item: { value: `http://www.wikidata.org/entity/${id}` }, lccn: { value: lccn } })),
+      },
+    })
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json(bindings([['Q1384', 'n80126293']]))))
+    expect(await lccnForVocabularyTerm('countries/nyu')).toBe('n80126293')
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json(bindings([['Q1', 'n1'], ['Q2', 'n2']]))))
+    expect(await lccnForVocabularyTerm('countries/nyu')).toBeNull()
   })
 })
