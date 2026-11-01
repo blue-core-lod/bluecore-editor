@@ -23,7 +23,7 @@ import { AddValue } from './AddValue'
 import { DescriptionContext, useDescription, type Previewed } from './context'
 import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
-import { layout, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
+import { layout, missingId, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
 import { Lookup } from './Lookup'
 import { marcLinks, primerUrl, type ResourceKind } from './presentation'
 
@@ -101,13 +101,14 @@ function Section({
       {missing.length > 0 && (
         <div className="missing">
           {missing.map((field) => (
-            <AddValue
-              key={field.id}
-              node={field.node}
-              prop={field.prop}
-              label={field.label}
-              prompt={`Add ${field.label.toLowerCase()}`}
-            />
+            <span key={field.id} id={missingId(field)}>
+              <AddValue
+                node={field.node}
+                prop={field.prop}
+                label={field.label}
+                prompt={`Add ${field.label.toLowerCase()}`}
+              />
+            </span>
           ))}
         </div>
       )}

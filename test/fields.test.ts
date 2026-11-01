@@ -4,7 +4,7 @@ import { normalize, type JsonObject } from '../src/doc/model'
 import { belongsOn, definitionOf, kindOf, modeledProperties } from '../src/schema/fields'
 import { entryFor, newValue } from '../src/ui/form'
 import { refLabels } from '../src/ui/labels'
-import { layout } from '../src/ui/layout'
+import { layout, usuallyMissing } from '../src/ui/layout'
 import { example } from './fixtures'
 
 describe('what the schema says about a property', () => {
@@ -101,5 +101,19 @@ describe('missing fields', () => {
     expect(suggested.get('summary')).toBeGreaterThan(0.1)
     // A book's fields no section names have a section of their own.
     expect(view.sections.map((s) => s.title)).toContain('Book details')
+  })
+
+  it('are gathered, most common first, where most records of the kind have them', () => {
+    // The example without its extent and dimensions, which nearly all of LC's books have.
+    const bounded = Object.entries(example('bounded')).filter(([name]) => name !== 'extent' && name !== 'dimensions')
+    const doc = normalize(Object.fromEntries(bounded))
+    const usual = usuallyMissing(layout(doc, refLabels(doc)))
+    expect(usual.map((field) => field.prop)).toEqual(['extent', 'dimensions'])
+    expect(usual.map((field) => field.share)).toEqual(usual.map((field) => field.share).toSorted((a, b) => b - a))
+  })
+
+  it('aren’t gathered for a record of no known kind, where every field is offered', () => {
+    const doc = untyped()
+    expect(usuallyMissing(layout(doc, refLabels(doc)))).toEqual([])
   })
 })

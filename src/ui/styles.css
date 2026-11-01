@@ -329,6 +329,34 @@ button.add:hover {
   color: var(--kind);
   margin-right: 0.5rem;
 }
+/* "3 fields most maps have": advice gathered from the sections, never a requirement. */
+.usually {
+  position: relative;
+  font-size: 0.85rem;
+  color: var(--kind);
+  margin-top: 0.2rem;
+}
+.usually summary {
+  cursor: pointer;
+}
+.usually ul {
+  position: absolute;
+  z-index: 10;
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0.5rem 0.75rem;
+  min-width: 14rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+}
+.usually li {
+  padding: 0.15rem 0;
+}
+.usually .share {
+  color: var(--muted);
+}
 /* "This looks like a map": a suggestion to switch kinds, never a switch by itself. */
 .kind-suggestion {
   margin: 0.35rem 0 0;

@@ -52,6 +52,8 @@ export interface Missing {
   resource: ResourceKind
   node: Key
   prop: string
+  /** How many of LC's records of this kind have it, 0 to 1, where guidance knows the kind. */
+  share?: number
 }
 
 /** A field the record's kind often has, offered with how often: "Edition, 24% of maps". */
@@ -133,7 +135,8 @@ export function layout(doc: Doc, labels: Map<string, RefLabel>): Layout {
       const [resource, node] = home
       const field = { id: `${node} ${spec.prop}`, label: spec.label, marc: spec.marc, resource, node, prop: spec.prop }
       const guided = offered(spec.prop)
-      if (!guided || guided.tier === 'shown') missing.push(field)
+      if (!guided) missing.push(field)
+      else if (guided.tier === 'shown') missing.push({ ...field, share: guided.share })
       else if (guided.tier === 'suggested') suggested.push({ ...field, share: guided.share })
     }
     return { title: section.title, rows: fields.flatMap(({ rows }) => rows), missing, suggested }
@@ -213,4 +216,22 @@ function perValueLabel(
 
 function capitalize(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+/**
+ * The fields most of LC's records of this kind have and this one doesn't,
+ * most common first: the record's sections offer them one by one, and the
+ * header gathers them. Empty for a record of no kind guidance knows, whose
+ * sections offer every field.
+ */
+export function usuallyMissing(view: Layout): (Missing & { share: number })[] {
+  return view.sections
+    .flatMap((section) => section.missing)
+    .filter((field): field is Missing & { share: number } => field.share !== undefined)
+    .toSorted((a, b) => b.share - a.share)
+}
+
+/** The element id of a missing field's "Add …" button, so the header's list can take the cataloger to it. */
+export function missingId(field: Missing): string {
+  return `missing-${field.id.replace(/\s+/g, '-')}`
 }

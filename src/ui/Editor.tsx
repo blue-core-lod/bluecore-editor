@@ -17,6 +17,7 @@ import { Header } from './Header'
 import { History } from './History'
 import { inferredKind, kindChange, kinds, resourceTypeOf, type Evidence } from '../schema/guidance'
 import { refLabels, refName, termLabel, titleOf } from './labels'
+import { layout, missingId, usuallyMissing } from './layout'
 import { primerUrl } from './presentation'
 import { replace } from './route'
 import { SaveReport } from './SaveReport'
@@ -87,6 +88,10 @@ export function Editor({ uri }: { uri: string }) {
 
   const changes = session?.log.changes.length ?? 0
   const pending = useMemo(() => (session ? unsaved(session.current, session.saved).length : 0), [session])
+  const usual = useMemo(
+    () => (session ? usuallyMissing(layout(session.current, refLabels(session.current))) : []),
+    [session],
+  )
 
   // Keep unsaved work in the browser as it happens, and let it go once saved.
   useEffect(() => {
@@ -314,6 +319,23 @@ export function Editor({ uri }: { uri: string }) {
               </>
             )}
           </p>
+          {kind && usual.length > 0 && (
+            <details className="usually">
+              <summary>
+                {usual.length === 1 ? '1 field' : `${usual.length} fields`} most {kind.plural} have
+              </summary>
+              <ul>
+                {usual.map((field) => (
+                  <li key={field.id}>
+                    <button type="button" className="link" onClick={(event) => goTo(event, missingId(field))}>
+                      {field.label}
+                    </button>{' '}
+                    <span className="share">{Math.round(field.share * 100)}%</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
           {suggestion && (
             <p className="kind-suggestion">
               This looks like {article(suggestion.kind.label)} {suggestion.kind.label.toLowerCase()}:{' '}
@@ -576,4 +598,12 @@ function reason(evidence: Evidence | undefined): string {
 
 function article(word: string): string {
   return /^[aeiou]/i.test(word) ? 'an' : 'a'
+}
+
+/** Take the cataloger to a missing field's "Add …" button, closing the list they chose it from. */
+function goTo(event: React.MouseEvent<HTMLElement>, id: string) {
+  event.currentTarget.closest('details')?.removeAttribute('open')
+  const target = document.getElementById(id)
+  target?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+  target?.querySelector('button')?.focus({ preventScroll: true })
 }
