@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      # What .env provides locally; the tests and build need them set, not reachable.
+      VITE_BLUECORE_URL: http://localhost/
+      VITE_KEYCLOAK_URL: http://localhost/keycloak/
+      VITE_KEYCLOAK_CLIENT_ID: bluecore_api
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build

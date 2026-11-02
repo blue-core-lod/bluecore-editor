@@ -1,5 +1,7 @@
 # bluecore-editor
 
+[![CI](https://github.com/edsu/bluecore-editor/actions/workflows/ci.yml/badge.svg)](https://github.com/edsu/bluecore-editor/actions/workflows/ci.yml)
+
 A BIBFRAME description editor for [Blue Core](https://bluecore.info/), for
 catalogers moving from MARC. It runs entirely in the browser; see
 [docs/design.md](docs/design.md) for the design and
