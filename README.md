@@ -29,6 +29,23 @@ The VITE_* variables in `.env` say where Blue Core and Keycloak are. Copy
 `.env.example` to `.env` for the local bluecore-stack, or change it to point at
 another environment. (Run through bluecore-stack, the compose file sets them.)
 
+Without them the editor looks for Blue Core and Keycloak (`/keycloak/`) on its
+own origin, and signs in with the `bluecore_api` client.
+
+## Deploying it
+
+The Docker image is the built app served by Nginx at `/editor/`, on port 80:
+
+```sh
+docker build -t bluecore-editor .
+docker run -p 8080:80 bluecore-editor   # http://localhost:8080/editor/
+```
+
+bluecore-stack runs it as the `editor` service and routes `/editor/` to it, so
+Blue Core and Keycloak are on the same origin and the image needs no settings.
+Each push to `main` publishes it as `ghcr.io/edsu/bluecore-editor:latest` (and
+tagged with the commit).
+
 ## Working on it
 
 ```sh
