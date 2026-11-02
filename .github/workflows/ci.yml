@@ -43,10 +43,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - id: version
+        run: echo "short=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v6
         with:
           context: .
           push: true
+          build-args: VERSION=${{ steps.version.outputs.short }}
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.sha }}

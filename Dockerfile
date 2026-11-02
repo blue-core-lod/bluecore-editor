@@ -6,6 +6,9 @@ COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
+# What the health check reports, as bluecore-stack's start page shows it.
+ARG VERSION=dev
+RUN printf '{"version": "%s"}\n' "$VERSION" > dist/health.json
 
 FROM nginx:1.27.4-alpine
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
