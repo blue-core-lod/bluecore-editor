@@ -1258,13 +1258,26 @@ button.remove:hover {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  .row,
-  .hints .row,
-  .subfield {
-    grid-template-columns: 1fr;
+  /* Too tall to keep on screen: it would take a third of a phone's. */
+  .app-header {
+    position: static;
   }
-  .badge {
-    justify-self: start;
+  /* The logo and the user on the first line, then the buttons and the title with the whole width. */
+  .header-main {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .user {
+    margin-left: auto;
+  }
+  .controls {
+    flex-wrap: wrap;
+    margin-left: 0;
+  }
+  .history,
+  .explainer {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 
@@ -1284,6 +1297,20 @@ button.remove:hover {
   }
   .subfield-label {
     padding-top: 0;
+  }
+}
+
+/* A phone: the label above its values, and with Hints the badge beside the label rather than in a column of its own. */
+@container (max-width: 30rem) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hints .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .hints .row-values {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }
 
