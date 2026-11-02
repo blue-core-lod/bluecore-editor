@@ -256,7 +256,7 @@ The editor depends on none of these, but they inform the guidance overrides and 
 - **Background jobs in Blue Core** collect Wikidata external identifiers for entities it holds, watch id.loc.gov for changes to promoted authorities, and index literal values and descriptions' origins for batch detection.
 - **An offline pipeline** derives guidance tiers from LC's corpus, and later Blue Core's, and publishes them to the sidecar.
 
-**Toward collaborative editing.** Sharing a description live between catalogers' browsers, over WebRTC, is a goal to engineer toward, not part of the first version.
+**Toward collaborative editing.** Sharing a description live between catalogers' browsers is a goal to engineer toward, not part of the first version.
 
 Cataloging has natural use cases for it:
 
@@ -269,12 +269,12 @@ The UX challenge is about meaning more than merging. A CRDT merges two people ty
 
 Decisions in the first version that keep this possible:
 
-- **Edits are an ordered log of small patches,** not whole-document overwrites. This maps cleanly onto a CRDT such as Yjs or Automerge later, both of which have WebRTC sync.
+- **Edits are an ordered log of small patches,** not whole-document overwrites, each checking what it expects to find. Shared, the log merges by replaying everyone's changes in one order, and a change that no longer applies is the conflict to resolve.
 - **Node keys are globally unique** (UUIDs, not counters), so two browsers never generate the same key.
 - **Presence stays separate from description data.**
 - **Saving to Blue Core is the single authoritative commit.** Collaboration happens on the draft, and one person saves, so the IndexedDB draft can later become the shared document.
 
-WebRTC also needs a small signaling service to connect peers, which could become a Blue Core endpoint when the time comes.
+Catalogers' browsers would meet in a room, a WebSocket endpoint in Blue Core that relays changes and presence. We chose it over WebRTC, which needs a signaling room on a server anyway, plus a relay for networks that block peer-to-peer connections. [collaboration.md](collaboration.md) has the merge model, the room, saving together, and the phases.
 
 ## References
 
