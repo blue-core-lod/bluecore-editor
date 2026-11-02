@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type SubmitEvent } from 'react'
+import { useCallback, useState, type SubmitEvent } from 'react'
 
 import { searchInstances, type SearchHit } from '../api/bluecore'
 import { instanceUri } from '../api/endpoints'
@@ -23,20 +23,12 @@ export function Start() {
   const [results, setResults] = useState<{ total: number; hits: SearchHit[] } | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
-  const [toured, setToured] = useStoredFlag('bluecore-editor.home-toured', false)
-  // Taking the tour from here carries on in the editor with the next record opened.
+  // The tour starts only when asked for. Taking it from here carries on in the editor with the next record opened.
   const [, setEditorToured] = useStoredFlag('bluecore-editor.toured', false)
   const tourThenNew = useCallback(() => {
     setEditorToured(false)
     startNew()
   }, [setEditorToured])
-
-  // The first visit gets a short tour; a moment's wait lets the unsaved records, read from the browser, appear first.
-  useEffect(() => {
-    if (toured) return
-    const timer = window.setTimeout(() => startTour(homeTour(tourThenNew), () => setToured(true)), 400)
-    return () => window.clearTimeout(timer)
-  }, [toured, setToured, tourThenNew])
 
   const submit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -67,7 +59,7 @@ export function Start() {
             className="link"
             onClick={() => {
               setEditorToured(false)
-              startTour(homeTour(tourThenNew), () => setToured(true))
+              startTour(homeTour(tourThenNew), () => {})
             }}
           >
             Take a tour

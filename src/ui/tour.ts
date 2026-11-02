@@ -2,8 +2,9 @@ import { driver, type DriveStep } from 'driver.js'
 import 'driver.js/dist/driver.css'
 
 /**
- * Short tours for someone's first visit: one of the start page, one of the
- * editor (again from the "?" beside Hints). Each step points at the real
+ * Short tours: one of the start page, taken from its "Take a tour" link, and
+ * one of the editor, shown on someone's first visit (again from the "?"
+ * beside Hints). Each step points at the real
  * interface; a step whose part isn't on the page, such as the advice that only
  * a record of a known kind gets, is left out. A step can make its part appear
  * first: the context panel step opens the panel for the record's first entity.
