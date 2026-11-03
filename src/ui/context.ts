@@ -16,6 +16,14 @@ export interface DescriptionContextValue {
   select: (uri: string) => void
   /** Show a lookup result in the context panel while it's highlighted, or stop. */
   preview: (entity: Previewed | null) => void
+  /** Mark a lookup as holding text that isn't in the record yet, or (null) as not. */
+  unfinished: (id: string, lookup: Unfinished | null) => void
+}
+
+/** A lookup with text in it, which saving would leave out. */
+export interface Unfinished {
+  label: string
+  focus: () => void
 }
 
 /** A lookup result shown in the context panel before it's chosen. */

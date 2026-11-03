@@ -11,7 +11,7 @@ import { changesWork, otherInstances, principals, snapshot, unsaved } from '../d
 import { deleteDraft, readDraft, restore, writeDraft, type Draft } from '../drafts/drafts'
 import { getValidators } from '../schema/validate'
 import { ContextPanel } from './ContextPanel'
-import type { Previewed } from './context'
+import type { Previewed, Unfinished } from './context'
 import { Description } from './Description'
 import { Header } from './Header'
 import { History } from './History'
@@ -64,6 +64,12 @@ export function Editor({ uri }: { uri: string }) {
   const [report, setReport] = useState<ResourceSave[] | null>(null)
   /** The linked entity in the context panel, and the lookup result shown there instead while it's highlighted. */
   const [selected, setSelected] = useState<string | null>(null)
+  // Lookups holding text that isn't in the record yet, which a save would leave out.
+  const lookups = useRef(new Map<string, Unfinished>())
+  const unfinished = useCallback((id: string, lookup: Unfinished | null) => {
+    if (lookup) lookups.current.set(id, lookup)
+    else lookups.current.delete(id)
+  }, [])
   const [previewing, setPreviewing] = useState<Previewed | null>(null)
   // Bumped to read the description from Blue Core again, discarding the session.
   const [generation, setGeneration] = useState(0)
@@ -248,6 +254,19 @@ export function Editor({ uri }: { uri: string }) {
     }
   }
 
+  /** Save, unless a lookup still holds text: saving would leave it out without a word. */
+  const saveFinished = (state: SaveState) => {
+    const [lookup] = lookups.current.values()
+    if (!lookup) {
+      setProblem(null)
+      return void save(state)
+    }
+    setView('record')
+    setProblem(`What’s typed in the ${lookup.label} search isn’t in the record yet. Pick a result or add it, or cancel, then save.`)
+    // Once the record view is showing again.
+    requestAnimationFrame(lookup.focus)
+  }
+
   const overwrite = (result: ResourceSave) => {
     if (!session || result.outcome.ok || !result.outcome.conflict) return
     void save({ ...session, etags: { ...session.etags, [result.key]: result.outcome.etag } })
@@ -429,7 +448,7 @@ export function Editor({ uri }: { uri: string }) {
           >
             {changes === 0 ? 'No unsaved changes' : changes === 1 ? '1 unsaved change' : `${changes} unsaved changes`}
           </button>
-          <button type="button" disabled={saving || pending === 0} onClick={() => void save(session)}>
+          <button type="button" disabled={saving || pending === 0} onClick={() => saveFinished(session)}>
             {saving ? 'Saving…' : 'Save to Blue Core'}
           </button>
           <span className="hints-control">
@@ -550,6 +569,7 @@ export function Editor({ uri }: { uri: string }) {
               selected={selected}
               select={setSelected}
               preview={setPreviewing}
+              unfinished={unfinished}
             />
           </div>
           {view === 'graph' && graph && (

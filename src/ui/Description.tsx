@@ -20,7 +20,7 @@ import { belongsOn, definitionOf, domainOf, modeledProperties } from '../schema/
 import { hasContext } from '../context/lc'
 import { AddField } from './AddField'
 import { AddValue } from './AddValue'
-import { DescriptionContext, useDescription, type Previewed } from './context'
+import { DescriptionContext, useDescription, type Previewed, type Unfinished } from './context'
 import { entryFor, fieldKind, schemaKind } from './form'
 import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } from './labels'
 import { layout, missingId, valueId, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
@@ -40,6 +40,7 @@ export function Description({
   selected,
   select,
   preview,
+  unfinished,
 }: {
   doc: Doc
   hints: boolean
@@ -47,12 +48,13 @@ export function Description({
   selected: string | null
   select: (uri: string) => void
   preview: (entity: Previewed | null) => void
+  unfinished: (id: string, lookup: Unfinished | null) => void
 }) {
   const labels = useMemo(() => refLabels(doc), [doc])
   const view = useMemo(() => layout(doc, labels), [doc, labels])
   const context = useMemo(
-    () => ({ doc, labels, hints, record, selected, select, preview }),
-    [doc, labels, hints, record, selected, select, preview],
+    () => ({ doc, labels, hints, record, selected, select, preview, unfinished }),
+    [doc, labels, hints, record, selected, select, preview, unfinished],
   )
 
   return (

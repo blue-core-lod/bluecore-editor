@@ -82,7 +82,7 @@ export function Lookup({
   onCompose?: (components: Component[]) => void
   onCancel: () => void
 }) {
-  const { hints, select, preview } = useDescription()
+  const { hints, select, preview, unfinished } = useDescription()
   const listId = useId()
   const input = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState(
@@ -102,6 +102,13 @@ export function Lookup({
 
   const text = query.trim()
   const pasted = isUri(text)
+
+  // What's typed here isn't in the record until it's picked or added, so saving waits for it.
+  useEffect(() => {
+    if (!text) return
+    unfinished(listId, { label, focus: () => input.current?.focus() })
+    return () => unfinished(listId, null)
+  }, [text, label, listId, unfinished])
   const parts = useMemo(() => partsOf(query), [query])
   const composing = Boolean(compose) && !pasted && parts.length > 1
   const index = composing ? partAt(parts, caret) : 0
