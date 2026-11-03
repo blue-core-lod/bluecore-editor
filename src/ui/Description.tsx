@@ -139,7 +139,7 @@ function Section({
 function FieldRow({ row }: { row: Row }) {
   const { hints } = useDescription()
   return (
-    <div className="row">
+    <div className={`row row-${row.resource.toLowerCase()}`}>
       <div className="row-label">
         <span>{row.label}</span>
         {hints && row.marc && <MarcTag marc={row.marc} />}

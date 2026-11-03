@@ -14,6 +14,9 @@
      on it reaches 4.5:1. */
   --work: #548241;
   --instance: #af006c;
+  /* Their tints, behind a field's row with Hints on. */
+  --work-tint: #e6efe3;
+  --instance-tint: #f5ecf1;
   --linked: #eaf0f8;
   --note-ground: #fff4dc;
   --note-text: #5a3b00;
@@ -969,6 +972,24 @@ input[readonly] {
 }
 .hints .row {
   grid-template-columns: minmax(8rem, 14rem) 1fr 5.5rem;
+}
+/* With Hints, each field's row is tinted for the resource it's saved with, a bar of its colour down the side, as in the
+   Blue Core design. Spaced apart rather than ruled, so each reads as its own band. */
+.hints .row-work,
+.hints .row-instance {
+  padding: 0.6rem 0.75rem;
+  border-top: none;
+  border-left: 3px solid;
+  border-radius: 0 4px 4px 0;
+  margin-top: 0.4rem;
+}
+.hints .row-work {
+  background: var(--work-tint);
+  border-left-color: var(--work);
+}
+.hints .row-instance {
+  background: var(--instance-tint);
+  border-left-color: var(--instance);
 }
 .row-label {
   display: flex;
