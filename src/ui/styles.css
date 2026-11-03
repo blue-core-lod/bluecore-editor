@@ -2,17 +2,23 @@
 :root {
   --ground: #fafbfa;
   --surface: #ffffff;
-  --text: #17202b;
-  --muted: #4a5560;
+  /* From the Blue Core design (Figma, BLUE CORE › Applications). */
+  --text: #2e2d29;
+  --muted: #6d6c69;
   --rule: #d9dddc;
-  --work: #1f4e8c;
-  --instance: #9a4a06;
+  /* Core Blue, for the primary action. */
+  --brand: #003caf;
+  /* Links and what's selected: the design's interactive blue. */
+  --link: #006cb8;
+  /* The Work's green and the Instance's magenta. The green is the design's #578744 made 1.5% darker, so white text
+     on it reaches 4.5:1. */
+  --work: #548241;
+  --instance: #af006c;
   --linked: #eaf0f8;
   --note-ground: #fff4dc;
   --note-text: #5a3b00;
-  --focus: #1f4e8c;
-  --create: #2e8540;
-  /* The kind of record (Map, Score): its own hue, apart from the Work's blue and the Instance's orange. */
+  --focus: #006cb8;
+  /* The kind of record (Map, Score): its own hue, apart from the Work's green and the Instance's magenta. */
   --kind: #6b3fa0;
   --sans: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
   --mono: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
@@ -35,7 +41,7 @@ body {
 }
 
 a {
-  color: var(--work);
+  color: var(--link);
 }
 
 :focus-visible {
@@ -53,14 +59,14 @@ h2 {
   color: var(--muted);
 }
 
-/* Buttons: dark filled for the primary action, outlined for secondary. */
+/* Buttons: filled in Core Blue for the primary action, outlined for secondary. */
 button {
   font: inherit;
   cursor: pointer;
   border-radius: 6px;
   padding: 0.35rem 0.9rem;
-  border: 1px solid var(--text);
-  background: var(--text);
+  border: 1px solid var(--brand);
+  background: var(--brand);
   color: #fff;
 }
 button:disabled {
@@ -70,11 +76,7 @@ button:disabled {
 button.secondary {
   background: var(--surface);
   color: var(--text);
-}
-/* Starting something new, set apart from opening what's there. */
-button.create {
-  background: var(--create);
-  border-color: var(--create);
+  border-color: var(--text);
 }
 button.round {
   border-radius: 50%;
@@ -85,7 +87,7 @@ button.round {
 button.link {
   border: none;
   background: none;
-  color: var(--work);
+  color: var(--link);
   padding: 0;
   text-decoration: underline;
 }
@@ -176,7 +178,7 @@ button.link {
   transition: background-position 0.15s;
 }
 .switch[aria-checked='true']::before {
-  background: var(--work) radial-gradient(circle at 1.45rem 50%, #fff 0.4rem, transparent 0.42rem);
+  background: var(--link) radial-gradient(circle at 1.45rem 50%, #fff 0.4rem, transparent 0.42rem);
 }
 
 /* Panels that open under the header. */
@@ -683,7 +685,7 @@ select.resource-type {
   margin: 0 0 1.25rem;
 }
 .json-key {
-  color: var(--work);
+  color: var(--link);
 }
 .json-link {
   font: inherit;
@@ -1074,7 +1076,7 @@ button.chip-name:hover {
   text-decoration: underline;
 }
 .chip.selected {
-  outline: 2px solid var(--work);
+  outline: 2px solid var(--link);
 }
 /* A complex subject: one chip, its parts in order, each selectable on its own. */
 .chip.complex .heading {
@@ -1089,7 +1091,7 @@ button.chip-name:hover {
   text-decoration: none;
 }
 .chip.complex button.part.selected {
-  outline: 2px solid var(--work);
+  outline: 2px solid var(--link);
   border-radius: 3px;
 }
 .chip.complex .part .code,
@@ -1167,7 +1169,7 @@ button.chip-name:hover {
 .source {
   font-size: 0.7rem;
   font-weight: 700;
-  color: var(--work);
+  color: var(--link);
   background: var(--surface);
   border-radius: 3px;
   padding: 0 0.3rem;

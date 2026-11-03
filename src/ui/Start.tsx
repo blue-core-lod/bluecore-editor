@@ -105,7 +105,7 @@ export function Start() {
         )}
         <p className="start-new">
           Or{' '}
-          <button type="button" className="create" onClick={startNew}>
+          <button type="button" onClick={startNew}>
             Start a new record
           </button>
         </p>
