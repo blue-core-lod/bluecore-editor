@@ -32,6 +32,7 @@ export function Header({ children }: { children?: ReactNode }) {
         }}
       >
         <img src={`${import.meta.env.BASE_URL}blue-core-logo.png`} alt="Blue Core" height={32} />
+        <span className="app-name">Editor</span>
       </a>
       <div className="header-main">{children}</div>
       {user && (

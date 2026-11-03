@@ -103,7 +103,8 @@ button.link {
   gap: 0.75rem 1.5rem;
   padding: 0.75rem 1.5rem;
   background: var(--surface);
-  border-bottom: 1px solid var(--rule);
+  /* On a Core Blue rule, as every Blue Core application's header is. */
+  border-bottom: 3px solid var(--brand);
   position: sticky;
   top: 0;
   z-index: 2;
@@ -121,6 +122,18 @@ button.link {
 .brand img {
   height: 32px;
   width: auto;
+}
+/* Which Blue Core application this is, after a divider: "Blue Core | Editor", as in the Blue Core design. */
+.app-name {
+  align-self: center;
+  margin-left: 0.9rem;
+  padding-left: 0.9rem;
+  border-left: 1px solid var(--muted);
+  color: var(--brand);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 .header-main {
   flex: 1;
