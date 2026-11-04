@@ -556,7 +556,7 @@ export function Editor({ uri }: { uri: string }) {
         )}
         {!draftsKept && (
           <p className="note">
-            This browser isn’t keeping drafts, so unsaved changes will be lost if you leave the page.
+            This browser isn’t keeping drafts, so unsaved changes will be lost if you leave the page. If another tab has the editor open from before an update, closing it and reloading this one may fix that.
           </p>
         )}
         {report && (
