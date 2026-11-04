@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import type { Change } from '../doc/log'
+import { PastEdits } from './PastEdits'
 
 /**
  * The changes since the description was loaded, newest first, each with its
@@ -12,6 +13,9 @@ export function History({
   startedFrom,
   undo,
   discardAll,
+  user,
+  uri,
+  recorded,
 }: {
   changes: readonly Change[]
   startedFrom: string
@@ -19,6 +23,11 @@ export function History({
   discardAll: () => void
   /** Undo these changes, or return the later ones that depend on them. */
   undo: (ids: string[]) => Change[] | null
+  /** Whose saved edits to this record to list, and the record. */
+  user: string
+  uri: string
+  /** How many saves have been recorded since the record opened, so a new one shows. */
+  recorded: number
 }) {
   const [blocked, setBlocked] = useState<{ change: Change; dependents: Change[] } | null>(null)
 
@@ -73,6 +82,7 @@ export function History({
           Discard all unsaved changes
         </button>
       )}
+      <PastEdits key={recorded} user={user} uri={uri} />
     </div>
   )
 }

@@ -1,9 +1,8 @@
-import { openDB, type DBSchema, type IDBPDatabase } from 'idb'
-
 import type { SaveState } from '../api/save'
 import { replay, type Log } from '../doc/log'
 import type { Key } from '../doc/model'
 import type { Saved } from '../doc/resources'
+import { db } from './db'
 
 /**
  * Unsaved work, kept in the browser's IndexedDB so that a reload, a closed tab
@@ -25,21 +24,6 @@ export interface Draft {
   etags: Record<Key, string | null>
   loadedAt: Date
   updatedAt: Date
-}
-
-interface Schema extends DBSchema {
-  drafts: { key: string; value: Draft }
-}
-
-let database: Promise<IDBPDatabase<Schema>> | undefined
-
-function db(): Promise<IDBPDatabase<Schema>> {
-  database ??= openDB<Schema>('bluecore-editor', 1, {
-    upgrade(db) {
-      db.createObjectStore('drafts', { keyPath: 'id' })
-    },
-  })
-  return database
 }
 
 function draftId(user: string, uri: string): string {

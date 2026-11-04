@@ -937,6 +937,63 @@ select.resource-type {
   margin-top: 0.3rem;
   font-size: 0.85rem;
 }
+.past-edits {
+  margin-top: 1.75rem;
+}
+.past-edits h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+.past-about {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+}
+.past-edits input[type='search'] {
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+.past-edits details {
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+}
+.past-edits details ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.2rem;
+}
+.past-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+.past-pages {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+/* In the history panel, under the unsaved changes. */
+.history .past-edits {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+.history .past-edits h2 {
+  font-size: 1rem;
+}
+.history .past-edits time {
+  display: inline;
+  font-size: inherit;
+}
+.sign-out {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  max-width: 26rem;
+}
 .results .uri {
   display: block;
   font-size: 0.8rem;

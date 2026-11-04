@@ -6,6 +6,7 @@ import { accessToken, useAuth } from '../auth/auth'
 import { placeholderUri } from '../doc/blank'
 import { newKey } from '../doc/model'
 import { Drafts } from './Drafts'
+import { PastEdits } from './PastEdits'
 import { Header } from './Header'
 import { instanceHref, open } from './route'
 import { useStoredFlag } from './storedFlag'
@@ -110,6 +111,7 @@ export function Start() {
           </button>
         </p>
         <Drafts user={user} />
+        <PastEdits user={user} />
       </main>
     </>
   )

@@ -9,6 +9,7 @@ import { getNode, normalize } from '../doc/model'
 import { ConflictError } from '../doc/patch'
 import { changesWork, otherInstances, principals, snapshot, unsaved } from '../doc/resources'
 import { deleteDraft, readDraft, restore, writeDraft, type Draft } from '../drafts/drafts'
+import { recordEdit } from '../drafts/edits'
 import { getValidators } from '../schema/validate'
 import { ContextPanel } from './ContextPanel'
 import type { Previewed, Unfinished } from './context'
@@ -64,6 +65,8 @@ export function Editor({ uri }: { uri: string }) {
   const [report, setReport] = useState<ResourceSave[] | null>(null)
   /** The linked entity in the context panel, and the lookup result shown there instead while it's highlighted. */
   const [selected, setSelected] = useState<string | null>(null)
+  // Saves recorded in this browser's edit history, so an open history panel shows the latest.
+  const [recorded, setRecorded] = useState(0)
   // Lookups holding text that isn't in the record yet, which a save would leave out.
   const lookups = useRef(new Map<string, Unfinished>())
   const unfinished = useCallback((id: string, lookup: Unfinished | null) => {
@@ -223,6 +226,17 @@ export function Editor({ uri }: { uri: string }) {
     setReport(null)
     try {
       const results = await saveDescription(state, accessToken())
+      if (results.some((result) => result.outcome.ok)) {
+        const instance = results.find((result) => result.kind === 'Instance')
+        // The history is a convenience: a browser that can't keep it still saves.
+        void recordEdit(user, {
+          uri: instance?.outcome.ok ? instance.uri : uri,
+          title: titleOf(state.current),
+          savedAt: new Date(),
+          resources: results.map((result) => ({ kind: result.kind, uri: result.uri, ok: result.outcome.ok })),
+          changes: state.log.changes,
+        }).then(() => setRecorded((count) => count + 1), () => undefined)
+      }
       setSession((session) => {
         if (!session) return session
         const next = afterSave(session, results)
@@ -484,6 +498,9 @@ export function Editor({ uri }: { uri: string }) {
                 : `Opened from Blue Core at ${session.loadedAt.toLocaleTimeString()}`
           }
           undo={undoChanges}
+          user={user}
+          uri={uri}
+          recorded={recorded}
           discardAll={() => {
             setPanel(null)
             void reload()
