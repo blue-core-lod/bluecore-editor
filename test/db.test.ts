@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 
 import { databaseState } from '../src/drafts/db'
 import { listDrafts } from '../src/drafts/drafts'
+import { listEdits } from '../src/drafts/edits'
 
 /** The database at a version other than this editor's, held open as another tab would. */
 function otherTab(version: number): Promise<IDBDatabase> {
@@ -24,6 +25,10 @@ describe('the database', () => {
     const older = await otherTab(1)
     await expect(listDrafts('lee')).rejects.toThrow(/older version/)
     expect(databaseState()).toBe('blocked')
+    // Every later use fails at once too, rather than wait silently behind the first.
+    const soon = (promise: Promise<unknown>) =>
+      Promise.race([promise.then(() => 'opened', () => 'failed'), settled().then(() => 'waiting')])
+    expect(await Promise.all([soon(listDrafts('lee')), soon(listEdits('lee'))])).toEqual(['failed', 'failed'])
 
     older.close()
     await settled()

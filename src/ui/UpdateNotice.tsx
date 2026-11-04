@@ -16,8 +16,8 @@ export function UpdateNotice() {
   if (database === 'blocked') {
     return (
       <div className="update-notice" role="alert">
-        Another tab has an older version of the editor open, so this one can’t keep drafts. Close that tab and
-        this note will go.
+        Another tab has an older version of the editor open, so this one can’t keep drafts. Close your other
+        Blue Core editor tabs, in any window, and this note will go.
       </div>
     )
   }
