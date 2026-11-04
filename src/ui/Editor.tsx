@@ -146,7 +146,11 @@ export function Editor({ uri }: { uri: string }) {
     // A new description no one has touched isn't kept: it would only clutter the list of drafts.
     const keep = changes > 0 || (pending > 0 && !isPlaceholder(uri))
     const write = keep ? writeDraft(user, uri, session) : deleteDraft(user, uri)
-    write.catch(() => setDraftsKept(false))
+    // A write that works again, once another tab stops holding drafts up, means they're kept again.
+    write.then(
+      () => setDraftsKept(true),
+      () => setDraftsKept(false),
+    )
   }, [session, changes, pending, user, uri])
 
   // Only when drafts can't be kept does leaving the page lose anything.
@@ -556,7 +560,7 @@ export function Editor({ uri }: { uri: string }) {
         )}
         {!draftsKept && (
           <p className="note">
-            This browser isn’t keeping drafts, so unsaved changes will be lost if you leave the page. If another tab has the editor open from before an update, closing it and reloading this one may fix that.
+            This browser isn’t keeping drafts, so unsaved changes will be lost if you leave the page.
           </p>
         )}
         {report && (

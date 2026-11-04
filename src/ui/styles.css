@@ -1445,3 +1445,24 @@ button.remove:hover {
   background: var(--text);
   color: var(--surface);
 }
+
+/* When the editor has changed under this tab: kept in view whatever the page is doing. */
+.update-notice {
+  position: fixed;
+  z-index: 50;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--brand);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgb(23 32 43 / 0.15);
+  font-size: 0.95rem;
+}
+.update-notice button {
+  margin-left: 0.5rem;
+}

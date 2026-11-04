@@ -2,6 +2,7 @@ import { signIn, useAuth } from '../auth/auth'
 import { Editor } from './Editor'
 import { Header } from './Header'
 import { Start } from './Start'
+import { UpdateNotice } from './UpdateNotice'
 import { useOpenInstance } from './route'
 
 export function App() {
@@ -11,6 +12,7 @@ export function App() {
   if (!user) {
     return (
       <>
+        <UpdateNotice />
         <Header />
         <main className="page start">
           <h1>Blue Core record editor</h1>
@@ -27,5 +29,10 @@ export function App() {
       </>
     )
   }
-  return uri ? <Editor key={uri} uri={uri} /> : <Start />
+  return (
+    <>
+      <UpdateNotice />
+      {uri ? <Editor key={uri} uri={uri} /> : <Start />}
+    </>
+  )
 }

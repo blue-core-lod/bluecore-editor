@@ -5,9 +5,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
-# What the health check reports, as bluecore-stack's start page shows it.
+# The commit, which the health check reports (as bluecore-stack's start page
+# shows it) and the app compares with it to notice a newer deploy.
 ARG VERSION=dev
+RUN VITE_VERSION="$VERSION" npm run build
 RUN printf '{"version": "%s"}\n' "$VERSION" > dist/health.json
 
 FROM nginx:1.27.4-alpine
