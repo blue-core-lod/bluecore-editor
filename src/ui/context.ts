@@ -18,6 +18,11 @@ export interface DescriptionContextValue {
   preview: (entity: Previewed | null) => void
   /** Mark a lookup as holding text that isn't in the record yet, or (null) as not. */
   unfinished: (id: string, lookup: Unfinished | null) => void
+  /** The record's languages, as MARC codes, from bf:language. */
+  languages: string[]
+  /** The ScriptShifter table the cataloger last chose in this record, so the next value doesn't ask again. */
+  lastTable: string | null
+  rememberTable: (id: string) => void
 }
 
 /** A lookup with text in it, which saving would leave out. */
