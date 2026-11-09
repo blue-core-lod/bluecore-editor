@@ -16,6 +16,17 @@ import {
 } from '../doc/model'
 import { isEmpty, moveOps, replaceOps } from '../doc/resources'
 import { composes, sourcesFor } from '../lookup/sources'
+import {
+  addOriginalOps,
+  addRomanizationOps,
+  groups,
+  offerFor,
+  recordLanguages,
+  replaceTextOps,
+  textOf,
+  type TextValue,
+} from '../romanize/pairs'
+import { scriptName, scriptOf, scriptOfTag, type Direction, type Table } from '../romanize/tables'
 import { belongsOn, definitionOf, domainOf, modeledProperties } from '../schema/fields'
 import { hasContext } from '../context/lc'
 import { AddField } from './AddField'
@@ -26,6 +37,7 @@ import { isUri, literalText, refLabels, refName, sourceOf, termLabel, typesOf } 
 import { layout, missingId, valueId, type Misplaced, type Missing, type Row, type Suggestion } from './layout'
 import { Lookup } from './Lookup'
 import { marcLinks, ontologyEntry, primerPage, primerUrl, resourcePrimer, sectionPrimer, type ResourceKind } from './presentation'
+import { ConvertValue } from './Romanize'
 
 /**
  * The description as one document, in cataloging sections, with every value
@@ -52,9 +64,11 @@ export function Description({
 }) {
   const labels = useMemo(() => refLabels(doc), [doc])
   const view = useMemo(() => layout(doc, labels), [doc, labels])
+  const languages = useMemo(() => recordLanguages(doc), [doc])
+  const [lastTable, rememberTable] = useState<string | null>(null)
   const context = useMemo(
-    () => ({ doc, labels, hints, record, selected, select, preview, unfinished }),
-    [doc, labels, hints, record, selected, select, preview, unfinished],
+    () => ({ doc, labels, hints, record, selected, select, preview, unfinished, languages, lastTable, rememberTable }),
+    [doc, labels, hints, record, selected, select, preview, unfinished, languages, lastTable],
   )
 
   return (
@@ -148,9 +162,7 @@ function FieldRow({ row }: { row: Row }) {
         {hints && <OntologyLink prop={row.prop} />}
       </div>
       <div className="row-values">
-        {row.values.map((value) => (
-          <ValueView key={value.key} node={row.node} prop={row.prop} value={value} label={row.label} />
-        ))}
+        <Values node={row.node} prop={row.prop} values={row.values} label={row.label} />
         {row.addAnother && (
           <div className="add-another">
             <AddValue node={row.node} prop={row.prop} label={row.addAnother} prompt="Add another" />
@@ -317,8 +329,7 @@ function ValueContent(props: ValueProps) {
     const kind = schemaKind(doc, props.node, props.prop)?.kind
     const link = kind ? kind !== 'text' : isUri(text)
     if (typeof value.literal === 'string' && link) return <Chip {...props} uri={text} />
-    // Keyed by its text, so an undo that changes the value resets the field.
-    return <LiteralField key={text} {...props} literal={value.literal} />
+    return <TextField {...props} literal={value.literal} />
   }
   const node = getNode(doc, value.node)
   const id = node.keywords['@id']
@@ -327,6 +338,161 @@ function ValueContent(props: ValueProps) {
   const text = sourcesFor(props.prop).length > 0 ? unlinkedLabel(node) : undefined
   if (text) return <Unlinked {...props} child={node} text={text} />
   return <Subnode {...props} child={node} />
+}
+
+/**
+ * A property's values, with a value in a non-Latin script and its
+ * romanization shown together as one pair.
+ */
+function Values({ node, prop, values, label }: { node: Key; prop: string; values: Value[]; label: string }) {
+  return groups(values).map((group) =>
+    group.kind === 'single' ? (
+      <ValueView key={group.value.key} node={node} prop={prop} value={group.value} label={label} />
+    ) : (
+      <Pair key={group.original.key} node={node} prop={prop} label={label} {...group} />
+    ),
+  )
+}
+
+/** Which way a conversion is being proposed, if one is: always from the value's text as it is now. */
+type Converting = Direction | null
+
+/**
+ * A text value with no partner, and the conversion it can have: romanizing
+ * text in a non-Latin script, or adding the original script to a romanized
+ * title or statement in a record whose language ScriptShifter has a table for.
+ * The proposal lives here rather than in the field, which is rebuilt when the
+ * text it was opened from is saved.
+ */
+function TextField(props: ValueProps & { literal: Literal; onRemove?: () => void }) {
+  const { doc, record, languages } = useDescription()
+  const { node, prop, value, label, literal } = props
+  const [converting, setConverting] = useState<Converting>(null)
+  const offer = offerFor(prop, literal, languages)
+  const self: TextValue = { key: value.key, literal }
+
+  const accept = (output: string, table: Table) => {
+    setConverting(null)
+    if (converting === 's2r') {
+      const values = getNode(doc, node).props[prop] ?? []
+      record(change(`Romanized ${label}: “${output}”`, addRomanizationOps(node, prop, values, self, output, table)))
+    } else {
+      const script = scriptName(scriptOfTag(table.tag) ?? '')
+      record(change(`Added ${label} in ${script}: “${output}”`, addOriginalOps(node, prop, self, output, table)))
+    }
+  }
+
+  return (
+    <>
+      {/* Keyed by its text, so an undo that changes the value resets the field. */}
+      <LiteralField
+        key={literalText(literal)}
+        {...props}
+        convert={
+          offer && !converting
+            ? {
+                label: offer === 's2r' ? 'Romanize' : 'Add original script',
+                start: () => setConverting(offer),
+              }
+            : undefined
+        }
+      />
+      {converting && (
+        <ConvertValue
+          direction={converting}
+          text={literalText(literal)}
+          script={scriptOf(literal)}
+          tag={tagOf(literal)}
+          onAccept={accept}
+          onCancel={() => setConverting(null)}
+        />
+      )}
+    </>
+  )
+}
+
+/**
+ * A value in a non-Latin script and its romanization, one above the other,
+ * each marked with its script. Romanizing again replaces the romanization,
+ * for when the original has been corrected.
+ */
+function Pair({
+  node,
+  prop,
+  label,
+  original,
+  romanized,
+  script,
+}: {
+  node: Key
+  prop: string
+  label: string
+  original: TextValue
+  romanized: TextValue
+  script: string
+}) {
+  const { record } = useDescription()
+  const [converting, setConverting] = useState<Converting>(null)
+  const name = scriptName(script)
+  const current = textOf(romanized.literal)
+
+  const accept = (output: string) => {
+    setConverting(null)
+    if (output === current) return
+    record(change(`Romanized ${label} again: “${output}”`, replaceTextOps(node, prop, romanized, output)))
+  }
+
+  return (
+    <div className="pair" role="group" aria-label={`${label}, in ${name} and romanized`}>
+      <span id={valueId(original.key)} className="value-anchor">
+        <LiteralField
+          key={literalText(original.literal)}
+          node={node}
+          prop={prop}
+          value={original}
+          label={`${label} (${name})`}
+          literal={original.literal}
+          marker={{ text: name, title: `In ${name} script, tagged ${tagOf(original.literal) ?? 'by its letters alone'}` }}
+          convert={
+            converting
+              ? undefined
+              : { label: 'Romanize again', start: () => setConverting('s2r') }
+          }
+        />
+      </span>
+      <span id={valueId(romanized.key)} className="value-anchor">
+        <LiteralField
+          key={current}
+          node={node}
+          prop={prop}
+          value={romanized}
+          label={`${label} (romanized)`}
+          literal={romanized.literal}
+          marker={{
+            text: 'Romanized',
+            title: tagOf(romanized.literal)
+              ? `The romanization of the ${name} above, tagged ${tagOf(romanized.literal)}`
+              : `The romanization of the ${name} above. Untagged, as in LC's data, so it goes in the regular MARC field and the ${name} in an 880.`,
+          }}
+        />
+      </span>
+      {converting && (
+        <ConvertValue
+          direction="s2r"
+          text={textOf(original.literal)}
+          script={script}
+          tag={tagOf(original.literal)}
+          replacing={current}
+          onAccept={accept}
+          onCancel={() => setConverting(null)}
+        />
+      )}
+    </div>
+  )
+}
+
+function tagOf(literal: Literal): string | undefined {
+  return (isValueObject(literal) && literal['@language']) || undefined
 }
 
 function useRemove({ node, prop, value, label }: ValueProps, name: string): () => void {
@@ -339,6 +505,10 @@ function LiteralField(
     literal: Literal
     /** Removes more than the literal, as when it stands for a node shown inline. */
     onRemove?: () => void
+    /** What to show in place of its language tag, as a pair shows the script. */
+    marker?: { text: string; title: string }
+    /** A conversion it offers, started once the text as typed is saved. */
+    convert?: { label: string; start: () => void }
   },
 ) {
   const { record } = useDescription()
@@ -369,15 +539,35 @@ function LiteralField(
           if (event.key === 'Escape') setDraft(text)
         }}
       />
-      {language && (
-        <span className="tag" title="Language of this text">
-          {language}
+      {props.marker ? (
+        <span className="tag script" title={props.marker.title}>
+          {props.marker.text}
         </span>
+      ) : (
+        language && (
+          <span className="tag" title="Language of this text">
+            {language}
+          </span>
+        )
       )}
       {datatype && (
         <span className="tag" title={datatype}>
           {datatype.split(/[#/]/).pop()}
         </span>
+      )}
+      {props.convert && (
+        <button
+          type="button"
+          className="link convert-start"
+          // Kept from taking the focus, so the text as typed is saved here, not by a blur that rebuilds the field.
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => {
+            commit()
+            props.convert?.start()
+          }}
+        >
+          {props.convert.label}
+        </button>
       )}
       <RemoveButton name={label} onClick={props.onRemove ?? remove} />
     </span>
@@ -598,8 +788,7 @@ function Subnode(props: ValueProps & { child: Node }) {
     'literal' in labelValue
   ) {
     return (
-      <LiteralField
-        key={literalText(labelValue.literal)}
+      <TextField
         node={child.key}
         prop="rdfs:label"
         value={labelValue}
@@ -623,9 +812,7 @@ function Subnode(props: ValueProps & { child: Node }) {
           <div className="subfield" key={prop}>
             <span className="subfield-label">{termLabel(prop)}</span>
             <div className="row-values">
-              {values.map((value) => (
-                <ValueView key={value.key} node={child.key} prop={prop} value={value} label={termLabel(prop)} />
-              ))}
+              <Values node={child.key} prop={prop} values={values} label={termLabel(prop)} />
               {domain && typesOf(child).length > 0 && !belongsOn(prop, typesOf(child)) && (
                 <OntologyNote field={termLabel(prop)} domain={domain} />
               )}

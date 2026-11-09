@@ -11,6 +11,8 @@ export const config = {
   keycloakClientId: import.meta.env.VITE_KEYCLOAK_CLIENT_ID || 'bluecore_api',
   /** QA, for authority lookups: Sinopia's proxy beside Blue Core, unless VITE_QA_URL says otherwise. */
   qaUrl: withSlash(import.meta.env.VITE_QA_URL || `${bluecoreUrl}api/qa/`),
+  /** ScriptShifter, for romanization: LC's instance, unless VITE_SCRIPTSHIFTER_URL says otherwise. */
+  scriptshifterUrl: withSlash(import.meta.env.VITE_SCRIPTSHIFTER_URL || 'https://bibframe.org/scriptshifter/'),
 }
 
 function withSlash(url: string): string {

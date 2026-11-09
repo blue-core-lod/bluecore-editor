@@ -1133,6 +1133,74 @@ input[readonly] {
   border-radius: 3px;
   padding: 0 0.3rem;
 }
+/* A pair's script, in words: "Cyrillic", "Romanized". */
+.tag.script {
+  font-family: var(--sans);
+  min-width: 5.5rem;
+  text-align: center;
+}
+.literal button.link {
+  white-space: nowrap;
+  font-size: 0.85rem;
+}
+
+/* A value in a non-Latin script above its romanization, bracketed as one. */
+.pair {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+  border-left: 3px solid var(--rule);
+  padding-left: 0.5rem;
+}
+
+/* A conversion from ScriptShifter, proposed under the value it's from. */
+.convert {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.6rem;
+  background: var(--linked);
+  border-radius: 6px;
+}
+.convert input {
+  flex: 1 1 100%;
+}
+.convert-table {
+  flex: 1 1 100%;
+  font-size: 0.9rem;
+}
+.convert-note,
+.convert-source {
+  flex: 1 1 100%;
+  margin: 0;
+  font-size: 0.85rem;
+}
+.convert-note.error {
+  background: var(--note-ground);
+  color: var(--note-text);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+.convert-source {
+  color: var(--muted);
+}
+.convert-warnings {
+  flex: 1 1 100%;
+  margin: 0;
+  padding: 0.2rem 0.4rem 0.2rem 1.4rem;
+  background: var(--note-ground);
+  color: var(--note-text);
+  font-size: 0.85rem;
+  border-radius: 3px;
+}
+.convert-actions {
+  display: flex;
+  gap: 0.4rem;
+}
 
 .chip {
   display: inline-flex;
