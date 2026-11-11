@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "noEmit": true,
+    "jsx": "react-jsx",
     "lib": [
       "ES2023",
       "DOM"
@@ -25,7 +26,6 @@
   },
   "include": [
     "test",
-    "scripts/profiles.ts",
     "vite.config.ts"
   ]
 }

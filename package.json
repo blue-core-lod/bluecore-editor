@@ -11,7 +11,6 @@
     "typecheck": "tsc -b",
     "lint": "eslint .",
     "test": "vitest run",
-    "profiles": "node scripts/write-profiles.mjs",
     "vendor:bibframe-json": "node scripts/vendor-bibframe-json.mjs",
     "vendor:lc-vocabularies": "node scripts/vendor-lc-vocabularies.mjs",
     "vendor:scriptshifter": "node scripts/vendor-scriptshifter.mjs"
