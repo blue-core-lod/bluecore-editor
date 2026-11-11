@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { availability, transcribe, type Availability } from '../assist/chrome'
 import {
@@ -108,6 +108,7 @@ function Item({
   const [status, setStatus] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [last, setLast] = useState<Run | null>(null)
+  const [camera, setCamera] = useState(false)
   const previews = useMemo(() => photos.map((photo) => URL.createObjectURL(photo)), [photos])
   useEffect(() => () => previews.forEach((url) => URL.revokeObjectURL(url)), [previews])
 
@@ -161,6 +162,7 @@ function Item({
     setItem('')
     setExpected(emptyTranscription())
     setPhotos([])
+    setCamera(false)
     setLast(null)
     setStatus(null)
   }
@@ -201,15 +203,34 @@ function Item({
       <p>
         <label>
           Photos of the title page, verso and CIP block{' '}
-          <input type="file" accept="image/*" multiple onChange={(event) => setPhotos([...(event.target.files ?? [])])} />
-        </label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={(event) => {
+              setPhotos([...photos, ...(event.target.files ?? [])])
+              event.target.value = ''
+            }}
+          />
+        </label>{' '}
+        {!camera && (
+          <button type="button" className="secondary" onClick={() => setCamera(true)}>
+            Take photos
+          </button>
+        )}
       </p>
+      {camera && <Camera onPhoto={(photo) => setPhotos((taken) => [...taken, photo])} onClose={() => setCamera(false)} />}
       {previews.length > 0 && (
-        <p className="transcribe-photos">
+        <div className="transcribe-photos">
           {previews.map((url, i) => (
-            <img key={url} src={url} alt={photos[i]?.name} />
+            <figure key={url}>
+              <img src={url} alt={photos[i]?.name} />
+              <button type="button" className="link" onClick={() => setPhotos(photos.filter((_, j) => j !== i))}>
+                Remove
+              </button>
+            </figure>
           ))}
-        </p>
+        </div>
       )}
       <p>
         <button type="button" onClick={() => void run()} disabled={busy || photos.length === 0 || model === 'unavailable'}>
@@ -222,6 +243,67 @@ function Item({
       {status && <p className="muted" role="status">{status}</p>}
       {last && <RunTable run={last} />}
     </section>
+  )
+}
+
+/**
+ * Photos from the machine's camera, for holding the item up to it: the back
+ * camera if there is one, at the most detail it gives, since CIP blocks are
+ * small print.
+ */
+function Camera({ onPhoto, onClose }: { onPhoto: (photo: File) => void; onClose: () => void }) {
+  const video = useRef<HTMLVideoElement>(null)
+  const [error, setError] = useState<string | null>(null)
+  useEffect(() => {
+    let stream: MediaStream | undefined
+    let stopped = false
+    navigator.mediaDevices
+      .getUserMedia({ video: { facingMode: 'environment', width: { ideal: 4096 }, height: { ideal: 4096 } } })
+      .then((opened) => {
+        stream = opened
+        if (stopped) opened.getTracks().forEach((track) => track.stop())
+        else if (video.current) video.current.srcObject = opened
+      })
+      .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : String(reason)))
+    return () => {
+      stopped = true
+      stream?.getTracks().forEach((track) => track.stop())
+    }
+  }, [])
+
+  const take = () => {
+    const source = video.current
+    if (!source?.videoWidth) return
+    const canvas = document.createElement('canvas')
+    canvas.width = source.videoWidth
+    canvas.height = source.videoHeight
+    canvas.getContext('2d')?.drawImage(source, 0, 0)
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return
+        onPhoto(new File([blob], `photo-${new Date().toISOString()}.jpg`, { type: 'image/jpeg' }))
+      },
+      'image/jpeg',
+      0.92,
+    )
+  }
+
+  return (
+    <div className="transcribe-camera">
+      {error ? (
+        <p className="note">The camera didn’t open: {error}</p>
+      ) : (
+        <video ref={video} autoPlay playsInline muted />
+      )}
+      <p>
+        <button type="button" onClick={take} disabled={!!error}>
+          Take photo
+        </button>{' '}
+        <button type="button" className="secondary" onClick={onClose}>
+          Done
+        </button>
+      </p>
+    </div>
   )
 }
 

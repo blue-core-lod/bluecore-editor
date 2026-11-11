@@ -1631,9 +1631,20 @@ button.remove:hover {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+.transcribe-photos figure {
+  margin: 0;
+  text-align: center;
+}
 .transcribe-photos img {
+  display: block;
   max-height: 12rem;
   border: 1px solid var(--rule);
+}
+.transcribe-camera video {
+  display: block;
+  max-width: 100%;
+  max-height: 60vh;
+  background: var(--text);
 }
 .transcribe-test .outcome-wrong,
 .transcribe-test .outcome-added {
