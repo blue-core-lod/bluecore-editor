@@ -6,7 +6,7 @@ Measured on 473 of LC's collections. A field is **shown** when 50% or more of th
 
 ## Defined by
 
-A record is a collection when its Work's type is `Collection` or `MixedMaterial`, or its issuance (`bf:issuance`) is `mulm`, and no kind above it in [the list](README.md) matches first. Choosing collection for a new record writes: Work type `Collection`.
+A record is a collection when its Work's type is `Collection` or `MixedMaterial`, or its issuance (`bf:issuance`) is `mulm`, and no kind above it in [the list](README.md) matches first. Once you choose collection, a new record holds: Work type `Collection`.
 
 ## Overrides
 

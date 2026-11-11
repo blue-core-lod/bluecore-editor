@@ -6,7 +6,7 @@ Measured on 498 of LC's scores. A field is **shown** when 50% or more of them ha
 
 ## Defined by
 
-A record is a score when its Work's type is `NotatedMusic`, and no kind above it in [the list](README.md) matches first. Choosing score for a new record writes: Instance type `Print`, Work type `NotatedMusic`.
+A record is a score when its Work's type is `NotatedMusic`, and no kind above it in [the list](README.md) matches first. Once you choose score, a new record holds: Instance type `Print`, Work type `NotatedMusic`.
 
 ## Overrides
 

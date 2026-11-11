@@ -64,12 +64,17 @@ function profile(kind: Kind): string {
     '',
     '## Defined by',
     '',
-    `A record is ${article(kind.label)} ${kind.label.toLowerCase()} when ${defining(kind)}${resourceTypes.types.indexOf(kind) > 0 ? ', and no kind above it in [the list](README.md) matches first' : ''}. ${kindChange(blankRecord(), kind.id) === null ? 'A new record starts as one, with' : `Choosing ${kind.label.toLowerCase()} for a new record writes`}: ${starting(doc)}.`,
+    `A record is ${article(kind.label)} ${kind.label.toLowerCase()} when ${defining(kind)}${resourceTypes.types.indexOf(kind) > 0 ? ', and no kind above it in [the list](README.md) matches first' : ''}. ${kindChange(blankRecord(), kind.id) === null ? 'A new record starts as one' : `Once you choose ${kind.label.toLowerCase()}, a new record holds`}: ${starting(doc)}.`,
     '',
     ...overrideSection(kind),
   ]
   for (const section of view.sections) {
     const fields = [
+      // What choosing the kind already filled in, such as an online book's carrier, which isn't missing any more.
+      ...section.rows.flatMap((row) => {
+        const found = usage(kind.id, row.prop)
+        return found ? [{ field: { ...row, share: found.share }, tier: `${tierName(found.tier)}, set by the kind` }] : []
+      }),
       ...section.missing.map((field) => ({ field, tier: 'Shown' })),
       ...section.suggested.map((field) => ({ field, tier: 'Suggested' })),
     ]

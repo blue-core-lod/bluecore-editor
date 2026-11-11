@@ -32,7 +32,7 @@ A record whose Work has none of these types has no kind. It's offered every fiel
 
 ## 2. The kind sets each field's tier
 
-For each kind, the editor measured how often LC's records use each BIBFRAME property, using 500 records per kind from the snapshot loaded into Blue Core ([`src/schema/guidance.json`](../src/schema/guidance.json)). Each property falls into a tier:
+For each kind, the editor measured how often LC's records use each BIBFRAME property, using up to 500 records per kind from the snapshot (each profile gives its count) loaded into Blue Core ([`src/schema/guidance.json`](../src/schema/guidance.json)). Each property falls into a tier:
 
 | Tier | Share of records of that kind | What you see |
 |---|---|---|

@@ -6,7 +6,7 @@ Measured on 500 of LC's online books. A field is **shown** when 50% or more of t
 
 ## Defined by
 
-A record is a book (online) when its Work's type is `Text`, and its only carrier (`bf:carrier`) is `cr` (online resource), and no kind above it in [the list](README.md) matches first. Choosing book (online) for a new record writes: Instance type `Electronic`, Instance `bf:carrier` `cr`, Work type `Text`.
+A record is a book (online) when its Work's type is `Text`, and its only carrier (`bf:carrier`) is `cr` (online resource), and no kind above it in [the list](README.md) matches first. Once you choose book (online), a new record holds: Instance type `Electronic`, Instance `bf:carrier` `cr`, Work type `Text`.
 
 ## Overrides
 
@@ -47,6 +47,7 @@ None: every tier here comes from the measured share.
 
 | Field | Property | On | MARC | Share | Tier |
 |---|---|---|---|---|---|
+| Carrier | `bf:carrier` | Instance | 338 | 100% | Shown, set by the kind |
 | Content | `bf:content` | Work | 336 | 100% | Shown |
 | Media | `bf:media` | Instance | 337 | 100% | Shown |
 | Extent | `bf:extent` | Instance | 300 $a | 100% | Shown |

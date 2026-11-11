@@ -4,7 +4,7 @@
 // after a change to the sections, and review the diff; test/profiles.test.ts
 // fails until the committed files match.
 
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, rm, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { runnerImport } from 'vite'
@@ -16,8 +16,16 @@ const out = join(root, 'docs', 'profiles')
 globalThis.window ??= { location: { origin: 'http://localhost' } }
 
 const { module } = await runnerImport(join(root, 'scripts', 'profiles.ts'))
+const profiles = module.renderProfiles()
 await mkdir(out, { recursive: true })
-for (const [name, text] of Object.entries(module.renderProfiles())) {
+// A kind that was renamed or removed would otherwise leave its old profile behind.
+for (const name of await readdir(out)) {
+  if (name.endsWith('.md') && !(name in profiles)) {
+    await rm(join(out, name))
+    console.log(`removed docs/profiles/${name}`)
+  }
+}
+for (const [name, text] of Object.entries(profiles)) {
   await writeFile(join(out, name), text)
   console.log(`docs/profiles/${name}`)
 }

@@ -6,7 +6,7 @@ Measured on 500 of LC's spoken audio recordings. A field is **shown** when 50% o
 
 ## Defined by
 
-A record is a spoken audio when its Work's type is `NonMusicAudio` or `Audio`, and no kind above it in [the list](README.md) matches first. Choosing spoken audio for a new record writes: Work type `NonMusicAudio`.
+A record is a spoken audio when its Work's type is `NonMusicAudio` or `Audio`, and no kind above it in [the list](README.md) matches first. Once you choose spoken audio, a new record holds: Work type `NonMusicAudio`.
 
 ## Overrides
 

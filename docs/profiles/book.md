@@ -6,7 +6,7 @@ Measured on 500 of LC's books. A field is **shown** when 50% or more of them hav
 
 ## Defined by
 
-A record is a book when its Work's type is `Text`, and no kind above it in [the list](README.md) matches first. A new record starts as one, with: Instance type `Print`, Work type `Text`.
+A record is a book when its Work's type is `Text`, and no kind above it in [the list](README.md) matches first. A new record starts as one: Instance type `Print`, Work type `Text`.
 
 ## Overrides
 

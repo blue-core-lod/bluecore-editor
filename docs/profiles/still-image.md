@@ -6,7 +6,7 @@ Measured on 500 of LC's still images. A field is **shown** when 50% or more of t
 
 ## Defined by
 
-A record is a still image when its Work's type is `StillImage`, and no kind above it in [the list](README.md) matches first. Choosing still image for a new record writes: Work type `StillImage`.
+A record is a still image when its Work's type is `StillImage`, and no kind above it in [the list](README.md) matches first. Once you choose still image, a new record holds: Work type `StillImage`.
 
 ## Overrides
 

@@ -22,8 +22,9 @@ the numbers by hand.
 - [docs/beyond-profiles.md](docs/beyond-profiles.md): why we work this way
   instead of with Sinopia-style templates, and what's still open.
 
-The editor links to these from the kind of record in its header, pinned to
-the commit the build was made from.
+The editor links to these, pinned to the commit the build was made from: the
+kind of a record in Blue Core goes to its profile, and the "fields most maps
+have" panel to the rules.
 
 ## Running it
 

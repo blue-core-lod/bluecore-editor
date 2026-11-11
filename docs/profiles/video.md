@@ -6,7 +6,7 @@ Measured on 500 of LC's videos. A field is **shown** when 50% or more of them ha
 
 ## Defined by
 
-A record is a video when its Work's type is `MovingImage`, and no kind above it in [the list](README.md) matches first. Choosing video for a new record writes: Work type `MovingImage`.
+A record is a video when its Work's type is `MovingImage`, and no kind above it in [the list](README.md) matches first. Once you choose video, a new record holds: Work type `MovingImage`.
 
 ## Overrides
 

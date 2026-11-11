@@ -6,7 +6,7 @@ Measured on 500 of LC's maps. A field is **shown** when 50% or more of them have
 
 ## Defined by
 
-A record is a map when its Work's type is `Cartography`, and no kind above it in [the list](README.md) matches first. Choosing map for a new record writes: Instance type `Print`, Work type `Cartography`.
+A record is a map when its Work's type is `Cartography`, and no kind above it in [the list](README.md) matches first. Once you choose map, a new record holds: Instance type `Print`, Work type `Cartography`.
 
 ## Overrides
 

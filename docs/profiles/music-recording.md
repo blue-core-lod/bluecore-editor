@@ -6,7 +6,7 @@ Measured on 500 of LC's music recordings. A field is **shown** when 50% or more 
 
 ## Defined by
 
-A record is a music recording when its Work's type is `MusicAudio`, and no kind above it in [the list](README.md) matches first. Choosing music recording for a new record writes: Work type `MusicAudio`.
+A record is a music recording when its Work's type is `MusicAudio`, and no kind above it in [the list](README.md) matches first. Once you choose music recording, a new record holds: Work type `MusicAudio`.
 
 ## Overrides
 

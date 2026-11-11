@@ -6,7 +6,7 @@ Measured on 500 of LC's online serials. A field is **shown** when 50% or more of
 
 ## Defined by
 
-A record is a serial (online) when its Work's type is `Serial`, or its issuance (`bf:issuance`) is `serl`, and its only carrier (`bf:carrier`) is `cr` (online resource). Choosing serial (online) for a new record writes: Instance type `Electronic`, Instance `bf:issuance` `serl`, Instance `bf:carrier` `cr`, Work type `Text`.
+A record is a serial (online) when its Work's type is `Serial`, or its issuance (`bf:issuance`) is `serl`, and its only carrier (`bf:carrier`) is `cr` (online resource). Once you choose serial (online), a new record holds: Instance type `Electronic`, Instance `bf:issuance` `serl`, Instance `bf:carrier` `cr`, Work type `Text`.
 
 ## Overrides
 
@@ -45,6 +45,7 @@ None: every tier here comes from the measured share.
 
 | Field | Property | On | MARC | Share | Tier |
 |---|---|---|---|---|---|
+| Carrier | `bf:carrier` | Instance | 338 | 100% | Shown, set by the kind |
 | Content | `bf:content` | Work | 336 | 100% | Shown |
 | Media | `bf:media` | Instance | 337 | 100% | Shown |
 | Extent | `bf:extent` | Instance | 300 $a | 53% | Shown |
@@ -53,6 +54,7 @@ None: every tier here comes from the measured share.
 
 | Field | Property | On | MARC | Share | Tier |
 |---|---|---|---|---|---|
+| Mode of issuance | `bf:issuance` | Instance |  | 100% | Shown, set by the kind |
 | Frequency | `bf:frequency` | Instance |  | 96% | Shown |
 | Serial pub type | `bflc:serialPubType` | Work |  | 92% | Shown |
 | Relation | `bf:relation` | Work |  | 84% | Shown |

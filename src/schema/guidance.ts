@@ -69,7 +69,33 @@ const rules: Rule[] = resourceTypes.types
 const measured = guidance.types as unknown as Record<string, Record<Resource, Record<string, Measured>>>
 const thresholds = overrides.thresholds
 const never = new Set<string>(overrides.never)
-const forced = overrides.types as Record<string, Override[]>
+const forced = checkedOverrides(overrides.types, never)
+
+/**
+ * The per-kind overrides, checked as the editor loads: a mistake in the file,
+ * such as an unknown tier or the per-tier lists it used to hold, would
+ * otherwise hide fields or break every record of the kind.
+ */
+export function checkedOverrides(types: unknown, never: ReadonlySet<string>): Record<string, Override[]> {
+  const fail = (problem: string) => {
+    throw new Error(`guidance-overrides.json: ${problem}`)
+  }
+  if (typeof types !== 'object' || types === null || Array.isArray(types)) fail('types must be an object of kinds')
+  const kindIds = new Set(rules.map((rule) => rule.id))
+  const tiers = new Set<unknown>(['shown', 'suggested', 'available'])
+  for (const [kind, list] of Object.entries(types as object)) {
+    if (!kindIds.has(kind)) fail(`${kind} is not a kind in resource-types.json`)
+    if (!Array.isArray(list)) fail(`${kind} must be a list of { prop, tier, reason }`)
+    for (const entry of list as unknown[]) {
+      const { prop, tier, reason } = (entry ?? {}) as Record<string, unknown>
+      if (typeof prop !== 'string' || !prop) fail(`an override for ${kind} has no prop`)
+      if (!tiers.has(tier)) fail(`${kind} ${String(prop)}: tier must be shown, suggested or available`)
+      if (typeof reason !== 'string' || !reason.trim()) fail(`${kind} ${String(prop)}: give a reason`)
+      if (never.has(prop as string)) fail(`${kind} ${String(prop)}: it is in never, so no form would offer it`)
+    }
+  }
+  return types as Record<string, Override[]>
+}
 
 /**
  * The kind of resource a record is, by the same rules the sample was drawn

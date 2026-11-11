@@ -6,7 +6,7 @@ Measured on 500 of LC's serials. A field is **shown** when 50% or more of them h
 
 ## Defined by
 
-A record is a serial when its Work's type is `Serial`, or its issuance (`bf:issuance`) is `serl`, and no kind above it in [the list](README.md) matches first. Choosing serial for a new record writes: Instance type `Print`, Instance `bf:issuance` `serl`, Work type `Text`.
+A record is a serial when its Work's type is `Serial`, or its issuance (`bf:issuance`) is `serl`, and no kind above it in [the list](README.md) matches first. Once you choose serial, a new record holds: Instance type `Print`, Instance `bf:issuance` `serl`, Work type `Text`.
 
 ## Overrides
 
@@ -56,6 +56,7 @@ None: every tier here comes from the measured share.
 
 | Field | Property | On | MARC | Share | Tier |
 |---|---|---|---|---|---|
+| Mode of issuance | `bf:issuance` | Instance |  | 100% | Shown, set by the kind |
 | Frequency | `bf:frequency` | Instance |  | 84% | Shown |
 | Relation | `bf:relation` | Work |  | 78% | Shown |
 | Notation system | `bf:notation`<br>Script 63% | Work |  | 63% | Shown |

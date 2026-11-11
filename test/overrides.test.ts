@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { guidedProperties, usage } from '../src/schema/guidance'
+import { checkedOverrides, guidedProperties, usage } from '../src/schema/guidance'
 import { renderProfiles } from '../scripts/profiles'
 
 // The overrides file has no per-kind entries yet, so these stand in for some.
@@ -52,5 +52,26 @@ describe('an override in the field profiles', () => {
 
   it('says when a kind has none', () => {
     expect(profiles['book.md']).toContain('None: every tier here comes from the measured share.')
+  })
+})
+
+describe('checking the overrides file', () => {
+  const never = new Set(['adminMetadata'])
+  const check = (types: unknown) => () => checkedOverrides(types, never)
+
+  it('takes a list of overrides per kind', () => {
+    expect(check({ map: [{ prop: 'scale', tier: 'shown', reason: 'Why not.' }] })()).toHaveProperty('map')
+    expect(check({})()).toEqual({})
+  })
+
+  it('refuses the per-tier lists it used to hold', () => {
+    expect(check({ map: { available: ['bflc:governmentPubType'] } })).toThrow(/list/)
+  })
+
+  it('refuses an unknown tier, a missing reason, a kind it doesn’t know and a property no form offers', () => {
+    expect(check({ map: [{ prop: 'scale', tier: 'show', reason: 'x' }] })).toThrow(/tier/)
+    expect(check({ map: [{ prop: 'scale', tier: 'shown' }] })).toThrow(/reason/)
+    expect(check({ atlas: [] })).toThrow(/not a kind/)
+    expect(check({ book: [{ prop: 'adminMetadata', tier: 'shown', reason: 'x' }] })).toThrow(/never/)
   })
 })
