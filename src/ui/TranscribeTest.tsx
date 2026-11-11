@@ -91,7 +91,14 @@ export function TranscribeTest() {
 function storedRuns(): Run[] {
   try {
     const stored = window.localStorage.getItem(storageKey)
-    return stored ? (JSON.parse(stored) as Run[]) : []
+    // Scored again, so runs kept from before a field or an outcome was added still add up.
+    return stored
+      ? (JSON.parse(stored) as Run[]).map((run) => {
+          const read = { ...emptyTranscription(), ...run.read }
+          const expected = { ...emptyTranscription(), ...run.expected }
+          return { ...run, read, expected, scores: score(read, expected) }
+        })
+      : []
   } catch {
     return []
   }
