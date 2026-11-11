@@ -1,5 +1,5 @@
 {
-  "x-about": "Hand corrections to guidance.json, which is measured and regenerated (docs/guidance.md). thresholds: the share of a type's records that makes a field shown, or suggested. never: properties no form offers, however often they're used, because they're record-keeping or structure rather than cataloging. types: per resource type, fields to put in a tier whatever their share.",
+  "x-about": "Hand corrections to guidance.json, which is measured and regenerated (docs/guidance.md). thresholds: the share of a type's records that makes a field shown, or suggested. never: properties no form offers, however often they're used, because they're record-keeping or structure rather than cataloging. types: per resource type, a list of fields to put in a tier whatever their share, each with the reason, which the field profiles in docs/profiles show: {\"prop\": \"duration\", \"tier\": \"shown\", \"reason\": \"...\"}.",
   "thresholds": { "shown": 0.5, "suggested": 0.1 },
   "never": [
     "adminMetadata",

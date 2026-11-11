@@ -24,6 +24,7 @@ import { recordGraph, type GraphNode } from './recordGraph'
 import { JsonView } from './JsonView'
 import { useStoredFlag } from './storedFlag'
 import { editorTour, startTour } from './tour'
+import { profileUrl, whichFieldsUrl } from './docs'
 import { layout, missingId, usuallyMissing, valueId } from './layout'
 import { primerUrl } from './presentation'
 import { replace } from './route'
@@ -359,13 +360,21 @@ export function Editor({ uri }: { uri: string }) {
               </select>
             ) : (
               kind && (
-                <span
+                <a
                   className="resource-type"
-                  title={`The fields offered first are the ones most of LC’s ${kind.plural} have`}
+                  href={profileUrl(kind.id)}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={`The fields offered first are the ones most of LC’s ${kind.plural} have: see them all`}
                 >
                   {kind.label}
-                </span>
+                </a>
               )
+            )}
+            {choosable && kind && (
+              <a className="profile-link" href={profileUrl(kind.id)} target="_blank" rel="noreferrer">
+                Fields for {kind.plural}
+              </a>
             )}
             {isPlaceholder(uri) && typeof workUri === 'string' && !isPlaceholder(workUri) ? (
               <>
@@ -408,6 +417,11 @@ export function Editor({ uri }: { uri: string }) {
                     <span className="share">{Math.round(field.share * 100)}%</span>
                   </li>
                 ))}
+                <li className="about">
+                  <a href={whichFieldsUrl} target="_blank" rel="noreferrer">
+                    How these are chosen
+                  </a>
+                </li>
               </ul>
             </details>
           )}

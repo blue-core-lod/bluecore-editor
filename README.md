@@ -7,6 +7,24 @@ catalogers moving from MARC. It runs entirely in the browser; see
 [docs/design.md](docs/design.md) for the design and
 [docs/mockups/screens.md](docs/mockups/screens.md) for the mockups.
 
+## Which fields it shows
+
+The editor has no templates. It shows every value a record has, and offers
+first the fields most of LC's records of the same kind have: a map's scale, a
+recording's sound characteristics. A short, reviewed overrides file corrects
+the numbers by hand.
+
+- [docs/which-fields.md](docs/which-fields.md): the rules, for new records and
+  existing ones.
+- [docs/profiles/](docs/profiles/README.md): every field each kind of record
+  offers, with its share and tier, and the overrides with their reasons,
+  generated from the editor's own code.
+- [docs/beyond-profiles.md](docs/beyond-profiles.md): why we work this way
+  instead of with Sinopia-style templates, and what's still open.
+
+The editor links to these from the kind of record in its header, pinned to
+the commit the build was made from.
+
 ## Running it
 
 In bluecore-stack, with this repository checked out beside it:
@@ -75,6 +93,12 @@ subjects, genre/form terms) are searched in QA through Sinopia's proxy beside
 Blue Core. The small LC vocabularies (carriers, languages, relators…) are
 vendored into `src/lookup/vocabularies.json` by `npm run
 vendor:lc-vocabularies` and searched locally, as picklists.
+
+`src/schema/guidance.json` holds the measurements of LC's records, made by
+`scripts/guidance/` ([docs/guidance.md](docs/guidance.md)), and
+`src/schema/guidance-overrides.json` the hand corrections. After changing
+either, or the sections in `src/ui/presentation.ts`, run `npm run profiles` to
+regenerate `docs/profiles/` and review the diff. A test fails until you do.
 
 `src/ui/` is the description view. `src/ui/presentation.ts` is the presentation
 sidecar: sections, field order and MARC hints, keyed by property name.

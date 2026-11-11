@@ -67,7 +67,15 @@ LC doesn't give these Instances a subclass (Print, Electronic): 99% have none. W
 
 - `thresholds`: a field used in 50% or more of a kind's records is shown, 10–50% suggested, under 10% available only through Add field;
 - `never`: properties no form offers, because they're record-keeping or structure rather than cataloging: `adminMetadata`, `instanceOf`, `hasInstance`, `bflc:aap`, `bflc:aap-normalized`, and `dcterms:isPartOf` (LC's dataset membership, on every record);
-- `types`: per kind, fields to put in a tier whatever their share. Empty for now.
+- `types`: per kind, a list of fields to put in a tier whatever their share, each with its reason. Empty for now. An entry looks like this:
+
+  ```json
+  "music-recording": [
+    { "prop": "duration", "tier": "shown", "reason": "Catalogers expect it, though LC's converter rarely carries it." }
+  ]
+  ```
+
+  Each kind's [field profile](profiles/README.md) lists its overrides with the share, the tier the share alone would give, the tier set and the reason, and marks the fields they moved. Run `npm run profiles` after changing this file.
 
 Likely next entries, visible in the measurements, to decide in use: conversion habits such as an LCCN on 99% of LC's records and `bflc:governmentPubType` (a MARC fixed field), LC internals such as `hasItem` and `acquisitionSource`, and fields to promote such as a recording's duration (22%).
 
