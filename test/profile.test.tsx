@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { beforeAll, describe, expect, it, vi } from 'vitest'
 
 import { Fields } from '../src/ui/Fields'
-import { profileOf, propertyName } from '../src/ui/profile'
+import { nearThreshold, profileOf, propertyName } from '../src/ui/profile'
 
 const fields = (id: string) => profileOf(id)?.sections.flatMap((section) => section.fields) ?? []
 
@@ -39,6 +39,15 @@ describe('the field profile of a kind', () => {
   it('keeps record-keeping out, and the rare properties for Add field', () => {
     expect(fields('map').map((field) => field.prop)).not.toContain('adminMetadata')
     expect(profileOf('map')?.available.every(({ share }) => share < 0.1)).toBe(true)
+  })
+
+  it('marks a share close enough to a threshold that another sample could move it', () => {
+    expect(nearThreshold('map', 0.5)).toBe(true)
+    expect(nearThreshold('map', 0.1)).toBe(true)
+    expect(nearThreshold('map', 0.99)).toBe(false)
+    expect(nearThreshold('map', 0.3)).toBe(false)
+    expect(nearThreshold('atlas', 0.5)).toBe(false)
+    expect(fields('map').find((field) => field.prop === 'scale')?.nearThreshold).toBe(false)
   })
 
   it('knows nothing of a kind the rules don’t', () => {

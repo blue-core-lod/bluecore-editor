@@ -56,6 +56,12 @@ export interface ProfileField {
   tier: Tier
   /** Filled in by choosing the kind, such as an online book's carrier. */
   setByKind: boolean
+  /**
+   * Whether the share is within the sample's margin of a threshold, so a
+   * different sample could put it in the next tier: where an override
+   * decision is worth making.
+   */
+  nearThreshold: boolean
   override?: { measured: Tier; reason: string }
   /** For a property whose values are typed nodes, the kinds 10% or more of records use: Lccn, Isbn. */
   typed: { cls: string; share: number }[]
@@ -77,7 +83,21 @@ interface Measured {
 type Rule = (typeof resourceTypes.types)[number]
 
 const measured = guidance.types as unknown as Record<string, Record<Resource, Record<string, Measured>>>
+const sampled = guidance.types as unknown as Record<string, { records: number }>
 const { thresholds } = overrides
+
+/**
+ * Whether a share is within two standard errors of a threshold, for a sample
+ * of this kind's size: about 95% confidence that it's on the side it was
+ * measured on, when this says no.
+ */
+export function nearThreshold(type: string, share: number): boolean {
+  const records = sampled[type]?.records ?? 0
+  if (records === 0) return false
+  return [thresholds.shown, thresholds.suggested].some(
+    (threshold) => Math.abs(share - threshold) < 2 * Math.sqrt((threshold * (1 - threshold)) / records),
+  )
+}
 
 /** The profile of a kind of resource, or undefined for a kind the rules don't know. */
 export function profileOf(id: string): Profile | undefined {
@@ -139,6 +159,7 @@ function field(
       share: found.share,
       tier: found.tier,
       setByKind,
+      nearThreshold: nearThreshold(type, found.share),
       ...(found.override ? { override: found.override } : {}),
       typed: typed(type, spec.prop),
     },
@@ -203,6 +224,7 @@ export function propertyName(prop: string): string {
   return prop.includes(':') ? prop : `bf:${prop}`
 }
 
+/** Rounded down, so a share just under a threshold never reads as the threshold itself: 49.6% is 49%, and suggested. */
 export function percent(share: number): string {
-  return `${Math.round(share * 100)}%`
+  return `${Math.floor(share * 100)}%`
 }

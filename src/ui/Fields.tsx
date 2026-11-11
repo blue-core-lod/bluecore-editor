@@ -69,7 +69,9 @@ function ProfileView({ profile }: { profile: Profile }) {
         Measured on a sample of LC’s {kind.plural}. A field is <strong>shown</strong> when{' '}
         {percent(thresholds.shown)} or more of them have it, and <strong>suggested</strong> at{' '}
         {percent(thresholds.suggested)} to {percent(thresholds.shown)}, unless an override says otherwise. A record
-        already in Blue Core also shows every value it has, whatever its tier. <a href={rulesUrl}>How fields are chosen</a>
+        already in Blue Core also shows every value it has, whatever its tier. A field marked “close to the line” is
+        near enough to a threshold that another sample could put it in the next tier, so it’s worth deciding with an
+        override. <a href={rulesUrl}>How fields are chosen</a>
       </p>
 
       <h2>Defined by</h2>
@@ -179,7 +181,11 @@ function ProfileView({ profile }: { profile: Profile }) {
 }
 
 function FieldRow({ field }: { field: ProfileField }) {
-  const notes = [field.setByKind && 'set by the kind', field.override && 'override'].filter(Boolean)
+  const notes = [
+    field.setByKind && 'set by the kind',
+    field.override && 'override',
+    field.nearThreshold && !field.override && 'close to the line',
+  ].filter(Boolean)
   return (
     <tr>
       <td>{field.label}</td>

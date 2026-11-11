@@ -1,7 +1,7 @@
 """Sample LC's CBD snapshot per resource type, framed as bibframe-json.
 
     uv run --project ../bluecore_api-editor python scripts/guidance/sample.py \\
-        ../bluecore-models/uploads corpus/index.tsv corpus/framed [--per-type 500] [--seed 1]
+        ../bluecore-models/uploads corpus/index.tsv corpus/framed [--per-type 2000] [--seed 1]
 
 Reads the index (index.py), sorts each record into a resource type by the
 rules in src/schema/resource-types.json, the same rules the editor uses, and
@@ -63,7 +63,7 @@ def main() -> None:
     parser.add_argument("uploads", type=Path)
     parser.add_argument("index", type=Path)
     parser.add_argument("out", type=Path)
-    parser.add_argument("--per-type", type=int, default=500)
+    parser.add_argument("--per-type", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=1)
     args = parser.parse_args()
 

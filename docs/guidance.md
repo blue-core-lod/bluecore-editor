@@ -28,7 +28,9 @@ All offline, in `scripts/guidance/`. RDF is read here, never in the editor (no R
    python3 -I scripts/guidance/index.py ../bluecore-models/uploads > corpus/index.tsv
    ```
 
-2. **Sample** (`sample.py`). Sorts each record into a resource type, then takes 500 of each at random with a fixed seed, so a re-run samples the same records, and frames each as a bibframe-json bounded description with bluecore_api's `frame_bounded`, the framing Blue Core's `.cbd.jsonld` uses. So it runs in the bluecore_api worktree's environment. 29 of the 5,500 records wouldn't frame (27 of them collections), and are reported and left out.
+2. **Sample** (`sample.py`). Sorts each record into a resource type, then takes 2,000 of each at random, or all of a type with fewer (792 collections, 1,423 spoken audio recordings), with a fixed seed, so a re-run samples the same records, and frames each as a bibframe-json bounded description with bluecore_api's `frame_bounded`, the framing Blue Core's `.cbd.jsonld` uses. So it runs in the bluecore_api worktree's environment. 50 of the 20,215 records wouldn't frame (46 of them collections), and are reported and left out. It takes about ten minutes.
+
+   The first measurements, on 500 of each type, put the same fields in the same tiers but two: a music recording's supplementary content (47% then, 50% now) is shown, and a spoken audio recording's `expressionOf` (11% then, under 10% now) is left to Add field. A share that close to a threshold could fall either side in another sample. At 2,000 records that's within about two points of 50%, or one of 10%, and the Fields page marks such fields "close to the line", as worth deciding with an override. 25 fields across the types are that close, down from 41 at 500.
 
    ```
    uv run --project ../bluecore_api-editor python scripts/guidance/sample.py \
