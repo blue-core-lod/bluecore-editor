@@ -1650,3 +1650,8 @@ button.remove:hover {
 .transcribe-test .outcome-added {
   font-weight: 600;
 }
+.transcribe-read pre {
+  white-space: pre-wrap;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}

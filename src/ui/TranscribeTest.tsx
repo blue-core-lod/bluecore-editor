@@ -28,6 +28,8 @@ interface Run {
   id: string
   item: string
   photos: number
+  /** The lines read from each photo, before they were sorted into fields; missing from runs before there were two steps. */
+  lines?: string[]
   expected: Transcription
   read: Transcription
   scores: Record<FieldName, Score>
@@ -131,17 +133,19 @@ function Item({
 
   const run = async () => {
     setBusy(true)
-    setStatus(model === 'available' ? 'Reading the photos…' : 'Downloading the model…')
+    setStatus(model === 'available' ? 'Starting…' : 'Downloading the model…')
     const started = performance.now()
     try {
-      const { transcription } = await transcribe(photos, {
-        onProgress: (loaded) => setStatus(loaded < 1 ? `Downloading the model: ${Math.floor(loaded * 100)}%` : 'Reading the photos…'),
+      const { transcription, read: lines } = await transcribe(photos, {
+        onProgress: (loaded) => loaded < 1 && setStatus(`Downloading the model: ${Math.floor(loaded * 100)}%`),
+        onStep: setStatus,
       })
       onModel('available')
       const result: Run = {
         id: crypto.randomUUID(),
         item: item || input || photos[0]?.name || 'item',
         photos: photos.length,
+        lines,
         expected,
         read: transcription,
         scores: score(transcription, expected),
@@ -308,6 +312,25 @@ function Camera({ onPhoto, onClose }: { onPhoto: (photo: File) => void; onClose:
 }
 
 function RunTable({ run }: { run: Run }) {
+  return (
+    <>
+      <Fields run={run} />
+      {run.lines && run.lines.length > 0 && (
+        <details className="transcribe-read">
+          <summary>What it read</summary>
+          {run.lines.map((lines, i) => (
+            <div key={i}>
+              <h4>Photo {i + 1}</h4>
+              <pre>{lines}</pre>
+            </div>
+          ))}
+        </details>
+      )}
+    </>
+  )
+}
+
+function Fields({ run }: { run: Run }) {
   return (
     <table className="fields-table">
       <thead>

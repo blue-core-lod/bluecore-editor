@@ -1,4 +1,12 @@
-import { instructions, parseTranscription, schema, type Transcription } from './transcription'
+import {
+  fieldInstructions,
+  fieldPrompt,
+  parseTranscription,
+  readingInstructions,
+  readingPrompt,
+  schema,
+  type Transcription,
+} from './transcription'
 
 /**
  * Chrome's built-in model (Gemini Nano), through the Prompt API: desktop
@@ -31,10 +39,7 @@ interface LanguageModelApi {
 }
 
 const options: CreateOptions = {
-  expectedInputs: [
-    { type: 'text', languages: ['en'] },
-    { type: 'image' },
-  ],
+  expectedInputs: [{ type: 'text', languages: ['en'] }, { type: 'image' }],
   expectedOutputs: [{ type: 'text', languages: ['en'] }],
 }
 
@@ -48,37 +53,58 @@ export async function availability(): Promise<Availability> {
 }
 
 /**
- * Read the fields off photos of the item. The first call may download the
+ * Read the fields off photos of the item, in the two steps transcription.ts
+ * describes: each photo's lines, one photo at a time so each has the context
+ * to itself, then the fields from the lines. The first call may download the
  * model, a few gigabytes, so it must come from a click; onProgress gets the
  * share downloaded, 0 to 1.
  */
 export async function transcribe(
   images: Blob[],
-  { onProgress, signal }: { onProgress?: (loaded: number) => void; signal?: AbortSignal } = {},
-): Promise<{ transcription: Transcription; raw: string }> {
+  {
+    onProgress,
+    onStep,
+    signal,
+  }: { onProgress?: (loaded: number) => void; onStep?: (step: string) => void; signal?: AbortSignal } = {},
+): Promise<{ transcription: Transcription; read: string[] }> {
   const model = api()
   if (!model) throw new Error('This browser has no built-in model.')
+  const monitor = (target: EventTarget) =>
+    target.addEventListener('downloadprogress', (event) => onProgress?.((event as ProgressEvent).loaded))
+
+  const read: string[] = []
+  for (const [i, image] of images.entries()) {
+    onStep?.(`Reading photo ${i + 1} of ${images.length}…`)
+    // A fresh session per photo, so one photo's lines don't crowd out the next's.
+    const session = await model.create({
+      ...options,
+      initialPrompts: [{ role: 'system', content: readingInstructions }],
+      monitor,
+      signal,
+    })
+    try {
+      read.push(
+        await session.prompt(
+          [{ role: 'user', content: [{ type: 'text', value: readingPrompt }, { type: 'image', value: image }] }],
+          { signal },
+        ),
+      )
+    } finally {
+      session.destroy()
+    }
+  }
+
+  onStep?.('Sorting the lines into fields…')
   const session = await model.create({
-    ...options,
-    initialPrompts: [{ role: 'system', content: instructions }],
-    monitor: (monitor) =>
-      monitor.addEventListener('downloadprogress', (event) => onProgress?.((event as ProgressEvent).loaded)),
+    expectedInputs: [{ type: 'text', languages: ['en'] }],
+    expectedOutputs: [{ type: 'text', languages: ['en'] }],
+    initialPrompts: [{ role: 'system', content: fieldInstructions }],
+    monitor,
     signal,
   })
   try {
-    const raw = await session.prompt(
-      [
-        {
-          role: 'user',
-          content: [
-            { type: 'text', value: 'These are photos of the item. Transcribe the fields.' },
-            ...images.map((image) => ({ type: 'image', value: image })),
-          ],
-        },
-      ],
-      { responseConstraint: schema, signal },
-    )
-    return { transcription: parseTranscription(raw), raw }
+    const raw = await session.prompt(fieldPrompt(read), { responseConstraint: schema, signal })
+    return { transcription: parseTranscription(raw), read }
   } finally {
     session.destroy()
   }

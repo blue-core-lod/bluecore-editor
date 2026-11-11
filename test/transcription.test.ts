@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { JsonObject } from '../src/doc/model'
-import { compareText, emptyTranscription, fromRecord, isbnDigits, parseTranscription, score } from '../src/assist/transcription'
+import { compareText, emptyTranscription, fieldPrompt, fromRecord, isbnDigits, parseTranscription, score } from '../src/assist/transcription'
 
 describe('comparing a reading with the record', () => {
   it('ignores spacing and the punctuation that ends a MARC subfield', () => {
@@ -77,5 +77,13 @@ describe('the model’s answer', () => {
       mainTitle: 'Maps',
       isbn: ['123'],
     })
+  })
+})
+
+describe('the lines given to the second step', () => {
+  it('say which photo each came from', () => {
+    expect(fieldPrompt(['[large] LES MISÉRABLES\n[small] par Victor Hugo\n', '[small] ISBN 978-2-07-040850-4'])).toBe(
+      'Photo 1:\n[large] LES MISÉRABLES\n[small] par Victor Hugo\n\nPhoto 2:\n[small] ISBN 978-2-07-040850-4',
+    )
   })
 })

@@ -42,10 +42,22 @@ export const schema = {
   additionalProperties: false,
 } as const
 
-export const instructions = `You help a library cataloger by transcribing what is printed on a book's title page, its verso and any CIP (Cataloging in Publication) block.
+/**
+ * Two steps, since a small model does better at each alone: first every line
+ * on each photo is read, with nothing decided about it; then, from that text
+ * alone, the lines are sorted into fields. The lines are kept, so a cataloger
+ * can check what was read against the photo before what it was taken to be.
+ */
+export const readingInstructions = `You read photos of a book's title page, its verso and any CIP (Cataloging in Publication) block for a library cataloger.
 
-Report each of these, transcribed exactly as printed, keeping every letter, number and diacritic:
-- mainTitle: the title proper, from the title page
+Transcribe every line of text in the photo, from top to bottom, exactly as printed, keeping every letter, number, punctuation mark and diacritic. Write one line of the item per line of your answer. Start each line with the size of its type, as [large], [medium] or [small]. Leave out nothing, and add nothing that is not printed.`
+
+export const readingPrompt = 'Transcribe every line in this photo.'
+
+export const fieldInstructions = `You help a library cataloger. You are given lines of text read from photos of a book: its title page, verso and any CIP (Cataloging in Publication) block. Each line starts with the size of its type.
+
+From those lines, report:
+- mainTitle: the title proper, from the title page, usually in the largest type there
 - subtitle: other title information, such as a subtitle
 - responsibility: the statement of responsibility, the authors, editors or translators as the title page names them, with any words that go with them, such as "by" or "edited by"
 - edition: the edition statement, such as "Second edition"
@@ -54,7 +66,12 @@ Report each of these, transcribed exactly as printed, keeping every letter, numb
 - date: the date of publication, or the copyright date if there is no other
 - isbn: every ISBN, digits and X only
 
-Capitalize as a library catalog does: the first word and proper names. Leave a field empty ("" or []) if it is not printed on the images. Never guess, and never add anything that is not printed.`
+A series title, a publisher's name or an author's name can be printed large too: they are not the title. Copy each value from the lines exactly, without the type size. Capitalize as a library catalog does: the first word and proper names. Leave a field empty ("" or []) if it is not in the lines. Never guess, and never add anything that is not in the lines.`
+
+/** The lines read from each photo, as the second step is given them. */
+export function fieldPrompt(read: readonly string[]): string {
+  return read.map((lines, i) => `Photo ${i + 1}:\n${lines.trim()}`).join('\n\n')
+}
 
 export function emptyTranscription(): Transcription {
   return { mainTitle: '', subtitle: '', responsibility: '', edition: '', place: '', publisher: '', date: '', isbn: [] }
