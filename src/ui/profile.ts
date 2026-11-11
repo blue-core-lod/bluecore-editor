@@ -18,8 +18,6 @@ import { layout } from './layout'
 
 export interface Profile {
   kind: ResourceType
-  /** How many of LC's records of the kind were measured. */
-  records: number
   thresholds: { shown: number; suggested: number }
   definedBy: Definition
   /** What a new record of the kind holds before the cataloger enters anything. */
@@ -78,7 +76,7 @@ interface Measured {
 
 type Rule = (typeof resourceTypes.types)[number]
 
-const measured = guidance.types as unknown as Record<string, { records: number } & Record<Resource, Record<string, Measured>>>
+const measured = guidance.types as unknown as Record<string, Record<Resource, Record<string, Measured>>>
 const { thresholds } = overrides
 
 /** The profile of a kind of resource, or undefined for a kind the rules don't know. */
@@ -100,7 +98,6 @@ export function profileOf(id: string): Profile | undefined {
     .filter((section) => section.fields.length > 0)
   return {
     kind: { id: rule.id, label: rule.label, plural: rule.plural },
-    records: measured[id]?.records ?? 0,
     thresholds,
     definedBy: definition(rule, index > 0),
     holds: holds(doc),
