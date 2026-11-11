@@ -7,8 +7,11 @@ import {
   fieldNames,
   fromRecord,
   score,
+  pages,
   type FieldName,
   type Outcome,
+  type Page,
+  type Reading,
   type Score,
   type Transcription,
 } from '../assist/transcription'
@@ -28,17 +31,27 @@ interface Run {
   id: string
   item: string
   photos: number
-  /** The lines read from each photo, before they were sorted into fields; missing from runs before there were two steps. */
-  lines?: string[]
+  /** What was read from each photo, before it was sorted into fields; missing from the first runs. */
+  readings?: Reading[]
   expected: Transcription
   read: Transcription
   scores: Record<FieldName, Score>
   seconds: number
 }
 
+interface Photo {
+  file: File
+  page: Page
+}
+
+/** Photos usually come in order, title page then verso; the cataloger says otherwise. */
+function guessPage(index: number): Page {
+  return index === 0 ? 'Title page' : index === 1 ? 'Verso' : 'Other'
+}
+
 const storageKey = 'transcribe-test-runs'
 
-const outcomes: Outcome[] = ['exact', 'close', 'wrong', 'missed', 'added', 'absent']
+const outcomes: Outcome[] = ['exact', 'close', 'wrong', 'misread', 'missed', 'added', 'absent']
 
 export function TranscribeTest() {
   const [model, setModel] = useState<Availability | 'checking'>('checking')
@@ -62,7 +75,10 @@ export function TranscribeTest() {
         <p>
           Photos of an item go to Chrome’s built-in model, on this machine. What it reads is scored against the record a
           cataloger made from the same item. <strong>Exact</strong> is the same apart from spacing and final
-          punctuation; <strong>close</strong> differs only in case, punctuation or diacritics.
+          punctuation; <strong>close</strong> differs only in case, punctuation or diacritics;{' '}
+          <strong>misread</strong> is an ISBN whose check digit doesn’t fit, or an LCCN of a shape LC never issues, which the editor
+          would never offer. Say which page each photo shows: the title and statement of responsibility are taken only
+          from the title page.
         </p>
         <ModelStatus model={model} />
         <Item model={model} onRun={(run) => setRuns([run, ...runs])} onModel={setModel} />
@@ -106,12 +122,14 @@ function Item({
   const [input, setInput] = useState('')
   const [item, setItem] = useState('')
   const [expected, setExpected] = useState(emptyTranscription)
-  const [photos, setPhotos] = useState<File[]>([])
+  const [photos, setPhotos] = useState<Photo[]>([])
   const [status, setStatus] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [last, setLast] = useState<Run | null>(null)
   const [camera, setCamera] = useState(false)
-  const previews = useMemo(() => photos.map((photo) => URL.createObjectURL(photo)), [photos])
+  const files = useMemo(() => photos.map((photo) => photo.file), [photos])
+  const previews = useMemo(() => files.map((file) => URL.createObjectURL(file)), [files])
+  const add = (added: File[]) => setPhotos((taken) => [...taken, ...added.map((file, i) => ({ file, page: guessPage(taken.length + i) }))])
   useEffect(() => () => previews.forEach((url) => URL.revokeObjectURL(url)), [previews])
 
   const load = async () => {
@@ -136,16 +154,16 @@ function Item({
     setStatus(model === 'available' ? 'Starting…' : 'Downloading the model…')
     const started = performance.now()
     try {
-      const { transcription, read: lines } = await transcribe(photos, {
+      const { transcription, readings } = await transcribe(photos.map(({ file, page }) => ({ image: file, page })), {
         onProgress: (loaded) => loaded < 1 && setStatus(`Downloading the model: ${Math.floor(loaded * 100)}%`),
         onStep: setStatus,
       })
       onModel('available')
       const result: Run = {
         id: crypto.randomUUID(),
-        item: item || input || photos[0]?.name || 'item',
+        item: item || input || photos[0]?.file.name || 'item',
         photos: photos.length,
-        lines,
+        readings,
         expected,
         read: transcription,
         scores: score(transcription, expected),
@@ -212,7 +230,7 @@ function Item({
             accept="image/*"
             multiple
             onChange={(event) => {
-              setPhotos([...photos, ...(event.target.files ?? [])])
+              add([...(event.target.files ?? [])])
               event.target.value = ''
             }}
           />
@@ -223,12 +241,23 @@ function Item({
           </button>
         )}
       </p>
-      {camera && <Camera onPhoto={(photo) => setPhotos((taken) => [...taken, photo])} onClose={() => setCamera(false)} />}
+      {camera && <Camera onPhoto={(photo) => add([photo])} onClose={() => setCamera(false)} />}
       {previews.length > 0 && (
         <div className="transcribe-photos">
           {previews.map((url, i) => (
             <figure key={url}>
-              <img src={url} alt={photos[i]?.name} />
+              <img src={url} alt={photos[i]?.file.name} />
+              <select
+                aria-label="Which page it shows"
+                value={photos[i]?.page}
+                onChange={(event) =>
+                  setPhotos(photos.map((photo, j) => (j === i ? { ...photo, page: event.target.value as Page } : photo)))
+                }
+              >
+                {pages.map((page) => (
+                  <option key={page}>{page}</option>
+                ))}
+              </select>{' '}
               <button type="button" className="link" onClick={() => setPhotos(photos.filter((_, j) => j !== i))}>
                 Remove
               </button>
@@ -315,12 +344,14 @@ function RunTable({ run }: { run: Run }) {
   return (
     <>
       <Fields run={run} />
-      {run.lines && run.lines.length > 0 && (
+      {run.readings && run.readings.length > 0 && (
         <details className="transcribe-read">
           <summary>What it read</summary>
-          {run.lines.map((lines, i) => (
+          {run.readings.map(({ page, lines }, i) => (
             <div key={i}>
-              <h4>Photo {i + 1}</h4>
+              <h4>
+                Photo {i + 1}, the {page.toLowerCase()}
+              </h4>
               <pre>{lines}</pre>
             </div>
           ))}

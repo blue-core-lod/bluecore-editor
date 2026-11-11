@@ -5,6 +5,8 @@ import {
   readingInstructions,
   readingPrompt,
   schema,
+  type Page,
+  type Reading,
   type Transcription,
 } from './transcription'
 
@@ -60,21 +62,24 @@ export async function availability(): Promise<Availability> {
  * share downloaded, 0 to 1.
  */
 export async function transcribe(
-  images: Blob[],
+  photos: { image: Blob; page: Page }[],
   {
     onProgress,
     onStep,
     signal,
   }: { onProgress?: (loaded: number) => void; onStep?: (step: string) => void; signal?: AbortSignal } = {},
-): Promise<{ transcription: Transcription; read: string[] }> {
+): Promise<{ transcription: Transcription; readings: Reading[] }> {
   const model = api()
   if (!model) throw new Error('This browser has no built-in model.')
+  // Chrome reports progress even when the model is already there, 0 as it starts loading it and 1 when it has,
+  // so it's only passed on when there is a download.
+  const downloading = (await model.availability(options)) !== 'available'
   const monitor = (target: EventTarget) =>
-    target.addEventListener('downloadprogress', (event) => onProgress?.((event as ProgressEvent).loaded))
+    target.addEventListener('downloadprogress', (event) => downloading && onProgress?.((event as ProgressEvent).loaded))
 
-  const read: string[] = []
-  for (const [i, image] of images.entries()) {
-    onStep?.(`Reading photo ${i + 1} of ${images.length}…`)
+  const readings: Reading[] = []
+  for (const [i, { image, page }] of photos.entries()) {
+    onStep?.(`Reading photo ${i + 1} of ${photos.length}, the ${page.toLowerCase()}…`)
     // A fresh session per photo, so one photo's lines don't crowd out the next's.
     const session = await model.create({
       ...options,
@@ -83,12 +88,11 @@ export async function transcribe(
       signal,
     })
     try {
-      read.push(
-        await session.prompt(
-          [{ role: 'user', content: [{ type: 'text', value: readingPrompt }, { type: 'image', value: image }] }],
-          { signal },
-        ),
+      const lines = await session.prompt(
+        [{ role: 'user', content: [{ type: 'text', value: readingPrompt }, { type: 'image', value: image }] }],
+        { signal },
       )
+      readings.push({ page, lines })
     } finally {
       session.destroy()
     }
@@ -103,8 +107,8 @@ export async function transcribe(
     signal,
   })
   try {
-    const raw = await session.prompt(fieldPrompt(read), { responseConstraint: schema, signal })
-    return { transcription: parseTranscription(raw), read }
+    const raw = await session.prompt(fieldPrompt(readings), { responseConstraint: schema, signal })
+    return { transcription: parseTranscription(raw), readings }
   } finally {
     session.destroy()
   }

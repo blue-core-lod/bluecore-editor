@@ -1,7 +1,18 @@
 import { describe, expect, it } from 'vitest'
 
 import type { JsonObject } from '../src/doc/model'
-import { compareText, emptyTranscription, fieldPrompt, fromRecord, isbnDigits, parseTranscription, score } from '../src/assist/transcription'
+import {
+  compareText,
+  emptyTranscription,
+  fieldPrompt,
+  fromRecord,
+  isbnDigits,
+  isbnValid,
+  lccnValid,
+  normalizedLccn,
+  parseTranscription,
+  score,
+} from '../src/assist/transcription'
 
 describe('comparing a reading with the record', () => {
   it('ignores spacing and the punctuation that ends a MARC subfield', () => {
@@ -30,6 +41,29 @@ describe('comparing a reading with the record', () => {
     expect(score(read, { ...emptyTranscription(), isbn: ['9782070408504'] }).isbn.outcome).toBe('exact')
     expect(score(read, { ...emptyTranscription(), isbn: ['9782070408504', '2070408507'] }).isbn.outcome).toBe('close')
     expect(score(read, { ...emptyTranscription(), isbn: ['2070408507'] }).isbn.outcome).toBe('wrong')
+  })
+})
+
+describe('a number that can’t be right', () => {
+  it('is an ISBN whose check digit doesn’t fit', () => {
+    expect(isbnValid('978-2-07-040850-4')).toBe(true)
+    expect(isbnValid('2-07-040850-7')).toBe(true)
+    expect(isbnValid('978-1-662-31440-0')).toBe(false)
+    expect(isbnValid('978-1-662-3?440-0')).toBe(false)
+  })
+
+  it('is an LCCN of a shape LC never issues', () => {
+    expect(normalizedLccn('2001-1234')).toBe('2001001234')
+    expect(normalizedLccn('n 79-21164 /AC')).toBe('n79021164')
+    expect(lccnValid('2026293288')).toBe(true)
+    expect(lccnValid('206293288')).toBe(false)
+  })
+
+  it('scores as misread, whatever the record says', () => {
+    const misread = { ...emptyTranscription(), isbn: ['978-1-662-31440-0'], lccn: '206293288' }
+    const record = { ...emptyTranscription(), isbn: ['9781662314407'], lccn: '2026293288' }
+    expect(score(misread, record)).toMatchObject({ isbn: { outcome: 'misread' }, lccn: { outcome: 'misread' } })
+    expect(score({ ...misread, lccn: '2026-293288' }, record).lccn.outcome).toBe('exact')
   })
 })
 
@@ -66,6 +100,7 @@ describe('the fields from a record', () => {
       publisher: 'Richard Milliken and Son',
       date: '1828-1838',
       isbn: ['0198526636'],
+      lccn: 'unk84236573',
     })
   })
 })
@@ -81,9 +116,12 @@ describe('the model’s answer', () => {
 })
 
 describe('the lines given to the second step', () => {
-  it('say which photo each came from', () => {
-    expect(fieldPrompt(['[large] LES MISÉRABLES\n[small] par Victor Hugo\n', '[small] ISBN 978-2-07-040850-4'])).toBe(
-      'Photo 1:\n[large] LES MISÉRABLES\n[small] par Victor Hugo\n\nPhoto 2:\n[small] ISBN 978-2-07-040850-4',
-    )
+  it('say which page each came from', () => {
+    expect(
+      fieldPrompt([
+        { page: 'Title page', lines: '[large] LES MISÉRABLES\n[small] par Victor Hugo\n' },
+        { page: 'Verso', lines: '[small] ISBN 978-2-07-040850-4' },
+      ]),
+    ).toBe('Title page:\n[large] LES MISÉRABLES\n[small] par Victor Hugo\n\nVerso:\n[small] ISBN 978-2-07-040850-4')
   })
 })
