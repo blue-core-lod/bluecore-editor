@@ -64,12 +64,13 @@ export const editorTour: Step[] = [
     element: '.resource-type',
     title: 'What kind of record',
     description:
-      'Map, score, book: the kind decides which fields are offered first, from how LC describes that kind. A new record can change kind here.',
+      'Map, score, book: the kind decides which fields are offered first, from how LC describes that kind. A new record can change kind here. A link here shows every field the kind offers, and why.',
   },
   {
     element: '.usually',
     title: 'What records like this usually have',
-    description: 'The fields most of LC’s records of this kind have and this one doesn’t, each a click from its field.',
+    description:
+      'The fields most of LC’s records of this kind have and this one doesn’t, each a click from its field. “How these are chosen” explains the rules.',
   },
   {
     element: '.description .chip-name',
