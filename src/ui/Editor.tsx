@@ -371,11 +371,6 @@ export function Editor({ uri }: { uri: string }) {
                 </a>
               )
             )}
-            {choosable && kind && (
-              <a className="profile-link" href={profileUrl(kind.id)} target="_blank" rel="noreferrer">
-                Fields for {kind.plural}
-              </a>
-            )}
             {isPlaceholder(uri) && typeof workUri === 'string' && !isPlaceholder(workUri) ? (
               <>
                 A new Instance of a{' '}
@@ -409,6 +404,11 @@ export function Editor({ uri }: { uri: string }) {
                 {usual.length === 1 ? '1 field' : `${usual.length} fields`} most {kind.plural} have
               </summary>
               <ul>
+                <li className="about">
+                  <a href={whichFieldsUrl} target="_blank" rel="noreferrer">
+                    How these are chosen
+                  </a>
+                </li>
                 {usual.map((field) => (
                   <li key={field.id}>
                     <button type="button" className="link" onClick={(event) => goTo(event, missingId(field))}>
@@ -417,11 +417,6 @@ export function Editor({ uri }: { uri: string }) {
                     <span className="share">{Math.round(field.share * 100)}%</span>
                   </li>
                 ))}
-                <li className="about">
-                  <a href={whichFieldsUrl} target="_blank" rel="noreferrer">
-                    How these are chosen
-                  </a>
-                </li>
               </ul>
             </details>
           )}
