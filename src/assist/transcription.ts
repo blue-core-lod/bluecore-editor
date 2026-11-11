@@ -84,7 +84,7 @@ From those lines, report:
 - subtitle: other title information, such as a subtitle, only from the title page
 - responsibility: the statement of responsibility, only from the title page: the authors, editors or translators as it names them, with any words that go with them, such as "by" or "edited by"
 - edition: the edition statement, such as "Second edition"
-- place: the place of publication
+- place: the place of publication: only the first one named, if there are several
 - publisher: the publisher's name
 - date: the date of publication, or the copyright date if there is no other
 - isbn: every ISBN, digits and X only
