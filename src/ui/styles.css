@@ -1579,6 +1579,24 @@ button.remove:hover {
   padding: 0.35rem 0.75rem 0.35rem 0;
   border-bottom: 1px solid var(--rule);
 }
+/* The same columns in every section, so they line up down the page. */
+.fields-table.by-field {
+  table-layout: fixed;
+}
+.by-field th:nth-child(1) {
+  width: 24%;
+}
+.by-field th:nth-child(2) {
+  width: 30%;
+}
+.by-field th:nth-child(3),
+.by-field th:nth-child(4),
+.by-field th:nth-child(5) {
+  width: 9%;
+}
+.fields-table td code {
+  overflow-wrap: anywhere;
+}
 .fields-table th {
   color: var(--muted);
   font-weight: 400;

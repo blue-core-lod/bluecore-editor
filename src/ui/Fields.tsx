@@ -123,7 +123,7 @@ function ProfileView({ profile }: { profile: Profile }) {
       {profile.sections.map((section) => (
         <section key={section.title}>
           <h2>{section.title}</h2>
-          <table className="fields-table">
+          <table className="fields-table by-field">
             <thead>
               <tr>
                 <th>Field</th>
