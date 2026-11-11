@@ -390,6 +390,18 @@ button.add:hover {
 .usually .share {
   color: var(--muted);
 }
+.usually .about {
+  margin-bottom: 0.3rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--rule);
+}
+/* The kind's field profile in the repository, for "why these fields?". */
+a.resource-type {
+  text-decoration: none;
+}
+a.resource-type:hover {
+  text-decoration: underline;
+}
 /* "This looks like a map": a suggestion to switch kinds, never a switch by itself. */
 .kind-suggestion {
   margin: 0.35rem 0 0;

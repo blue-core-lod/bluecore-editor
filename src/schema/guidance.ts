@@ -31,6 +31,15 @@ export interface Usage {
   share: number
   /** The resource LC puts it on more often, where a new value would go. */
   resource: Resource
+  /** Set when an override put the property in its tier: the tier its share alone gives, and why. */
+  override?: { measured: Tier; reason: string }
+}
+
+/** A hand correction for one kind: this property goes in this tier, whatever its share. */
+export interface Override {
+  prop: string
+  tier: Tier
+  reason: string
 }
 
 interface Rule extends ResourceType {
@@ -60,7 +69,33 @@ const rules: Rule[] = resourceTypes.types
 const measured = guidance.types as unknown as Record<string, Record<Resource, Record<string, Measured>>>
 const thresholds = overrides.thresholds
 const never = new Set<string>(overrides.never)
-const forced = overrides.types as Record<string, Partial<Record<Tier, string[]>>>
+const forced = checkedOverrides(overrides.types, never)
+
+/**
+ * The per-kind overrides, checked as the editor loads: a mistake in the file,
+ * such as an unknown tier or the per-tier lists it used to hold, would
+ * otherwise hide fields or break every record of the kind.
+ */
+export function checkedOverrides(types: unknown, never: ReadonlySet<string>): Record<string, Override[]> {
+  const fail = (problem: string) => {
+    throw new Error(`guidance-overrides.json: ${problem}`)
+  }
+  if (typeof types !== 'object' || types === null || Array.isArray(types)) fail('types must be an object of kinds')
+  const kindIds = new Set(rules.map((rule) => rule.id))
+  const tiers = new Set<unknown>(['shown', 'suggested', 'available'])
+  for (const [kind, list] of Object.entries(types as object)) {
+    if (!kindIds.has(kind)) fail(`${kind} is not a kind in resource-types.json`)
+    if (!Array.isArray(list)) fail(`${kind} must be a list of { prop, tier, reason }`)
+    for (const entry of list as unknown[]) {
+      const { prop, tier, reason } = (entry ?? {}) as Record<string, unknown>
+      if (typeof prop !== 'string' || !prop) fail(`an override for ${kind} has no prop`)
+      if (!tiers.has(tier)) fail(`${kind} ${String(prop)}: tier must be shown, suggested or available`)
+      if (typeof reason !== 'string' || !reason.trim()) fail(`${kind} ${String(prop)}: give a reason`)
+      if (never.has(prop as string)) fail(`${kind} ${String(prop)}: it is in never, so no form would offer it`)
+    }
+  }
+  return types as Record<string, Override[]>
+}
 
 /**
  * The kind of resource a record is, by the same rules the sample was drawn
@@ -227,19 +262,15 @@ export function usage(type: string, prop: string): Usage | undefined {
   const work = kind?.Work[prop]?.share ?? 0
   const share = Math.max(instance, work)
   const resource: Resource = work > instance ? 'Work' : 'Instance'
-  const force = forced[type]
-  const tier: Tier = force?.shown?.includes(prop)
-    ? 'shown'
-    : force?.suggested?.includes(prop)
-      ? 'suggested'
-      : force?.available?.includes(prop)
-        ? 'available'
-        : share >= thresholds.shown
-          ? 'shown'
-          : share >= thresholds.suggested
-            ? 'suggested'
-            : 'available'
-  return { tier, share, resource }
+  const measuredTier: Tier = share >= thresholds.shown ? 'shown' : share >= thresholds.suggested ? 'suggested' : 'available'
+  const force = forced[type]?.find((override) => override.prop === prop)
+  if (!force) return { tier: measuredTier, share, resource }
+  return { tier: force.tier, share, resource, override: { measured: measuredTier, reason: force.reason } }
+}
+
+/** The hand corrections for a kind of resource, in the order the overrides file gives them. */
+export function overridesFor(type: string): readonly Override[] {
+  return forced[type] ?? []
 }
 
 /**
@@ -258,7 +289,7 @@ export function kindShare(type: string, prop: string, cls: string): number | und
 export function guidedProperties(type: string): { prop: string; usage: Usage }[] {
   const kind = measured[type]
   if (!kind) return []
-  const props = new Set([...Object.keys(kind.Instance), ...Object.keys(kind.Work), ...Object.values(forced[type] ?? {}).flat()])
+  const props = new Set([...Object.keys(kind.Instance), ...Object.keys(kind.Work), ...overridesFor(type).map((override) => override.prop)])
   return [...props]
     .flatMap((prop) => {
       const found = usage(type, prop)
