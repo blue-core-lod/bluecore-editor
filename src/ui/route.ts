@@ -7,6 +7,7 @@ import { isPlaceholder, placeholderId, placeholderUri } from '../doc/blank'
  * description can be bookmarked and the back button works. A new one, not in
  * Blue Core yet, is ?new=<id>, standing for its placeholder URI. The fields a
  * kind of record offers are ?fields=<kind>, and ?fields alone lists the kinds.
+ * In the dev build, ?transcribe-test is the test of transcribing from photos.
  */
 
 function subscribe(listener: () => void): () => void {
@@ -60,4 +61,12 @@ export function fieldsHref(kind: string): string {
 export function openFields(kind: string): void {
   window.history.pushState(null, '', fieldsHref(kind))
   window.dispatchEvent(new PopStateEvent('popstate'))
+}
+
+function currentTranscribeTest(): boolean {
+  return new URLSearchParams(window.location.search).has('transcribe-test')
+}
+
+export function useTranscribeTest(): boolean {
+  return useSyncExternalStore(subscribe, currentTranscribeTest)
 }

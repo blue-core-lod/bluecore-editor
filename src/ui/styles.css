@@ -1618,3 +1618,24 @@ button.remove:hover {
     overflow-x: auto;
   }
 }
+
+/* The transcription test, in the dev build only. */
+.transcribe-test input:not([type='file']) {
+  width: 100%;
+}
+.transcribe-test th[scope='row'] {
+  width: 14rem;
+}
+.transcribe-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.transcribe-photos img {
+  max-height: 12rem;
+  border: 1px solid var(--rule);
+}
+.transcribe-test .outcome-wrong,
+.transcribe-test .outcome-added {
+  font-weight: 600;
+}
