@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { checkedOverrides, guidedProperties, usage } from '../src/schema/guidance'
-import { renderProfiles } from '../scripts/profiles'
+import { profileOf } from '../src/ui/profile'
 
 // The overrides file has no per-kind entries yet, so these stand in for some.
 vi.mock('../src/schema/guidance-overrides.json', () => ({
@@ -35,23 +35,27 @@ describe('an override', () => {
   })
 })
 
-describe('an override in the field profiles', () => {
-  const profiles = renderProfiles()
+describe('an override in a field profile', () => {
+  const fields = (id: string) => profileOf(id)?.sections.flatMap((section) => section.fields) ?? []
 
   it('is listed with its share, both tiers and its reason', () => {
-    expect(profiles['music-recording.md']).toContain('| `bf:duration` | 22% | Suggested | Shown | Catalogers expect it. |')
-    expect(profiles['map.md']).toContain(
-      '| `bflc:governmentPubType` | 22% | Suggested | Available | A MARC fixed field, not a choice. |',
-    )
+    expect(profileOf('music-recording')?.overrides).toEqual([
+      { prop: 'duration', share: expect.closeTo(0.22, 2), measured: 'suggested', tier: 'shown', reason: 'Catalogers expect it.' },
+    ])
+    expect(profileOf('map')?.overrides).toMatchObject([{ prop: 'bflc:governmentPubType', measured: 'suggested', tier: 'available' }])
   })
 
   it('marks the field it moved', () => {
-    expect(profiles['music-recording.md']).toMatch(/\| Duration \| `bf:duration` \|.*\| Shown \(override\) \|/)
-    expect(profiles['map.md']).toContain('`bflc:governmentPubType` 22% (override)')
+    expect(fields('music-recording').find((field) => field.prop === 'duration')).toMatchObject({
+      tier: 'shown',
+      override: { measured: 'suggested' },
+    })
+    expect(fields('map').map((field) => field.prop)).not.toContain('bflc:governmentPubType')
+    expect(profileOf('map')?.available).toContainEqual(expect.objectContaining({ prop: 'bflc:governmentPubType', override: true }))
   })
 
-  it('says when a kind has none', () => {
-    expect(profiles['book.md']).toContain('None: every tier here comes from the measured share.')
+  it('leaves a kind with none empty', () => {
+    expect(profileOf('book')?.overrides).toEqual([])
   })
 })
 

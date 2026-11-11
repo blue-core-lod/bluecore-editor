@@ -16,15 +16,15 @@ the numbers by hand.
 
 - [docs/which-fields.md](docs/which-fields.md): the rules, for new records and
   existing ones.
-- [docs/profiles/](docs/profiles/README.md): every field each kind of record
-  offers, with its share and tier, and the overrides with their reasons,
-  generated from the editor's own code.
 - [docs/beyond-profiles.md](docs/beyond-profiles.md): why we work this way
   instead of with Sinopia-style templates, and what's still open.
 
-The editor links to these, pinned to the commit the build was made from: the
-kind of a record in Blue Core goes to its profile, and the "fields most maps
-have" panel to the rules.
+The editor's Fields page (`/editor/?fields=map`) lists every field each kind
+of record offers, with its share and tier, and the overrides with their
+reasons. It's worked out by the same code the record view uses, so it always
+describes the running build, and it's open without signing in, so it can be
+shared. The kind of a record in Blue Core links to it, as does the "fields
+most maps have" panel.
 
 ## Running it
 
@@ -97,9 +97,9 @@ vendor:lc-vocabularies` and searched locally, as picklists.
 
 `src/schema/guidance.json` holds the measurements of LC's records, made by
 `scripts/guidance/` ([docs/guidance.md](docs/guidance.md)), and
-`src/schema/guidance-overrides.json` the hand corrections. After changing
-either, or the sections in `src/ui/presentation.ts`, run `npm run profiles` to
-regenerate `docs/profiles/` and review the diff. A test fails until you do.
+`src/schema/guidance-overrides.json` the hand corrections, checked as the
+editor loads. `src/ui/profile.ts` works out a kind's profile from them for the
+Fields page.
 
 `src/ui/` is the description view. `src/ui/presentation.ts` is the presentation
 sidecar: sections, field order and MARC hints, keyed by property name.

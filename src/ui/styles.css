@@ -1546,3 +1546,57 @@ button.remove:hover {
 .update-notice button {
   margin-left: 0.5rem;
 }
+
+/* Fields: which fields a kind of record offers, and why. */
+.kind-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+.kind-nav a[aria-current='page'] {
+  color: var(--kind);
+  font-weight: 700;
+  text-decoration: none;
+}
+.fields h1 {
+  margin: 1.25rem 0 0.75rem;
+}
+.fields h2 {
+  margin: 1.75rem 0 0.5rem;
+}
+.fields-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.fields-table th,
+.fields-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.35rem 0.75rem 0.35rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.fields-table th {
+  color: var(--muted);
+  font-weight: 400;
+}
+.fields-table .share {
+  font-variant-numeric: tabular-nums;
+}
+.fields-table .typed {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.fields-available {
+  font-size: 0.9rem;
+}
+/* Narrow screens scroll a table sideways, not the page. */
+@media (max-width: 40rem) {
+  .fields section {
+    overflow-x: auto;
+  }
+}

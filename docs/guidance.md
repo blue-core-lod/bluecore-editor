@@ -75,7 +75,7 @@ LC doesn't give these Instances a subclass (Print, Electronic): 99% have none. W
   ]
   ```
 
-  Each kind's [field profile](profiles/README.md) lists its overrides with the share, the tier the share alone would give, the tier set and the reason, and marks the fields they moved. Run `npm run profiles` after changing this file.
+  The editor checks the file as it loads, and refuses an entry in another shape, an unknown tier or kind, a missing reason, or a property in `never`. Its Fields page (`?fields=<kind>`) lists each kind's overrides with the share, the tier the share alone would give, the tier set and the reason, and marks the fields they moved.
 
 Likely next entries, visible in the measurements, to decide in use: conversion habits such as an LCCN on 99% of LC's records and `bflc:governmentPubType` (a MARC fixed field), LC internals such as `hasItem` and `acquisitionSource`, and fields to promote such as a recording's duration (22%).
 

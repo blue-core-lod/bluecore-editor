@@ -24,10 +24,9 @@ import { recordGraph, type GraphNode } from './recordGraph'
 import { JsonView } from './JsonView'
 import { useStoredFlag } from './storedFlag'
 import { editorTour, startTour } from './tour'
-import { profileUrl, whichFieldsUrl } from './docs'
 import { layout, missingId, usuallyMissing, valueId } from './layout'
 import { primerUrl } from './presentation'
-import { replace } from './route'
+import { fieldsHref, replace } from './route'
 import { SaveReport } from './SaveReport'
 import { ScopePrompt } from './ScopePrompt'
 
@@ -362,7 +361,7 @@ export function Editor({ uri }: { uri: string }) {
               kind && (
                 <a
                   className="resource-type"
-                  href={profileUrl(kind.id)}
+                  href={fieldsHref(kind.id)}
                   target="_blank"
                   rel="noreferrer"
                   title={`The fields offered first are the ones most of LC’s ${kind.plural} have: see them all`}
@@ -405,7 +404,7 @@ export function Editor({ uri }: { uri: string }) {
               </summary>
               <ul>
                 <li className="about">
-                  <a href={whichFieldsUrl} target="_blank" rel="noreferrer">
+                  <a href={fieldsHref(kind.id)} target="_blank" rel="noreferrer">
                     How these are chosen
                   </a>
                 </li>
