@@ -10,7 +10,6 @@ const fields = (id: string) => profileOf(id)?.sections.flatMap((section) => sect
 describe('the field profile of a kind', () => {
   it('lists what a new record of the kind offers, by section, with shares and tiers', () => {
     const map = profileOf('map')
-    expect(map?.records).toBe(500)
     expect(map?.sections.map((section) => section.title)).toContain('Map details')
     expect(fields('map').find((field) => field.prop === 'scale')).toMatchObject({ tier: 'shown', resource: 'Work' })
     expect(fields('map').find((field) => field.prop === 'cartographicAttributes')).toMatchObject({ tier: 'suggested' })

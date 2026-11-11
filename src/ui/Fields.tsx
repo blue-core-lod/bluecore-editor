@@ -66,7 +66,7 @@ function ProfileView({ profile }: { profile: Profile }) {
     <>
       <h1>Fields for {kind.plural}</h1>
       <p>
-        Measured on {profile.records} of LC’s {kind.plural}. A field is <strong>shown</strong> when{' '}
+        Measured on a sample of LC’s {kind.plural}. A field is <strong>shown</strong> when{' '}
         {percent(thresholds.shown)} or more of them have it, and <strong>suggested</strong> at{' '}
         {percent(thresholds.suggested)} to {percent(thresholds.shown)}, unless an override says otherwise. A record
         already in Blue Core also shows every value it has, whatever its tier. <a href={rulesUrl}>How fields are chosen</a>
