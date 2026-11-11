@@ -289,11 +289,14 @@ function Item({
 /**
  * Photos from the machine's camera, for holding the item up to it: the back
  * camera if there is one, at the most detail it gives, since CIP blocks are
- * small print.
+ * small print. A camera facing the cataloger is shown mirrored, as in a video
+ * call, so the item moves the way their hands do; the photo itself never is,
+ * so its text reads the right way round.
  */
 function Camera({ onPhoto, onClose }: { onPhoto: (photo: File) => void; onClose: () => void }) {
   const video = useRef<HTMLVideoElement>(null)
   const [error, setError] = useState<string | null>(null)
+  const [mirrored, setMirrored] = useState(true)
   useEffect(() => {
     let stream: MediaStream | undefined
     let stopped = false
@@ -301,8 +304,13 @@ function Camera({ onPhoto, onClose }: { onPhoto: (photo: File) => void; onClose:
       .getUserMedia({ video: { facingMode: 'environment', width: { ideal: 4096 }, height: { ideal: 4096 } } })
       .then((opened) => {
         stream = opened
-        if (stopped) opened.getTracks().forEach((track) => track.stop())
-        else if (video.current) video.current.srcObject = opened
+        if (stopped) {
+          opened.getTracks().forEach((track) => track.stop())
+          return
+        }
+        // Laptop cameras often don't say which way they face; only a back camera says "environment".
+        setMirrored(opened.getVideoTracks()[0]?.getSettings().facingMode !== 'environment')
+        if (video.current) video.current.srcObject = opened
       })
       .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : String(reason)))
     return () => {
@@ -333,7 +341,7 @@ function Camera({ onPhoto, onClose }: { onPhoto: (photo: File) => void; onClose:
       {error ? (
         <p className="note">The camera didn’t open: {error}</p>
       ) : (
-        <video ref={video} autoPlay playsInline muted />
+        <video ref={video} autoPlay playsInline muted className={mirrored ? 'mirrored' : undefined} />
       )}
       <p>
         <button type="button" onClick={take} disabled={!!error}>
@@ -341,7 +349,10 @@ function Camera({ onPhoto, onClose }: { onPhoto: (photo: File) => void; onClose:
         </button>{' '}
         <button type="button" className="secondary" onClick={onClose}>
           Done
-        </button>
+        </button>{' '}
+        <label>
+          <input type="checkbox" checked={mirrored} onChange={(event) => setMirrored(event.target.checked)} /> Mirror
+        </label>
       </p>
     </div>
   )

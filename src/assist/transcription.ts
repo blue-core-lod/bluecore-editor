@@ -90,7 +90,7 @@ From those lines, report:
 - isbn: every ISBN, digits and X only
 - lccn: the Library of Congress Control Number, often on the verso or in the CIP block
 
-The rest can come from any page. A series title, a publisher's name or an author's name can be printed large too: they are not the title. Copy each value from the lines exactly, without the type size. Capitalize as a library catalog does: the first word and proper names. Leave a field empty ("" or []) if it is not in the lines. Never guess, and never add anything that is not in the lines.`
+The rest can come from any page. A series title, a publisher's name or an author's name can be printed large too: they are not the title. Copy each value from the lines exactly, capitals and all, without the type size. Leave a field empty ("" or []) if it is not in the lines. Never guess, and never add anything that is not in the lines.`
 
 /** The lines read from each photo, headed by its page, as the second step is given them. */
 export function fieldPrompt(readings: readonly Reading[]): string {

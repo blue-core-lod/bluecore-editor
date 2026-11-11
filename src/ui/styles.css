@@ -1620,7 +1620,7 @@ button.remove:hover {
 }
 
 /* The transcription test, in the dev build only. */
-.transcribe-test input:not([type='file']) {
+.transcribe-test input:not([type='file'], [type='checkbox']) {
   width: 100%;
 }
 .transcribe-test th[scope='row'] {
@@ -1645,6 +1645,9 @@ button.remove:hover {
   max-width: 100%;
   max-height: 60vh;
   background: var(--text);
+}
+.transcribe-camera video.mirrored {
+  transform: scaleX(-1);
 }
 .transcribe-test .outcome-wrong,
 .transcribe-test .outcome-added {
