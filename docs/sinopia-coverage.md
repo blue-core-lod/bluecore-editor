@@ -52,7 +52,7 @@ As with Sinopia, details nested inside a value aren't counted. In bluecore-edito
 ## Method
 
 1. **Templates:** all 96 from `https://stage.bcld.info/api/profiles/`, fetched November 9, 2026, with no sign-in needed. For a record with no template recorded, which is every record ingested from LC, Sinopia asks the cataloger to choose one. On stage the only full-record choices are the two Monograph templates, so we used those.
-2. **Records:** the guidance sample ([guidance.md](guidance.md)), which is 500 records of each kind drawn from the LC snapshot loaded into Blue Core, framed as bibframe-json. Each record was split into the two resources Sinopia edits separately:
+2. **Records:** the guidance sample as it was then ([guidance.md](guidance.md)), 500 records of each kind drawn from the LC snapshot (since raised to 2,000) loaded into Blue Core, framed as bibframe-json. Each record was split into the two resources Sinopia edits separately:
    - the Instance, linking to its Work;
    - the Work, linking to its Instance.
 
