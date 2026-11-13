@@ -1,6 +1,6 @@
 # Design: Romanization with ScriptShifter
 
-**Status:** phases 1–3 built ([#18](https://github.com/edsu/bluecore-editor/issues/18)).
+**Status:** phases 1–3 built ([#18](https://github.com/blue-core-lod/bluecore-editor/issues/18)).
 **Related:** [design.md, Future: assistance](../design.md#future-assistance); [assistance.md](assistance.md), which leaves romanization to this deterministic tool.
 
 ## Summary

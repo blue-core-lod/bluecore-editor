@@ -1,6 +1,6 @@
 # bluecore-editor
 
-[![CI](https://github.com/edsu/bluecore-editor/actions/workflows/ci.yml/badge.svg)](https://github.com/edsu/bluecore-editor/actions/workflows/ci.yml)
+[![CI](https://github.com/blue-core-lod/bluecore-editor/actions/workflows/ci.yml/badge.svg)](https://github.com/blue-core-lod/bluecore-editor/actions/workflows/ci.yml)
 
 A BIBFRAME description editor for [Blue Core](https://bluecore.info/), for
 catalogers moving from MARC. It runs entirely in the browser; see
@@ -62,7 +62,7 @@ docker run -p 8080:80 bluecore-editor   # http://localhost:8080/editor/
 
 bluecore-stack runs it as the `editor` service and routes `/editor/` to it, so
 Blue Core and Keycloak are on the same origin and the image needs no settings.
-Each push to `main` publishes it as `ghcr.io/edsu/bluecore-editor:latest` (and
+Each push to `main` publishes it as `ghcr.io/blue-core-lod/bluecore-editor:latest` (and
 tagged with the commit).
 
 ## Working on it
