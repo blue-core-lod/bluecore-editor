@@ -6,7 +6,7 @@ import { percent, profileOf, propertyName, type Definition, type Profile, type P
 import { fieldsHref, openFields } from './route'
 
 /** The full rules, in prose, for anyone who wants more than this page says. */
-const rulesUrl = 'https://github.com/edsu/bluecore-editor/blob/main/docs/which-fields.md'
+const rulesUrl = 'https://github.com/blue-core-lod/bluecore-editor/blob/main/docs/which-fields.md'
 
 /**
  * Which fields a kind of record offers, and why: the profile the editor works

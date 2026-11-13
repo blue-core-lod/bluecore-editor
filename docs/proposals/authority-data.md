@@ -1,7 +1,7 @@
 # Design: Authority data in the editor
 
 **Status:** proposed; not started.
-**Related:** [#6](https://github.com/edsu/bluecore-editor/issues/6) (saying when a pasted URI isn't on id.loc.gov yet), [#11](https://github.com/edsu/bluecore-editor/issues/11) (storing `sameAs` links); [design.md, Authority data](../design.md#authority-data).
+**Related:** [#6](https://github.com/blue-core-lod/bluecore-editor/issues/6) (saying when a pasted URI isn't on id.loc.gov yet), [#11](https://github.com/blue-core-lod/bluecore-editor/issues/11) (storing `sameAs` links); [design.md, Authority data](../design.md#authority-data).
 
 ## Summary
 
@@ -76,7 +76,7 @@ For catalogers with NACO credentials, the same form can produce a MARC authority
 - **A promotion endpoint and policy.** The API owns the policy and enforces it for every client, Marva and scripts included. When it returns an other resource, it includes a `promote` link only if this user may promote it. Promotion is a `POST` to that link: the API mints the URI, copies the resource, records `derivedFrom` and the LC version, adds provenance, and returns the new URI. Disallowed promotions are refused with `problem+json`. The policy is configuration: rules by kind of resource, and the roles allowed to apply them. See [design.md, Appendix C](../design.md#appendix-c-reading-saving-and-the-api).
 - **Storage for created and promoted authorities,** as a kind of resource alongside Works and Instances, with the status the badge shows.
 - **Search over them,** so lookups can include Blue Core's own authorities.
-- **`sameAs` storage** ([#11](https://github.com/edsu/bluecore-editor/issues/11)).
+- **`sameAs` storage** ([#11](https://github.com/blue-core-lod/bluecore-editor/issues/11)).
 
 ## Alternatives considered
 
